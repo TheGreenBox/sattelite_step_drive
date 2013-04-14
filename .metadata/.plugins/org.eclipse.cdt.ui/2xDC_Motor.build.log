@@ -1,0 +1,12 @@
+
+**** Clean-only build of configuration F2803x_RAM for project 2xDC_Motor ****
+
+/home/alexander/ti/ccsv5/utils/bin/gmake -k clean 
+rm -rf  "2xDC_Motor.out"
+rm -rf "2xDC_Motor-DevInit_F2803x.pp" "2xDC_Motor.pp" "DSP2803x_GlobalVariableDefs.pp" 
+rm -rf "2xDC_Motor-DevInit_F2803x.obj" "2xDC_Motor.obj" "DLOG4CHC.obj" "DSP2803x_GlobalVariableDefs.obj" "DSP2803x_usDelay.obj" 
+rm -rf "DLOG4CHC.pp" "DSP2803x_usDelay.pp" 
+Finished clean
+ 
+
+**** Build Finished ****
