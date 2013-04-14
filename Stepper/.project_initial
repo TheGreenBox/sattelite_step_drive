@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Stepper</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>com.ti.ccstudio.managedbuild.core.ccsNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>DSP2803x_GlobalVariableDefs.c</name>
+			<type>1</type>
+			<locationURI>CONTROLSUITE_DRV8412_ROOT/device_support/f2803x/v122/DSP2803x_headers/source/DSP2803x_GlobalVariableDefs.c</locationURI>
+		</link>
+		<link>
+			<name>DSP2803x_Headers_nonBIOS.cmd</name>
+			<type>1</type>
+			<locationURI>CONTROLSUITE_DRV8412_ROOT/device_support/f2803x/v122/DSP2803x_headers/cmd/DSP2803x_Headers_nonBIOS.cmd</locationURI>
+		</link>
+		<link>
+			<name>IQmath.lib</name>
+			<type>1</type>
+			<locationURI>CONTROLSUITE_DRV8412_ROOT/libs/math/IQmath/v15c/lib/IQmath.lib</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
