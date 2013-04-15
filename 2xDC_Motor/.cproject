@@ -44,12 +44,12 @@
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.DEBUGGING_MODEL.1158248708" name="Debugging model" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.DEBUGGING_MODEL" value="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.DEBUGGING_MODEL.SYMDEBUG__DWARF" valueType="enumerated"/>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.INCLUDE_PATH.1650689077" name="Add dir to #include search path (--include_path, -I)" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.INCLUDE_PATH" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/include&quot;"/>
-									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/../libs/math/IQmath/v15c/include"/>
-									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/../development_kits/~SupportFiles/F2803x_headers"/>
-									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/../libs/app_libs/motor_control/drivers/f2803x_v1.1"/>
-									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/../device_support/f2803x/v122/DSP2803x_headers/include"/>
-									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/../device_support/f2803x/v122/DSP2803x_common/include"/>
-									<listOptionValue builtIn="false" value="${PROJECT_ROOT}/../libs/app_libs/motor_control/math_blocks/v2.1"/>
+									<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../libs/math/IQmath/v15c/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../development_kits/~SupportFiles/F2803x_headers&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../libs/app_libs/motor_control/drivers/f2803x_v1.1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../device_support/f2803x/v122/DSP2803x_headers/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../device_support/f2803x/v122/DSP2803x_common/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../libs/app_libs/motor_control/math_blocks/v2.1&quot;"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.DIAG_WARNING.1354907435" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.DIAG_WARNING" valueType="stringList">
 									<listOptionValue builtIn="false" value="225"/>
@@ -73,6 +73,7 @@
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_6.1.linkerID.LIBRARY.1113915039" name="Include library file or command file as input (--library, -l)" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.linkerID.LIBRARY" valueType="libs">
 									<listOptionValue builtIn="false" value="&quot;libc.a&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../libs/math/IQmath/v15c/lib/IQmath.lib&quot;"/>
 								</option>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_6.1.exeLinker.inputType__CMD_SRCS.1715812189" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.exeLinker.inputType__CMD_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_6.1.exeLinker.inputType__CMD2_SRCS.1804642286" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.exeLinker.inputType__CMD2_SRCS"/>
@@ -80,13 +81,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.ti.ccstudio.buildDefinitions.C2000.Debug.616033879.1488808881" name="IQmath.lib" rcbsApplicability="disable" resourcePath="IQmath.lib" toolsToInvoke="com.ti.ccstudio.buildDefinitions.C2000_6.1.exe.linkerDebug.965102012.360122664">
-						<tool id="com.ti.ccstudio.buildDefinitions.C2000_6.1.exe.linkerDebug.965102012.360122664" name="C2000 Linker" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.exe.linkerDebug.965102012">
-							<inputType id="com.ti.ccstudio.buildDefinitions.C2000_6.1.exeLinker.inputType__CMD_SRCS.2123016600" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.exeLinker.inputType__CMD_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.C2000_6.1.exeLinker.inputType__CMD2_SRCS.325397313" name="Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.exeLinker.inputType__CMD2_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.C2000_6.1.exeLinker.inputType__GEN_CMDS.1049612067" name="Generated Linker Command Files" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.exeLinker.inputType__GEN_CMDS"/>
-						</tool>
-					</fileInfo>
 					<sourceEntries>
 						<entry excluding="F28035_FLASH_2xDC_Motor.CMD" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
