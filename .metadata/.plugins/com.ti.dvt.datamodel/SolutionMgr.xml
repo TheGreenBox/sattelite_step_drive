@@ -2,17 +2,17 @@
 <java version="1.6.0_13" class="java.beans.XMLDecoder"> 
  <object class="com.ti.dvt.datamodel.solution.SolutionManager$PersistState"> 
   <void property="defaultSolution"> 
-   <string>/home/alexander/ti/ccsv5/ccs_base/DebugServer/../dvt_3.3.0.201209281235/CodeGen/solutions/CodeGenCoverage</string> 
+   <string>/opt/ti/ccsv5/ccs_base/DebugServer/../dvt_3.3.0.201209281235/CodeGen/solutions/CodeGenCoverage</string> 
   </void> 
   <void property="openedSolutions"> 
    <void method="add"> 
-    <string>/home/alexander/ti/ccsv5/ccs_base/DebugServer/../dvt_3.3.0.201209281235/CodeGen/solutions/CodeGenCoverage</string> 
+    <string>/opt/ti/ccsv5/ccs_base/DebugServer/../dvt_3.3.0.201209281235/CodeGen/solutions/CodeGenCoverage</string> 
    </void> 
    <void method="add"> 
-    <string>/home/alexander/ti/ccsv5/ccs_base/DebugServer/../dvt_3.3.0.201209281235/RTA6/solutions/cce_rta6</string> 
+    <string>/opt/ti/ccsv5/ccs_base/DebugServer/../dvt_3.3.0.201209281235/RTA6/solutions/cce_rta6</string> 
    </void> 
    <void method="add"> 
-    <string>/media/general/src/the_green_box/step_course/dvt/AnalysisSolutionsTemp/AnalysisSolution1366002927331/null</string> 
+    <string>/media/general/src/the_green_box_projects/step_course/dvt/AnalysisSolutionsTemp/AnalysisSolution1366009970181/null</string> 
    </void> 
   </void> 
  </object> 
