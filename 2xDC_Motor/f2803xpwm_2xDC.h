@@ -1,14 +1,14 @@
 /* ==================================================================================
-File name:        F2803xPWM_2xDC.H                     
-                    
+File name:        F2803xPWM_2xDC.H
+
 Originator:	 Digital Control Systems Group
 			 Texas Instruments
-Description: Header file containing data type, object, macro definitions and 
+Description: Header file containing data type, object, macro definitions and
 			 initializers. This file is specific to "DRV8412" kit and configures
 			 PWM 1,2
 
 Target: TMS320F280x family
-              
+
 =====================================================================================
 History:
 -------------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ History:
 #include "f2803xbmsk.h"
 
 /*----------------------------------------------------------------------------
-Initialization constant for the F280X Time-Base Control Registers for PWM Generation. 
+Initialization constant for the F280X Time-Base Control Registers for PWM Generation.
 Sets up the timer to run free upon emulation suspend, count up-down mode
 prescaler 1.
 ----------------------------------------------------------------------------*/
@@ -34,7 +34,7 @@ prescaler 1.
                          CNTLD_DISABLE )
 
 /*----------------------------------------------------------------------------
-Initialization constant for the F280X Compare Control Register. 
+Initialization constant for the F280X Compare Control Register.
 ----------------------------------------------------------------------------*/
 #define CMPCTL_INIT_STATE ( LOADAMODE_ZRO + \
                             LOADBMODE_ZRO + \
@@ -43,47 +43,48 @@ Initialization constant for the F280X Compare Control Register.
 
 
 /*----------------------------------------------------------------------------
-Initialization constant for the F280X Action Qualifier Software Force Register. 
+Initialization constant for the F280X Action Qualifier Software Force Register.
 ----------------------------------------------------------------------------*/
 #define AQSFRC_INIT_STATE ( RLDCSF_PRD )
 
 /*----------------------------------------------------------------------------
-Initialization constant for the F280X Action Qualifier Output A Register. 
+Initialization constant for the F280X Action Qualifier Output A Register.
 ----------------------------------------------------------------------------*/
 #define AQCTLA_INIT_STATE ( CAU_SET + CAD_CLEAR )
 #define AQCTLB_INIT_STATE ( CAU_SET + CAD_CLEAR )
 /*----------------------------------------------------------------------------
-Initialization constant for the F280X Dead-Band Generator registers for PWM Generation. 
+Initialization constant for the F280X Dead-Band Generator registers for PWM Generation.
 Sets up the dead band for PWM and sets up dead band values.
 ----------------------------------------------------------------------------*/
 #define DBCTL_INIT_STATE  (BP_DISABLE)
 
 /*----------------------------------------------------------------------------
-Initialization constant for the F280X PWM Chopper Control register for PWM Generation. 
+Initialization constant for the F280X PWM Chopper Control register for PWM Generation.
 ----------------------------------------------------------------------------*/
 #define  PCCTL_INIT_STATE  CHPEN_DISABLE
 
 /*----------------------------------------------------------------------------
-Initialization constant for the F280X Trip Zone Select Register 
+Initialization constant for the F280X Trip Zone Select Register
 ----------------------------------------------------------------------------*/
-#define  TZSEL_INIT_STATE  ( ENABLE_TZ2_OST + ENABLE_TZ3_OST) 
-							            
+#define  TZSEL_INIT_STATE  ( ENABLE_TZ2_OST + ENABLE_TZ3_OST)
+
 /*----------------------------------------------------------------------------
-Initialization constant for the F280X Trip Zone Control Register 
+Initialization constant for the F280X Trip Zone Control Register
 ----------------------------------------------------------------------------*/
 #define  TZCTL_INIT_STATE ( TZA_FORCE_LO + TZB_FORCE_LO + \
                             DCAEVT1_HI_Z + DCAEVT2_HI_Z + \
                             DCBEVT1_HI_Z + DCBEVT2_HI_Z )
-                                                                 
+
 /*-----------------------------------------------------------------------------
-	Define the structure of the PWM Driver Object 
+	Define the structure of the PWM Driver Object
 -----------------------------------------------------------------------------*/
-typedef struct {   
-        Uint16 PeriodMax;     // Parameter: PWM Half-Period in CPU clock cycles (Q0)
-        int16 MfuncPeriod;    // Input: Period scaler (Q15) 
-        int16 MfuncC1;        // Input: EPWM1 A&B Duty cycle ratio (Q15)
-		int16 PWM1out;
-        } PWMGEN ;    
+typedef struct
+{
+    Uint16 PeriodMax;     // Parameter: PWM Half-Period in CPU clock cycles (Q0)
+    int16 MfuncPeriod;    // Input: Period scaler (Q15)
+    int16 MfuncC1;        // Input: EPWM1 A&B Duty cycle ratio (Q15)
+    int16 PWM1out;
+} PWMGEN ;
 
 /*-----------------------------------------------------------------------------
 	Define a PWMGEN_handle
@@ -91,14 +92,14 @@ typedef struct {
 typedef PWMGEN *PWMGEN_handle;
 
 /*------------------------------------------------------------------------------
-	Default Initializers for the F280X PWMGEN Object 
+	Default Initializers for the F280X PWMGEN Object
 ------------------------------------------------------------------------------*/
 #define F280X_FC_PWM_GEN    { 1000,   \
                               0x7FFF, \
                               0x4000, \
 							  0x4000, \
                              }
-                              
+
 
 #define PWMGEN_DEFAULTS 	F280X_FC_PWM_GEN
 /*------------------------------------------------------------------------------
@@ -166,14 +167,14 @@ typedef PWMGEN *PWMGEN_handle;
          EPwm1Regs.TZCTL.all = TZCTL_INIT_STATE;							\
          EPwm2Regs.TZCTL.all = TZCTL_INIT_STATE;							\
 																			\
-         EDIS;                         /* Disable EALLOW*/			
+         EDIS;                         /* Disable EALLOW*/
 
 
 
 
 
-	int16 MPeriod;
-	int32 Tmp;
+int16 MPeriod;
+int32 Tmp;
 
 #define PWM_MACRO(v)																		\
 																							\

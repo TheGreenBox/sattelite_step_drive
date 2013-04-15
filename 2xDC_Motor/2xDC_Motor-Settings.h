@@ -1,10 +1,10 @@
 /* =================================================================================
-File name:  2xDC_Motor-Settings.H                     
-                    
+File name:  2xDC_Motor-Settings.H
+
 Originator:	Digital Control Systems Group
 			Texas Instruments
 
-Description: 
+Description:
 Incremental Build Level control file.
 =====================================================================================
  History:
@@ -16,8 +16,8 @@ Incremental Build Level control file.
 /*------------------------------------------------------------------------------
 Following is the list of the Build Level choices.
 ------------------------------------------------------------------------------*/
-#define LEVEL1  1      		// Module check out (do not connect the motors) 
-#define LEVEL2  2           // Verify ADC, calibrate the offset 
+#define LEVEL1  1      		// Module check out (do not connect the motors)
+#define LEVEL2  2           // Verify ADC, calibrate the offset
 #define LEVEL3  3           // Verify closed current(torque) loop
 #define LEVEL4  4           // Run 2 axes closed current(torque) loop
 /*------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ This line sets the BUILDLEVEL to one of the available choices.
 #define   BUILDLEVEL LEVEL1
 
 
-#ifndef BUILDLEVEL    
+#ifndef BUILDLEVEL
 #error  Critical: BUILDLEVEL must be defined !!
 #endif  // BUILDLEVEL
 //------------------------------------------------------------------------------
@@ -53,12 +53,12 @@ This line sets the BUILDLEVEL to one of the available choices.
 #define Motor 1
 
 //not used for this project.  Save for future use
-//#define POLES   8						// Number of poles 
+//#define POLES   8						// Number of poles
 
-// Define the base quantites 
+// Define the base quantites
 #define BASE_VOLTAGE    66.32		    // Base peak phase voltage (volt), maximum measurable DC Bus
 #define BASE_CURRENT    7.2            	// Base peak phase current (amp) , maximum measurable peak current
 //not used for this project.  Save for future use
 //#define BASE_FREQ      	200           	// Base electrical frequency (Hz)
 
-#endif 
+#endif
