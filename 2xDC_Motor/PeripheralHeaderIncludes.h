@@ -1,11 +1,11 @@
 //============================================================================
 //============================================================================
 //
-// FILE:   			PeripheralHeaderIncludes.h (2803x version)
+// FILE:          PeripheralHeaderIncludes.h (2803x version)
 // 
-// DESCRIPTION:		Contains F2803x device specific definitions and includes
+// DESCRIPTION:      Contains F2803x device specific definitions and includes
 //
-// VERSION:			04 Apr 2009 - (BRL)
+// VERSION:       04 Apr 2009 - (BRL)
 //============================================================================
 //============================================================================
 #ifndef DSP2803x_DEVICE_H
@@ -18,19 +18,19 @@ extern "C" {
 //---------------------------------------------------------------------------
 // CPU Timer Definitions:
 // Timer definitions based on 60MHz System Clock
-// 	if not using a 60MHz clock define a different set of constants elsewhere
-#define		mSec0_5		30000		// 0.5 mS
-#define		mSec1		60000		// 1.0 mS
-#define		mSec2		120000		// 2.0 mS
-#define		mSec5		300000		// 5.0 mS
-#define		mSec7_5		450000		// 7.5 mS
-#define		mSec10		600000		// 10 mS
-#define		mSec20		1200000		// 20 mS
-#define		mSec50		3000000		// 50 mS
-#define		mSec100		6000000		// 100 mS
-#define		mSec500		30000000	// 500 mS
-#define		mSec1000	60000000	// 1000 mS
-#define		mSec5000	300000000	// 5000 mS
+//    if not using a 60MHz clock define a different set of constants elsewhere
+#define     mSec0_5     30000       // 0.5 mS
+#define     mSec1       60000       // 1.0 mS
+#define     mSec2       120000      // 2.0 mS
+#define     mSec5       300000      // 5.0 mS
+#define     mSec7_5     450000      // 7.5 mS
+#define     mSec10      600000      // 10 mS
+#define     mSec20      1200000     // 20 mS
+#define     mSec50      3000000     // 50 mS
+#define     mSec100     6000000     // 100 mS
+#define     mSec500     30000000    // 500 mS
+#define     mSec1000    60000000    // 1000 mS
+#define     mSec5000    300000000   // 5000 mS
 
 //---------------------------------------------------------------------------
 // Common CPU Definitions:

@@ -106,23 +106,12 @@ Uint16 DRV_RESET = 0;
 volatile Uint16 EnableFlag = FALSE;
 Uint16 RunMotor = FALSE;
 
-//not used for this project.  Save for future use
-//Uint16 SpeedLoopPrescaler = 10;      // Speed loop prescaler
-//Uint16 SpeedLoopCount = 1;           // Speed loop counter
-
-//not used for this project.  Save for future use
-// Instance a QEP interface driver
-//QEP qep1 = QEP_DEFAULTS;
-//QEP qep2 = QEP_DEFAULTS;
-
 // Instance PID regulators to regulate the current, and speed
 PIDREG3 pid1_i = PIDREG3_DEFAULTS;
 //not used for this project.  Save for future use
 //PIDREG3 pid1_spd = PIDREG3_DEFAULTS;
 
 PIDREG3 pid2_i = PIDREG3_DEFAULTS;
-//not used for this project.  Save for future use
-//PIDREG3 pid2_spd = PIDREG3_DEFAULTS;
 
 // Instance a PWM driver instance
 PWMGEN pwm1 = PWMGEN_DEFAULTS;
@@ -135,16 +124,6 @@ PWMDAC pwmdac2 = PWMDAC_DEFAULTS;
 // Instance a ramp controller to smoothly ramp the frequency
 RMPCNTL rc1 = RMPCNTL_DEFAULTS;
 RMPCNTL rc2 = RMPCNTL_DEFAULTS;
-
-//not used for this project.  Save for future use
-// Instance a ramp generator to simulate an Angle
-//RAMPGEN rg1 = RAMPGEN_DEFAULTS;
-//RAMPGEN rg2 = RAMPGEN_DEFAULTS;
-
-//not used for this project.  Save for future use
-// Instance a speed calculator based on QEP
-//SPEED_MEAS_QEP speed1 = SPEED_MEAS_QEP_DEFAULTS;
-//SPEED_MEAS_QEP speed2 = SPEED_MEAS_QEP_DEFAULTS;
 
 // Create an instance of DATALOG Module
 DLOG_4CH dlog = DLOG_4CH_DEFAULTS;
@@ -216,41 +195,7 @@ void main(void)
 // Initialize ADC module
     ADC_MACRO_INIT()
 
-//not used for this project.  Save for future use
-// Initialize QEP module
-//    qep1.LineEncoder = 2048;
-//    qep1.MechScaler = _IQ30(0.25/qep1.LineEncoder);
-//    qep1.PolePairs = POLES/2;
-//    qep1.CalibratedAngle = 0;
-//    QEP_INIT_MACRO(qep1)
-
-//not used for this project.  Save for future use
-    // Initialize QEP module
-//    qep2.LineEncoder = 2048;
-//    qep2.MechScaler = _IQ30(0.25/qep2.LineEncoder);
-//    qep2.PolePairs = POLES/2;
-//    qep2.CalibratedAngle = 0;
-//    QEP_INIT_MACRO(qep1)
-
-//not used for this project.  Save for future use
-// Initialize the Speed module for QEP based speed calculation
-//    speed1.K1 = _IQ21(1/(BASE_FREQ*T));
-//    speed1.K2 = _IQ(1/(1+T*2*PI*5));  // Low-pass cut-off frequency
-//    speed1.K3 = _IQ(1)-speed1.K2;
-//    speed1.BaseRpm = 120*(BASE_FREQ/POLES);
-
-//    speed2.K1 = _IQ21(1/(BASE_FREQ*T));
-//    speed2.K2 = _IQ(1/(1+T*2*PI*5));  // Low-pass cut-off frequency
-//    speed2.K3 = _IQ(1)-speed2.K2;
-//    speed2.BaseRpm = 120*(BASE_FREQ/POLES);
-
-//not used for this project.  Save for future use
-// Initialize the RAMPGEN module
-//    rg1.StepAngleMax = _IQ(BASE_FREQ*T);
-//    rg2.StepAngleMax = _IQ(BASE_FREQ*T);
-
 // Initialize the PID_REG3 module for I
-// pid1_i.Kp = _IQ(0.442);    //for 12V DC bus
     pid1_i.Kp = _IQ(0.318);      //for 24V DC bus
     pid1_i.Ki = _IQ(T/0.0005);
     pid1_i.Kd = _IQ(0/T);
@@ -258,29 +203,12 @@ void main(void)
     pid1_i.OutMax = _IQ(0.95);
     pid1_i.OutMin = _IQ(-0.95);
 
-//    pid2_i.Kp = _IQ(0.442);    //for 12V DC bus
     pid2_i.Kp = _IQ(0.318);      //for 24V DC bus
     pid2_i.Ki = _IQ(T/0.0005);
     pid2_i.Kd = _IQ(0/T);
     pid2_i.Kc = _IQ(0.2);
     pid2_i.OutMax = _IQ(0.95);
     pid2_i.OutMin = _IQ(-0.95);
-
-//not used for this project.  Save for future use
-// Initialize the PID_REG3 module for speed
-//    pid1_spd.Kp = _IQ(1.0);
-// pid1_spd.Ki = _IQ(T*SpeedLoopPrescaler/0.3);
-// pid1_spd.Kd = _IQ(0/(T*SpeedLoopPrescaler));
-//    pid1_spd.Kc = _IQ(0.2);
-//    pid1_spd.OutMax = _IQ(0.95);
-//    pid1_spd.OutMin = _IQ(-0.95);
-//
-//    pid2_spd.Kp = _IQ(1.0);
-// pid2_spd.Ki = _IQ(T*SpeedLoopPrescaler/0.3);
-// pid2_spd.Kd = _IQ(0/(T*SpeedLoopPrescaler));
-//    pid2_spd.Kc = _IQ(0.2);
-//    pid2_spd.OutMax = _IQ(0.95);
-//    pid2_spd.OutMin = _IQ(-0.95);
 
 // Reassign ISRs.
 

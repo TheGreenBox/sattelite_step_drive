@@ -1,18 +1,18 @@
 /* ==================================================================================
 File name:        F2803xPWM_2xDC.H
 
-Originator:	 Digital Control Systems Group
-			 Texas Instruments
+Originator:  Digital Control Systems Group
+          Texas Instruments
 Description: Header file containing data type, object, macro definitions and
-			 initializers. This file is specific to "DRV8412" kit and configures
-			 PWM 1,2
+          initializers. This file is specific to "DRV8412" kit and configures
+          PWM 1,2
 
 Target: TMS320F280x family
 
 =====================================================================================
 History:
 -------------------------------------------------------------------------------------
- 07-28-2010	Version 1.0
+ 07-28-2010 Version 1.0
 ------------------------------------------------------------------------------------*/
 
 #ifndef __F280X_PWM_H__
@@ -76,7 +76,7 @@ Initialization constant for the F280X Trip Zone Control Register
                             DCBEVT1_HI_Z + DCBEVT2_HI_Z )
 
 /*-----------------------------------------------------------------------------
-	Define the structure of the PWM Driver Object
+   Define the structure of the PWM Driver Object
 -----------------------------------------------------------------------------*/
 typedef struct
 {
@@ -87,86 +87,86 @@ typedef struct
 } PWMGEN ;
 
 /*-----------------------------------------------------------------------------
-	Define a PWMGEN_handle
+   Define a PWMGEN_handle
 -----------------------------------------------------------------------------*/
 typedef PWMGEN *PWMGEN_handle;
 
 /*------------------------------------------------------------------------------
-	Default Initializers for the F280X PWMGEN Object
+   Default Initializers for the F280X PWMGEN Object
 ------------------------------------------------------------------------------*/
 #define F280X_FC_PWM_GEN    { 1000,   \
                               0x7FFF, \
                               0x4000, \
-							  0x4000, \
-                             }
+                              0x4000, \
+                              }
 
 
-#define PWMGEN_DEFAULTS 	F280X_FC_PWM_GEN
+#define PWMGEN_DEFAULTS    F280X_FC_PWM_GEN
 /*------------------------------------------------------------------------------
-	PWM Init & PWM Update Macro Definitions
+   PWM Init & PWM Update Macro Definitions
 ------------------------------------------------------------------------------*/
 
 
-#define PWM_INIT_MACRO(v)													\
-	     /* Setup Sync*/													\
-         EPwm1Regs.TBCTL.bit.SYNCOSEL = 0;       /* Pass through*/			\
-         EPwm2Regs.TBCTL.bit.SYNCOSEL = 0;       /* Pass through*/			\
-        																	\
-																			\
-         /* Allow each timer to be sync'ed*/								\
-         EPwm1Regs.TBCTL.bit.PHSEN = 1;										\
-         EPwm2Regs.TBCTL.bit.PHSEN = 1;										\
-																			\
-         /* Init Timer-Base Period Register for EPWM1-EPWM3*/				\
-         EPwm1Regs.TBPRD = v.PeriodMax;										\
-         EPwm2Regs.TBPRD = v.PeriodMax;										\
-																			\
-         /* Init Compare Register for EPWM1-EPWM3*/							\
-         EPwm1Regs.CMPA.half.CMPA = v.PeriodMax;							\
-         EPwm2Regs.CMPA.half.CMPA = v.PeriodMax;							\
-																			\
-         /* Init Timer-Base Phase Register for EPWM1-EPWM3*/				\
-         EPwm1Regs.TBPHS.half.TBPHS = 0;									\
-         EPwm2Regs.TBPHS.half.TBPHS = 0;									\
-																			\
-         /* Init Timer-Base Control Register for EPWM1-EPWM3*/				\
-         EPwm1Regs.TBCTL.all = PWM_INIT_STATE;								\
-         EPwm2Regs.TBCTL.all = PWM_INIT_STATE;								\
-																			\
-         /* Init Compare Control Register for EPWM1-EPWM3*/					\
-         EPwm1Regs.CMPCTL.all = CMPCTL_INIT_STATE;							\
-         EPwm2Regs.CMPCTL.all = CMPCTL_INIT_STATE;							\
-																			\
-         /* Init Action Qualifier Output A Register for EPWM1-EPWM3*/		\
-         EPwm1Regs.AQCTLA.all = AQCTLA_INIT_STATE;							\
-         EPwm2Regs.AQCTLA.all = AQCTLA_INIT_STATE;							\
-																			\
-          /* Init Action Qualifier Output A Register for EPWM1-EPWM3*/		\
-         EPwm1Regs.AQCTLB.all = AQCTLB_INIT_STATE;							\
-         EPwm2Regs.AQCTLB.all = AQCTLB_INIT_STATE;							\
-																			\
-          /* Init Action Qualifier S/W Force Register for EPWM1-EPWM2*/		\
-         EPwm1Regs.AQSFRC.all = AQSFRC_INIT_STATE;							\
-         EPwm2Regs.AQSFRC.all = AQSFRC_INIT_STATE;							\
-																			\
-         /* Init Dead-Band Generator Control Register for EPWM1-EPWM3*/		\
-         EPwm1Regs.DBCTL.all = DBCTL_INIT_STATE;							\
-         EPwm2Regs.DBCTL.all = DBCTL_INIT_STATE;							\
-																			\
-         /* Init PWM Chopper Control Register for EPWM1-EPWM3*/				\
-         EPwm1Regs.PCCTL.all = PCCTL_INIT_STATE;							\
-         EPwm2Regs.PCCTL.all = PCCTL_INIT_STATE;							\
-																			\
-         EALLOW;                       /* Enable EALLOW */					\
-																			\
-         /* Init Trip Zone Select Register*/								\
-         EPwm1Regs.TZSEL.all = TZSEL_INIT_STATE;							\
-         EPwm2Regs.TZSEL.all = TZSEL_INIT_STATE;							\
-																			\
-         /* Init Trip Zone Control Register*/								\
-         EPwm1Regs.TZCTL.all = TZCTL_INIT_STATE;							\
-         EPwm2Regs.TZCTL.all = TZCTL_INIT_STATE;							\
-																			\
+#define PWM_INIT_MACRO(v)                                      \
+        /* Setup Sync*/                                     \
+         EPwm1Regs.TBCTL.bit.SYNCOSEL = 0;       /* Pass through*/         \
+         EPwm2Regs.TBCTL.bit.SYNCOSEL = 0;       /* Pass through*/         \
+                                                         \
+                                                         \
+         /* Allow each timer to be sync'ed*/                      \
+         EPwm1Regs.TBCTL.bit.PHSEN = 1;                              \
+         EPwm2Regs.TBCTL.bit.PHSEN = 1;                              \
+                                                         \
+         /* Init Timer-Base Period Register for EPWM1-EPWM3*/           \
+         EPwm1Regs.TBPRD = v.PeriodMax;                              \
+         EPwm2Regs.TBPRD = v.PeriodMax;                              \
+                                                         \
+         /* Init Compare Register for EPWM1-EPWM3*/                     \
+         EPwm1Regs.CMPA.half.CMPA = v.PeriodMax;                     \
+         EPwm2Regs.CMPA.half.CMPA = v.PeriodMax;                     \
+                                                         \
+         /* Init Timer-Base Phase Register for EPWM1-EPWM3*/            \
+         EPwm1Regs.TBPHS.half.TBPHS = 0;                          \
+         EPwm2Regs.TBPHS.half.TBPHS = 0;                          \
+                                                         \
+         /* Init Timer-Base Control Register for EPWM1-EPWM3*/          \
+         EPwm1Regs.TBCTL.all = PWM_INIT_STATE;                       \
+         EPwm2Regs.TBCTL.all = PWM_INIT_STATE;                       \
+                                                         \
+         /* Init Compare Control Register for EPWM1-EPWM3*/             \
+         EPwm1Regs.CMPCTL.all = CMPCTL_INIT_STATE;                   \
+         EPwm2Regs.CMPCTL.all = CMPCTL_INIT_STATE;                   \
+                                                         \
+         /* Init Action Qualifier Output A Register for EPWM1-EPWM3*/      \
+         EPwm1Regs.AQCTLA.all = AQCTLA_INIT_STATE;                   \
+         EPwm2Regs.AQCTLA.all = AQCTLA_INIT_STATE;                   \
+                                                         \
+          /* Init Action Qualifier Output A Register for EPWM1-EPWM3*/     \
+         EPwm1Regs.AQCTLB.all = AQCTLB_INIT_STATE;                   \
+         EPwm2Regs.AQCTLB.all = AQCTLB_INIT_STATE;                   \
+                                                         \
+          /* Init Action Qualifier S/W Force Register for EPWM1-EPWM2*/    \
+         EPwm1Regs.AQSFRC.all = AQSFRC_INIT_STATE;                   \
+         EPwm2Regs.AQSFRC.all = AQSFRC_INIT_STATE;                   \
+                                                         \
+         /* Init Dead-Band Generator Control Register for EPWM1-EPWM3*/    \
+         EPwm1Regs.DBCTL.all = DBCTL_INIT_STATE;                     \
+         EPwm2Regs.DBCTL.all = DBCTL_INIT_STATE;                     \
+                                                         \
+         /* Init PWM Chopper Control Register for EPWM1-EPWM3*/            \
+         EPwm1Regs.PCCTL.all = PCCTL_INIT_STATE;                     \
+         EPwm2Regs.PCCTL.all = PCCTL_INIT_STATE;                     \
+                                                         \
+         EALLOW;                       /* Enable EALLOW */              \
+                                                         \
+         /* Init Trip Zone Select Register*/                      \
+         EPwm1Regs.TZSEL.all = TZSEL_INIT_STATE;                     \
+         EPwm2Regs.TZSEL.all = TZSEL_INIT_STATE;                     \
+                                                         \
+         /* Init Trip Zone Control Register*/                        \
+         EPwm1Regs.TZCTL.all = TZCTL_INIT_STATE;                     \
+         EPwm2Regs.TZCTL.all = TZCTL_INIT_STATE;                     \
+                                                         \
          EDIS;                         /* Disable EALLOW*/
 
 
@@ -176,19 +176,19 @@ typedef PWMGEN *PWMGEN_handle;
 int16 MPeriod;
 int32 Tmp;
 
-#define PWM_MACRO(v)																		\
-																							\
-/* Compute the timer period (Q0) from the period modulation input (Q15)*/					\
-																							\
-	Tmp = (int32)v.PeriodMax*(int32)v.MfuncPeriod;			/* Q15 = Q0*Q15	*/				\
-	MPeriod = (int16)(Tmp>>15);                           /* Q15 -> Q0 (period) */	        \
-																							\
-	EPwm1Regs.TBPRD = MPeriod;																\
-	EPwm2Regs.TBPRD = MPeriod;																\
-																							\
-/*Compute the compare value (Q0) from the related duty cycle ratio (Q15)*/					\
-																							\
-	Tmp = (int32)MPeriod*(int32)v.MfuncC1;				/* Q15 = Q0*Q15	*/					\
-	v.PWM1out = MPeriod - (int16)(Tmp>>15);				/* Q0 - (Q15 -> Q0) */				\
+#define PWM_MACRO(v)                                                    \
+                                                                     \
+/* Compute the timer period (Q0) from the period modulation input (Q15)*/              \
+                                                                     \
+   Tmp = (int32)v.PeriodMax*(int32)v.MfuncPeriod;        /* Q15 = Q0*Q15   */          \
+   MPeriod = (int16)(Tmp>>15);                           /* Q15 -> Q0 (period) */           \
+                                                                     \
+   EPwm1Regs.TBPRD = MPeriod;                                              \
+   EPwm2Regs.TBPRD = MPeriod;                                              \
+                                                                     \
+/*Compute the compare value (Q0) from the related duty cycle ratio (Q15)*/             \
+                                                                     \
+   Tmp = (int32)MPeriod*(int32)v.MfuncC1;          /* Q15 = Q0*Q15   */             \
+   v.PWM1out = MPeriod - (int16)(Tmp>>15);            /* Q0 - (Q15 -> Q0) */           \
 
 #endif  // __F280X_PWM_H__
