@@ -1,16 +1,16 @@
 /* ==============================================================================
-System Name:  	2xDC_Motor
+System Name:   2xDC_Motor
 
-File Name:	  	2xDC_Motor.C
+File Name:     2xDC_Motor.C
 
-Description:	Primary system file for the Real Implementation of Brushed
-          		Permanent-Magnet DC Motor(s) (DCMOTOR)
+Description:   Primary system file for the Real Implementation of Brushed
+               Permanent-Magnet DC Motor(s) (DCMOTOR)
 
-Originator:		Digital control systems Group - Texas Instruments
+Originator:    Digital control systems Group - Texas Instruments
 
 Note: In this software, the default inverter is supposed to be DRV8412 kit.
 =====================================================================================
- History: 07-28-2010	Version 1.0: Initial Release
+ History: 07-28-2010 Version 1.0: Initial Release
 =================================================================================  */
 
 // Include header files used in the main function
@@ -30,61 +30,61 @@ void InitFlash();
 // State Machine function prototypes
 //------------------------------------
 // Alpha states
-void A0(void);	//state A0
-void B0(void);	//state B0
-void C0(void);	//state C0
+void A0(void); //state A0
+void B0(void); //state B0
+void C0(void); //state C0
 
 // A branch states
-void A1(void);	//state A1
-void A2(void);	//state A2
-void A3(void);	//state A3
+void A1(void); //state A1
+void A2(void); //state A2
+void A3(void); //state A3
 
 // B branch states
-void B1(void);	//state B1
-void B2(void);	//state B2
-void B3(void);	//state B3
+void B1(void); //state B1
+void B2(void); //state B2
+void B3(void); //state B3
 
 // C branch states
-void C1(void);	//state C1
-void C2(void);	//state C2
-void C3(void);	//state C3
+void C1(void); //state C1
+void C2(void); //state C2
+void C3(void); //state C3
 
 // Variable declarations
-void (*Alpha_State_Ptr)(void);	// Base States pointer
-void (*A_Task_Ptr)(void);		// State pointer A branch
-void (*B_Task_Ptr)(void);		// State pointer B branch
-void (*C_Task_Ptr)(void);		// State pointer C branch
+void (*Alpha_State_Ptr)(void);   // Base States pointer
+void (*A_Task_Ptr)(void);     // State pointer A branch
+void (*B_Task_Ptr)(void);     // State pointer B branch
+void (*C_Task_Ptr)(void);     // State pointer C branch
 
 // Used for running BackGround in flash, and ISR in RAM
 extern Uint16 *RamfuncsLoadStart, *RamfuncsLoadEnd, *RamfuncsRunStart;
 
 
-int16	VTimer0[4];			// Virtual Timers slaved off CPU Timer 0 (A events)
-int16	VTimer1[4]; 		// Virtual Timers slaved off CPU Timer 1 (B events)
-int16	VTimer2[4]; 		// Virtual Timers slaved off CPU Timer 2 (C events)
-int16	SerialCommsTimer;
+int16 VTimer0[4];       // Virtual Timers slaved off CPU Timer 0 (A events)
+int16 VTimer1[4];       // Virtual Timers slaved off CPU Timer 1 (B events)
+int16 VTimer2[4];       // Virtual Timers slaved off CPU Timer 2 (C events)
+int16 SerialCommsTimer;
 
 // Global variables used in this system
 
-_iq VRef1 = _IQ(0.0);				// Motor 1 voltge reference (pu)
-_iq IRef1 = _IQ(0.0);				// Motor 1 current reference (pu)
-_iq IFdbk1;							// Motor 1 current feedback (pu)
-_iq IFdbk1a;							// Phase 1 current feedback (pu)
-_iq IFdbk1b;							// Phase 1 current feedback (pu)
+_iq VRef1 = _IQ(0.0);            // Motor 1 voltge reference (pu)
+_iq IRef1 = _IQ(0.0);            // Motor 1 current reference (pu)
+_iq IFdbk1;                      // Motor 1 current feedback (pu)
+_iq IFdbk1a;                     // Phase 1 current feedback (pu)
+_iq IFdbk1b;                     // Phase 1 current feedback (pu)
 //not used for this project.  Save for future use
-//_iq SpeedRef1 = _IQ(0.25);			// Motor 1 Speed reference (pu)
-Uint16 Rotation1 = 1;				// Motor 1 PWM direction
+//_iq SpeedRef1 = _IQ(0.25);     // Motor 1 Speed reference (pu)
+Uint16 Rotation1 = 1;            // Motor 1 PWM direction
 
-_iq VRef2 = _IQ(0.0);				// Motor 2 voltge reference (pu)
-_iq IRef2 = _IQ(0.0);				// Motor 2 current reference (pu)
-_iq IFdbk2;							// Motor 2 current feedback (pu)
-_iq IFdbk2c;							// Phase 2 current feedback (pu)
-_iq IFdbk2d;							// Phase 2 current feedback (pu)
+_iq VRef2 = _IQ(0.0);            // Motor 2 voltge reference (pu)
+_iq IRef2 = _IQ(0.0);            // Motor 2 current reference (pu)
+_iq IFdbk2;                      // Motor 2 current feedback (pu)
+_iq IFdbk2c;                     // Phase 2 current feedback (pu)
+_iq IFdbk2d;                     // Phase 2 current feedback (pu)
 //not used for this project.  Save for future use
-//_iq SpeedRef2 = _IQ(0.25);			// Motor 2 Speed reference (pu)
-Uint16 Rotation2 = 1;				// Motor 2 PWM direction
+//_iq SpeedRef2 = _IQ(0.25);     // Motor 2 Speed reference (pu)
+Uint16 Rotation2 = 1;            // Motor 2 PWM direction
 
-float32 T = 0.001/ISR_FREQUENCY;    // Samping period (sec), see parameter.h
+float32 T = 0.001/ISR_FREQUENCY; // Samping period (sec), see parameter.h
 
 Uint32 IsrTicker = 0;
 Uint16 BackTicker = 0;
@@ -137,7 +137,7 @@ RMPCNTL rc1 = RMPCNTL_DEFAULTS;
 RMPCNTL rc2 = RMPCNTL_DEFAULTS;
 
 //not used for this project.  Save for future use
-//	Instance a ramp generator to simulate an Angle
+// Instance a ramp generator to simulate an Angle
 //RAMPGEN rg1 = RAMPGEN_DEFAULTS;
 //RAMPGEN rg2 = RAMPGEN_DEFAULTS;
 
@@ -155,7 +155,7 @@ DLOG_4CH dlog = DLOG_4CH_DEFAULTS;
 void main(void)
 {
 
-    DeviceInit();	// Device Life support & GPIO
+    DeviceInit(); // Device Life support & GPIO
 
 // Only used if running from FLASH
 // Note that the variable FLASH is defined by the compiler
@@ -168,7 +168,7 @@ void main(void)
 
 // Call Flash Initialization to setup flash waitstates
 // This function must reside in RAM
-    InitFlash();	// Call the flash wrapper init function
+    InitFlash();  // Call the flash wrapper init function
 #endif //(FLASH)
 
     // Waiting for enable flag set
@@ -179,9 +179,9 @@ void main(void)
 
 // Timing sync for slow background tasks
 // Timer period definitions found in device specific PeripheralHeaderIncludes.h
-    CpuTimer0Regs.PRD.all =  mSec1;		// A tasks
-    CpuTimer1Regs.PRD.all =  mSec5;		// B tasks
-    CpuTimer2Regs.PRD.all =  mSec50;	// C tasks
+    CpuTimer0Regs.PRD.all =  mSec1;    // A tasks
+    CpuTimer1Regs.PRD.all =  mSec5;    // B tasks
+    CpuTimer2Regs.PRD.all =  mSec50;   // C tasks
 
 // Tasks State-machine init
     Alpha_State_Ptr = &A0;
@@ -250,16 +250,16 @@ void main(void)
 //    rg2.StepAngleMax = _IQ(BASE_FREQ*T);
 
 // Initialize the PID_REG3 module for I
-//	pid1_i.Kp = _IQ(0.442);		//for 12V DC bus
-    pid1_i.Kp = _IQ(0.318);		//for 24V DC bus
+// pid1_i.Kp = _IQ(0.442);    //for 12V DC bus
+    pid1_i.Kp = _IQ(0.318);      //for 24V DC bus
     pid1_i.Ki = _IQ(T/0.0005);
     pid1_i.Kd = _IQ(0/T);
     pid1_i.Kc = _IQ(0.2);
     pid1_i.OutMax = _IQ(0.95);
     pid1_i.OutMin = _IQ(-0.95);
 
-//   	pid2_i.Kp = _IQ(0.442);		//for 12V DC bus
-    pid2_i.Kp = _IQ(0.318);		//for 24V DC bus
+//    pid2_i.Kp = _IQ(0.442);    //for 12V DC bus
+    pid2_i.Kp = _IQ(0.318);      //for 24V DC bus
     pid2_i.Ki = _IQ(T/0.0005);
     pid2_i.Kd = _IQ(0/T);
     pid2_i.Kc = _IQ(0.2);
@@ -269,22 +269,22 @@ void main(void)
 //not used for this project.  Save for future use
 // Initialize the PID_REG3 module for speed
 //    pid1_spd.Kp = _IQ(1.0);
-//	pid1_spd.Ki = _IQ(T*SpeedLoopPrescaler/0.3);
-//	pid1_spd.Kd = _IQ(0/(T*SpeedLoopPrescaler));
-// 	pid1_spd.Kc = _IQ(0.2);
+// pid1_spd.Ki = _IQ(T*SpeedLoopPrescaler/0.3);
+// pid1_spd.Kd = _IQ(0/(T*SpeedLoopPrescaler));
+//    pid1_spd.Kc = _IQ(0.2);
 //    pid1_spd.OutMax = _IQ(0.95);
 //    pid1_spd.OutMin = _IQ(-0.95);
 //
 //    pid2_spd.Kp = _IQ(1.0);
-//	pid2_spd.Ki = _IQ(T*SpeedLoopPrescaler/0.3);
-//	pid2_spd.Kd = _IQ(0/(T*SpeedLoopPrescaler));
-// 	pid2_spd.Kc = _IQ(0.2);
+// pid2_spd.Ki = _IQ(T*SpeedLoopPrescaler/0.3);
+// pid2_spd.Kd = _IQ(0/(T*SpeedLoopPrescaler));
+//    pid2_spd.Kc = _IQ(0.2);
 //    pid2_spd.OutMax = _IQ(0.95);
 //    pid2_spd.OutMin = _IQ(-0.95);
 
 // Reassign ISRs.
 
-    EALLOW;	// This is needed to write to EALLOW protected registers
+    EALLOW; // This is needed to write to EALLOW protected registers
     PieVectTable.EPWM1_INT = &MainISR;
     EDIS;
 
@@ -301,14 +301,14 @@ void main(void)
     IER |= M_INT3;
 // Enable global Interrupts and higher priority real-time debug events:
     EINT;   // Enable Global interrupt INTM
-    ERTM;	// Enable Global realtime interrupt DBGM
+    ERTM;   // Enable Global realtime interrupt DBGM
 
 // IDLE loop. Just sit and loop forever:
     for(;;)  //infinite loop
     {
         // State machine entry & exit point
         //===========================================================
-        (*Alpha_State_Ptr)();	// jump to an Alpha state (A0,B0,...)
+        (*Alpha_State_Ptr)(); // jump to an Alpha state (A0,B0,...)
         //===========================================================
 
         //Put the DRV chip in RESET if we want the power stage inactive
@@ -329,7 +329,7 @@ void main(void)
 
 
 //=================================================================================
-//	STATE-MACHINE SEQUENCING AND SYNCRONIZATION FOR SLOW BACKGROUND TASKS
+// STATE-MACHINE SEQUENCING AND SYNCRONIZATION FOR SLOW BACKGROUND TASKS
 //=================================================================================
 
 //--------------------------------- FRAMEWORK -------------------------------------
@@ -338,17 +338,17 @@ void A0(void)
     // loop rate synchronizer for A-tasks
     if(CpuTimer0Regs.TCR.bit.TIF == 1)
     {
-        CpuTimer0Regs.TCR.bit.TIF = 1;	// clear flag
+        CpuTimer0Regs.TCR.bit.TIF = 1; // clear flag
 
         //-----------------------------------------------------------
-        (*A_Task_Ptr)();		// jump to an A Task (A1,A2,A3,...)
+        (*A_Task_Ptr)();      // jump to an A Task (A1,A2,A3,...)
         //-----------------------------------------------------------
 
-        VTimer0[0]++;			// virtual timer 0, instance 0 (spare)
+        VTimer0[0]++;         // virtual timer 0, instance 0 (spare)
         SerialCommsTimer++;
     }
 
-    Alpha_State_Ptr = &B0;		// Comment out to allow only A tasks
+    Alpha_State_Ptr = &B0;    // Comment out to allow only A tasks
 }
 
 void B0(void)
@@ -356,15 +356,15 @@ void B0(void)
     // loop rate synchronizer for B-tasks
     if(CpuTimer1Regs.TCR.bit.TIF == 1)
     {
-        CpuTimer1Regs.TCR.bit.TIF = 1;				// clear flag
+        CpuTimer1Regs.TCR.bit.TIF = 1;          // clear flag
 
         //-----------------------------------------------------------
-        (*B_Task_Ptr)();		// jump to a B Task (B1,B2,B3,...)
+        (*B_Task_Ptr)();      // jump to a B Task (B1,B2,B3,...)
         //-----------------------------------------------------------
-        VTimer1[0]++;			// virtual timer 1, instance 0 (spare)
+        VTimer1[0]++;         // virtual timer 1, instance 0 (spare)
     }
 
-    Alpha_State_Ptr = &C0;		// Allow C state tasks
+    Alpha_State_Ptr = &C0;    // Allow C state tasks
 }
 
 void C0(void)
@@ -372,20 +372,20 @@ void C0(void)
     // loop rate synchronizer for C-tasks
     if(CpuTimer2Regs.TCR.bit.TIF == 1)
     {
-        CpuTimer2Regs.TCR.bit.TIF = 1;				// clear flag
+        CpuTimer2Regs.TCR.bit.TIF = 1;          // clear flag
 
         //-----------------------------------------------------------
-        (*C_Task_Ptr)();		// jump to a C Task (C1,C2,C3,...)
+        (*C_Task_Ptr)();      // jump to a C Task (C1,C2,C3,...)
         //-----------------------------------------------------------
-        VTimer2[0]++;			//virtual timer 2, instance 0 (spare)
+        VTimer2[0]++;         //virtual timer 2, instance 0 (spare)
     }
 
-    Alpha_State_Ptr = &A0;	// Back to State A0
+    Alpha_State_Ptr = &A0; // Back to State A0
 }
 
 
 //=================================================================================
-//	A - TASKS (executed in every 1 msec)
+// A - TASKS (executed in every 1 msec)
 //=================================================================================
 //--------------------------------------------------------
 void A1(void) // SPARE (not used)
@@ -464,7 +464,7 @@ void A3(void) // SPARE (not used)
 
 
 //=================================================================================
-//	B - TASKS (executed in every 5 msec)
+// B - TASKS (executed in every 5 msec)
 //=================================================================================
 
 //----------------------------------- USER ----------------------------------------
@@ -504,17 +504,17 @@ void B3(void) //  SPARE
 
 
 //=================================================================================
-//	C - TASKS (executed in every 50 msec)
+// C - TASKS (executed in every 50 msec)
 //=================================================================================
 
 //--------------------------------- USER ------------------------------------------
 
 //----------------------------------------
-void C1(void) 	// Toggle GPIO-34
+void C1(void)  // Toggle GPIO-34
 //----------------------------------------
 {
 
-    GpioDataRegs.GPBTOGGLE.bit.GPIO34 = 1;	// Blink LED
+    GpioDataRegs.GPBTOGGLE.bit.GPIO34 = 1;   // Blink LED
     //-----------------
     //the next time CpuTimer2 'counter' reaches Period value go to C2
     C_Task_Ptr = &C2;
@@ -558,8 +558,8 @@ interrupt void MainISR(void)
     if(RunMotor)
     {
 // =============================== LEVEL 1 ======================================
-//	  Checks target independent modules, duty cycle waveforms and PWM update
-//	  Keep the motors disconnected at this level
+//   Checks target independent modules, duty cycle waveforms and PWM update
+//   Keep the motors disconnected at this level
 // ==============================================================================
 
 #if (BUILDLEVEL==LEVEL1)
@@ -574,7 +574,7 @@ interrupt void MainISR(void)
 //  Connect inputs of the PWM_DRV module and call the PWM signal generation macro
 // ------------------------------------------------------------------------------
         pwm1.MfuncC1 = (int16)_IQtoIQ15(_IQabs(rc1.SetpointValue)); // MfuncC1 is in Q15
-        PWM_MACRO(pwm1)							   	   // Calculate the new PWM compare values
+        PWM_MACRO(pwm1)                            // Calculate the new PWM compare values
 
         if(rc1.SetpointValue < 0)
         {
@@ -589,18 +589,18 @@ interrupt void MainISR(void)
         {
             if(Rotation1==0)
             {
-                EPwm1Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM1B
-                EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
+                EPwm1Regs.AQCSFRC.bit.CSFB = 0;    //Forcing Disabled on EPWM1B
+                EPwm1Regs.AQCSFRC.bit.CSFA = 1;    //EPWM1A forced low
             }
             else if(Rotation1 == 1)
             {
-                EPwm1Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM1A
-                EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+                EPwm1Regs.AQCSFRC.bit.CSFA = 0;    //Forcing Disabled on EPWM1A
+                EPwm1Regs.AQCSFRC.bit.CSFB = 1;    //EPWM1B forced low
             }
             else
             {
-                EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
-                EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+                EPwm1Regs.AQCSFRC.bit.CSFA = 1;    //EPWM1A forced low
+                EPwm1Regs.AQCSFRC.bit.CSFB = 1;    //EPWM1B forced low
             }
             EPwm1Regs.CMPA.half.CMPA=pwm1.PWM1out;
         }
@@ -608,18 +608,18 @@ interrupt void MainISR(void)
         {
             if(Rotation1==0)
             {
-                EPwm2Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM2B
-                EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
+                EPwm2Regs.AQCSFRC.bit.CSFB = 0;    //Forcing Disabled on EPWM2B
+                EPwm2Regs.AQCSFRC.bit.CSFA = 1;    //EPWM2A forced low
             }
             else if(Rotation1 == 1)
             {
-                EPwm2Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM2A
-                EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+                EPwm2Regs.AQCSFRC.bit.CSFA = 0;    //Forcing Disabled on EPWM2A
+                EPwm2Regs.AQCSFRC.bit.CSFB = 1;    //EPWM2B forced low
             }
             else
             {
-                EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
-                EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+                EPwm2Regs.AQCSFRC.bit.CSFA = 1;    //EPWM2A forced low
+                EPwm2Regs.AQCSFRC.bit.CSFB = 1;    //EPWM2B forced low
             }
             EPwm2Regs.CMPA.half.CMPA=pwm1.PWM1out;
         }
@@ -641,7 +641,7 @@ interrupt void MainISR(void)
 #endif // (BUILDLEVEL==LEVEL1)
 
 // =============================== LEVEL 2 ======================================
-//	  Level 2 verifies the analog-to-digital conversion, offset compensation
+//   Level 2 verifies the analog-to-digital conversion, offset compensation
 // ==============================================================================
 
 #if (BUILDLEVEL==LEVEL2)
@@ -672,7 +672,7 @@ interrupt void MainISR(void)
 //  Connect inputs of the PWM_DRV module and call the PWM signal generation macro
 // ------------------------------------------------------------------------------
         pwm1.MfuncC1 = (int16)_IQtoIQ15(_IQabs(rc1.SetpointValue)); // MfuncC1 is in Q15
-        PWM_MACRO(pwm1)							   	   // Calculate the new PWM compare values
+        PWM_MACRO(pwm1)                            // Calculate the new PWM compare values
 
         if(rc1.SetpointValue < 0)
         {
@@ -687,18 +687,18 @@ interrupt void MainISR(void)
         {
             if(Rotation1==0)
             {
-                EPwm1Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM1B
-                EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
+                EPwm1Regs.AQCSFRC.bit.CSFB = 0;    //Forcing Disabled on EPWM1B
+                EPwm1Regs.AQCSFRC.bit.CSFA = 1;    //EPWM1A forced low
             }
             else if(Rotation1 == 1)
             {
-                EPwm1Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM1A
-                EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+                EPwm1Regs.AQCSFRC.bit.CSFA = 0;    //Forcing Disabled on EPWM1A
+                EPwm1Regs.AQCSFRC.bit.CSFB = 1;    //EPWM1B forced low
             }
             else
             {
-                EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
-                EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+                EPwm1Regs.AQCSFRC.bit.CSFA = 1;    //EPWM1A forced low
+                EPwm1Regs.AQCSFRC.bit.CSFB = 1;    //EPWM1B forced low
             }
             EPwm1Regs.CMPA.half.CMPA=pwm1.PWM1out;
         }
@@ -706,18 +706,18 @@ interrupt void MainISR(void)
         {
             if(Rotation1==0)
             {
-                EPwm2Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM2B
-                EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
+                EPwm2Regs.AQCSFRC.bit.CSFB = 0;    //Forcing Disabled on EPWM2B
+                EPwm2Regs.AQCSFRC.bit.CSFA = 1;    //EPWM2A forced low
             }
             else if(Rotation1 == 1)
             {
-                EPwm2Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM2A
-                EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+                EPwm2Regs.AQCSFRC.bit.CSFA = 0;    //Forcing Disabled on EPWM2A
+                EPwm2Regs.AQCSFRC.bit.CSFB = 1;    //EPWM2B forced low
             }
             else
             {
-                EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
-                EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+                EPwm2Regs.AQCSFRC.bit.CSFA = 1;    //EPWM2A forced low
+                EPwm2Regs.AQCSFRC.bit.CSFB = 1;    //EPWM2B forced low
             }
             EPwm2Regs.CMPA.half.CMPA=pwm1.PWM1out;
         }
@@ -739,7 +739,7 @@ interrupt void MainISR(void)
 #endif // (BUILDLEVEL==LEVEL2)
 
 // =============================== LEVEL 3 ======================================
-//	Level 3 verifies the current regulation performed by PID
+// Level 3 verifies the current regulation performed by PID
 // ==============================================================================
 
 #if (BUILDLEVEL==LEVEL3)
@@ -777,7 +777,7 @@ interrupt void MainISR(void)
 //  Connect inputs of the PWM_DRV module and call the PWM signal generation macro
 // ------------------------------------------------------------------------------
         pwm1.MfuncC1 = (int16)_IQtoIQ15(_IQabs(pid1_i.Out)); // MfuncC1 is in Q15
-        PWM_MACRO(pwm1)							   	   // Calculate the new PWM compare values
+        PWM_MACRO(pwm1)                            // Calculate the new PWM compare values
 
         if(pid1_i.Out < 0)
         {
@@ -792,18 +792,18 @@ interrupt void MainISR(void)
         {
             if(Rotation1==0)
             {
-                EPwm1Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM1B
-                EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
+                EPwm1Regs.AQCSFRC.bit.CSFB = 0;    //Forcing Disabled on EPWM1B
+                EPwm1Regs.AQCSFRC.bit.CSFA = 1;    //EPWM1A forced low
             }
             else if(Rotation1 == 1)
             {
-                EPwm1Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM1A
-                EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+                EPwm1Regs.AQCSFRC.bit.CSFA = 0;    //Forcing Disabled on EPWM1A
+                EPwm1Regs.AQCSFRC.bit.CSFB = 1;    //EPWM1B forced low
             }
             else
             {
-                EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
-                EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+                EPwm1Regs.AQCSFRC.bit.CSFA = 1;    //EPWM1A forced low
+                EPwm1Regs.AQCSFRC.bit.CSFB = 1;    //EPWM1B forced low
             }
             EPwm1Regs.CMPA.half.CMPA=pwm1.PWM1out;
         }
@@ -811,18 +811,18 @@ interrupt void MainISR(void)
         {
             if(Rotation1==0)
             {
-                EPwm2Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM2B
-                EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
+                EPwm2Regs.AQCSFRC.bit.CSFB = 0;    //Forcing Disabled on EPWM2B
+                EPwm2Regs.AQCSFRC.bit.CSFA = 1;    //EPWM2A forced low
             }
             else if(Rotation1 == 1)
             {
-                EPwm2Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM2A
-                EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+                EPwm2Regs.AQCSFRC.bit.CSFA = 0;    //Forcing Disabled on EPWM2A
+                EPwm2Regs.AQCSFRC.bit.CSFB = 1;    //EPWM2B forced low
             }
             else
             {
-                EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
-                EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+                EPwm2Regs.AQCSFRC.bit.CSFA = 1;    //EPWM2A forced low
+                EPwm2Regs.AQCSFRC.bit.CSFB = 1;    //EPWM2B forced low
             }
             EPwm2Regs.CMPA.half.CMPA=pwm1.PWM1out;
         }
@@ -845,7 +845,7 @@ interrupt void MainISR(void)
 
 
 // =============================== LEVEL 4 ======================================
-//	  Level 4 runs two independent axes with closed loop current control
+//   Level 4 runs two independent axes with closed loop current control
 // ==============================================================================
 #if (BUILDLEVEL==LEVEL4)
 
@@ -884,8 +884,8 @@ interrupt void MainISR(void)
 //  Connect inputs of the PWM_DRV module and call the PWM signal generation macro
 // ------------------------------------------------------------------------------
 //update PWM for Motor 1
-        pwm1.MfuncC1 = (int16)_IQtoIQ15(_IQabs(pid1_i.Out));	// MfuncC1 is in Q15
-        PWM_MACRO(pwm1)							   	   			// Calculate the new PWM compare values
+        pwm1.MfuncC1 = (int16)_IQtoIQ15(_IQabs(pid1_i.Out));   // MfuncC1 is in Q15
+        PWM_MACRO(pwm1)                                     // Calculate the new PWM compare values
 
         if(pid1_i.Out < 0)
         {
@@ -898,24 +898,24 @@ interrupt void MainISR(void)
 
         if(Rotation1==0)
         {
-            EPwm1Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM1B
-            EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
+            EPwm1Regs.AQCSFRC.bit.CSFB = 0;     //Forcing Disabled on EPWM1B
+            EPwm1Regs.AQCSFRC.bit.CSFA = 1;     //EPWM1A forced low
         }
         else if(Rotation1 == 1)
         {
-            EPwm1Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM1A
-            EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+            EPwm1Regs.AQCSFRC.bit.CSFA = 0;     //Forcing Disabled on EPWM1A
+            EPwm1Regs.AQCSFRC.bit.CSFB = 1;     //EPWM1B forced low
         }
         else
         {
-            EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
-            EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+            EPwm1Regs.AQCSFRC.bit.CSFA = 1;     //EPWM1A forced low
+            EPwm1Regs.AQCSFRC.bit.CSFB = 1;     //EPWM1B forced low
         }
         EPwm1Regs.CMPA.half.CMPA=pwm1.PWM1out;
 
 //update pwm for Motor 2
-        pwm2.MfuncC1 = (int16)_IQtoIQ15(_IQabs(pid2_i.Out));	// MfuncC1 is in Q15
-        PWM_MACRO(pwm2)							   	   			// Calculate the new PWM compare values
+        pwm2.MfuncC1 = (int16)_IQtoIQ15(_IQabs(pid2_i.Out));   // MfuncC1 is in Q15
+        PWM_MACRO(pwm2)                                     // Calculate the new PWM compare values
 
         if(pid2_i.Out < 0)
         {
@@ -928,18 +928,18 @@ interrupt void MainISR(void)
 
         if(Rotation2==0)
         {
-            EPwm2Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM2B
-            EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
+            EPwm2Regs.AQCSFRC.bit.CSFB = 0;     //Forcing Disabled on EPWM2B
+            EPwm2Regs.AQCSFRC.bit.CSFA = 1;     //EPWM2A forced low
         }
         else if(Rotation2 == 1)
         {
-            EPwm2Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM2A
-            EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+            EPwm2Regs.AQCSFRC.bit.CSFA = 0;     //Forcing Disabled on EPWM2A
+            EPwm2Regs.AQCSFRC.bit.CSFB = 1;     //EPWM2B forced low
         }
         else
         {
-            EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
-            EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+            EPwm2Regs.AQCSFRC.bit.CSFA = 1;     //EPWM2A forced low
+            EPwm2Regs.AQCSFRC.bit.CSFB = 1;     //EPWM2B forced low
         }
         EPwm2Regs.CMPA.half.CMPA=pwm2.PWM1out;
 
