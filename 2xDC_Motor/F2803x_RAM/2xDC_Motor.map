@@ -1,10 +1,10 @@
 ******************************************************************************
-             TMS320C2000 Linker Unix v6.1.0                    
+             TMS320C2000 Linker PC v6.1.0                      
 ******************************************************************************
->> Linked Mon Apr 15 11:50:33 2013
+>> Linked Wed Apr 17 16:24:55 2013
 
 OUTPUT FILE NAME:   <2xDC_Motor.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 000087c1
+ENTRY POINT SYMBOL: "_c_int00"  address: 000087e8
 
 
 MEMORY CONFIGURATION
@@ -15,7 +15,7 @@ PAGE 0:
   BEGIN                 00000000   00000002  00000000  00000002  RWIX
   BOOT_RSVD             00000002   0000004e  00000000  0000004e  RWIX
   RAMM0                 00000050   000003b0  0000012a  00000286  RWIX
-  progRAM               00008000   00001800  0000089d  00000f63  RWIX
+  progRAM               00008000   00001800  000008c4  00000f3c  RWIX
   IQTABLES              003fe000   00000b50  00000000  00000b50  RWIX
   IQTABLES2             003feb50   0000008c  00000000  0000008c  RWIX
   IQTABLES3             003febdc   000000aa  00000000  000000aa  RWIX
@@ -88,22 +88,22 @@ ramfuncs   0    0000015b    0000001f
                   0000015b    0000001b     2xDC_Motor-DevInit_F2803x.obj (ramfuncs)
                   00000176    00000004     DSP2803x_usDelay.obj (ramfuncs)
 
-.text      0    00008000    0000089d     
+.text      0    00008000    000008c4     
                   00008000    00000369     2xDC_Motor.obj (.text)
                   00008369    000001b8     2xDC_Motor-DevInit_F2803x.obj (.text)
-                  00008521    000000f5     2xDC_Motor.obj (.text:retain)
-                  00008616    00000083     rts2800_ml.lib : fd_mpy.obj (.text)
-                  00008699    00000083                    : fs_div.obj (.text)
-                  0000871c    0000005a                    : fs_mpy.obj (.text)
-                  00008776    0000004b     DLOG4CHC.obj (.text)
-                  000087c1    00000044     rts2800_ml.lib : boot.obj (.text)
-                  00008805    0000001f                    : fd_tol.obj (.text)
-                  00008824    0000001d                    : fs_tou.obj (.text)
-                  00008841    0000001c                    : fs_tofd.obj (.text)
-                  0000885d    00000019                    : args_main.obj (.text)
-                  00008876    00000019                    : exit.obj (.text)
-                  0000888f    00000009                    : _lock.obj (.text)
-                  00008898    00000005     2xDC_Motor-DevInit_F2803x.obj (.text:retain)
+                  00008521    0000011c     2xDC_Motor.obj (.text:retain)
+                  0000863d    00000083     rts2800_ml.lib : fd_mpy.obj (.text)
+                  000086c0    00000083                    : fs_div.obj (.text)
+                  00008743    0000005a                    : fs_mpy.obj (.text)
+                  0000879d    0000004b     DLOG4CHC.obj (.text)
+                  000087e8    00000044     rts2800_ml.lib : boot.obj (.text)
+                  0000882c    0000001f                    : fd_tol.obj (.text)
+                  0000884b    0000001d                    : fs_tou.obj (.text)
+                  00008868    0000001c                    : fs_tofd.obj (.text)
+                  00008884    00000019                    : args_main.obj (.text)
+                  0000889d    00000019                    : exit.obj (.text)
+                  000088b6    00000009                    : _lock.obj (.text)
+                  000088bf    00000005     2xDC_Motor-DevInit_F2803x.obj (.text:retain)
 
 .reset     0    003fffc0    00000002     DSECT
                   003fffc0    00000002     rts2800_ml.lib : boot.obj (.reset)
@@ -313,13 +313,13 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 address    name
 --------   ----
 00008000   .text
-00008876   C$$EXIT
-00008616   FD$$MPY
-00008805   FD$$TOL
-00008699   FS$$DIV
-0000871c   FS$$MPY
-00008841   FS$$TOFD
-00008824   FS$$TOU
+0000889d   C$$EXIT
+0000863d   FD$$MPY
+0000882c   FD$$TOL
+000086c0   FS$$DIV
+00008743   FS$$MPY
+00008868   FS$$TOFD
+0000884b   FS$$TOU
 000082ad   _A0
 000082f2   _A1
 00008335   _A2
@@ -348,8 +348,8 @@ address    name
 00000c10   _CpuTimer2Regs
 003f7ff8   _CsmPwl
 00000ae0   _CsmRegs
-00008776   _DLOG_4CH_init
-00008781   _DLOG_4CH_update
+0000879d   _DLOG_4CH_init
+000087a8   _DLOG_4CH_update
 00009b47   _DRV_RESET
 00000176   _DSP28x_usDelay
 00000880   _DevEmuRegs
@@ -390,7 +390,7 @@ address    name
 00009b56   _IFdbk2d
 00009b52   _IRef1
 00009b5c   _IRef2
-00008898   _ISR_ILLEGAL
+000088bf   _ISR_ILLEGAL
 0000015b   _InitFlash
 00009b5a   _IsrTicker
 00006c00   _LinaRegs
@@ -432,22 +432,22 @@ address    name
 ffffffff   ___binit__
 ffffffff   ___c_args__
 00000050   ___cinit__
-0000889d   ___etext__
+000088c4   ___etext__
 ffffffff   ___pinit__
 00008000   ___text__
-0000885d   __args_main
+00008884   __args_main
 00009b24   __cleanup_ptr
 00009b26   __dtors_ptr
 00009b22   __lock
-00008897   __nop
-00008893   __register_lock
-0000888f   __register_unlock
+000088be   __nop
+000088ba   __register_lock
+000088b6   __register_unlock
 00000480   __stack
 00009b20   __unlock
-00008876   _abort
-000087c1   _c_int00
+0000889d   _abort
+000087e8   _c_int00
 00009bc0   _dlog
-00008878   _exit
+0000889f   _exit
 00008000   _main
 00009c00   _pid1_i
 00009bd6   _pid2_i
@@ -460,7 +460,7 @@ ffffffff   ___pinit__
 00009b6c   _rc_tmp
 ffffffff   binit
 00000050   cinit
-0000889d   etext
+000088c4   etext
 ffffffff   pinit
 
 
@@ -542,25 +542,25 @@ address    name
 000084f0   _PieVectTableInit
 0000850c   _MemCopy
 00008521   _MainISR
-00008616   FD$$MPY
-00008699   FS$$DIV
-0000871c   FS$$MPY
-00008776   _DLOG_4CH_init
-00008781   _DLOG_4CH_update
-000087c1   _c_int00
-00008805   FD$$TOL
-00008824   FS$$TOU
-00008841   FS$$TOFD
-0000885d   __args_main
-00008876   C$$EXIT
-00008876   _abort
-00008878   _exit
-0000888f   __register_unlock
-00008893   __register_lock
-00008897   __nop
-00008898   _ISR_ILLEGAL
-0000889d   ___etext__
-0000889d   etext
+0000863d   FD$$MPY
+000086c0   FS$$DIV
+00008743   FS$$MPY
+0000879d   _DLOG_4CH_init
+000087a8   _DLOG_4CH_update
+000087e8   _c_int00
+0000882c   FD$$TOL
+0000884b   FS$$TOU
+00008868   FS$$TOFD
+00008884   __args_main
+0000889d   C$$EXIT
+0000889d   _abort
+0000889f   _exit
+000088b6   __register_unlock
+000088ba   __register_lock
+000088be   __nop
+000088bf   _ISR_ILLEGAL
+000088c4   ___etext__
+000088c4   etext
 00009b20   __unlock
 00009b22   __lock
 00009b24   __cleanup_ptr

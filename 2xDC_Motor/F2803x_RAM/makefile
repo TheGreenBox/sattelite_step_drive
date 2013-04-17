@@ -2,7 +2,9 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-CG_TOOL_ROOT := /opt/ti/ccsv5/tools/compiler/c2000_6.1.0
+SHELL = cmd.exe
+
+CG_TOOL_ROOT := C:/ti/ccsv5/tools/compiler/c2000_6.1.0
 
 ORDERED_OBJS += \
 $(GEN_CMDS__FLAG) \
@@ -12,15 +14,15 @@ $(GEN_CMDS__FLAG) \
 "./2xDC_Motor.obj" \
 "./2xDC_Motor-DevInit_F2803x.obj" \
 -l"libc.a" \
--l"/media/general/src/the_green_box_projects/step_course/2xDC_Motor/../libs/math/IQmath/v15c/lib/IQmath.lib" \
-"/media/general/src/the_green_box_projects/step_course/device_support/f2803x/v122/DSP2803x_headers/cmd/DSP2803x_Headers_nonBIOS.cmd" \
+-l"C:/src/step_course/2xDC_Motor/../libs/math/IQmath/v15c/lib/IQmath.lib" \
+"C:/src/step_course/device_support/f2803x/v122/DSP2803x_headers/cmd/DSP2803x_Headers_nonBIOS.cmd" \
 "../F28035_RAM_2xDC_Motor.CMD" \
-"/media/general/src/the_green_box_projects/step_course/libs/math/IQmath/v15c/lib/IQmath.lib" \
+"C:/src/step_course/libs/math/IQmath/v15c/lib/IQmath.lib" \
 
 -include ../makefile.init
 
-RM := rm -rf
-RMDIR := rm -rf
+RM := DEL /F
+RMDIR := RMDIR /S/Q
 
 # All of the sources participating in the build are defined here
 -include sources.mk
@@ -120,7 +122,7 @@ all: 2xDC_Motor.out
 2xDC_Motor.out: $(OBJS) $(CMD_SRCS) $(CMD_UPPER_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C2000 Linker'
-	"/opt/ti/ccsv5/tools/compiler/c2000_6.1.0/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -g --diag_warning=225 -z --stack_size=0x380 -m"2xDC_Motor.map" --warn_sections -i"/opt/ti/ccsv5/tools/compiler/c2000_6.1.0/lib" -i"/opt/ti/ccsv5/tools/compiler/c2000_6.1.0/include" -i"/media/general/src/the_green_box_projects/step_course/libs/math/IQmath/v15c/lib" --reread_libs --rom_model -o "2xDC_Motor.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -g --diag_warning=225 -z --stack_size=0x380 -m"2xDC_Motor.map" --warn_sections -i"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/lib" -i"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/include" -i"C:/src/step_course/libs/math/IQmath/v15c/lib" --reread_libs --rom_model -o "2xDC_Motor.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

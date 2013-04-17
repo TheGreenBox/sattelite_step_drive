@@ -18,6 +18,42 @@
 <entry path="/opt/ti/ccsv5/eclipse/jre/lib/endorsed"/>
 </endorsedDirs>
 </libraryInfo>
+<libraryInfo home="C:\ti\ccsv5\eclipse" version="1.6.0_13">
+<bootpath>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\resources.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\rt.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\sunrsasign.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\jsse.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\jce.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\charsets.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\ext"/>
+<entry path="C:\windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+<libraryInfo home="C:\ti\ccsv5\eclipse\jre" version="1.6.0_13">
+<bootpath>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\resources.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\rt.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\sunrsasign.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\jsse.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\jce.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\charsets.jar"/>
+<entry path="C:\ti\ccsv5\eclipse\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\ext"/>
+<entry path="C:\windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\ti\ccsv5\eclipse\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
 <libraryInfo home="/opt/ti/ccsv5/eclipse/jre" version="1.6.0_13">
 <bootpath>
 <entry path="/opt/ti/ccsv5/eclipse/jre/lib/resources.jar"/>

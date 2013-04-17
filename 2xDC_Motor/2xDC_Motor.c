@@ -495,10 +495,18 @@ interrupt void MainISR(void)
         pwm1.MfuncC1 = (int16)_IQtoIQ15(_IQabs(rc1.SetpointValue)); // MfuncC1 is in Q15
         PWM_MACRO(pwm1) // Calculate the new PWM compare values
         
-        Rotation1 = (rc1.SetpointValue < 0 ) ? ( 0 ):( 1 );
 
-        //if(Motor==1)
-        //{
+        if(rc1.SetpointValue < 0)
+        {
+            Rotation1 = 0;
+        }
+        else
+        {
+            Rotation1 = 1;
+        }
+
+        if(Motor==1)
+        {
             if(Rotation1==0)
             {
                 EPwm1Regs.AQCSFRC.bit.CSFB = 0;    //Forcing Disabled on EPWM1B
