@@ -71,8 +71,6 @@ _iq IRef1 = _IQ(0.0);            // Motor 1 current reference (pu)
 _iq IFdbk1;                      // Motor 1 current feedback (pu)
 _iq IFdbk1a;                     // Phase 1 current feedback (pu)
 _iq IFdbk1b;                     // Phase 1 current feedback (pu)
-//not used for this project.  Save for future use
-//_iq SpeedRef1 = _IQ(0.25);     // Motor 1 Speed reference (pu)
 Uint16 Rotation1 = 1;            // Motor 1 PWM direction
 
 _iq VRef2 = _IQ(0.0);            // Motor 2 voltge reference (pu)
@@ -80,8 +78,6 @@ _iq IRef2 = _IQ(0.0);            // Motor 2 current reference (pu)
 _iq IFdbk2;                      // Motor 2 current feedback (pu)
 _iq IFdbk2c;                     // Phase 2 current feedback (pu)
 _iq IFdbk2d;                     // Phase 2 current feedback (pu)
-//not used for this project.  Save for future use
-//_iq SpeedRef2 = _IQ(0.25);     // Motor 2 Speed reference (pu)
 Uint16 Rotation2 = 1;            // Motor 2 PWM direction
 
 float32 T = 0.001/ISR_FREQUENCY; // Samping period (sec), see parameter.h
