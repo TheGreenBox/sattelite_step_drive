@@ -1,37 +1,12 @@
 
-**** Build of configuration F2803x_RAM for project 2xDC_Motor ****
+**** Clean-only build of configuration F2803x_RAM for project 2xDC_Motor ****
 
-"C:\\ti\\ccsv5\\utils\\bin\\gmake" -k all 
-'Building file: ../2xDC_Motor-DevInit_F2803x.c'
-'Invoking: C2000 Compiler'
-"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -g --include_path="C:/ti/ccsv5/tools/compiler/c2000_6.1.0/include" --include_path="C:/src/step_course/libs/math/IQmath/v15c/include" --include_path="C:/src/step_course/development_kits/~SupportFiles/F2803x_headers" --include_path="C:/src/step_course/libs/app_libs/motor_control/drivers/f2803x_v1.1" --include_path="C:/src/step_course/device_support/f2803x/v122/DSP2803x_headers/include" --include_path="C:/src/step_course/device_support/f2803x/v122/DSP2803x_common/include" --include_path="C:/src/step_course/libs/app_libs/motor_control/math_blocks/v2.1" --diag_warning=225 --preproc_with_compile --preproc_dependency="2xDC_Motor-DevInit_F2803x.pp"  "../2xDC_Motor-DevInit_F2803x.c"
-'Finished building: ../2xDC_Motor-DevInit_F2803x.c'
-' '
-'Building file: ../2xDC_Motor.c'
-'Invoking: C2000 Compiler'
-"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -g --include_path="C:/ti/ccsv5/tools/compiler/c2000_6.1.0/include" --include_path="C:/src/step_course/libs/math/IQmath/v15c/include" --include_path="C:/src/step_course/development_kits/~SupportFiles/F2803x_headers" --include_path="C:/src/step_course/libs/app_libs/motor_control/drivers/f2803x_v1.1" --include_path="C:/src/step_course/device_support/f2803x/v122/DSP2803x_headers/include" --include_path="C:/src/step_course/device_support/f2803x/v122/DSP2803x_common/include" --include_path="C:/src/step_course/libs/app_libs/motor_control/math_blocks/v2.1" --diag_warning=225 --preproc_with_compile --preproc_dependency="2xDC_Motor.pp"  "../2xDC_Motor.c"
-'Finished building: ../2xDC_Motor.c'
-' '
-'Building file: ../DLOG4CHC.asm'
-'Invoking: C2000 Compiler'
-"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -g --include_path="C:/ti/ccsv5/tools/compiler/c2000_6.1.0/include" --include_path="C:/src/step_course/libs/math/IQmath/v15c/include" --include_path="C:/src/step_course/development_kits/~SupportFiles/F2803x_headers" --include_path="C:/src/step_course/libs/app_libs/motor_control/drivers/f2803x_v1.1" --include_path="C:/src/step_course/device_support/f2803x/v122/DSP2803x_headers/include" --include_path="C:/src/step_course/device_support/f2803x/v122/DSP2803x_common/include" --include_path="C:/src/step_course/libs/app_libs/motor_control/math_blocks/v2.1" --diag_warning=225 --preproc_with_compile --preproc_dependency="DLOG4CHC.pp"  "../DLOG4CHC.asm"
-'Finished building: ../DLOG4CHC.asm'
-' '
-'Building file: C:/src/step_course/device_support/f2803x/v122/DSP2803x_headers/source/DSP2803x_GlobalVariableDefs.c'
-'Invoking: C2000 Compiler'
-"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -g --include_path="C:/ti/ccsv5/tools/compiler/c2000_6.1.0/include" --include_path="C:/src/step_course/libs/math/IQmath/v15c/include" --include_path="C:/src/step_course/development_kits/~SupportFiles/F2803x_headers" --include_path="C:/src/step_course/libs/app_libs/motor_control/drivers/f2803x_v1.1" --include_path="C:/src/step_course/device_support/f2803x/v122/DSP2803x_headers/include" --include_path="C:/src/step_course/device_support/f2803x/v122/DSP2803x_common/include" --include_path="C:/src/step_course/libs/app_libs/motor_control/math_blocks/v2.1" --diag_warning=225 --preproc_with_compile --preproc_dependency="DSP2803x_GlobalVariableDefs.pp"  "C:/src/step_course/device_support/f2803x/v122/DSP2803x_headers/source/DSP2803x_GlobalVariableDefs.c"
-'Finished building: C:/src/step_course/device_support/f2803x/v122/DSP2803x_headers/source/DSP2803x_GlobalVariableDefs.c'
-' '
-'Building file: ../DSP2803x_usDelay.asm'
-'Invoking: C2000 Compiler'
-"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -g --include_path="C:/ti/ccsv5/tools/compiler/c2000_6.1.0/include" --include_path="C:/src/step_course/libs/math/IQmath/v15c/include" --include_path="C:/src/step_course/development_kits/~SupportFiles/F2803x_headers" --include_path="C:/src/step_course/libs/app_libs/motor_control/drivers/f2803x_v1.1" --include_path="C:/src/step_course/device_support/f2803x/v122/DSP2803x_headers/include" --include_path="C:/src/step_course/device_support/f2803x/v122/DSP2803x_common/include" --include_path="C:/src/step_course/libs/app_libs/motor_control/math_blocks/v2.1" --diag_warning=225 --preproc_with_compile --preproc_dependency="DSP2803x_usDelay.pp"  "../DSP2803x_usDelay.asm"
-'Finished building: ../DSP2803x_usDelay.asm'
-' '
-'Building target: 2xDC_Motor.out'
-'Invoking: C2000 Linker'
-"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -g --diag_warning=225 -z --stack_size=0x380 -m"2xDC_Motor.map" --warn_sections -i"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/lib" -i"C:/ti/ccsv5/tools/compiler/c2000_6.1.0/include" -i"C:/src/step_course/libs/math/IQmath/v15c/lib" --reread_libs --rom_model -o "2xDC_Motor.out"  "./DSP2803x_usDelay.obj" "./DSP2803x_GlobalVariableDefs.obj" "./DLOG4CHC.obj" "./2xDC_Motor.obj" "./2xDC_Motor-DevInit_F2803x.obj" -l"libc.a" -l"C:/src/step_course/2xDC_Motor/../libs/math/IQmath/v15c/lib/IQmath.lib" "C:/src/step_course/device_support/f2803x/v122/DSP2803x_headers/cmd/DSP2803x_Headers_nonBIOS.cmd" "../F28035_RAM_2xDC_Motor.CMD" "C:/src/step_course/libs/math/IQmath/v15c/lib/IQmath.lib" 
-<Linking>
-'Finished building target: 2xDC_Motor.out'
-' '
+/home/alexander/ti/ccsv5/utils/bin/gmake -k clean 
+rm -rf  "2xDC_Motor.out"
+rm -rf "2xDC_Motor-DevInit_F2803x.pp" "2xDC_Motor.pp" "DSP2803x_GlobalVariableDefs.pp" 
+rm -rf "2xDC_Motor-DevInit_F2803x.obj" "2xDC_Motor.obj" "DLOG4CHC.obj" "DSP2803x_GlobalVariableDefs.obj" "DSP2803x_usDelay.obj" 
+rm -rf "DLOG4CHC.pp" "DSP2803x_usDelay.pp" 
+Finished clean
+ 
 
 **** Build Finished ****

@@ -9,4 +9,5 @@
 <rts value="libc.a"/>
 <defaultAssemblyOnly value="false"/>
 <deviceFamily value="C2000"/>
+<isTargetManual value="false"/>
 </projectOptions>
