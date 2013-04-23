@@ -1,20 +1,20 @@
 /* ==================================================================================
 File name:       F2803XILEG_VDC_Stepper.H
-                    
+
 Originator:	Digital Control Systems Group
 			Texas Instruments
 
-Description: This header file contains macro definition for ADC initilization 
+Description: This header file contains macro definition for ADC initilization
 (In this project ADC is used for leg current measurement and DC-bus measurement)
 
 This drv file is specific to "DRV8412" kit
 
 Target: TMS320F2803x family
-              
+
 =====================================================================================
 History:
 -------------------------------------------------------------------------------------
- 07-28-2010	Version 1.0 
+ 07-28-2010	Version 1.0
 ------------------------------------------------------------------------------------*/
 
 #ifndef __F280XILEG_VDC_H__
@@ -23,7 +23,7 @@ History:
 #include "f2803xbmsk.h"
 
 /*------------------------------------------------------------------------------
- ADC Initialization Macro Definition 
+ ADC Initialization Macro Definition
 ------------------------------------------------------------------------------*/
 
 

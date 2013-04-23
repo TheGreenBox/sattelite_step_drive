@@ -1,14 +1,14 @@
 /* =================================================================================
-File name:        F2803XQEP_Stepper.H                     
-                    
+File name:        F2803XQEP_Stepper.H
+
 Originator:	Digital Control Systems Group
 			Texas Instruments
-Description:  
-Header file containing data type, object, macro definitions and initializers. 
+Description:
+Header file containing data type, object, macro definitions and initializers.
 ====================================================================================
 History:
 -------------------------------------------------------------------------------------
- 07-28-2010	Version 1.0 
+ 07-28-2010	Version 1.0
 ----------------------------------------------------------------------------------*/
 
 #ifndef __F2803X_QEP_H__
@@ -30,12 +30,12 @@ History:
                                  IEL_RISING + \
                                  QPEN_ENABLE + \
                                  QCLM_TIME_OUT + \
-                                 UTE_ENABLE )  
+                                 UTE_ENABLE )
 
 /*-----------------------------------------------------------------------------
     Initialization states for EQEP Position-Compare Control Register
 ------------------------------------------------------------------------------*/
-#define QPOSCTL_INIT_STATE      PCE_DISABLE 
+#define QPOSCTL_INIT_STATE      PCE_DISABLE
 
 /*-----------------------------------------------------------------------------
     Initialization states for EQEP Capture Control Register
@@ -45,20 +45,22 @@ History:
                                  CEN_ENABLE )
 
 /*-----------------------------------------------------------------------------
-Define the structure of the QEP (Quadrature Encoder) Driver Object 
+Define the structure of the QEP (Quadrature Encoder) Driver Object
 -----------------------------------------------------------------------------*/
-typedef struct {int32 ElecTheta;        // Output: Motor Electrical angle (Q24)
-                int32 MechTheta;        // Output: Motor Mechanical Angle (Q24) 
-                Uint16 DirectionQep;    // Output: Motor rotation direction (Q0)
-                Uint16 QepPeriod;       // Output: Capture period of QEP signal in number of EQEP capture timer (QCTMR) period  (Q0)
-                Uint32 QepCountIndex;   // Variable: Encoder counter index (Q0) 
-                 int32 RawTheta;        // Variable: Raw angle from EQEP Postiion counter (Q0)
-                Uint32 MechScaler;      // Parameter: 0.9999/total count (Q30) 
-                Uint16 LineEncoder;     // Parameter: Number of line encoder (Q0) 
-                Uint16 PolePairs;       // Parameter: Number of pole pairs (Q0) 
-                 int32 CalibratedAngle; // Parameter: Raw angular offset between encoder index and phase a (Q0)
-                Uint16 IndexSyncFlag;   // Output: Index sync status (Q0) 
-                }  QEP;
+typedef struct
+{
+    int32 ElecTheta;        // Output: Motor Electrical angle (Q24)
+    int32 MechTheta;        // Output: Motor Mechanical Angle (Q24)
+    Uint16 DirectionQep;    // Output: Motor rotation direction (Q0)
+    Uint16 QepPeriod;       // Output: Capture period of QEP signal in number of EQEP capture timer (QCTMR) period  (Q0)
+    Uint32 QepCountIndex;   // Variable: Encoder counter index (Q0)
+    int32 RawTheta;        // Variable: Raw angle from EQEP Postiion counter (Q0)
+    Uint32 MechScaler;      // Parameter: 0.9999/total count (Q30)
+    Uint16 LineEncoder;     // Parameter: Number of line encoder (Q0)
+    Uint16 PolePairs;       // Parameter: Number of pole pairs (Q0)
+    int32 CalibratedAngle; // Parameter: Raw angular offset between encoder index and phase a (Q0)
+    Uint16 IndexSyncFlag;   // Output: Index sync status (Q0)
+}  QEP;
 
 /*-----------------------------------------------------------------------------
 Define a QEP_handle
@@ -69,11 +71,11 @@ typedef QEP *QEP_handle;
 Default initializer for the QEP Object.
 -----------------------------------------------------------------------------*/
 
-#define QEP_DEFAULTS { 0x0,0x0,0x0,0x0,0x0,0x0,0x00020000,0x0,2,0,0x0}  
-               
+#define QEP_DEFAULTS { 0x0,0x0,0x0,0x0,0x0,0x0,0x00020000,0x0,2,0,0x0}
+
 
 /*-----------------------------------------------------------------------------
-	QEP Init and QEP Update Macro Definitions                                 
+	QEP Init and QEP Update Macro Definitions
 -----------------------------------------------------------------------------*/
 
 
@@ -90,7 +92,7 @@ Default initializer for the QEP Object.
      GpioCtrlRegs.GPAMUX2.bit.GPIO20 = 1;  /* GPIO20 is EQEP1A */								\
      GpioCtrlRegs.GPAMUX2.bit.GPIO21 = 1;  /* GPIO21 is EQEP1B */								\
      GpioCtrlRegs.GPAMUX2.bit.GPIO23 = 1;  /* GPIO23 is EQEP1I  */								\
-     EDIS;                         /* Disable EALLOW*/							
+     EDIS;                         /* Disable EALLOW*/
 
 
 #define QEP_MACRO(v)																			\
@@ -140,7 +142,7 @@ Default initializer for the QEP Object.
 
 
 
-#endif // __F280X_QEP_H__ 
+#endif // __F280X_QEP_H__
 
 
 
