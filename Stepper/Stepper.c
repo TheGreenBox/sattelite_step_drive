@@ -146,19 +146,19 @@ void main(void)
 
     DeviceInit();	// Device Life support & GPIO
 
-// Only used if running from FLASH
-// Note that the variable FLASH is defined by the compiler
+    // Only used if running from FLASH
+    // Note that the variable FLASH is defined by the compiler
 
-#ifdef FLASH
-// Copy time critical code and Flash setup code to RAM
-// The  RamfuncsLoadStart, RamfuncsLoadEnd, and RamfuncsRunStart
-// symbols are created by the linker. Refer to the linker files.
+    #ifdef FLASH
+    // Copy time critical code and Flash setup code to RAM
+    // The  RamfuncsLoadStart, RamfuncsLoadEnd, and RamfuncsRunStart
+    // symbols are created by the linker. Refer to the linker files.
     MemCopy(&RamfuncsLoadStart, &RamfuncsLoadEnd, &RamfuncsRunStart);
 
-// Call Flash Initialization to setup flash waitstates
-// This function must reside in RAM
+    // Call Flash Initialization to setup flash waitstates
+    // This function must reside in RAM
     InitFlash();	// Call the flash wrapper init function
-#endif //(FLASH)
+    #endif //(FLASH)
 
     // Waiting for enable flag set
     while (EnableFlag==FALSE)
@@ -166,33 +166,33 @@ void main(void)
         BackTicker++;
     }
 
-// Timing sync for slow background tasks
-// Timer period definitions found in device specific PeripheralHeaderIncludes.h
+    // Timing sync for slow background tasks
+    // Timer period definitions found in device specific PeripheralHeaderIncludes.h
     CpuTimer0Regs.PRD.all =  mSec1;		// A tasks
     CpuTimer1Regs.PRD.all =  mSec5;		// B tasks
     CpuTimer2Regs.PRD.all =  mSec50;	// C tasks
 
-// Tasks State-machine init
+    // Tasks State-machine init
     Alpha_State_Ptr = &A0;
     A_Task_Ptr = &A1;
     B_Task_Ptr = &B1;
     C_Task_Ptr = &C1;
 
-// Initialize PWM module
+    // Initialize PWM module
     pwm1.PeriodMax = SYSTEM_FREQUENCY*1000000*T/2;  // Prescaler X1 (T1), ISR period = T x 1
     PWM_INIT_MACRO(pwm1)
 
     pwm2.PeriodMax = SYSTEM_FREQUENCY*1000000*T/2;  // Prescaler X1 (T1), ISR period = T x 1
     PWM_INIT_MACRO(pwm2)
 
-// Initialize PWMDAC module
+    // Initialize PWMDAC module
     pwmdac1.PeriodMax = 500;   // @60Mhz: 1500->20kHz, 1000-> 30kHz, 500->60kHz
     pwmdac1.PwmDacInPointer0 = &PwmDacCh1;
     pwmdac1.PwmDacInPointer1 = &PwmDacCh2;
 
     PWMDAC_INIT_MACRO(pwmdac1)
 
-// Initialize DATALOG module
+    // Initialize DATALOG module
     dlog.iptr1 = &DlogCh1;
     dlog.iptr2 = &DlogCh2;
     dlog.iptr3 = &DlogCh3;
@@ -202,28 +202,13 @@ void main(void)
     dlog.prescalar = 5;
     dlog.init(&dlog);
 
-// Initialize ADC module
+    // Initialize ADC module
     ADC_MACRO_INIT()
 
-//not used for this project.  Save for future use
-// Initialize QEP module
-//    qep1.LineEncoder = 2048;
-//    qep1.MechScaler = _IQ30(0.25/qep1.LineEncoder);
-//    qep1.PolePairs = POLES/2;
-//    qep1.CalibratedAngle = 0;
-//    QEP_INIT_MACRO(qep1)
-
-//not used for this project.  Save for future use
-// Initialize the Speed module for QEP based speed calculation
-//    speed1.K1 = _IQ21(1/(BASE_FREQ*T));
-//    speed1.K2 = _IQ(1/(1+T*2*PI*5));  // Low-pass cut-off frequency
-//    speed1.K3 = _IQ(1)-speed1.K2;
-//    speed1.BaseRpm = 120*(BASE_FREQ/POLES);
-
-// Initialize the RAMPGEN module
+    // Initialize the RAMPGEN module
     rg1.StepAngleMax = _IQ(BASE_FREQ*T);
 
-// Initialize the PID_REG3 module for I
+    // Initialize the PID_REG3 module for I
     pid1_i.Kp = _IQ(2.16);			//for 24V DC bus
     pid1_i.Ki = _IQ(T*128.1);
     pid1_i.Kd = _IQ(0/T);
@@ -238,42 +223,33 @@ void main(void)
     pid2_i.OutMax = _IQ(0.95);
     pid2_i.OutMin = _IQ(-0.95);
 
-//not used for this project.  Save for future use
-// Initialize the PID_REG3 module for speed
-//    pid1_spd.Kp = _IQ(1.0);
-//	pid1_spd.Ki = _IQ(T*SpeedLoopPrescaler/0.3);
-//	pid1_spd.Kd = _IQ(0/(T*SpeedLoopPrescaler));
-// 	pid1_spd.Kc = _IQ(0.2);
-//    pid1_spd.OutMax = _IQ(0.95);
-//    pid1_spd.OutMin = _IQ(-0.95);
-
-//Initialize the SINCOSTBL object
+    //Initialize the SINCOSTBL object
     //512 is max resolution of of table
     //2^9 = 512
     st1.AngleShift = 9-MICROSTEPS;
 
-// Reassign ISRs.
+    // Reassign ISRs.
 
     EALLOW;	// This is needed to write to EALLOW protected registers
     PieVectTable.EPWM1_INT = &MainISR;
     EDIS;
 
-// Enable PIE group 3 interrupt 1 for EPWM1_INT
+    // Enable PIE group 3 interrupt 1 for EPWM1_INT
     PieCtrlRegs.PIEIER3.bit.INTx1 = 1;
 
-// Enable CNT_zero interrupt using EPWM1 Time-base
+    // Enable CNT_zero interrupt using EPWM1 Time-base
     EPwm1Regs.ETSEL.bit.INTEN = 1;   // Enable EPWM1INT generation
     EPwm1Regs.ETSEL.bit.INTSEL = 1;  // Enable interrupt CNT_zero event
     EPwm1Regs.ETPS.bit.INTPRD = 1;   // Generate interrupt on the 1st event
     EPwm1Regs.ETCLR.bit.INT = 1;     // Enable more interrupts
 
-// Enable CPU INT3 for EPWM1_INT:
+    // Enable CPU INT3 for EPWM1_INT:
     IER |= M_INT3;
-// Enable global Interrupts and higher priority real-time debug events:
+    // Enable global Interrupts and higher priority real-time debug events:
     EINT;   // Enable Global interrupt INTM
     ERTM;	// Enable Global realtime interrupt DBGM
 
-// IDLE loop. Just sit and loop forever:
+    // IDLE loop. Just sit and loop forever:
     for(;;)  //infinite loop
     {
         // State machine entry & exit point
@@ -404,32 +380,25 @@ void A1(void) // SPARE (not used)
 
 
     }
-    //-------------------
+    
     //the next time CpuTimer0 'counter' reaches Period value go to A2
     A_Task_Ptr = &A2;
-    //-------------------
 }
 
 //-----------------------------------------------------------------
 void A2(void) // SPARE (not used)
 //-----------------------------------------------------------------
 {
-
-    //-------------------
     //the next time CpuTimer0 'counter' reaches Period value go to A3
     A_Task_Ptr = &A3;
-    //-------------------
 }
 
 //-----------------------------------------
 void A3(void) // SPARE (not used)
 //-----------------------------------------
 {
-
-    //-----------------
     //the next time CpuTimer0 'counter' reaches Period value go to A1
     A_Task_Ptr = &A1;
-    //-----------------
 }
 
 
@@ -444,33 +413,24 @@ void A3(void) // SPARE (not used)
 void B1(void) // Toggle GPIO-00
 //----------------------------------------
 {
-
-    //-----------------
     //the next time CpuTimer1 'counter' reaches Period value go to B2
     B_Task_Ptr = &B2;
-    //-----------------
 }
 
 //----------------------------------------
 void B2(void) //  SPARE
 //----------------------------------------
 {
-
-    //-----------------
     //the next time CpuTimer1 'counter' reaches Period value go to B3
     B_Task_Ptr = &B3;
-    //-----------------
 }
 
 //----------------------------------------
 void B3(void) //  SPARE
 //----------------------------------------
 {
-
-    //-----------------
     //the next time CpuTimer1 'counter' reaches Period value go to B1
     B_Task_Ptr = &B1;
-    //-----------------
 }
 
 
@@ -480,83 +440,63 @@ void B3(void) //  SPARE
 
 //--------------------------------- USER ------------------------------------------
 
-//----------------------------------------
 void C1(void) 	// Toggle GPIO-34
-//----------------------------------------
 {
-
     GpioDataRegs.GPBTOGGLE.bit.GPIO34 = 1;	// Blink LED
-    //-----------------
     //the next time CpuTimer2 'counter' reaches Period value go to C2
     C_Task_Ptr = &C2;
-    //-----------------
-
 }
 
-//----------------------------------------
 void C2(void) //  SPARE
-//----------------------------------------
 {
-
-    //-----------------
     //the next time CpuTimer2 'counter' reaches Period value go to C3
     C_Task_Ptr = &C3;
-    //-----------------
 }
 
-
-//-----------------------------------------
 void C3(void) //  SPARE
-//-----------------------------------------
 {
-
-    //-----------------
     //the next time CpuTimer2 'counter' reaches Period value go to C1
     C_Task_Ptr = &C1;
-    //-----------------
 }
-
-
-
 
 // MainISR
 interrupt void MainISR(void)
 {
     _iq Aout,Bout;
 
-// Verifying the ISR
+   // Verifying the ISR
     IsrTicker++;
 
     if(RunMotor)
     {
-// =============================== LEVEL 1 ======================================
-//	  Checks target independent modules, duty cycle waveforms and PWM update
-//	  Keep the motor disconnected at this level
-// ==============================================================================
-
+        // =============================== LEVEL 1 ======================================
+        //	  Checks target independent modules, duty cycle waveforms and PWM update
+        //	  Keep the motor disconnected at this level
+        // ==============================================================================
+        
 #if (BUILDLEVEL==LEVEL1)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the RMP module and call the ramp control macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the RMP module and call the ramp control macro
+        // ------------------------------------------------------------------------------
         rc1.TargetValue = SpeedRef;
         RC_MACRO(rc1)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the RAMP GEN module and call the ramp generator macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the RAMP GEN module and call the ramp generator macro
+        // ------------------------------------------------------------------------------
         rg1.Freq = rc1.SetpointValue;
         RG_MACRO(rg1)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the SINCOSTBL module and call the sin table macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the SINCOSTBL module and call the sin table macro
+        // ------------------------------------------------------------------------------
         st1.Angle = (Uint16)(rg1.Out >> (GLOBAL_Q - MICROSTEPS));
         SINCOSTBL_MACRO(st1)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the PWM_DRV module and call the PWM signal generation macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the PWM_DRV module and call the PWM signal generation macro
+        // ------------------------------------------------------------------------------
         Aout = _IQmpy(VRef,st1.CosOut);
         pwm1.MfuncC1 = (int16)_IQtoIQ15(_IQabs(Aout)); // MfuncC1 is in Q15
         PWM_MACRO(pwm1)							   	   // Calculate the new PWM compare values
@@ -575,15 +515,18 @@ interrupt void MainISR(void)
             EPwm1Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM1B
             EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
         }
-        else if(Rotation1 == 1)
+        else 
         {
-            EPwm1Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM1A
-            EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
-        }
-        else
-        {
-            EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
-            EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+            if(Rotation1 == 1)
+            {
+                EPwm1Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM1A
+                EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+            }
+            else
+            {
+                EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
+                EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+            }
         }
         EPwm1Regs.CMPA.half.CMPA=pwm1.PWM1out;
 
@@ -605,27 +548,30 @@ interrupt void MainISR(void)
             EPwm2Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM2B
             EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
         }
-        else if(Rotation2 == 1)
+        else 
         {
-            EPwm2Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM2A
-            EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
-        }
-        else
-        {
-            EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
-            EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+            if(Rotation2 == 1)
+            {
+                EPwm2Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM2A
+                EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+            }
+            else
+            {
+                EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
+                EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+            }
         }
         EPwm2Regs.CMPA.half.CMPA=pwm2.PWM1out;
 
-// ------------------------------------------------------------------------------
-//    Connect inputs of the PWMDAC module
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //    Connect inputs of the PWMDAC module
+        // ------------------------------------------------------------------------------
         PwmDacCh1 = (int16)_IQtoIQ15(Aout);
         PwmDacCh2 = (int16)_IQtoIQ15(Bout);
 
-// ------------------------------------------------------------------------------
-//    Connect inputs of the DATALOG module
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //    Connect inputs of the DATALOG module
+        // ------------------------------------------------------------------------------
         DlogCh1 = (int16)_IQtoIQ15(Aout);
         DlogCh2 = (int16)_IQtoIQ15(Bout);
         DlogCh3 = (int16)_IQtoIQ15(rg1.Out);
@@ -633,33 +579,33 @@ interrupt void MainISR(void)
 
 #endif // (BUILDLEVEL==LEVEL1)
 
-// =============================== LEVEL 2 ======================================
-//	  Level 2 verifies the analog-to-digital conversion, offset compensation
-// ==============================================================================
+    // =============================== LEVEL 2 ======================================
+    //	  Level 2 verifies the analog-to-digital conversion, offset compensation
+    // ==============================================================================
 
 #if (BUILDLEVEL==LEVEL2)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the RMP module and call the ramp control macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the RMP module and call the ramp control macro
+        // ------------------------------------------------------------------------------
         rc1.TargetValue = SpeedRef;
         RC_MACRO(rc1)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the RAMP GEN module and call the ramp generator macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the RAMP GEN module and call the ramp generator macro
+        // ------------------------------------------------------------------------------
         rg1.Freq = rc1.SetpointValue;
         RG_MACRO(rg1)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the SINCOSTBL module and call the sin table macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the SINCOSTBL module and call the sin table macro
+        // ------------------------------------------------------------------------------
         st1.Angle = (Uint16)(rg1.Out >> (GLOBAL_Q - MICROSTEPS));
         SINCOSTBL_MACRO(st1)
 
-// ------------------------------------------------------------------------------
-//  Measure phase currents, subtract the offset and normalize from (-0.5,+0.5) to (-1,+1).
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Measure phase currents, subtract the offset and normalize from (-0.5,+0.5) to (-1,+1).
+        // ------------------------------------------------------------------------------
         IFdbk1b=_IQ15toIQ((AdcResult.ADCRESULT1<<3)-_IQ15(0.5))<<1;
         IFdbk1a=_IQ15toIQ((AdcResult.ADCRESULT0<<3)-_IQ15(0.5))<<1;
         IFdbk1 = (IFdbk1a - IFdbk1b) >> 1;
@@ -668,9 +614,9 @@ interrupt void MainISR(void)
         IFdbk2c=_IQ15toIQ((AdcResult.ADCRESULT3<<3)-_IQ15(0.5))<<1;
         IFdbk2 = (IFdbk2c - IFdbk2d) >> 1;
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the PWM_DRV module and call the PWM signal generation macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the PWM_DRV module and call the PWM signal generation macro
+        // ------------------------------------------------------------------------------
         Aout = _IQmpy(VRef,st1.CosOut);
         pwm1.MfuncC1 = (int16)_IQtoIQ15(_IQabs(Aout)); // MfuncC1 is in Q15
         PWM_MACRO(pwm1)							   	   // Calculate the new PWM compare values
@@ -689,15 +635,18 @@ interrupt void MainISR(void)
             EPwm1Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM1B
             EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
         }
-        else if(Rotation1 == 1)
+        else 
         {
-            EPwm1Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM1A
-            EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
-        }
-        else
-        {
-            EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
-            EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+            if(Rotation1 == 1)
+            {
+                EPwm1Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM1A
+                EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+            }
+            else
+            {
+                EPwm1Regs.AQCSFRC.bit.CSFA = 1;		//EPWM1A forced low
+                EPwm1Regs.AQCSFRC.bit.CSFB = 1;		//EPWM1B forced low
+            }
         }
         EPwm1Regs.CMPA.half.CMPA=pwm1.PWM1out;
 
@@ -719,27 +668,30 @@ interrupt void MainISR(void)
             EPwm2Regs.AQCSFRC.bit.CSFB = 0;		//Forcing Disabled on EPWM2B
             EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
         }
-        else if(Rotation2 == 1)
+        else 
         {
-            EPwm2Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM2A
-            EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
-        }
-        else
-        {
-            EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
-            EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+            if(Rotation2 == 1)
+            {
+                EPwm2Regs.AQCSFRC.bit.CSFA = 0;		//Forcing Disabled on EPWM2A
+                EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+            }
+            else
+            {
+                EPwm2Regs.AQCSFRC.bit.CSFA = 1;		//EPWM2A forced low
+                EPwm2Regs.AQCSFRC.bit.CSFB = 1;		//EPWM2B forced low
+            }
         }
         EPwm2Regs.CMPA.half.CMPA=pwm2.PWM1out;
 
-// ------------------------------------------------------------------------------
-//    Connect inputs of the PWMDAC module
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //    Connect inputs of the PWMDAC module
+        // ------------------------------------------------------------------------------
         PwmDacCh1 = (int16)_IQtoIQ15(IFdbk1);
         PwmDacCh2 = (int16)_IQtoIQ15(IFdbk2);
 
-// ------------------------------------------------------------------------------
-//    Connect inputs of the DATALOG module
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //    Connect inputs of the DATALOG module
+        // ------------------------------------------------------------------------------
         DlogCh1 = (int16)_IQtoIQ15(Aout);
         DlogCh2 = (int16)_IQtoIQ15(IFdbk1);
         DlogCh3 = (int16)_IQtoIQ15(Bout);
@@ -747,33 +699,33 @@ interrupt void MainISR(void)
 
 #endif // (BUILDLEVEL==LEVEL2)
 
-// =============================== LEVEL 3 ======================================
-//	Level 3 verifies the current regulation performed by PID
-// ==============================================================================
+    // =============================== LEVEL 3 ======================================
+    //	Level 3 verifies the current regulation performed by PID
+    // ==============================================================================
 
 #if (BUILDLEVEL==LEVEL3)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the RMP module and call the ramp control macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the RMP module and call the ramp control macro
+        // ------------------------------------------------------------------------------
         rc1.TargetValue = SpeedRef;
         RC_MACRO(rc1)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the RAMP GEN module and call the ramp generator macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the RAMP GEN module and call the ramp generator macro
+        // ------------------------------------------------------------------------------
         rg1.Freq = rc1.SetpointValue;
         RG_MACRO(rg1)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the SINCOSTBL module and call the sin table macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the SINCOSTBL module and call the sin table macro
+        // ------------------------------------------------------------------------------
         st1.Angle = (Uint16)(rg1.Out >> (GLOBAL_Q - MICROSTEPS));
         SINCOSTBL_MACRO(st1)
 
-// ------------------------------------------------------------------------------
-//  Measure phase currents, subtract the offset and normalize from (-0.5,+0.5) to (-1,+1).
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Measure phase currents, subtract the offset and normalize from (-0.5,+0.5) to (-1,+1).
+        // ------------------------------------------------------------------------------
         IFdbk1b=_IQ15toIQ((AdcResult.ADCRESULT1<<3)-_IQ15(0.5))<<1;
         IFdbk1a=_IQ15toIQ((AdcResult.ADCRESULT0<<3)-_IQ15(0.5))<<1;
         IFdbk1 = (IFdbk1a - IFdbk1b) >> 1;
@@ -782,9 +734,9 @@ interrupt void MainISR(void)
         IFdbk2c=_IQ15toIQ((AdcResult.ADCRESULT3<<3)-_IQ15(0.5))<<1;
         IFdbk2 = (IFdbk2c - IFdbk2d) >> 1;
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the PID_REG3 module and call the PID controller macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the PID_REG3 module and call the PID controller macro
+        // ------------------------------------------------------------------------------
         Aout = _IQmpy(IRef,st1.CosOut);
         pid1_i.Ref = Aout;
         pid1_i.Fdb = IFdbk1;
@@ -795,9 +747,9 @@ interrupt void MainISR(void)
         pid2_i.Fdb = IFdbk2;
         PID_MACRO(pid2_i)
 
-// ------------------------------------------------------------------------------
-//  Connect inputs of the PWM_DRV module and call the PWM signal generation macro
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //  Connect inputs of the PWM_DRV module and call the PWM signal generation macro
+        // ------------------------------------------------------------------------------
         pwm1.MfuncC1 = (int16)_IQtoIQ15(_IQabs(pid1_i.Out)); // MfuncC1 is in Q15
         PWM_MACRO(pwm1)							   	   // Calculate the new PWM compare values
 
@@ -856,15 +808,15 @@ interrupt void MainISR(void)
         }
         EPwm2Regs.CMPA.half.CMPA=pwm2.PWM1out;
 
-// ------------------------------------------------------------------------------
-//    Connect inputs of the PWMDAC module
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //    Connect inputs of the PWMDAC module
+        // ------------------------------------------------------------------------------
         PwmDacCh1 = (int16)_IQtoIQ15(IFdbk1);
         PwmDacCh2 = (int16)_IQtoIQ15(IFdbk1);
 
-// ------------------------------------------------------------------------------
-//    Connect inputs of the DATALOG module
-// ------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------
+        //    Connect inputs of the DATALOG module
+        // ------------------------------------------------------------------------------
         DlogCh1 = (int16)_IQtoIQ15(pid1_i.Ref);
         DlogCh2 = (int16)_IQtoIQ15(pid1_i.Fdb);
         DlogCh3 = (int16)_IQtoIQ15(pid2_i.Ref);
@@ -873,22 +825,22 @@ interrupt void MainISR(void)
 #endif // (BUILDLEVEL==LEVEL3)
     }//end if(RunMotor)
 
-// ------------------------------------------------------------------------------
-//    Call the PWMDAC update macro.
-// ------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------
+    //    Call the PWMDAC update macro.
+    // ------------------------------------------------------------------------------
     PWMDAC_MACRO(pwmdac1)
 
-// ------------------------------------------------------------------------------
-//    Call the DATALOG update function.
-// ------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------
+    //    Call the DATALOG update function.
+    // ------------------------------------------------------------------------------
     dlog.update(&dlog);
 
 
 #if (DSP2803x_DEVICE_H==1)||(DSP280x_DEVICE_H==1)
-// Enable more interrupts from this timer
+    // Enable more interrupts from this timer
     EPwm1Regs.ETCLR.bit.INT = 1;
 
-// Acknowledge interrupt to recieve more interrupts from PIE group 3
+    // Acknowledge interrupt to recieve more interrupts from PIE group 3
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
 #endif
 
