@@ -12,7 +12,7 @@
 // Functions that will be run from RAM need to be assigned to
 // a different section.  This section will then be mapped to a load and
 // run address using the linker cmd file.
-#pragma CODE_SECTION(InitFlash, "ramfuncs");
+
 #define Device_cal (void   (*)(void))0x3D7C80
 
 static void WDogDisable(void)
@@ -553,6 +553,7 @@ static void initGPIO()
 static void peripheryInit()
 {
     settingPeripheryCLK();
+    interruptInit();
     adcCalibrate();
     peripheryClockEnable();
     initGPIO();
