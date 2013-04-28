@@ -73,7 +73,7 @@ void PieCntlInit(void)
     PieCtrlRegs.PIEIFR12.all = 0;
 }
 
-interrupt void ISR_ILLEGAL(void)   // Illegal operation TRAP
+interrupt void ISR_ILLEGAL(void) // Illegal operation TRAP
 {
     // Insert ISR Code here
 
