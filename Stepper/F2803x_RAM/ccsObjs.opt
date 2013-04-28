@@ -1,1 +1,0 @@
-"./Stepper.obj" "./Stepper-DevInit_F2803x.obj" "./DSP2803x_usDelay.obj" "./DSP2803x_GlobalVariableDefs.obj" "./DLOG4CHC.obj" -l"libc.a" "/home/alexander/source/step_cource/device_support/f2803x/v122/DSP2803x_headers/cmd/DSP2803x_Headers_nonBIOS.cmd" "../F28035_RAM_Stetpper.CMD" "/home/alexander/source/step_cource/libs/math/IQmath/v15c/lib/IQmath.lib" 
