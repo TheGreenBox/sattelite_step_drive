@@ -1,3 +1,13 @@
+/* ========================================================
+ * Organization: The green box 
+ *   
+ * Project name: Satellite stepper drive
+ * File name: control_algo.c
+ * Description: module for setting algo type and sending
+ * A and B phase states for next step 
+ * ========================================================
+ */
+ 
 #define ONE_TWO_PHASE_STEPS_NUMBER  4
 #define HALF_PHASE_STEPS_NUMBER     8
 #define NUMBER_OF_ALGOS             3
@@ -39,7 +49,7 @@ half_phase_parametrs.phase_B = half_phase_algo_B;
 half_phase_parametrs.algo_steps_number = HALF_PHASE_STEPS_NUMBER;
 
 static struct algo_type* p_current_algo_struct;
-static int next_step = 1;
+static int next_step = 0;
 
 int set_algo_type(int algo_type_code)
 {
@@ -55,9 +65,9 @@ int set_algo_type(int algo_type_code)
             p_current_algo_struct = &half_phase_parametrs;
             break;
         default:
-            printf("There is no algorythm type with this code\n");
+            return 1;
     }
-    return;
+    return 0;
 }
 
 
@@ -72,7 +82,7 @@ int get_next_step(int* phase_A, int* phase_B)
     }
     else
     {
-        next_step = 1;
+        next_step = 0;
     }
     return;
 }
