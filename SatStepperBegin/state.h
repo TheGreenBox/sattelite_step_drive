@@ -10,9 +10,9 @@
 
 typedef struct _GlobalState
 {
-    Uint32_t systemTimer;
+    long long systemTimer;
     
-    Uint32_t rotationTicker;
+    long long rotationTicker;
     
 } GlobalState;
 
