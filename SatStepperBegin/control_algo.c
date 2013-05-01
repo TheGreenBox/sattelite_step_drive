@@ -23,8 +23,7 @@ struct algo_type
     int algo_steps_number;
 };
 
-struct algo_type one_phase_parametrs, two_phase_parametrs, half_phase_parametrs;
-struct algo_type* phase_parametrs[NUMBER_OF_ALGOS] = {&one_phase_parametrs, &two_phase_parametrs, &half_phase_parametrs};
+static struct algo_type one_phase_parametrs, two_phase_parametrs, half_phase_parametrs;
 
 //const structure variables init
 one_phase_parametrs.phase_A = one_phase_algo_A;
@@ -39,16 +38,40 @@ half_phase_parametrs.phase_A = half_phase_algo_A;
 half_phase_parametrs.phase_B = half_phase_algo_B;
 half_phase_parametrs.algo_steps_number = HALF_PHASE_STEPS_NUMBER;
 
-static int* current_algo_struct_pointer;
-static int current_rotation_direction = 1;
+static struct algo_type* p_current_algo_struct;
+static int next_step = 1;
 
 int set_algo_type(int algo_type_code)
 {
-    if ( algo_type_code > NUMBER_OF_ALGOS || algo_type_code < 1 )
+    switch (algo_type_code) 
     {
-        printf("There is no algorythm type with this code\n");
+        case '1':
+            p_current_algo_struct = &one_phase_parametrs;
+            break;
+        case '2': 
+            p_current_algo_struct = &two_phase_parametrs;
+            break;
+        case '3':
+            p_current_algo_struct = &half_phase_parametrs;
+            break;
+        default:
+            printf("There is no algorythm type with this code\n");
+    }
+    return;
+}
+
+int get_next_step(int* phase_A, int* phase_B)
+{
+    *phase_A = p_current_algo_struct->phase_A[next_step];
+    *phase_B = p_current_algo_struct->phase_B[next_step];
+    if (next_step < p_current_algo_struct->algo_steps_number)
+    {
+        next_step++;
         return;
     }
-    current_algo_struct_pointer = phase_parametrs[i];
+    else
+    {
+        next_step = 1;
+    }
     return;
 }
