@@ -60,6 +60,7 @@ int set_algo_type(int algo_type_code)
     return;
 }
 
+
 int get_next_step(int* phase_A, int* phase_B)
 {
     *phase_A = p_current_algo_struct->phase_A[next_step];
