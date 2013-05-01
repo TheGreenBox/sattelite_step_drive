@@ -8,4 +8,6 @@
  * ========================================================
  */
 
+#include "state.h"
+
 volatile extern GlobalState gState; 
