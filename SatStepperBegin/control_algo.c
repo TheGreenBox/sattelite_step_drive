@@ -40,8 +40,9 @@ half_phase_parametrs.phase_B = half_phase_algo_B;
 half_phase_parametrs.algo_steps_number = HALF_PHASE_STEPS_NUMBER;
 
 static int* current_algo_struct_pointer;
+static int current_rotation_direction = 1;
 
-int* set_algo_type(int algo_type_code)
+int set_algo_type(int algo_type_code)
 {
     if ( algo_type_code > NUMBER_OF_ALGOS || algo_type_code < 1 )
     {
