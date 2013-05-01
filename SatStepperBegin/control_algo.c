@@ -1,5 +1,6 @@
 #define ONE_TWO_PHASE_STEP_NUMBER   4
 #define HALF_PHASE_STEP_NUMBER      4
+#define NUMBER_OF_ALGOS             3
 #define INVALID                     0
 #define ONE_PHASE                   1
 #define TWO_PHASE                   2
@@ -37,7 +38,14 @@ half_phase_parametrs.phase_A = half_phase_algo_A;
 half_phase_parametrs.phase_B = half_phase_algo_B;
 half_phase_parametrs.algo_steps_number = 8;
 
-int set_algo_type(int)
+struct algo_type* phase_parametrs[NUMBER_OF_ALGOS] = {&one_phase_parametrs, &two_phase_parametrs, &half_phase_parametrs};
+
+int* set_algo_type(int algo_type_code)
 {
-    
+    if ( algo_type_code > 3 || algo_type_code < 1 )
+    {
+        printf("There is no algorythm type with this code\n");
+        return;
+    }
+    return int* struct_pointer = phase_parametrs[i];
 }
