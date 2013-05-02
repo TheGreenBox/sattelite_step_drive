@@ -8,6 +8,7 @@
  */
 
 #include <PeripheralHeaderIncludes.h>
+#include <f2803xbmsk.h>
 #include "pwm_wrap_module.h"
 
 static void initAPWM( short int prescaler )
@@ -27,43 +28,54 @@ static void initAPWM( short int prescaler )
     EPwm1Regs.TBCTL.bit.PHSEN = 1;
 
     // Init Timer-Base Period Register for EPWM1-EPWM3
-    EPwm1Regs.TBPRD = v.PeriodMax;
+    EPwm1Regs.TBPRD = prescaler;
 
     // Init Compare Register for EPWM1-EPWM3
-    EPwm1Regs.CMPA.half.CMPA = v.PeriodMax;
+    EPwm1Regs.CMPA.half.CMPA = prescaler;
 
     // Init Timer-Base Phase Register for EPWM1-EPWM3
     EPwm1Regs.TBPHS.half.TBPHS = 0;
 
     // Init Timer-Base Control Register for EPWM1-EPWM3
-    EPwm1Regs.TBCTL.all = PWM_INIT_STATE;
+    EPwm1Regs.TBCTL.all = FREE_RUN_FLAG
+                          + PRDLD_IMMEDIATE
+                          + TIMER_CNT_UPDN
+                          + HSPCLKDIV_PRESCALE_X_1
+                          + CLKDIV_PRESCALE_X_1
+                          + PHSDIR_CNT_UP
+                          + CNTLD_DISABLE;
 
     // Init Compare Control Register for EPWM1-EPWM3
-    EPwm1Regs.CMPCTL.all = CMPCTL_INIT_STATE;
+    EPwm1Regs.CMPCTL.all = LOADAMODE_ZRO
+                           + LOADBMODE_ZRO
+                           + SHDWAMODE_SHADOW
+                           + SHDWBMODE_SHADOW;
 
     // Init Action Qualifier Output A Register for EPWM1-EPWM3
-    EPwm1Regs.AQCTLA.all = AQCTLA_INIT_STATE;
+    EPwm1Regs.AQCTLA.all = CAU_SET + CAD_CLEAR;
 
     // Init Action Qualifier Output A Register for EPWM1-EPWM3
-    EPwm1Regs.AQCTLB.all = AQCTLB_INIT_STATE;
+    EPwm1Regs.AQCTLB.all = CAU_SET + CAD_CLEAR;
 
     // Init Action Qualifier S/W Force Register for EPWM1-EPWM2
-    EPwm1Regs.AQSFRC.all = AQSFRC_INIT_STATE;
+    EPwm1Regs.AQSFRC.all = RLDCSF_PRD;
 
     // Init Dead-Band Generator Control Register for EPWM1-EPWM3
-    EPwm1Regs.DBCTL.all = DBCTL_INIT_STATE;
+    EPwm1Regs.DBCTL.all = BP_DISABLE;
 
     // Init PWM Chopper Control Register for EPWM1-EPWM3
-    EPwm1Regs.PCCTL.all = PCCTL_INIT_STATE;
+    EPwm1Regs.PCCTL.all = CHPEN_DISABLE;
     
     // Enable EALLOW
     EALLOW;
 
     // Init Trip Zone Select Register
-    EPwm1Regs.TZSEL.all = TZSEL_INIT_STATE;
+    EPwm1Regs.TZSEL.all = ENABLE_TZ2_OST + ENABLE_TZ3_OST;
 
     // Init Trip Zone Control Register
-    EPwm1Regs.TZCTL.all = TZCTL_INIT_STATE;
+    EPwm1Regs.TZCTL.all = TZA_FORCE_LO + TZB_FORCE_LO
+                          + DCAEVT1_HI_Z + DCAEVT2_HI_Z
+                          + DCBEVT1_HI_Z + DCBEVT2_HI_Z;
     
     // Disable EALLOW
     EDIS;
@@ -78,42 +90,53 @@ static void initBPWM( short int prescaler )
     EPwm2Regs.TBCTL.bit.PHSEN = 1;
 
     // Init Timer-Base Period Register for EPWM1-EPWM3
-    EPwm2Regs.TBPRD = v.PeriodMax;
+    EPwm2Regs.TBPRD = prescaler;
 
     // Init Compare Register for EPWM1-EPWM3
-    EPwm2Regs.CMPA.half.CMPA = v.PeriodMax;
+    EPwm2Regs.CMPA.half.CMPA = prescaler;
 
     // Init Timer-Base Phase Register for EPWM1-EPWM3
     EPwm2Regs.TBPHS.half.TBPHS = 0;
 
     // Init Timer-Base Control Register for EPWM1-EPWM3
-    EPwm2Regs.TBCTL.all = PWM_INIT_STATE;
+    EPwm2Regs.TBCTL.all = FREE_RUN_FLAG
+                          + PRDLD_IMMEDIATE
+                          + TIMER_CNT_UPDN
+                          + HSPCLKDIV_PRESCALE_X_1
+                          + CLKDIV_PRESCALE_X_1
+                          + PHSDIR_CNT_UP
+                          + CNTLD_DISABLE;
 
     // Init Compare Control Register for EPWM1-EPWM3
-    EPwm2Regs.CMPCTL.all = CMPCTL_INIT_STATE;
+    EPwm2Regs.CMPCTL.all = LOADAMODE_ZRO
+                           + LOADBMODE_ZRO
+                           + SHDWAMODE_SHADOW
+                           + SHDWBMODE_SHADOW;
 
     // Init Action Qualifier Output A Register for EPWM1-EPWM3
-    EPwm2Regs.AQCTLA.all = AQCTLA_INIT_STATE;
+    EPwm2Regs.AQCTLA.all = CAU_SET + CAD_CLEAR;
 
     // Init Action Qualifier Output A Register for EPWM1-EPWM3
-    EPwm2Regs.AQCTLB.all = AQCTLB_INIT_STATE;
+    EPwm2Regs.AQCTLB.all = CAU_SET + CAD_CLEAR;
 
     // Init Action Qualifier S/W Force Register for EPWM1-EPWM2
-    EPwm2Regs.AQSFRC.all = AQSFRC_INIT_STATE;
+    EPwm2Regs.AQSFRC.all = RLDCSF_PRD;
 
     // Init Dead-Band Generator Control Register for EPWM1-EPWM3
-    EPwm2Regs.DBCTL.all = DBCTL_INIT_STATE;
+    EPwm2Regs.DBCTL.all = BP_DISABLE;
 
     // Init PWM Chopper Control Register for EPWM1-EPWM3
-    EPwm2Regs.PCCTL.all = PCCTL_INIT_STATE;
+    EPwm2Regs.PCCTL.all = CHPEN_DISABLE;
 
     EALLOW; // Enable EALLOW
 
     // Init Trip Zone Select Register
-    EPwm2Regs.TZSEL.all = TZSEL_INIT_STATE;
+    EPwm2Regs.TZSEL.all = ENABLE_TZ2_OST + ENABLE_TZ3_OST;
 
     // Init Trip Zone Control Register
-    EPwm2Regs.TZCTL.all = TZCTL_INIT_STATE;
+    EPwm2Regs.TZCTL.all = TZA_FORCE_LO + TZB_FORCE_LO
+                          + DCAEVT1_HI_Z + DCAEVT2_HI_Z
+                          + DCBEVT1_HI_Z + DCBEVT2_HI_Z;
 
     EDIS;  // Disable EALLOW
 }
