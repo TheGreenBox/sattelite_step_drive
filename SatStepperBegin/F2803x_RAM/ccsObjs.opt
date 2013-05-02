@@ -1,0 +1,1 @@
+"./state.obj" "./pwm_wrap_module.obj" "./main.obj" "./init.obj" "./control_algo.obj" "./DSP2803x_GlobalVariableDefs.obj" -l"libc.a" "../28035_RAM_lnk.cmd" 

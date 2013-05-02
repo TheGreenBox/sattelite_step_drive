@@ -8,8 +8,21 @@
  * ========================================================
  */
 
+#include "PeripheralHeaderIncludes.h"
+
+interrupt void MainISR(void)
+{   
+
+}
+
+void defaultInit()
+{
+    
+}
+
 int main(void) 
 {
-	
+	defaultInit();
 	return 0;
 }
+

@@ -22,7 +22,7 @@ static void initAPWM( short int prescaler )
     // Enable CPU INT3 for EPWM1_INT:
     IER |= M_INT3;
 
-    EPwm1Regs.TBCTL.bit.SYNCOSEL = 0;   // Pass through
+    EPwm1Regs.TBCTL.bit.SYNCOSE = 0;   // Pass through
 
     // Allow each timer to be sync'ed
     EPwm1Regs.TBCTL.bit.PHSEN = 1;
@@ -151,9 +151,66 @@ void initPwm( _pwmTimerInterruptHandler int_hanler, short int prescaler )
     initBPWM( prescaler );
 }
 
-void setPwm( int aPwm,  int bPwm )
+void setPwm( short int aPwm, short int bPwm )
 {
+    EPwm1Regs.CMPA.half.CMPA = aPwm;
+    EPwm2Regs.CMPA.half.CMPA = bPwm;
+}
 
+void setADirection(int direct)
+{
+    if ( direct == 0 )
+    {   
+        //EPWM1A forced low
+        EPwm1Regs.AQCSFRC.bit.CSFA = 1;
+        //EPWM1B forced low
+        EPwm1Regs.AQCSFRC.bit.CSFB = 1;
+    }
+    else
+    {
+        if ( direct > 0 ) 
+        {
+            //Forcing Disabled on EPWM1A
+            EPwm1Regs.AQCSFRC.bit.CSFA = 0;
+            //EPWM1B forced low
+            EPwm1Regs.AQCSFRC.bit.CSFB = 1;
+        }
+        else
+        {   
+            //EPWM1A forced low
+            EPwm1Regs.AQCSFRC.bit.CSFA = 1;
+            //EPWM1B forced low
+            EPwm1Regs.AQCSFRC.bit.CSFB = 1;
+        }
+    }
+}
+
+void setBDirection(int direct)
+{
+    if ( direct == 0 )
+    {   
+        //EPWM1A forced low
+        EPwm2Regs.AQCSFRC.bit.CSFA = 1;
+        //EPWM1B forced low
+        EPwm2Regs.AQCSFRC.bit.CSFB = 1;
+    }
+    else
+    {
+        if ( direct > 0 ) 
+        {
+            //Forcing Disabled on EPWM1A
+            EPwm2Regs.AQCSFRC.bit.CSFA = 0;
+            //EPWM1B forced low
+            EPwm2Regs.AQCSFRC.bit.CSFB = 1;
+        }
+        else
+        {   
+            //EPWM1A forced low
+            EPwm2Regs.AQCSFRC.bit.CSFA = 1;
+            //EPWM1B forced low
+            EPwm2Regs.AQCSFRC.bit.CSFB = 1;
+        }
+    }
 }
 
 void resetDriver(int drv_reset)
