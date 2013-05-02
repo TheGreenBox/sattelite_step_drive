@@ -9,7 +9,8 @@
  * ========================================================
  */
 
-#include "DSP2803x_Gpio.h"               // General Purpose I/O Registers
+#include "PeripheralHeaderIncludes.h"               // Peripheral Header (General Purpose I/O Registers header requiredss)
+#include "led_control.h"
 
 //functions turning LEDs on or off
 void setGreenStatusLed (int setState)

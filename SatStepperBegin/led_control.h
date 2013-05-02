@@ -6,11 +6,11 @@
  * Description: header for led_control.h
  * Author: SNikitin
  * ========================================================
- */
- 
+ */ 
+
 #ifndef LED_CONTROL_INCLUDED
 #define LED_CONTROL_INCLUDED
- 
+
 void setGreenStatusLed (int);
 void setRedLed2 (int);
 void setRedLed3 (int);
