@@ -18,6 +18,6 @@ typedef struct _GlobalState
     
 } GlobalState;
 
-volatile extern GlobalState gState;
+extern volatile GlobalState gState;
 
 #endif //_GLOBAL_STATE_H_
