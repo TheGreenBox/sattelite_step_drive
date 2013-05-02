@@ -47,6 +47,7 @@ int set_algo_type(int algo_type_code)                               //sets contr
 {
     switch (algo_type_code)
     {
+        next_step = 0;
         case ONE_PHASE_CODE:
             p_current_algo_struct = &one_phase_parametrs;
             break;
