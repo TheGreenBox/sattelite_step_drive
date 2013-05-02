@@ -30,9 +30,23 @@ void defaultInit()
     ERTM;	// Enable Global realtime interrupt DBGM
 }
 
+void mainLoop()
+{
+    while (1)
+    {
+        
+    }
+}
+
 int main(void) 
 {
 	defaultInit();
+    resetDriver( 0 );
+    setADirection(-1);
+    setBDirection(1);
+    setPwm( 15000, 5000 );
+
+
 	return 0;
 }
 
