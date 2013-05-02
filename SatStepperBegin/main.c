@@ -16,7 +16,7 @@
 
 interrupt void motorISR(void)
 {   
-
+    toggleRedLed2();
 }
 
 void defaultInit()
@@ -28,6 +28,7 @@ void defaultInit()
     // Enable global Interrupts and higher priority real-time debug events:
     EINT;   // Enable Global interrupt INTM
     ERTM;	// Enable Global realtime interrupt DBGM
+    setGreenStatusLed(1);
 }
 
 void mainLoop()
@@ -46,6 +47,7 @@ int main(void)
     setBDirection(1);
     setPwm( 15000, 5000 );
 
+    mainLoop();
 
 	return 0;
 }
