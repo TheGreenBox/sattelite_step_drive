@@ -464,7 +464,7 @@ interrupt void MainISR(void)
 {
     _iq Aout,Bout;
 
-   // Verifying the ISR
+    // Verifying the ISR
     IsrTicker++;
 
     if(RunMotor)

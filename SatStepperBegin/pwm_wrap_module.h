@@ -13,8 +13,11 @@
 typedef void (* _pwmTimerInterruptHandler)(void);
 
 void initPwm( _pwmTimerInterruptHandler, short int prescaler );
-void setPwm( int apwm, int bpwm );
 
+void setPwm( short int aPwm, short int bPwm );
+
+void setADirection(int direct);
+void setBDirection(int direct);
 
 void resetDriver( int );
 
