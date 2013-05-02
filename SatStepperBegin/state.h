@@ -14,11 +14,10 @@
 typedef struct _GlobalState
 {
     long long systemTimer;
-    
     long long rotationTicker;
     
 } GlobalState;
 
-volatile extern GlobalState gState; 
+volatile extern GlobalState gState;
 
 #endif //_GLOBAL_STATE_H_

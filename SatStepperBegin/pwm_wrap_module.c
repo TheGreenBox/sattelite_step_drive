@@ -22,7 +22,7 @@ static void initAPWM( short int prescaler )
     // Enable CPU INT3 for EPWM1_INT:
     IER |= M_INT3;
 
-    EPwm1Regs.TBCTL.bit.SYNCOSE = 0;   // Pass through
+    EPwm1Regs.TBCTL.bit.SYNCOSEL = 0;   // Pass through
 
     // Allow each timer to be sync'ed
     EPwm1Regs.TBCTL.bit.PHSEN = 1;

@@ -22,7 +22,7 @@ interrupt void motorISR(void)
 void defaultInit()
 {
     initPwm( &motorISR, 30000 );
-    resetDriver( int );
+    resetDriver( 1 );
     // Enable CPU INT3 for EPWM1_INT:
     IER |= M_INT3;
     // Enable global Interrupts and higher priority real-time debug events:
