@@ -19,7 +19,7 @@
 #define TWO_PHASE_CODE              2
 #define HALF_PHASE_CODE             3
 
-int set_algo_type();
-int get_next_step(int*, int*);
+int setAlgoType();
+int getNextStep(int*, int*);
 
 #endif //CONTROL_ALGO_INCLUDED
