@@ -8,6 +8,9 @@
  * ========================================================
  */
 
+#ifndef _GLOBAL_STATE_H_
+#define _GLOBAL_STATE_H_
+
 typedef struct _GlobalState
 {
     long long systemTimer;
@@ -17,3 +20,5 @@ typedef struct _GlobalState
 } GlobalState;
 
 volatile extern GlobalState gState; 
+
+#endif //_GLOBAL_STATE_H_

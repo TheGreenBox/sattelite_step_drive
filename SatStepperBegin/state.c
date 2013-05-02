@@ -10,4 +10,4 @@
 
 #include "state.h"
 
-volatile extern GlobalState gState; 
+volatile GlobalState gState;
