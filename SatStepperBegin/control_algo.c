@@ -5,6 +5,7 @@
  * File name: control_algo.c
  * Description: module for setting algo type and sending
  * A and B phase states for next step
+ * Author: SNikitin
  * ========================================================
  */
 
