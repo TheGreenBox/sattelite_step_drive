@@ -9,6 +9,8 @@
  * ========================================================
  */
 
+#include "DSP2803x_Gpio.h"               // General Purpose I/O Registers
+
 //functions turning LEDs on or off
 void setGreenStatusLed (int setState)
 {
@@ -53,37 +55,18 @@ void setRedLed3 (int setState)
 }
 
 //functions turning toggling LEDs' state
-void toggleGreenStatusLed (int setState);
+void toggleGreenStatusLed ();
 {
-    if setState == 0
-    {
-        GpioDataRegs.GPATOGGLE.bit.GPIO22 = 0;
-    }
-    else
-    {
         GpioDataRegs.GPATOGGLE.bit.GPIO22 = 1;
-    }
 }
 
-void toggleRedLed2 (int setState);
+void toggleRedLed2 ();
 {
-    if setState == 0
-    {
-        GpioDataRegs.GPATOGGLE.bit.GPIO31 = 0;
-    }
-    else
-    {
         GpioDataRegs.GPATOGGLE.bit.GPIO31 = 1;
-    }
 }
-void toggleRedLed3 (int setState);
+
+void toggleRedLed3 ();
 {
-    if setState == 0
-    {
-        GpioDataRegs.GPBTOGGLE.bit.GPIO32 = 0;
-    }
-    else
-    {
+
         GpioDataRegs.GPBTOGGLE.bit.GPIO32 = 1;
-    }
 }

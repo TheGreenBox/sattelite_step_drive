@@ -15,9 +15,9 @@ void setGreenStatusLed (int);
 void setRedLed2 (int);
 void setRedLed3 (int);
 
-void toggleGreenStatusLed (int);
-void toggleRedLed2 (int);
-void toggleRedLed3 (int);
+void toggleGreenStatusLed ();
+void toggleRedLed2 ();
+void toggleRedLed3 ();
 
 
 #endif              //LED_CONTROL_INCLUDED
