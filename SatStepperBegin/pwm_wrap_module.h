@@ -12,11 +12,11 @@
 
 typedef void (* _pwmTimerInterruptHandler)(void) 
 
-void initPwm(_pwmTimerInterruptHandler);
-void setPwm(int apwm, int bpwm);
+void initPwm( _pwmTimerInterruptHandler, short int prescaler );
+void setPwm( int apwm, int bpwm );
 
 
-void resetDriver(int);
+void resetDriver( int );
 
 #endif //_PWM_WRAP_MODULE__H_
 
