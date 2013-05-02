@@ -147,6 +147,9 @@ void initPwm( _pwmTimerInterruptHandler int_hanler, short int prescaler )
     PieVectTable.EPWM1_INT = int_hanler;
     EDIS;
     
+    // Enable PIE group 3 interrupt 1 for EPWM1_INT
+    PieCtrlRegs.PIEIER3.bit.INTx1 = 1;
+    
     initAPWM( prescaler );
     initBPWM( prescaler );
 }

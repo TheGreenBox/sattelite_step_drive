@@ -9,15 +9,25 @@
  */
 
 #include "PeripheralHeaderIncludes.h"
+#include "pwm_wrap_module.h"
+#include "control_algo.h"
+#include "led_control.h"
 
-interrupt void MainISR(void)
+
+interrupt void motorISR(void)
 {   
 
 }
 
 void defaultInit()
 {
-    
+    initPwm( &motorISR, 30000 );
+    resetDriver( int );
+    // Enable CPU INT3 for EPWM1_INT:
+    IER |= M_INT3;
+    // Enable global Interrupts and higher priority real-time debug events:
+    EINT;   // Enable Global interrupt INTM
+    ERTM;	// Enable Global realtime interrupt DBGM
 }
 
 int main(void) 
