@@ -36,6 +36,10 @@ interrupt void motorISR(void)
 {   
     PWM_LEVEL_A = cycleLimiter(PWM_LEVEL_A, pwm_period, 0);
     PWM_LEVEL_B = cycleLimiter(PWM_LEVEL_B, pwm_period, 0);
+    // Enable more interrupts from this timer
+    EPwm1Regs.ETCLR.bit.INT = 1;
+    // Acknowledge interrupt to recieve more interrupts from PIE group 3
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
 }
 
 void defaultInit()
