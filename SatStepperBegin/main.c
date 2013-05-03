@@ -13,6 +13,8 @@
 #include "control_algo.h"
 #include "led_control.h"
 #include "init.h"
+#include "control_interrupt.h"
+
 
 // --- global var --- 
 unsigned int PWM_LEVEL_A = 20000;
