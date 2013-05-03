@@ -12,7 +12,7 @@
 #include "pwm_wrap_module.h"
 #include "control_algo.h"
 #include "led_control.h"
-
+#include "init.h"
 
 interrupt void motorISR(void)
 {   
