@@ -21,6 +21,7 @@ interrupt void motorISR(void)
 
 void defaultInit()
 {
+    deviceInit();
     initPwm( &motorISR, 30000 );
     resetDriver( 1 );
     // Enable CPU INT3 for EPWM1_INT:
