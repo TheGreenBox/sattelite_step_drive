@@ -14,15 +14,34 @@
 #include "led_control.h"
 #include "init.h"
 
+// --- global var --- 
+unsigned int PWM_LEVEL_A = 20000;
+unsigned int PWM_LEVEL_B = 20000;
+int ROTATION_DIRECT_A = 1;
+int ROTATION_DIRECT_B = 1;
+
+unsigned short pwm_period = 30000;
+
+unsigned int cycleLimiter (unsigned val, unsigned hi, unsigned low)
+{
+    ++val;
+    if (val > hi)
+    {
+        return low;
+    }
+    return val;
+}
+
 interrupt void motorISR(void)
 {   
-    toggleRedLed2();
+    PWM_LEVEL_A = cycleLimiter(PWM_LEVEL_A, pwm_period, 0);
+    PWM_LEVEL_B = cycleLimiter(PWM_LEVEL_B, pwm_period, 0);
 }
 
 void defaultInit()
 {
     deviceInit();
-    initPwm( &motorISR, 30000 );
+    initPwm( &motorISR, pwm_period );
     resetDriver( 1 );
     // Enable CPU INT3 for EPWM1_INT:
     IER |= M_INT3;
@@ -31,12 +50,6 @@ void defaultInit()
     ERTM;	// Enable Global realtime interrupt DBGM
     setGreenStatusLed(1);
 }
-
-int PWM_LEVEL_A = 20000;
-int PWM_LEVEL_B = 20000;
-int ROTATION_DIRECT_A = 1;
-int ROTATION_DIRECT_B = 1;
-
 void mainLoop()
 {
     while (1)

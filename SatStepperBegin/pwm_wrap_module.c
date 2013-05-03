@@ -158,7 +158,7 @@ void initPwm( _pwmTimerInterruptHandler int_hanler, short int prescaler )
     initBPWM( prescaler );
 }
 
-void setPwm( short int aPwm, short int bPwm )
+void setPwm( unsigned int aPwm, unsigned int bPwm )
 {
     EPwm1Regs.CMPA.half.CMPA = aPwm;
     EPwm2Regs.CMPA.half.CMPA = bPwm;

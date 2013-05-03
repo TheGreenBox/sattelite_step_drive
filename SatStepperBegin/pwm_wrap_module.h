@@ -14,7 +14,7 @@ typedef void (* _pwmTimerInterruptHandler)(void);
 
 void initPwm( _pwmTimerInterruptHandler, short int prescaler );
 
-void setPwm( short int aPwm, short int bPwm );
+void setPwm( unsigned int aPwm, unsigned int bPwm );
 
 void setADirection(int direct);
 void setBDirection(int direct);
