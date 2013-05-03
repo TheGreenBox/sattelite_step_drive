@@ -15,38 +15,16 @@
 #include "init.h"
 #include "control_interrupt.h"
 
-
-// --- global var --- 
-unsigned int PWM_LEVEL_A = 20000;
-unsigned int PWM_LEVEL_B = 20000;
+//global variables
 int ROTATION_DIRECT_A = 1;
 int ROTATION_DIRECT_B = 1;
 
-unsigned short pwm_period = 30000;
-
-unsigned int cycleLimiter (unsigned val, unsigned hi, unsigned low)
-{
-    ++val;
-    if (val > hi)
-    {
-        return low;
-    }
-    return val;
-}
-
-interrupt void motorISR(void)
-{   
-    PWM_LEVEL_A = cycleLimiter(PWM_LEVEL_A, pwm_period, 0);
-    PWM_LEVEL_B = cycleLimiter(PWM_LEVEL_B, pwm_period, 0);
-    // Enable more interrupts from this timer
-    EPwm1Regs.ETCLR.bit.INT = 1;
-    // Acknowledge interrupt to recieve more interrupts from PIE group 3
-    PieCtrlRegs.PIEACK.all = PIEACK_GROUP3;
-}
+unsigned int PWM_LEVEL_A = 20000;
+unsigned int PWM_LEVEL_B = 20000;
 
 void defaultInit()
 {
-    deviceInit();
+	deviceInit();
     initPwm( &motorISR, pwm_period );
     resetDriver( 1 );
     // Enable CPU INT3 for EPWM1_INT:
