@@ -32,11 +32,19 @@ void defaultInit()
     setGreenStatusLed(1);
 }
 
+int PWM_LEVEL_A = 20000;
+int PWM_LEVEL_B = 20000;
+int ROTATION_DIRECT_A = 1;
+int ROTATION_DIRECT_B = 1;
+
 void mainLoop()
 {
     while (1)
     {
-        
+
+        setADirection(ROTATION_DIRECT_A);
+        setBDirection(ROTATION_DIRECT_B);
+    	setPwm( PWM_LEVEL_A , PWM_LEVEL_B );
     }
 }
 
@@ -44,9 +52,9 @@ int main(void)
 {
 	defaultInit();
     resetDriver( 0 );
-    setADirection(-1);
-    setBDirection(1);
-    setPwm( 15000, 5000 );
+    setADirection(ROTATION_DIRECT_A);
+    setBDirection(ROTATION_DIRECT_B);
+    setPwm( PWM_LEVEL_A , PWM_LEVEL_B );
 
     mainLoop();
 
