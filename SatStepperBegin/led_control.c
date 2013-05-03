@@ -68,6 +68,5 @@ void toggleRedLed2 ()
 
 void toggleRedLed3 ()
 {
-
         GpioDataRegs.GPBTOGGLE.bit.GPIO32 = 1;
 }
