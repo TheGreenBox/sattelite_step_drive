@@ -37,13 +37,15 @@ static void initAPWM( short int prescaler )
     EPwm1Regs.TBPHS.half.TBPHS = 0;
 
     // Init Timer-Base Control Register for EPWM1-EPWM3
-    EPwm1Regs.TBCTL.all = FREE_RUN_FLAG
+    // page 106 ref guide pwm
+    EPwm1Regs.TBCTL.all = TIMER_CNT_UPDN
+                          + CNTLD_DISABLE
                           + PRDLD_IMMEDIATE
-                          + TIMER_CNT_UPDN
+                          + SYNCOSEL_EPWMSYNCI
                           + HSPCLKDIV_PRESCALE_X_1
                           + CLKDIV_PRESCALE_X_1
                           + PHSDIR_CNT_UP
-                          + CNTLD_DISABLE;
+                          + FREE_RUN_FLAG;
 
     // Init Compare Control Register for EPWM1-EPWM3
     EPwm1Regs.CMPCTL.all = LOADAMODE_ZRO
@@ -61,7 +63,8 @@ static void initAPWM( short int prescaler )
     EPwm1Regs.AQSFRC.all = RLDCSF_PRD;
 
     // Init Dead-Band Generator Control Register for EPWM1-EPWM3
-    EPwm1Regs.DBCTL.all = BP_DISABLE;
+    EPwm1Regs.DBCTL.all = BP_DISABLE
+                          + POLSEL_ACTIVE_HI;
 
     // Init PWM Chopper Control Register for EPWM1-EPWM3
     EPwm1Regs.PCCTL.all = CHPEN_DISABLE;
@@ -99,13 +102,14 @@ static void initBPWM( short int prescaler )
     EPwm2Regs.TBPHS.half.TBPHS = 0;
 
     // Init Timer-Base Control Register for EPWM1-EPWM3
-    EPwm2Regs.TBCTL.all = FREE_RUN_FLAG
+    EPwm2Regs.TBCTL.all = TIMER_CNT_UPDN
+                          + CNTLD_DISABLE
                           + PRDLD_IMMEDIATE
-                          + TIMER_CNT_UPDN
+                          + SYNCOSEL_EPWMSYNCI
                           + HSPCLKDIV_PRESCALE_X_1
                           + CLKDIV_PRESCALE_X_1
                           + PHSDIR_CNT_UP
-                          + CNTLD_DISABLE;
+                          + FREE_RUN_FLAG;
 
     // Init Compare Control Register for EPWM1-EPWM3
     EPwm2Regs.CMPCTL.all = LOADAMODE_ZRO
@@ -183,7 +187,7 @@ void setADirection(int direct)
             //EPWM1A forced low
             EPwm1Regs.AQCSFRC.bit.CSFA = 1;
             //EPWM1B forced low
-            EPwm1Regs.AQCSFRC.bit.CSFB = 1;
+            EPwm1Regs.AQCSFRC.bit.CSFB = 0;
         }
     }
 }
@@ -211,7 +215,7 @@ void setBDirection(int direct)
             //EPWM1A forced low
             EPwm2Regs.AQCSFRC.bit.CSFA = 1;
             //EPWM1B forced low
-            EPwm2Regs.AQCSFRC.bit.CSFB = 1;
+            EPwm2Regs.AQCSFRC.bit.CSFB = 0;
         }
     }
 }
