@@ -25,7 +25,9 @@ interrupt void TMR0_Interrupt(void)
     // The TIMH:TIM is loaded with the value in the PRDH:PRD,
     //  and the prescaler counter (PSCH:PSC) is loaded with the
     //  value in the timer divide- down register (TDDRH:TDDR).
-    CpuTimer0Regs.TCR.bit.TRB = 0;
+    CpuTimer0Regs.TCR.bit.TRB = 1;
+    // Acknowledge interrupt to recieve more interrupts from PIE group 3
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
 }
 
 void timer0Init( _controlTimerInterruptHandler handler )
