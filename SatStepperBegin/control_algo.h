@@ -8,8 +8,8 @@
  * ========================================================
  */
 
-#ifndef CONTROL_ALGO_INCLUDED
-#define CONTROL_ALGO_INCLUDED
+#ifndef _CONTROL_ALGO_INCLUDED_
+#define _CONTROL_ALGO_INCLUDED_
 
 
 #define ONE_TWO_PHASE_STEPS_NUMBER  4
@@ -23,4 +23,4 @@
 int setAlgoType();
 int getNextStep(int*, int*);
 
-#endif //CONTROL_ALGO_INCLUDED
+#endif //_CONTROL_ALGO_INCLUDED_

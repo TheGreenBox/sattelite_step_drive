@@ -8,11 +8,11 @@
  * ========================================================
  */ 
 
-#ifndef INTERRUPT_CONTROL_INCLUDED
-#define INTERRUPT_CONTROL_INCLUDED
+#ifndef _INTERRUPT_CONTROL_INCLUDED_
+#define _INTERRUPT_CONTROL_INCLUDED_
 
 extern unsigned short pwm_period;
 
 interrupt void motorISR(void);
 
-#endif              //INTERRUPT_CONTROL_INCLUDED
+#endif              //_INTERRUPT_CONTROL_INCLUDED_
