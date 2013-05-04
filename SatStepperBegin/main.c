@@ -17,9 +17,6 @@
 #include "control_timer.h"
 #include "state.h"
 
-//global variables
-
-
 void defaultInit()
 {
 	deviceInit();
@@ -32,18 +29,12 @@ void defaultInit()
     
     timer0Init( &motorISR );
     
-    // Enable CPU INT3 for EPWM1_INT:
-    IER |= M_INT1;
-    // Enable global Interrupts and higher priority real-time debug events:
-    EINT;   // Enable Global interrupt INTM
-    ERTM;	// Enable Global realtime interrupt DBGM
     setAlgoType(3);
     setGreenStatusLed(1);
 }
 
 void mainLoop()
 {
-	setTimer0Peiod(gState.motorControl.stepTimeout);
 	while (1)
     {
     	setPwm(gState.motorControl.pwmDutyCycle);
