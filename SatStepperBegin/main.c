@@ -25,10 +25,7 @@ void defaultInit()
 	deviceInit();
     initPwm( gConfig.pwmPeriod );
     resetDriver( 1 );
-   
-    gState.motorControl.pwmDutyCycle = 800;
-    gState.motorControl.rotationDirection = 1;
-    gState.motorControl.stepTimeout = 0x04FF;
+    motorControlInit();
     
     timer0Init( &motorISR );
     
