@@ -26,9 +26,9 @@ void defaultInit()
     initPwm( gConfig.pwmPeriod );
     resetDriver( 1 );
    
-    gState.motorControl.pwmLevelA = 900;
-    gState.motorControl.pwmLevelB = 900;
-    gState.motorControl.stepTimeout = 0xFFFF;
+    gState.motorControl.pwmDutyCycle = 800;
+    gState.motorControl.rotationDirection = 1;
+    gState.motorControl.stepTimeout = 0x04FF;
     
     timer0Init( &motorISR );
     
@@ -43,10 +43,10 @@ void defaultInit()
 
 void mainLoop()
 {
-    while (1)
+	setTimer0Peiod(gState.motorControl.stepTimeout);
+	while (1)
     {
-    	setPwm(gState.motorControl.pwmLevelA, gState.motorControl.pwmLevelB);
-        setTimer0Peiod(gState.motorControl.stepTimeout);
+    	setPwm(gState.motorControl.pwmDutyCycle);
     }
 }
 

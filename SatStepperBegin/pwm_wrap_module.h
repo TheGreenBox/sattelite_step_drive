@@ -12,7 +12,7 @@
 
 void initPwm( short int prescaler );
 
-void setPwm( unsigned aPwm, unsigned bPwm );
+void setPwm( unsigned pwmDutyCycle );
 
 void setADirection(int direct);
 void setBDirection(int direct);

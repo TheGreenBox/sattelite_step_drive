@@ -30,14 +30,16 @@ struct AlgoType
 };
 
 //const structure variables init
-static struct AlgoType onePhaseParametrs     = { onePhaseAlgoA ,
+static struct AlgoType onePhaseParametrs     = {   
+                                                    onePhaseAlgoA ,
                                                     onePhaseAlgoB ,
                                                     ONE_TWO_PHASE_STEPS_NUMBER },
-                        twoPhaseParametrs     = {
+                        twoPhaseParametrs    = {    
                                                     twoPhaseAlgoA ,
                                                     twoPhaseAlgoB ,
                                                     ONE_TWO_PHASE_STEPS_NUMBER },
-                        halfPhaseParametrs    = { halfPhaseAlgoA ,
+                        halfPhaseParametrs   = {    
+                                                    halfPhaseAlgoA ,
                                                     halfPhaseAlgoB ,
                                                     HALF_PHASE_STEPS_NUMBER  };
 

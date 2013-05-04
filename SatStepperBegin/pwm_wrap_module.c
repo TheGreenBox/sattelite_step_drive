@@ -141,10 +141,10 @@ void initPwm( short int prescaler )
     initBPWM( prescaler );
 }
 
-void setPwm( unsigned aPwm, unsigned bPwm )
+void setPwm( unsigned pwmDutyCycle )
 {
-    EPwm1Regs.CMPA.half.CMPA = aPwm;
-    EPwm2Regs.CMPA.half.CMPA = bPwm;
+    EPwm1Regs.CMPA.half.CMPA = pwmDutyCycle;
+    EPwm2Regs.CMPA.half.CMPA = pwmDutyCycle;
 }
 
 void setADirection(int direct)

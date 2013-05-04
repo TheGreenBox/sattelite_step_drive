@@ -13,9 +13,9 @@
 
 typedef struct _MotorControl
 {
-    unsigned int pwmLevelA;
-    unsigned int pwmLevelB;
-    unsigned int stepTimeout;
+    unsigned pwmDutyCycle;
+    unsigned stepTimeout;
+    short rotationDirection;		//1 or -1
 } MotorControl;
 
 typedef struct _GlobalState

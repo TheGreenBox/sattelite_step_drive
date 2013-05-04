@@ -29,7 +29,7 @@ void motorISR(void)
 	int phaseVSignA;
 	int phaseVSignB;
 
-	getNextStep(&phaseVSignA , &phaseVSignB);
-    setADirection(phaseVSignA);
-    setBDirection(phaseVSignB);
+	getNextStep( &phaseVSignA , &phaseVSignB );
+    setADirection( phaseVSignA );
+    setBDirection( gState.motorControl.rotationDirection*phaseVSignB );
 }    
