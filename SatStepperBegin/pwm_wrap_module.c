@@ -6,7 +6,6 @@
  * Description: pwm control
  * ========================================================
  */
-#include <stdlib>
 #include <PeripheralHeaderIncludes.h>
 #include <f2803xbmsk.h>
 #include "pwm_wrap_module.h"
