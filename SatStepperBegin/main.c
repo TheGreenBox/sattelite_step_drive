@@ -26,8 +26,9 @@ void defaultInit()
     initPwm( gConfig.pwmPeriod );
     resetDriver( 1 );
    
-    gState.motorControl.pwmLevelA = 20000;
-    gState.motorControl.pwmLevelB = 20000;
+    gState.motorControl.pwmLevelA = 900;
+    gState.motorControl.pwmLevelB = 900;
+    gState.motorControl.stepTimeout = 0xFFFF;
     
     timer0Init( &motorISR );
     
@@ -36,7 +37,7 @@ void defaultInit()
     // Enable global Interrupts and higher priority real-time debug events:
     EINT;   // Enable Global interrupt INTM
     ERTM;	// Enable Global realtime interrupt DBGM
-    setAlgoType(1);
+    setAlgoType(3);
     setGreenStatusLed(1);
 }
 
@@ -44,7 +45,8 @@ void mainLoop()
 {
     while (1)
     {
-    	setPwm(gState.motorControl.pwmLevelA , gState.motorControl.pwmLevelB);
+    	setPwm(gState.motorControl.pwmLevelA, gState.motorControl.pwmLevelB);
+        setTimer0Peiod(gState.motorControl.stepTimeout);
     }
 }
 

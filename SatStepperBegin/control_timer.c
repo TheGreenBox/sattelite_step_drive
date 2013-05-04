@@ -54,7 +54,10 @@ void timer0Init( _controlTimerInterruptHandler handler )
 
 void setTimer0Peiod(int _period) // ~ usec
 {
-    CpuTimer0Regs.PRD.all = _period;
+    if (_period != CpuTimer0Regs.PRD.all)
+    {
+        CpuTimer0Regs.PRD.all = _period;
+    }
 }
 
 void timer0Stop()

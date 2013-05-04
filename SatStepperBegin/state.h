@@ -15,6 +15,7 @@ typedef struct _MotorControl
 {
     unsigned int pwmLevelA;
     unsigned int pwmLevelB;
+    unsigned int stepTimeout;
 } MotorControl;
 
 typedef struct _GlobalState

@@ -14,5 +14,5 @@ volatile GlobalState gState;
 
 const GlobalConfig gConfig =
 					{
-					    30000
+					    1000
 					};
