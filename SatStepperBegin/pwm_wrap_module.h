@@ -10,9 +10,7 @@
 #ifndef _PWM_WRAP_MODULE__H_
 #define _PWM_WRAP_MODULE__H_
 
-typedef void (* _pwmTimerInterruptHandler)(void);
-
-void initPwm( _pwmTimerInterruptHandler, short int prescaler );
+void initPwm( short int prescaler );
 
 void setPwm( unsigned int aPwm, unsigned int bPwm );
 

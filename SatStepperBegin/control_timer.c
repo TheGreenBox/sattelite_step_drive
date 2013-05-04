@@ -20,12 +20,12 @@ static _controlTimerInterruptHandler _tmr0Handler;
 interrupt void TMR0_Interrupt(void)
 {
     _tmr0Handler();
-    CpuTimer0Regs.TCR.all.TIF = 0;
+    CpuTimer0Regs.TCR.bit.TIF = 0;
     
     // The TIMH:TIM is loaded with the value in the PRDH:PRD,
     //  and the prescaler counter (PSCH:PSC) is loaded with the
     //  value in the timer divide- down register (TDDRH:TDDR).
-    CpuTimer0Regs.TCR.all.TRB = 0;
+    CpuTimer0Regs.TCR.bit.TRB = 0;
 }
 
 void timer0Init( _controlTimerInterruptHandler handler )
@@ -40,10 +40,10 @@ void timer0Init( _controlTimerInterruptHandler handler )
     PieCtrlRegs.PIEIER1.bit.INTx7 = 1;
     
     // enable timer 0 interrupt
-    CpuTimer0Regs.TCR.bits.TIE = 1;
+    CpuTimer0Regs.TCR.bit.TIE = 1;
     // free run mode switch on
-    CpuTimer0Regs.TCR.bits.FREE = 1;
-    CpuTimer0Regs.TCR.bits.SOFT = 0; 
+    CpuTimer0Regs.TCR.bit.FREE = 1;
+    CpuTimer0Regs.TCR.bit.SOFT = 0;
 
     // set preload value and timer prescaler 
     CpuTimer0Regs.PRD.all = 0xFFFF;
@@ -57,7 +57,7 @@ void setTimer0Peiod(int _period) // ~ usec
 
 void timer0Stop()
 {
-    CpuTimer0Regs.TCR.bits.TSS = 1;
+    CpuTimer0Regs.TCR.bit.TSS = 1;
 }
 
 void timer0Start()

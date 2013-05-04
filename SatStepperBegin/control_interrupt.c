@@ -22,7 +22,7 @@ unsigned int cycleLimiter (unsigned val, unsigned hi, unsigned low)
     return val;
 }
 
-interrupt void motorISR(void)
+void motorISR(void)
 {   
     gState.motorControl.pwmLevelA = cycleLimiter(gState.motorControl.pwmLevelA, gConfig.pwmPeriod, 0);
     gState.motorControl.pwmLevelB = cycleLimiter(gState.motorControl.pwmLevelB, gConfig.pwmPeriod, 0);

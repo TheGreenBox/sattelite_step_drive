@@ -14,13 +14,13 @@
 static void initAPWM( short int prescaler )
 {
     // Enable CNT_zero interrupt using EPWM1 Time-base
-    EPwm1Regs.ETSEL.bit.INTEN  = 1;  // Enable EPWM1INT generation
-    EPwm1Regs.ETSEL.bit.INTSEL = 1;  // Enable interrupt CNT_zero event
-    EPwm1Regs.ETPS.bit.INTPRD  = 1;  // Generate interrupt on the 1st event
-    EPwm1Regs.ETCLR.bit.INT    = 1;  // Enable more interrupts
+//    EPwm1Regs.ETSEL.bit.INTEN  = 1;  // Enable EPWM1INT generation
+//    EPwm1Regs.ETSEL.bit.INTSEL = 1;  // Enable interrupt CNT_zero event
+//    EPwm1Regs.ETPS.bit.INTPRD  = 1;  // Generate interrupt on the 1st event
+//    EPwm1Regs.ETCLR.bit.INT    = 1;  // Enable more interrupts
     
     // Enable CPU INT3 for EPWM1_INT:
-    IER |= M_INT3;
+//    IER |= M_INT3;
 
     EPwm1Regs.TBCTL.bit.SYNCOSEL = 0;   // Pass through
 
@@ -145,14 +145,14 @@ static void initBPWM( short int prescaler )
     EDIS;  // Disable EALLOW
 }
 
-void initPwm( _pwmTimerInterruptHandler int_hanler, short int prescaler )
+void initPwm( short int prescaler )
 {
-    EALLOW; // This is needed to write to EALLOW protected registers
-    PieVectTable.EPWM1_INT = int_hanler;
-    EDIS;
+//    EALLOW; // This is needed to write to EALLOW protected registers
+//    PieVectTable.EPWM1_INT = int_hanler;
+//    EDIS;
     
     // Enable PIE group 3 interrupt 1 for EPWM1_INT
-    PieCtrlRegs.PIEIER3.bit.INTx1 = 1;
+//    PieCtrlRegs.PIEIER3.bit.INTx1 = 1;
     
     initAPWM( prescaler );
     initBPWM( prescaler );

@@ -14,6 +14,7 @@
 #include "led_control.h"
 #include "init.h"
 #include "control_interrupt.h"
+#include "control_timer.h"
 #include "state.h"
 
 //global variables
@@ -22,18 +23,21 @@
 void defaultInit()
 {
 	deviceInit();
-    initPwm( &motorISR, gConfig.pwmPeriod );
+    initPwm( gConfig.pwmPeriod );
     resetDriver( 1 );
-    // Enable CPU INT3 for EPWM1_INT:
-    IER |= M_INT3;
-    // Enable global Interrupts and higher priority real-time debug events:
-    EINT;   // Enable Global interrupt INTM
-    ERTM;	// Enable Global realtime interrupt DBGM
-    
+   
     gState.motorControl.pwmLevelA = 20000;
     gState.motorControl.pwmLevelB = 20000;
     gState.motorControl.phaseVSignA = 1;
     gState.motorControl.phaseVSignB = 1;
+    
+    timer0Init( &motorISR );
+    
+    // Enable CPU INT3 for EPWM1_INT:
+    IER |= M_INT1;
+    // Enable global Interrupts and higher priority real-time debug events:
+    EINT;   // Enable Global interrupt INTM
+    ERTM;	// Enable Global realtime interrupt DBGM
     
     setGreenStatusLed(1);
 }
