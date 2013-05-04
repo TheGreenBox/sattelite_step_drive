@@ -37,11 +37,11 @@ void defaultInit()
     
     setGreenStatusLed(1);
 }
+
 void mainLoop()
 {
     while (1)
     {
-
         setADirection(gState.motorControl.phaseVSignA);
         setBDirection(gState.motorControl.phaseVSignB);
     	setPwm( gState.motorControl.pwmLevelA , gState.motorControl.pwmLevelB );
@@ -54,7 +54,6 @@ int main(void)
     resetDriver( 0 );
     setADirection( gState.motorControl.phaseVSignA );
     setBDirection( gState.motorControl.phaseVSignB );
-    setPwm( gState.motorControl.pwmLevelA , gState.motorControl.pwmLevelB );
 
     mainLoop();
 
