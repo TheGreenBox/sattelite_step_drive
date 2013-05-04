@@ -44,7 +44,7 @@ static struct AlgoType onePhaseParametrs     = { onePhaseAlgoA ,
 static struct AlgoType* pCurrentAlgoStruct = NULL;
 static int nextStep = 0;
 
-int setAlgoType(int algoTypeCode)                               //sets control algorythm type that will be used
+int setAlgoType(short algoTypeCode)                               //sets control algorythm type that will be used
 {
     nextStep = 0;
     switch (algoTypeCode)
@@ -72,7 +72,7 @@ int getNextStep(int* phaseA, int* phaseB)                       //writes phase s
     }
     *phaseA = pCurrentAlgoStruct->phaseA[nextStep];
     *phaseB = pCurrentAlgoStruct->phaseB[nextStep];
-    if (++nextStep < pCurrentAlgoStruct->algoStepsNumber)
+    if (++nextStep >= pCurrentAlgoStruct->algoStepsNumber)
     {
         nextStep = 0;
     }

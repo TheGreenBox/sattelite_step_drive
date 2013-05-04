@@ -11,6 +11,6 @@
 #ifndef _INTERRUPT_CONTROL_INCLUDED_
 #define _INTERRUPT_CONTROL_INCLUDED_
 
-void motorISR(void);
+    void motorISR(void);
 
 #endif              //_INTERRUPT_CONTROL_INCLUDED_

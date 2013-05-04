@@ -15,8 +15,6 @@ typedef struct _MotorControl
 {
     unsigned int pwmLevelA;
     unsigned int pwmLevelB;
-    int phaseVSignA;
-    int phaseVSignB;
 } MotorControl;
 
 typedef struct _GlobalState

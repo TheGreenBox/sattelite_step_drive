@@ -28,8 +28,6 @@ void defaultInit()
    
     gState.motorControl.pwmLevelA = 20000;
     gState.motorControl.pwmLevelB = 20000;
-    gState.motorControl.phaseVSignA = 1;
-    gState.motorControl.phaseVSignB = 1;
     
     timer0Init( &motorISR );
     
@@ -38,7 +36,7 @@ void defaultInit()
     // Enable global Interrupts and higher priority real-time debug events:
     EINT;   // Enable Global interrupt INTM
     ERTM;	// Enable Global realtime interrupt DBGM
-    
+    setAlgoType(1);
     setGreenStatusLed(1);
 }
 
@@ -46,9 +44,7 @@ void mainLoop()
 {
     while (1)
     {
-        setADirection(gState.motorControl.phaseVSignA);
-        setBDirection(gState.motorControl.phaseVSignB);
-    	setPwm( gState.motorControl.pwmLevelA , gState.motorControl.pwmLevelB );
+    	setPwm(gState.motorControl.pwmLevelA , gState.motorControl.pwmLevelB);
     }
 }
 
@@ -56,8 +52,6 @@ int main(void)
 {
 	defaultInit();
     resetDriver( 0 );
-    setADirection( gState.motorControl.phaseVSignA );
-    setBDirection( gState.motorControl.phaseVSignB );
 
     mainLoop();
 

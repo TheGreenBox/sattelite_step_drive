@@ -20,7 +20,7 @@
 #define TWO_PHASE_CODE              2
 #define HALF_PHASE_CODE             3
 
-int setAlgoType();
+int setAlgoType(short);
 int getNextStep(int*, int*);
 
 #endif //_CONTROL_ALGO_INCLUDED_
