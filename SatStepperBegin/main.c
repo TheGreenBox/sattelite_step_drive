@@ -21,13 +21,10 @@ void defaultInit()
 {
 	deviceInit();
     initPwm( gConfig.pwmPeriod );
-    resetDriver( 1 );
     motorControlInit();
-    
     timer0Init( &motorISR );
-    enableGlobalInterrupts();
     
-    setAlgoType(3);
+    enableGlobalInterrupts();
     
     setGreenStatusLed(1);
 }
@@ -43,7 +40,8 @@ void mainLoop()
 int main(void) 
 {
 	defaultInit();
-    resetDriver( 0 );
+    
+    setAlgoType(3);
 
     mainLoop();
 
