@@ -9,11 +9,8 @@
  */
 #include "PeripheralHeaderIncludes.h"
 #include "control_interrupt.h"
+#include "state.h"
 
-unsigned int _PWM_LEVEL_A = 20000;
-unsigned int _PWM_LEVEL_B = 20000;
-
-unsigned short pwm_period = 30000;
 
 unsigned int cycleLimiter (unsigned val, unsigned hi, unsigned low)
 {
@@ -27,8 +24,8 @@ unsigned int cycleLimiter (unsigned val, unsigned hi, unsigned low)
 
 interrupt void motorISR(void)
 {   
-    _PWM_LEVEL_A = cycleLimiter(_PWM_LEVEL_A, pwm_period, 0);
-    _PWM_LEVEL_B = cycleLimiter(_PWM_LEVEL_B, pwm_period, 0);
+    gState.motorControl.pwmLevelA = cycleLimiter(gState.motorControl.pwmLevelA, gConfig.pwmPeriod, 0);
+    gState.motorControl.pwmLevelB = cycleLimiter(gState.motorControl.pwmLevelB, gConfig.pwmPeriod, 0);
     // Enable more interrupts from this timer
     EPwm1Regs.ETCLR.bit.INT = 1;
     // Acknowledge interrupt to recieve more interrupts from PIE group 3

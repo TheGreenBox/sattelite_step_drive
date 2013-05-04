@@ -11,3 +11,8 @@
 #include "state.h"
 
 volatile GlobalState gState;
+
+const GlobalConfig gConfig =
+					{
+					    30000
+					};

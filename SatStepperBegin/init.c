@@ -8,6 +8,7 @@
  */
 
 #include "PeripheralHeaderIncludes.h"
+#include "state.h"
 
 // Functions that will be run from RAM need to be assigned to
 // a different section.  This section will then be mapped to a load and
@@ -569,6 +570,8 @@ void deviceInit()
     switchInternalOscilator();
     setSystemClockSpeed();
     peripheryInit();
+
+
 }
 
 

@@ -14,24 +14,27 @@
 #include "led_control.h"
 #include "init.h"
 #include "control_interrupt.h"
+#include "state.h"
 
 //global variables
-int ROTATION_DIRECT_A = 1;
-int ROTATION_DIRECT_B = 1;
 
-unsigned int PWM_LEVEL_A = 20000;
-unsigned int PWM_LEVEL_B = 20000;
 
 void defaultInit()
 {
 	deviceInit();
-    initPwm( &motorISR, pwm_period );
+    initPwm( &motorISR, gConfig.pwmPeriod );
     resetDriver( 1 );
     // Enable CPU INT3 for EPWM1_INT:
     IER |= M_INT3;
     // Enable global Interrupts and higher priority real-time debug events:
     EINT;   // Enable Global interrupt INTM
     ERTM;	// Enable Global realtime interrupt DBGM
+    
+    gState.motorControl.pwmLevelA = 20000;
+    gState.motorControl.pwmLevelB = 20000;
+    gState.motorControl.phaseVSignA = 1;
+    gState.motorControl.phaseVSignB = 1;
+    
     setGreenStatusLed(1);
 }
 void mainLoop()
@@ -39,9 +42,9 @@ void mainLoop()
     while (1)
     {
 
-        setADirection(ROTATION_DIRECT_A);
-        setBDirection(ROTATION_DIRECT_B);
-    	setPwm( PWM_LEVEL_A , PWM_LEVEL_B );
+        setADirection(gState.motorControl.phaseVSignA);
+        setBDirection(gState.motorControl.phaseVSignB);
+    	setPwm( gState.motorControl.pwmLevelA , gState.motorControl.pwmLevelB );
     }
 }
 
@@ -49,9 +52,9 @@ int main(void)
 {
 	defaultInit();
     resetDriver( 0 );
-    setADirection(ROTATION_DIRECT_A);
-    setBDirection(ROTATION_DIRECT_B);
-    setPwm( PWM_LEVEL_A , PWM_LEVEL_B );
+    setADirection( gState.motorControl.phaseVSignA );
+    setBDirection( gState.motorControl.phaseVSignB );
+    setPwm( gState.motorControl.pwmLevelA , gState.motorControl.pwmLevelB );
 
     mainLoop();
 
