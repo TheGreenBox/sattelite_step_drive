@@ -580,3 +580,9 @@ void motorControlInit()
     gState.motorControl.rotationDirection = 1;
     gState.motorControl.stepTimeout = 0x04FF;
 }
+
+void enableGlobalInterrupts()
+{
+    EINT;   // Enable Global interrupt INTM
+    ERTM;  // Enable Global realtime interrupt DBGM 
+}

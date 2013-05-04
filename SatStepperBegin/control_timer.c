@@ -40,6 +40,7 @@ void timer0Init( _controlTimerInterruptHandler handler )
    
     // Enable PIE for TINT0
     PieCtrlRegs.PIEIER1.bit.INTx7 = 1;
+    IER |= M_INT1;
     
     // enable timer 0 interrupt
     CpuTimer0Regs.TCR.bit.TIE = 1;

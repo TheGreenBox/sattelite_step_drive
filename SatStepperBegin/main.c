@@ -25,8 +25,10 @@ void defaultInit()
     motorControlInit();
     
     timer0Init( &motorISR );
+    enableGlobalInterrupts();
     
     setAlgoType(3);
+    
     setGreenStatusLed(1);
 }
 

@@ -12,5 +12,6 @@
 
 void deviceInit();
 void motorControlInit();
+void enableGlobalInterrupts();
 
 #endif //_INIT__H_
