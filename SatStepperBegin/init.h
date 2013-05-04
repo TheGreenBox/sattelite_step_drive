@@ -11,5 +11,6 @@
 #define _INIT__H_
 
 void deviceInit();
+void motorControlInit();
 
 #endif //_INIT__H_
