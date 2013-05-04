@@ -11,6 +11,7 @@
 #include "control_interrupt.h"
 #include "state.h"
 #include "control_algo.h"
+#include "control_timer.h"
 #include "pwm_wrap_module.h"
 
 
@@ -32,4 +33,5 @@ void motorISR(void)
 	getNextStep( &phaseVSignA , &phaseVSignB );
     setADirection( phaseVSignA );
     setBDirection( gState.motorControl.rotationDirection*phaseVSignB );
+    setTimer0Peiod(gState.motorControl.stepTimeout);
 }    

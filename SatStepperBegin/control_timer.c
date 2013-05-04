@@ -49,10 +49,10 @@ void timer0Init( _controlTimerInterruptHandler handler )
 
     // set preload value and timer prescaler 
     CpuTimer0Regs.PRD.all = 0xFFFF;
-    CpuTimer0Regs.TPR.all = 0x0258; //600 
+    CpuTimer0Regs.TPR.all = 0x1770; //600 
 }
 
-void setTimer0Peiod(int _period) // ~ usec
+void setTimer0Peiod (unsigned _period) // ~ usec
 {
     if (_period != CpuTimer0Regs.PRD.all)
     {

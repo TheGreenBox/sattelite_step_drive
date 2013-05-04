@@ -17,7 +17,7 @@ typedef void (* _controlTimerInterruptHandler)(void);
 
 void timer0Init( _controlTimerInterruptHandler );
 
-void setTimer0Peiod(int _period); // ~ usec*10
+void setTimer0Peiod(unsigned _period); // ~ usec*10
 
 void timer0Stop();
 
