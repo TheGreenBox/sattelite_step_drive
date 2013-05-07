@@ -41,7 +41,8 @@ int main(void)
 {
 	defaultInit();
     
-    setAlgoType(3);
+	resetDriver(0);
+    setAlgoType(gConfig.algoType);
 
     mainLoop();
 

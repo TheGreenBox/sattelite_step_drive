@@ -30,6 +30,7 @@ extern volatile GlobalState gState;
 typedef struct _GlobalConfig
 {
     unsigned short pwmPeriod;
+    unsigned short algoType;
 } GlobalConfig;
 
 extern const GlobalConfig gConfig;

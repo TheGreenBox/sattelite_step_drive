@@ -12,7 +12,7 @@
 
 volatile GlobalState gState;
 
-const GlobalConfig gConfig =
-					{
-					    1000
-					};
+const GlobalConfig gConfig = {
+					            1000,
+                                1
+					         };

@@ -576,11 +576,10 @@ void deviceInit()
 
 void motorControlInit()
 {
-    gState.motorControl.pwmDutyCycle = 800;
+    gState.motorControl.pwmDutyCycle = 990;
     gState.motorControl.rotationDirection = 1;
     gState.motorControl.stepTimeout = 0x04FF;
-    resetDriver( 0 );
-}
+ }
 
 void enableGlobalInterrupts()
 {

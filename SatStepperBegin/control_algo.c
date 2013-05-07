@@ -30,23 +30,30 @@ struct AlgoType
 };
 
 //const structure variables init
-static struct AlgoType onePhaseParametrs     = {   
-                                                    onePhaseAlgoA ,
-                                                    onePhaseAlgoB ,
-                                                    ONE_TWO_PHASE_STEPS_NUMBER },
-                        twoPhaseParametrs    = {    
-                                                    twoPhaseAlgoA ,
-                                                    twoPhaseAlgoB ,
-                                                    ONE_TWO_PHASE_STEPS_NUMBER },
-                        halfPhaseParametrs   = {    
-                                                    halfPhaseAlgoA ,
-                                                    halfPhaseAlgoB ,
-                                                    HALF_PHASE_STEPS_NUMBER  };
+static struct AlgoType 
+onePhaseParametrs  = {   
+                        onePhaseAlgoA ,
+                        onePhaseAlgoB ,
+                        ONE_TWO_PHASE_STEPS_NUMBER 
+                     },
+
+twoPhaseParametrs  = {
+                        twoPhaseAlgoA ,
+                        twoPhaseAlgoB ,
+                        ONE_TWO_PHASE_STEPS_NUMBER 
+                     },
+
+halfPhaseParametrs = {    
+                        halfPhaseAlgoA ,
+                        halfPhaseAlgoB ,
+                        HALF_PHASE_STEPS_NUMBER  
+                     };
 
 static struct AlgoType* pCurrentAlgoStruct = NULL;
 static int nextStep = 0;
 
-int setAlgoType(short algoTypeCode)                               //sets control algorythm type that will be used
+// sets control algorythm type that will be used
+int setAlgoType(unsigned short algoTypeCode)
 {
     nextStep = 0;
     switch (algoTypeCode)
@@ -66,9 +73,11 @@ int setAlgoType(short algoTypeCode)                               //sets control
     return 0;
 }
 
-int getNextStep(int* phaseA, int* phaseB)                       //writes phase states for next step to PWM registers
+// writes phase states for next step to PWM registers
+int getNextStep(int* phaseA, int* phaseB)
 {
-    if (pCurrentAlgoStruct == NULL)                              //if setAlgoType wasn't used
+    // if setAlgoType wasn't used
+    if (pCurrentAlgoStruct == NULL)
     {
         return 1;
     }
@@ -80,3 +89,4 @@ int getNextStep(int* phaseA, int* phaseB)                       //writes phase s
     }
     return 0;
 }
+
