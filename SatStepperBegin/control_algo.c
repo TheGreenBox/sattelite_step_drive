@@ -26,6 +26,7 @@ struct AlgoType
 {
     int* phaseA;
     int* phaseB;
+    
     int algoStepsNumber;
 };
 
