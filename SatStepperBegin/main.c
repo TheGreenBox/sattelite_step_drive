@@ -33,7 +33,8 @@ void mainLoop()
 {
 	while (1)
     {
-    	setPwm(gState.motorControl.pwmDutyCycle);
+        // Put here debug functions 
+        // For instance - fuction for simulate input signal
     }
 }
 

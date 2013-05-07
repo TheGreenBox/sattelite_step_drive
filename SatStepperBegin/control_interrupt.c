@@ -14,8 +14,8 @@
 #include "control_timer.h"
 #include "pwm_wrap_module.h"
 
-
-unsigned int cycleLimiter (unsigned val, unsigned hi, unsigned low)     //for debug purposes
+// for debug purposes
+unsigned int cycleLimiter (unsigned val, unsigned hi, unsigned low)
 {
     ++val;
     if (val > hi)
@@ -33,5 +33,8 @@ void motorISR(void)
 	getNextStep( &phaseVSignA , &phaseVSignB );
     setADirection( phaseVSignA );
     setBDirection( gState.motorControl.rotationDirection*phaseVSignB );
+    
+    setPwm(gState.motorControl.pwmDutyCycle);
+    // set speed step motor
     setTimer0Peiod(gState.motorControl.stepTimeout);
 }    
