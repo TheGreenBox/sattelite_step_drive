@@ -9,10 +9,11 @@
  */
 
 #include "state.h"
+#include "control_algo.h"
 
 volatile GlobalState gState;
 
 const GlobalConfig gConfig = {
 					            1000,
-                                1
+                                CTRL_ALGO_ONE_PHASE              
 					         };

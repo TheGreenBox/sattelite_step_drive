@@ -58,13 +58,13 @@ int setAlgoType(unsigned short algoTypeCode)
     nextStep = 0;
     switch (algoTypeCode)
     {
-        case ONE_PHASE_CODE:
+        case CTRL_ALGO_ONE_PHASE:
             pCurrentAlgoStruct = &onePhaseParametrs;
             break;
-        case TWO_PHASE_CODE:
+        case CTRL_ALGO_TWO_PHASE:
             pCurrentAlgoStruct = &twoPhaseParametrs;
             break;
-        case HALF_PHASE_CODE:
+        case CTRL_ALGO_HALF_PHASE:
             pCurrentAlgoStruct = &halfPhaseParametrs;
             break;
         default:
