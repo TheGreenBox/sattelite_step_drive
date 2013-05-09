@@ -27,10 +27,10 @@ unsigned int cycleLimiter (unsigned val, unsigned hi, unsigned low)
 
 void motorISR(void)
 {   
-	int phaseVSignA;
-	int phaseVSignB;
+    int phaseVSignA;
+    int phaseVSignB;
 
-	getNextStep( &phaseVSignA , &phaseVSignB );
+    getNextStep( &phaseVSignA , &phaseVSignB );
     setADirection( phaseVSignA );
     setBDirection( gState.motorControl.rotationDirection*phaseVSignB );
     

@@ -19,7 +19,7 @@
 
 void defaultInit()
 {
-	deviceInit();
+    deviceInit();
     initPwm( gConfig.pwmPeriod );
     motorControlInit();
     timer0Init( &motorISR );
@@ -31,7 +31,7 @@ void defaultInit()
 
 void mainLoop()
 {
-	while (1)
+    while (1)
     {
         // Put here debug functions 
         // For instance - fuction for simulate input signal
@@ -40,13 +40,13 @@ void mainLoop()
 
 int main(void) 
 {
-	defaultInit();
+    defaultInit();
     
-	resetDriver(0);
+    resetDriver(0);
     setAlgoType(gConfig.algoType);
 
     mainLoop();
 
-	return 0;
+    return 0;
 }
 
