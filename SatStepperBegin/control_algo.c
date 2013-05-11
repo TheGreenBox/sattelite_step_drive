@@ -12,51 +12,71 @@
 #include <stdio.h>
 #include "control_algo.h"
 
-//arrays of step by step phase states for different algorythms
-static int onePhaseAlgoA[ONE_TWO_PHASE_STEPS_NUMBER]  = { 1 , 0 , -1 ,  0 };
-static int onePhaseAlgoB[ONE_TWO_PHASE_STEPS_NUMBER]  = { 0 , 1 ,  0 , -1 };
+#include "state.h"
 
-static int twoPhaseAlgoA[ONE_TWO_PHASE_STEPS_NUMBER]  = { 1 , -1 , -1 ,  1 };
-static int twoPhaseAlgoB[ONE_TWO_PHASE_STEPS_NUMBER]  = { 1 ,  1 , -1 , -1 };
+//arrays of step by step phase states for different algorythms
+static int onePhaseAlgoA[ONE_PHASE_STEPS_NUMBER]  = { 1 , 0 , -1 ,  0 };
+static int onePhaseAlgoB[ONE_PHASE_STEPS_NUMBER]  = { 0 , 1 ,  0 , -1 };
+
+static long onePhasePwmDuty[ONE_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DUTY };
+
+
+static int twoPhaseAlgoA[TWO_PHASE_STEPS_NUMBER]  = { 1 , -1 , -1 ,  1 };
+static int twoPhaseAlgoB[TWO_PHASE_STEPS_NUMBER]  = { 1 ,  1 , -1 , -1 };
+
+static long twoPhasePwmDuty[TWO_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DUTY };
+
 
 static int halfPhaseAlgoA[HALF_PHASE_STEPS_NUMBER] = { 1 , 1 , 0 , -1 , -1 , -1,   0 ,  1 };
 static int halfPhaseAlgoB[HALF_PHASE_STEPS_NUMBER] = { 0 , 1 , 1 ,  1 ,  0 , -1 , -1 , -1 };
+
+static long halfPhasePwmDuty[HALF_PHASE_PWM_STEPS_NUMBER] = { (long)(MAX_PWM_DUTY*1), (long)(MAX_PWM_DUTY*0.707) };
 
 struct AlgoType
 {
     int* phaseA;
     int* phaseB;
     
-    int algoStepsNumber;
+    unsigned algoStepsNumber;
+
+    long* pwmDuty;
+    unsigned algoPwmStepsNumber; 
 };
 
 //const structure variables init
 static struct AlgoType 
 onePhaseParametrs  = {   
-                        onePhaseAlgoA ,
-                        onePhaseAlgoB ,
-                        ONE_TWO_PHASE_STEPS_NUMBER 
+                        onePhaseAlgoA,
+                        onePhaseAlgoB,
+                        ONE_PHASE_STEPS_NUMBER, 
+                        
+                        onePhasePwmDuty,
+                        ONE_PHASE_PWM_STEPS_NUMBER
                      },
 
 twoPhaseParametrs  = {
-                        twoPhaseAlgoA ,
-                        twoPhaseAlgoB ,
-                        ONE_TWO_PHASE_STEPS_NUMBER 
+                        twoPhaseAlgoA,
+                        twoPhaseAlgoB,
+                        ONE_PHASE_STEPS_NUMBER,
+                        
+                        twoPhasePwmDuty,
+                        TWO_PHASE_PWM_STEPS_NUMBER
                      },
 
 halfPhaseParametrs = {    
-                        halfPhaseAlgoA ,
-                        halfPhaseAlgoB ,
-                        HALF_PHASE_STEPS_NUMBER  
+                        halfPhaseAlgoA,
+                        halfPhaseAlgoB,
+                        HALF_PHASE_STEPS_NUMBER, 
+                        
+                        halfPhasePwmDuty,
+                        HALF_PHASE_PWM_STEPS_NUMBER
                      };
 
 static struct AlgoType* pCurrentAlgoStruct = NULL;
-static int nextStep = 0;
 
 // sets control algorythm type that will be used
 int setAlgoType(unsigned short algoTypeCode)
 {
-    nextStep = 0;
     switch (algoTypeCode)
     {
         case CTRL_ALGO_ONE_PHASE:
@@ -75,19 +95,27 @@ int setAlgoType(unsigned short algoTypeCode)
 }
 
 // writes phase states for next step to PWM registers
-int getNextStep(int* phaseA, int* phaseB)
+int getPhasePulseByStep(long long step, int* phaseA, int* phaseB)
 {
     // if setAlgoType wasn't used
     if (pCurrentAlgoStruct == NULL)
     {
         return 1;
     }
+    unsigned nextStep = step % pCurrentAlgoStruct->algoStepsNumber;
     *phaseA = pCurrentAlgoStruct->phaseA[nextStep];
     *phaseB = pCurrentAlgoStruct->phaseB[nextStep];
-    if (++nextStep >= pCurrentAlgoStruct->algoStepsNumber)
-    {
-        nextStep = 0;
-    }
     return 0;
 }
 
+int getPwmDutyByStep(long long step, unsigned currentPwmDuty, unsigned* pwmDuty)
+{
+    if (pCurrentAlgoStruct == NULL)
+    {
+        return 1;
+    }
+    unsigned nextStep = step % pCurrentAlgoStruct->algoPwmStepsNumber;
+    *pwmDuty = currentPwmDuty*pCurrentAlgoStruct->pwmDuty[nextStep];
+    *pwmDuty /= MAX_PWM_DUTY;
+    return 0;
+}

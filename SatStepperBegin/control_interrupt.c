@@ -27,14 +27,37 @@ unsigned int cycleLimiter (unsigned val, unsigned hi, unsigned low)
 
 void motorISR(void)
 {   
-    int phaseVSignA;
-    int phaseVSignB;
-
-    getNextStep( &phaseVSignA , &phaseVSignB );
-    setADirection( phaseVSignA );
-    setBDirection( gState.motorControl.rotationDirection*phaseVSignB );
+    if ( gState.motorControl.rotationDirection == 0 )
+    {
+        setADirection( 0 );
+        setBDirection( 0 );
+        setPwm( MAX_PWM_DUTY );
+        return;
+    }
     
-    setPwm(gState.motorControl.pwmDutyCycle);
+    if ( gState.motorControl.rotationDirection > 0 )
+    {
+        ++gState.stepTicker;
+    }
+    else
+    {
+        ++gState.stepTicker;
+    }
+    
+    int phaseVSignA, phaseVSignB;
+
+    getPhasePulseByStep ( gState.stepTicker, 
+                          &phaseVSignA , &phaseVSignB );
+    
+    setADirection( phaseVSignA );
+    setBDirection( phaseVSignB );
+    
+    unsigned pwmDuty;
+    
+    getPwmDutyByStep ( gState.stepTicker,
+                       gState.motorControl.pwmDutyCycle, 
+                       &pwmDuty );
+    setPwm( pwmDuty );
     // set speed step motor
     setTimer0Peiod(gState.motorControl.stepTimeout);
-}    
+}
