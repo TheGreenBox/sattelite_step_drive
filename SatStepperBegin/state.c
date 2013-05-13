@@ -15,5 +15,5 @@ volatile GlobalState gState;
 
 const GlobalConfig gConfig = {
 					            MAX_PWM_DUTY,
-                                CTRL_ALGO_ONE_PHASE              
+					            CTRL_ALGO_HALF_PHASE
 					         };

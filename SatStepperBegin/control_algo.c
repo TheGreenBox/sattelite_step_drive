@@ -18,19 +18,19 @@
 static int onePhaseAlgoA[ONE_PHASE_STEPS_NUMBER]  = { 1 , 0 , -1 ,  0 };
 static int onePhaseAlgoB[ONE_PHASE_STEPS_NUMBER]  = { 0 , 1 ,  0 , -1 };
 
-static long onePhasePwmDuty[ONE_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DUTY };
+static unsigned onePhasePwmDuty[ONE_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DUTY };
 
 
 static int twoPhaseAlgoA[TWO_PHASE_STEPS_NUMBER]  = { 1 , -1 , -1 ,  1 };
 static int twoPhaseAlgoB[TWO_PHASE_STEPS_NUMBER]  = { 1 ,  1 , -1 , -1 };
 
-static long twoPhasePwmDuty[TWO_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DUTY };
+static unsigned twoPhasePwmDuty[TWO_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DUTY };
 
 
 static int halfPhaseAlgoA[HALF_PHASE_STEPS_NUMBER] = { 1 , 1 , 0 , -1 , -1 , -1,   0 ,  1 };
 static int halfPhaseAlgoB[HALF_PHASE_STEPS_NUMBER] = { 0 , 1 , 1 ,  1 ,  0 , -1 , -1 , -1 };
 
-static long halfPhasePwmDuty[HALF_PHASE_PWM_STEPS_NUMBER] = { (long)(MAX_PWM_DUTY*1), (long)(MAX_PWM_DUTY*0.707) };
+static unsigned halfPhasePwmDuty[HALF_PHASE_PWM_STEPS_NUMBER] = { (unsigned)(MAX_PWM_DUTY*1), (unsigned)(MAX_PWM_DUTY*0.707) };
 
 struct AlgoType
 {
@@ -39,7 +39,7 @@ struct AlgoType
     
     unsigned algoStepsNumber;
 
-    long* pwmDuty;
+    unsigned* pwmDuty;
     unsigned algoPwmStepsNumber; 
 };
 
@@ -115,7 +115,11 @@ int getPwmDutyByStep(long long step, unsigned currentPwmDuty, unsigned* pwmDuty)
         return 1;
     }
     unsigned nextStep = step % pCurrentAlgoStruct->algoPwmStepsNumber;
-    *pwmDuty = currentPwmDuty*pCurrentAlgoStruct->pwmDuty[nextStep];
-    *pwmDuty /= MAX_PWM_DUTY;
+
+    unsigned long pwm = MAX_PWM_DUTY - currentPwmDuty;
+    pwm *= pCurrentAlgoStruct->pwmDuty[nextStep];
+    pwm /= MAX_PWM_DUTY;
+    *pwmDuty = (unsigned)(MAX_PWM_DUTY - pwm);
+
     return 0;
 }

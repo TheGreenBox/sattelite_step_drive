@@ -578,7 +578,7 @@ void motorControlInit()
 {
     gState.motorControl.pwmDutyCycle = 990;
     gState.motorControl.rotationDirection = 1;
-    gState.motorControl.stepTimeout = 0x04FF;
+    gState.motorControl.stepTimeout = 0xFFFF;
  }
 
 void enableGlobalInterrupts()

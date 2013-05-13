@@ -27,6 +27,7 @@ void defaultInit()
     enableGlobalInterrupts();
     
     setGreenStatusLed(1);
+    gState.stepTicker = 0;
 }
 
 void mainLoop()

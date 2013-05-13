@@ -53,11 +53,12 @@ void motorISR(void)
     setBDirection( phaseVSignB );
     
     unsigned pwmDuty;
-    
+
     getPwmDutyByStep ( gState.stepTicker,
-                       gState.motorControl.pwmDutyCycle, 
+                       gState.motorControl.pwmDutyCycle,
                        &pwmDuty );
     setPwm( pwmDuty );
+
     // set speed step motor
     setTimer0Peiod(gState.motorControl.stepTimeout);
 }
