@@ -1,0 +1,94 @@
+\documentclass{article}
+
+\usepackage [utf8] {inputenc}
+
+\usepackage[unicode]{hyperref}
+
+% включаем переносы для русского и английского языка
+\usepackage[english,russian]{babel}
+
+% Начинать первый параграф раздела следует с красной строки
+\usepackage{indentfirst}
+
+% Выбор внутренней TEX−кодировки
+\usepackage [T2A]{fontenc}
+
+%\usepackage{weird,querr}
+\usepackage{amssymb}
+
+\usepackage{cmap}
+
+\usepackage{multirow}
+
+\usepackage{geometry} % Меняем поля страницы
+\geometry{left=2cm}% левое поле
+\geometry{right=1.5cm}% правое поле
+\geometry{top=2cm}% верхнее поле
+\geometry{bottom=2cm}% нижнее поле
+
+
+\begin{document}
+
+\part{ Основные формулы }
+
+Если не учитывать насыщение магнитной системы то справедливо равенство [ Л 1 : c 82 ]:
+
+\begin{equation}
+\label{step_motor_torque_common}
+    M(\theta)
+    = \frac{dW_r}{d\theta_m} 
+    = p \frac{dW_s}{d\theta}
+    = \frac{1}{2} p I_s \frac{dL_s}{d\theta}
+        + \frac{1}{2} p I_r \frac{dL_r}{d\theta}
+        + \frac{1}{2} p I_{s} I_r \frac{dL_{sr}}{d\theta}
+\end{equation}
+
+$I_{s}, I_{r}$ - установившееся значение токов статора и ротора соответсвенно
+
+$L_{s}(\theta)$ - индуктивность статора
+
+$L_{r}(\theta)$ - индуктивность ротора
+
+$L_{sr}(\theta)$ - взаимоиндукция ротора и статора
+
+Частота собственных упругих колебаний ротора \cite[гл 3-1]{Chilikin} при малых отклонениях от положения устойчивого
+положения позволяет получить сторогую оценку механической подвижности системы и является ее мерой.
+
+\begin{equation}
+\label{step_motor_torque_without_load_and_with_unstable_rotor}
+    M(\theta)
+    = - M_{m} \sin{\theta}
+    = - M_{m} \sin{p\theta_{M}}
+\end{equation}
+
+\begin{equation}
+\label{step_motor_dynamic_move_equation}   
+    J \ddot{ \theta_{M} } + M_{m} \sin{p \theta_{M}} = 0
+\end{equation}
+
+При малых отклонениях от положения равновесия таких что:
+\begin{equation}
+    \sin{\theta} \thickapprox 0
+\end{equation}
+
+\begin{equation}
+    \label{rotor_like_harmonical_oscilator_equation}
+    \ddot{\theta} + \frac{p M_{m}}{J} \theta = 0 
+\end{equation}
+
+\begin{equation}
+    \label{friquent_for_rotor_self_oscilating}
+    \omega = \sqrt{\frac{p M_{m}}{J}}
+\end{equation}
+
+\newpage
+\begin{thebibliography}{10}
+\bibitem{Chilikin} Дискретный электропривод с шаговыми двигателями (Чиликин)
+\bibitem{RatmirovIvobotenko} Электроприводы с полупроводниковым управлением. Системы с шаговыми
+приводами. Ратмиров Ивоботенко
+\end{thebibliography}
+
+
+
+
+\end{document}
