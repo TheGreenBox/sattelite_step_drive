@@ -1,22 +1,19 @@
 HELLO_MSG="Drafts for step motor student work"
 PRODUCT_DIR='product'
 
-PROJECT_LIST=math_model
+all: hello create_build_dir main
 
-all:
-	@for path in $(PROJECT_LIST); do \
-		cd $$path ; \
-		make ; \
-		cd ../ ; \
-	done
-
-rebuild:
-	@for path in $(PROJECT_LIST); do \
-		cd $$path ; \
-		make rebuild; \
-		cd ../ ; \
-	done
+hello: 
+	@echo "----------------------------------------"
+	@echo "    "${HELLO_MSG}
+	@echo "========================================"
 
 clean:
 	@rm -f ${PRODUCT_DIR}/*
+
+create_build_dir:
+	@mkdir -p ${PRODUCT_DIR}/
+
+main:
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main.tex 
 

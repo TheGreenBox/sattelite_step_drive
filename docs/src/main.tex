@@ -26,8 +26,12 @@
 \geometry{top=2cm}% верхнее поле
 \geometry{bottom=2cm}% нижнее поле
 
+\usepackage{subfiles}
 
 \begin{document}
-\include{bibliography.tex}
+
+\tableofcontents 
+\subfile{src/math_model}
+\subfile{src/bibliography}
 \end{document}
 
