@@ -15,7 +15,7 @@
 \begin{equation}
 \label{step_motor_torque_common}
     M(\theta)
-    = \frac{dW_r}{d\theta_m} 
+    = \frac{dW_r}{d\theta_m}
     = p \frac{dW_s}{d\theta}
     = \frac{1}{2} p I_s \frac{dL_s}{d\theta}
         + \frac{1}{2} p I_r \frac{dL_r}{d\theta}
@@ -41,7 +41,7 @@ $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
 \end{equation}
 
 \begin{equation}
-\label{step_motor_dynamic_move_equation}   
+\label{step_motor_dynamic_move_equation}
     J \ddot{ \theta_{M} } + M_{m} \sin{p \theta_{M}} = 0
 \end{equation}
 
@@ -52,13 +52,21 @@ $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
 
 \begin{equation}
     \label{rotor_like_harmonical_oscilator_equation}
-    \ddot{\theta} + \frac{p M_{m}}{J} \theta = 0 
+    \ddot{\theta} + \frac{p M_{m}}{J} \theta = 0
 \end{equation}
 
 \begin{equation}
     \label{friquent_for_rotor_self_oscilating}
     \omega = \sqrt{\frac{p M_{m}}{J}}
 \end{equation}
+
+Передаточная функция шагового двигателя при управлении источником тока \cite[гл. 4.2, ф-ла 4.65]{Kenio}
+
+\begin{equation}
+    \label{step_motor_transfer_function}
+    G(s) = \omega{_{пр}^(2)}{\frac{s^{2} + (D / J) * s + \omega{_{пр}^{2}} } }
+\end{equation}
+
 
 \newpage
 \endinput
