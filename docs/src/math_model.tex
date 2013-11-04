@@ -59,6 +59,24 @@ $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
     \label{friquent_for_rotor_self_oscilating}
     \omega = \sqrt{\frac{p M_{m}}{J}}
 \end{equation}
+\\
+Процесс изменения тока в обмотке шагового двигателя при ШИМ-управлении \cite[гл. 6.4, стр. 239]{Chilikin}:
+
+Для случая $0 \le \varepsilon \le \zeta$:
+\begin{equation}
+    \label{winding_current_with_pwm_control_1}
+    i[n ; \varepsilon] = U_{1}\{1 - \frac{e^{-\sigma\varepsilon}}{1 - e^{-\sigma}}[(1 - e^{-n\sigma}) - e^{-(1 - \zeta)\sigma}(1 - e^{-n\sigma + \sigma})]\} - \frac{U_{2}}{R}\frac{e^{-\sigma}}{1 - e^{-\sigma}}(1 - e^{-n\sigma+\sigma})(1 - e^{-\sigma + \sigma\zeta})
+\end{equation}
+
+Для случая $\zeta \le \varepsilon \le 1$:
+\begin{equation}
+    \label{winding_current_with_pwm_control_0}
+    i[n; \varepsilon] = \frac{U_{1} + U_{2}}{R}\frac{1}{1 - e^{-\sigma}}(1 - e^{-\sigma\zeta})(1 - e^{-n\sigma})e^{-\sigma\varepsilon + \sigma\zeta} - \frac{U_{2}}{R}[1 - e^{-(n - 1 + \varepsilon - \zeta)\sigma}]
+\end{equation}
+где $\varepsilon = \frac{t}{T_{y}}$; $\zeta = \frac{t_{1}}{T_{y}}$; $\sigma = \frac{T}{T_{y}}$; $T = \frac{L}{R}$; $n$ - число периодов импульсов напряжения; $t_{1}$ - время подачи напряжения внутри импульса, сек; $T_{y}$ - период ШИМ, сек; $t$ - текущее время, сек
+
+\newpage
+\part{ Управление без ОС }
 
 Передаточная функция шагового двигателя для одного шага при управлении источником тока \cite[гл. 4.2, ф-ла 4.65]{Kenio}, с помощью которой можно определить пороговую частоту переключения обмоток, после которой двигатель выходит из синхронизма при управлении без обратной связи:
 
@@ -88,12 +106,10 @@ $I_{o}$ - ток якоря, А
 $\tau$ - статический момент удержания, Н$\cdot$м
 
 $\delta\theta$ - отклонение от положения равновесия, рад
-
+\\
 Вычислим $K_{T}$ в положении, в котором момент удержания максимален. В первом приближении он достигается при отклонении от положения равновесия $\delta\theta = \frac{\pi}{2}$.
 
-Тогда, подставляя паспортные данные
-
-$\tau = 0,9$ Н$\cdot$м, $I_{o} = 3$ А в (\ref{moment_coeff}) получим
+Тогда, подставляя паспортные данные $\tau = 0,9$ Н$\cdot$м, $I_{o} = 3$ А в (\ref{moment_coeff}), получим
 
 \begin{equation}
     \label{first_approximation_moment_coeff}
@@ -106,6 +122,9 @@ $\tau = 0,9$ Н$\cdot$м, $I_{o} = 3$ А в (\ref{moment_coeff}) получим
     \label{first_approximation_rotor_natural_frequency}
     \omega_{np} = 1,118\cdot10^{2}
 \end{equation}
+
+\newpage
+\part{ Управление с ОС }
 
 \newpage
 \endinput
