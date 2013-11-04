@@ -10,7 +10,7 @@
 
 \part{ Основные формулы }
 
-Если не учитывать насыщение магнитной системы то справедливо равенство [ Л 1 : c 82 ]:
+Если не учитывать насыщение магнитной системы, то справедливо равенство \cite[стр. 82]{Chilikin}:
 
 \begin{equation}
 \label{step_motor_torque_common}
@@ -30,7 +30,7 @@ $L_{r}(\theta)$ - индуктивность ротора
 
 $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
 
-Частота собственных упругих колебаний ротора \cite[гл 3-1]{Chilikin} при малых отклонениях от положения устойчивого
+Частота собственных упругих колебаний ротора \cite[гл 3.1]{Chilikin} при малых отклонениях от положения устойчивого
 положения позволяет получить сторогую оценку механической подвижности системы и является ее мерой.
 
 \begin{equation}
@@ -59,7 +59,7 @@ $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
     \label{friquent_for_rotor_self_oscilating}
     \omega = \sqrt{\frac{p M_{m}}{J}}
 \end{equation}
-\\
+
 Процесс изменения тока в обмотке шагового двигателя при ШИМ-управлении \cite[гл. 6.4, стр. 239]{Chilikin}:
 
 Для случая $0 \le \varepsilon \le \zeta$:
@@ -73,7 +73,21 @@ $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
     \label{winding_current_with_pwm_control_0}
     i[n; \varepsilon] = \frac{U_{1} + U_{2}}{R}\frac{1}{1 - e^{-\sigma}}(1 - e^{-\sigma\zeta})(1 - e^{-n\sigma})e^{-\sigma\varepsilon + \sigma\zeta} - \frac{U_{2}}{R}[1 - e^{-(n - 1 + \varepsilon - \zeta)\sigma}]
 \end{equation}
-где $\varepsilon = \frac{t}{T_{y}}$; $\zeta = \frac{t_{1}}{T_{y}}$; $\sigma = \frac{T}{T_{y}}$; $T = \frac{L}{R}$; $n$ - число периодов импульсов напряжения; $t_{1}$ - время подачи напряжения внутри импульса, сек; $T_{y}$ - период ШИМ, сек; $t$ - текущее время, сек
+$\varepsilon = \frac{t}{T_{y}}$
+
+$\zeta = \frac{t_{1}}{T_{y}}$
+
+$\sigma = \frac{T}{T_{y}}$
+
+$T = \frac{L}{R}$
+
+$n$ - число периодов импульсов напряжения
+
+$t_{1}$ - время подачи напряжения внутри импульса, сек
+
+$T_{y}$ - период ШИМ, сек
+
+$t$ - текущее время, сек
 
 \newpage
 \part{ Управление без ОС }
@@ -95,29 +109,28 @@ $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
 Постоянная момента, выраженная из \cite[гл. 4.2, ф-ла 4.52]{Kenio}, при условии линейности характеристики $r = f(\delta\theta)$
 
 \begin{equation}
-    \label{moment_coeff}
+    \label{torque_coeff}
     K_{T} = \frac{N_{r}I_{o}\delta\theta}{\tau}
 \end{equation}
 
-где $N_{r} = 100$ - число зубцов ротора,
+$N_{r} = 100$ - число зубцов ротора,
 
 $I_{o}$ - ток якоря, А
 
 $\tau$ - статический момент удержания, Н$\cdot$м
 
-$\delta\theta$ - отклонение от положения равновесия, рад
-\\
+$\delta\theta$ - отклонение от положения равновесия, рад.
+\newline\newline
+
 Вычислим $K_{T}$ в положении, в котором момент удержания максимален. В первом приближении он достигается при отклонении от положения равновесия $\delta\theta = \frac{\pi}{2}$.
 
-Тогда, подставляя паспортные данные $\tau = 0,9$ Н$\cdot$м, $I_{o} = 3$ А в (\ref{moment_coeff}), получим
-
+Тогда, подставляя паспортные данные $\tau = 0,9$ Н$\cdot$м, $I_{o} = 3$ А в (\ref{torque_coeff}), получим:
 \begin{equation}
     \label{first_approximation_moment_coeff}
     K_{T} = 2\cdot10^{-3}
 \end{equation}
 
-Подставляя (\ref{first_approximation_moment_coeff}) в (\ref{rotor_natural_frequency}), получим
-
+Подставляя (\ref{first_approximation_moment_coeff}) в (\ref{rotor_natural_frequency}), получим:
 \begin{equation}
     \label{first_approximation_rotor_natural_frequency}
     \omega_{np} = 1,118\cdot10^{2}
@@ -125,6 +138,24 @@ $\delta\theta$ - отклонение от положения равновеси
 
 \newpage
 \part{ Управление с ОС }
+
+Момент шагового двигателя в зависимости от угла отклонения ротора от положения равновесия:
+\begin{equation}
+    \label{torque_from_rotor_deviation}
+    \tau = K_{T} I_{M} N_{r} (\theta_{i} - \theta_{0})
+\end{equation}
+
+$K_{T}$ - см. (\ref{torque_coeff})
+
+$I_{M}$ - ток в обмотке, А
+
+$N_{r} = 100$ - число зубцов ротора
+
+$\theta_{0}$ - положение ровновесия, рад.
+
+$\theta_{i}$ - текущее угловое положение, рад.
+\newline\newline
+С помощью (\ref{torque_from_rotor_deviation}), задав желаемый угол коммутации и средний (среднеинтегральный) момент, можно получить значение желаемого среднего (среднеинтегрального) тока и с помощью (\ref{winding_current_with_pwm_control_1}) и (\ref{winding_current_with_pwm_control_0}) получить коэффициент заполнения ШИМ, необходимый для поддержания на данном шаге заданного момента.
 
 \newpage
 \endinput
