@@ -65,7 +65,20 @@ $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
 Для случая $0 \le \varepsilon \le \zeta$:
 \begin{equation}
     \label{winding_current_with_pwm_control_1}
-    i[n ; \varepsilon] = U_{1}\{1 - \frac{e^{-\sigma\varepsilon}}{1 - e^{-\sigma}}[(1 - e^{-n\sigma}) - e^{-(1 - \zeta)\sigma}(1 - e^{-n\sigma + \sigma})]\} - \frac{U_{2}}{R}\frac{e^{-\sigma}}{1 - e^{-\sigma}}(1 - e^{-n\sigma+\sigma})(1 - e^{-\sigma + \sigma\zeta})
+    i[n ; \varepsilon] = 
+        \frac{U_{1}}{R} 
+            \cdot \{ 1 
+                 -\frac { e^{ -\sigma \cdot \varepsilon } }
+                        { 1 - e^{-\sigma} }
+                    \cdot [ (1 - e^{-n\sigma}) 
+                              - e^{ -(1 - \zeta) \cdot \sigma }
+                                    \cdot ( 1 - e^{-n\sigma + \sigma} )
+                          ]
+              \} 
+        -\frac{ U_2 }{ R }
+            \cdot \frac {e^{-\sigma}} {1 - e^{-\sigma}}
+            \cdot ( 1 - e^{ -n \cdot \sigma + \sigma } )
+            \cdot ( 1 - e^{ -\sigma + \sigma \cdot \zeta } )
 \end{equation}
 
 Для случая $\zeta \le \varepsilon \le 1$:
