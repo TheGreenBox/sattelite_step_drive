@@ -1,10 +1,14 @@
 \documentclass{article}
 
-\usepackage [utf8] {inputenc}
+\usepackage[utf8]{inputenc}
 
+% Подключение и настройка внешнего вида гиперссылок
+\usepackage{xcolor}
 \usepackage[unicode]{hyperref}
+\definecolor{LINKCOLOUR}{rgb}{0.1,0.0,0.9}
+\hypersetup{colorlinks,breaklinks,urlcolor=LINKCOLOUR,linkcolor=LINKCOLOUR}
 
-% включаем переносы для русского и английского языка
+% Включение переносов для русского и английского языков
 \usepackage[english,russian]{babel}
 
 % Начинать первый параграф раздела следует с красной строки
@@ -31,7 +35,7 @@
 
 \begin{document}
 
-\tableofcontents 
+\tableofcontents
 \newpage
 
 \subfile{src/score_statement}
