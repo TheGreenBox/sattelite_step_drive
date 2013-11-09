@@ -65,16 +65,16 @@ $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
 Для случая $0 \le \varepsilon \le \zeta$:
 \begin{equation}
     \label{winding_current_with_pwm_control_1}
-    i[n ; \varepsilon] = 
-        \frac{U_{1}}{R} 
-            \cdot \{ 1 
+    i[n ; \varepsilon] =
+        \frac{U_{1}}{R}
+            \cdot \{ 1
                  -\frac { e^{ -\sigma \cdot \varepsilon } }
                         { 1 - e^{-\sigma} }
-                    \cdot [ (1 - e^{-n\sigma}) 
+                    \cdot [ (1 - e^{-n\sigma})
                               - e^{ -(1 - \zeta) \cdot \sigma }
                                     \cdot ( 1 - e^{-n\sigma + \sigma} )
                           ]
-              \} 
+              \}
         -\frac{ U_2 }{ R }
             \cdot \frac {e^{-\sigma}} {1 - e^{-\sigma}}
             \cdot ( 1 - e^{ -n \cdot \sigma + \sigma } )
@@ -185,7 +185,7 @@ $p = \frac{360}{2m \cdot step}$
 
 $m = 2$ - число фаз шагового двигателя
 
-$step = 1,8$ - шаг углового перемещения шагового двигателя
+$step = 1,8$ - шаг углового перемещения шагового двигателя, град
 
 $E_{M}$ - амплитудное значение ЭДС самоиндукции разомнутой обмотки статора, В
 
