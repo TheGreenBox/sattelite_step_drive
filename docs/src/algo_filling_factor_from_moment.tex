@@ -2,25 +2,29 @@
 \part{ Алгоритм получения управляющих воздействий для кусочно линейной траектории момента }
 
 Расчитаем для случая управления с ОС двухфазным ШД. Параметризуем угол коммутации и обозначим
-$\lambda_c$.
+$\theta_{com}$.
 Согласно формуле (\ref{torque_from_rotor_deviation}) момент действующий на ротор в начале импульса
 управления:
 
 \begin{equation}
     \label{moment_to_rotor_at_the_begin_of_control_pulse}    
-    \tau_{begin} = K_{T} I_{M} N_{r} (\theta_{i} - \theta_{0})
+    \tau_{begin} = K_{T} I_{M} N_{r} ( \theta_{com} )
 \end{equation}
 
 в конце импульса:
 
 \begin{equation}
     \label{moment_to_rotor_at_the_end_of_control_pulse}    
-    \tau_{end} = K_{T} I_{M} N_{r} (\theta_{i} - \theta_{0})
+    \tau_{end} = K_{T} I_{M} N_{r} ( \theta_{com} - \theta_{s} )
 \end{equation}
 
 Средний момент для этого участка:
 $$
     \tau_{step} = \frac{ \tau_{begin} + \tau_{end} }{ 2 }
+$$
+
+$$
+    \tau_{step} = K_{T} I_{M} N_{r} ( \theta_{com} - \frac{ \theta_{s} }{ 2 } )
 $$
 
 Зная требуемый момент получим требуемый среднеинтегральный ток на этом шаге кусочно линейной
@@ -36,11 +40,97 @@ $$
 
 Согласно формулам (\ref{winding_current_with_pwm_control_1}) 
 и (\ref{winding_current_with_pwm_control_0}) эта кривая ни что иное, как совокупность чередующихся
-участков нарастания и спада тока. Предположим и докажем что асимптотическое нарастание тока до
+участков нарастания и спада тока. Предположим и докажем, что асимптотическое нарастание тока до
 некоторого уровня зависящего от коэффициента заполнения $\zeta$ осуществляется за количество периодов ШИМ
 $n_{crit}$ независящее от коэффициента заполнения. 
 
 Максимальное значение тока в импульсе ШИМ согласно (\ref{winding_current_with_pwm_control_1}) при
-$\varepsilon=\zeta$
+$\varepsilon=\zeta$ и $U_{2}=0$:
+
+\begin{equation}
+    \label{max_current_in_the_n_pwm_pulse}
+    i_{max}[n; \zeta] =
+        I_{0} 
+            \cdot \{ 1 
+                     - \frac{ e^{-\sigma \cdot \zeta} }{ 1 - e^{-\sigma} }
+                       \cdot [ (1 - e^{-n\sigma})
+                               - e^{ -(1 - \zeta) \cdot \sigma }
+                                    \cdot ( 1 - e^{-n\sigma + \sigma} )
+                             ]
+                  \}
+\end{equation}
+
+Где $I_0 = \frac{ U_{1} }{ R }$ 
+
+Минимальное значение тока в импульсе ШИМ согласно (\ref{winding_current_with_pwm_control_1}) при
+$\varepsilon=1$ и $U_{2}=0$:
+
+\begin{equation}
+    \label{min_current_in_the_n_pwm_pulse}
+    i_{min}[n; \zeta] =
+        I_{0} 
+            \cdot \frac{ 1 }{ 1-e^{-\sigma} }
+            \cdot (1 - e^{-\sigma\zeta})
+            \cdot (1 - e^{-n\sigma})
+            \cdot e^{-\sigma + \sigma\zeta} 
+\end{equation}
+
+Предел нарастания тока $I_{pwm,max}$ для данного коэффициента заполнения ШИМ получим из
+\ref{max_current_in_the_n_pwm_pulse} в пределе при $n \to \infty$
+
+\begin{equation}
+    \label{asymptote_of_current_within_constol_pulse}
+    I_{pwm,max}[\zeta]= 
+        \lim_{n \to \infty}i_{max}[n; \zeta] = 
+            I_{0} \cdot frac{ 1 - e^{-\sigma\zeta} }{ 1 - e^{-\sigma}}
+\end{equation}
+
+Значение $i_{max}$ на $n+1$ шаге:
+
+$$
+    i_{max}[n+1; \zeta] =
+        I_{0} 
+            \cdot \{ 1 
+                     - \frac{ e^{-\sigma \cdot \zeta} }{ 1 - e^{-\sigma} }
+                       \cdot [ (1 - e^{-n\sigma - \sigma})
+                               - e^{ -(1 - \zeta) \cdot \sigma }
+                                    \cdot ( 1 - e^{-n\sigma} )
+                             ]
+                  \}
+$$
+
+Тогда относительное нарастание тока на $n+1$ шаге $\lambda I[n+1]$ будет:
+$$
+    \lambda I[n+1] = 
+        \frac{ i_{max}[n+1; \zeta] - i_{max}[n; \zeta] }{ I_{pwm,max}[\zeta] }
+$$
+
+$ i_{max}[n+1; \zeta] - i_{max}[n; \zeta] = \\
+\newline \newline
+  = I_{0} 
+    \cdot \{ \frac{ e^{-\sigma \cdot \zeta} }{ 1 - e^{-\sigma} } 
+                \cdot [ e^{-n\sigma-\sigma}
+                        -e^{-n\sigma}
+                        -e^{-( 1-\zeta )\sigma} \cdot ( 1-e^{-n\sigma+\sigma} )
+                        +e^{-(1-\zeta)\sigma} \cdot (1-e^{-n\sigma})
+                      ] 
+          \} =
+\newline \newline
+  = I_{0} 
+    \cdot e^{-n\sigma}
+    \cdot (1-e^{-\sigma\zeta}) 
+$
+\newline
+
+Тогда получим выражение для относительного нарастания тока на $n+1$ шаге.
+\begin{equation}
+    \label{relative_current_increasing_in_the_n_pwm_pulse}
+    \lambda I[n+1] = 
+        \cdot e^{-n\sigma}
+        \cdot (1-e^{-\sigma})
+\end{equation}
+
+Как мы и предполагали оно не зависит от $\zeta$.
+
 
 
