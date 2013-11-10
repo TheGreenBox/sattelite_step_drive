@@ -66,7 +66,7 @@ $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
 \begin{equation}
     \label{winding_current_with_pwm_control_1}
     i[n ; \varepsilon] =
-        \frac{U_{1}}{R}
+        \frac{ U_{1} }{ R }
             \cdot \{ 1
                  -\frac { e^{ -\sigma \cdot \varepsilon } }
                         { 1 - e^{-\sigma} }
@@ -84,15 +84,23 @@ $L_{sr}(\theta)$ - взаимоиндукция ротора и статора
 Для случая $\zeta \le \varepsilon \le 1$:
 \begin{equation}
     \label{winding_current_with_pwm_control_0}
-    i[n; \varepsilon] = \frac{U_{1} + U_{2}}{R}\frac{1}{1 - e^{-\sigma}}(1 - e^{-\sigma\zeta})(1 - e^{-n\sigma})e^{-\sigma\varepsilon + \sigma\zeta} - \frac{U_{2}}{R}[1 - e^{-(n - 1 + \varepsilon - \zeta)\sigma}]
+    i[n; \varepsilon] =
+        \frac{ U_{1} + U_{2} }{ R }
+            \cdot \frac{ 1 }{ 1 - e^{-\sigma} }
+            \cdot (1 - e^{-\sigma\zeta})
+            \cdot (1 - e^{-n\sigma})e^{-\sigma\varepsilon + \sigma\zeta} 
+        - \frac{ U_{2} }{ R }
+            \cdot [ 1 - e^{ -( n - 1 + \varepsilon - \zeta ) \sigma }]
+
 \end{equation}
-$\varepsilon = \frac{t}{T_{y}}$
 
-$\zeta = \frac{t_{1}}{T_{y}}$
+$\varepsilon = \frac{ t }{ T_{y} }$
 
-$\sigma = \frac{T}{T_{y}}$
+$\zeta = \frac{ t_{1} }{ T_{y} }$
 
-$T = \frac{L}{R}$
+$\sigma = \frac{ T }{ T_{y} }$
+
+$T = \frac{ L }{ R }$
 
 $n$ - число периодов импульсов напряжения
 
@@ -109,7 +117,9 @@ $t$ - текущее время, сек
 
 \begin{equation}
     \label{step_motor_transfer_function}
-    G(s) = \frac{\omega_{np}^{2}}{s^{2} + \frac{D}{J}s + \omega_{np}^{2} }
+    G(s) = \frac{ \omega_{np}^{2} }
+                { s^{2} + \frac{D}{J} \cdot s + \omega_{np}^{2} }
+
 \end{equation}
 
 Собственная частота вращения ротора \cite[гл. 4.2, ф-ла 4.48]{Kenio}
@@ -146,7 +156,7 @@ $\delta\theta$ - отклонение от положения равновеси
 Подставляя (\ref{first_approximation_moment_coeff}) в (\ref{rotor_natural_frequency}), получим:
 \begin{equation}
     \label{first_approximation_rotor_natural_frequency}
-    \omega_{np} = 1,118\cdot10^{2}
+    \omega_{np} = 1,118 \cdot 10^{2}
 \end{equation}
 
 \newpage
@@ -155,7 +165,7 @@ $\delta\theta$ - отклонение от положения равновеси
 Момент шагового двигателя в зависимости от угла отклонения ротора от положения равновесия:
 \begin{equation}
     \label{torque_from_rotor_deviation}
-    \tau = K_{T} I_{M} N_{r} (\theta_{i} - \theta_{0})
+    \tau = K_{T} I_{M} N_{r} ( \theta_{i} - \theta_{0} )
 \end{equation}
 
 $K_{T}$ - см. (\ref{torque_coeff})
