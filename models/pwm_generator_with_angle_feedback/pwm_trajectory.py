@@ -21,7 +21,7 @@ LoadInertia   = RotorInertia*2 # fix it
 CommonInertia = RotorInertia + LoadInertia 
 
 def getConstPwmByCurrent(curr):
-    sigma    = PhaseElectricalTimeConst / PWM_Const
+    sigma = PhaseElectricalTimeConst / PWM_Const
     pwm = 0
     return pwm
 
