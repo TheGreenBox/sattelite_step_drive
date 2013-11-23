@@ -17,3 +17,7 @@ create_build_dir:
 main:
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main.tex 
 
+c112:
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/c112.tex 
+
+
