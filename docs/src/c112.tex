@@ -1,0 +1,66 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+
+% Подключение гиперссылок
+\usepackage{xcolor}
+\usepackage[unicode]{hyperref}
+
+% Настройка внешнего вида гиперссылок
+\definecolor{LINKCOLOUR}{rgb}{0.1,0.0,0.9}
+\hypersetup{colorlinks,breaklinks,urlcolor=LINKCOLOUR,linkcolor=LINKCOLOUR}
+
+% Включение переносов для русского и английского языков
+\usepackage[english,russian]{babel}
+
+% Начинать первый параграф раздела следует с красной строки
+\usepackage{indentfirst}
+
+% Выбор внутренней TEX−кодировки
+\usepackage [T2A]{fontenc}
+
+% Дополнительные математические пакеты
+%\usepackage{weird,querr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% Для корректного копирования из документа
+\usepackage{cmap}
+
+% Кто нибудь помнит зачем это тут?
+\usepackage{multirow}
+
+% Меняем поля страницы
+\usepackage{geometry}
+\geometry{left=2cm}    % левое поле
+\geometry{right=1.5cm} % правое поле
+\geometry{top=2cm}     % верхнее поле
+\geometry{bottom=2cm}  % нижнее поле
+
+\usepackage{subfiles}
+
+\begin{document}
+
+%\maketitle
+\begin{titlepage}
+\begin{center}
+{\largeМосковский Государственный Технический Университет им. Н.Э.Баумана}
+\\[37mm]
+{\LARGEКурсовой проект}
+\\[37mm]
+Москва, 2013г.
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+\subfile{src/score_statement}
+\subfile{src/intermediate_task_list}
+\subfile{src/math_model}
+\subfile{src/algo_filling_factor_from_moment}
+
+\subfile{src/bibliography}
+
+\end{document}
+
