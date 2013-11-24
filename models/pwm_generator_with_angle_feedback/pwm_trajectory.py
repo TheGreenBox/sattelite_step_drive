@@ -10,7 +10,8 @@ _I_max_per_phase = 3.0 # A per phase
 ##
 # Torq = K_t * I * N * (theta2 - theta2)
 ##
-_K_T = _max_hold_torq / (2 * _stepRad * _N_r * _I_max_per_phase)
+_K_T = _max_hold_torq / (_stepRad * _N_r * _I_max_per_phase)
+print( "K_t= "+str(_K_T))
 
 def getCurrentByTorque( torq, comAng ):
     ###
@@ -19,4 +20,4 @@ def getCurrentByTorque( torq, comAng ):
     ##
     return torq/( _K_T * _N_r * _stepRad * ( comAng-0.5) )
 
-print( getCurrentByTorque( 1.274, 2 ) )
+print( getCurrentByTorque( 1.274, 1.5 ) )
