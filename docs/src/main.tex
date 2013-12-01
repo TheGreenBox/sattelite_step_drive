@@ -33,10 +33,17 @@
 
 \usepackage{subfiles}
 
-\begin{document}
+% работа с импортом изображений
+\ifx\pdfoutput\undefined
+\usepackage{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\fi
 
+\begin{document}
 \tableofcontents
 \newpage
+
 \subfile{src/current_feedback_description}
 \subfile{src/score_statement}
 \subfile{src/bibliography}

@@ -39,6 +39,14 @@
 
 \usepackage{subfiles}
 
+% работа с импортом изображений
+\ifx\pdfoutput\undefined
+\usepackage{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\fi
+
+
 \begin{document}
 
 %\maketitle
@@ -76,7 +84,7 @@
 \subfile{src/intermediate_task_list}
 \subfile{src/theoretical_base}
 \subfile{src/modeling}
-
+\subfile{src/current_feedback_description}
 \newpage
 \section{Заключение}
 
