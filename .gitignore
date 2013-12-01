@@ -38,8 +38,7 @@
 *.vrb
 *.xdy
 *.tdo
-*.pdf
-
+*product*
 *.swp
 *.swo
 *.~
