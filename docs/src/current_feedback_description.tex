@@ -1,6 +1,6 @@
 \newpage
 \section{ Описание обратной связи по току }
-Согласно требованиям задачи необходимо обеспечить скорости переброски системы не менее 
+Согласно требованиям задачи необходимо обеспечить скорости переброски системы не менее
 $ \dot{q}_{max} = 1.73$ рад/c, при выбранном на этапе энергетического расчета передаточном
 отношении редуктора $ i{gb} = 225 $. Отсюда очевидно, что минимальное время импульса управления:
 
@@ -20,12 +20,13 @@ $$
 
 \subsubsection{ Схематика аппаратной части }
 
-\begin{figure}
+\begin{figure}[h!]
 \centering
-\includegraphics[width=121mm, keepaspectratio]{./src/pictures/current_measuring_sheme}
+\includegraphics[width=\textwidth, keepaspectratio, clip=true, trim=0mm 25mm 0mm 25mm]{./src/pictures/current_measuring_sheme}
 \caption{Электрическая схема датчика тока}
 \label{graph_speed_and_angle_comutation}
 \end{figure}
+
 Датчик тока на плате управления, выполнен на измерительном резисторе, последовательно
 включенном в цепь каждой фазы. Так как управление происходит ШИМ сигналом, то стоит 4
 датчика тока в кажом канале (A, B, C, D).
