@@ -9,7 +9,7 @@
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth, keepaspectratio, clip=true, trim=0mm 25mm 0mm 25mm]{./src/pictures/sattelite_3d_images/general_view}
+\includegraphics[width=\textwidth, keepaspectratio]{./src/pictures/sattelite_3d_images/general_view}
 \caption{Манипулятор наведения камеры малого КА}
 \label{sattelite_general_view}
 \end{figure}
@@ -30,24 +30,85 @@
 \section{Описание объекта управления}
 Проектируемый привод установлен на малом спутнике Земли и представляет собой
 исполнительный элемент системы дистанционного зондирования Земли (далее - ДЗЗ).
-Объектом управления является специальная камера, предназначенная для создания
+Объектом управления является специальная камера (рис. \ref{control_object_general_view}), предназначенная для создания
 снимком поверхности Земли высокой четкости, оборудована двумя звёздными
 датчиками для ориентации в пространстве и находящаяся внутри корпуса
 экранно-вакуумной теплоизоляции (далее - ЭВТИ).
+
+\begin{figure}[h!]
+\centering
+
+\begin{minipage}{0.5\textwidth}
+\centering
+\includegraphics[width=0.5\linewidth, keepaspectratio]{./src/pictures/sattelite_3d_images/control_object_view_1}
+\label{control_object_view_1}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+\centering
+\includegraphics[width=0.5\linewidth, keepaspectratio]{./src/pictures/sattelite_3d_images/control_object_view_2}
+\label{control_object_view_2}
+\end{minipage}
+
+\caption{Общий вид объекта управления}
+\label{control_object_general_view}
+\end{figure}
+
+\begin{table}[h!]
+\begin{tabular}{|c|c|}
+\hline
+    Эскиз & Описание                                                                                       \\
+\hline
+    \includegraphics[height=20mm, keepaspectratio]{./src/pictures/sattelite_3d_images/camera}               &
+    \shortstack[l]{\textbf{Камера ДЗЗ:}                                                             \\
+                    Момент инерции вокруг продольной оси: 1,22 $kg \cdot m^{2}$;                    \\
+                    Момент инерции вокруг каждой из двух поперечных  осей: 2,17 $kg \cdot m^{2}$;   \\
+                    Масса: 49,84 $kg$;
+                  }                                                                                         \\
+\hline
+    \includegraphics[height=20mm, keepaspectratio]{./src/pictures/sattelite_3d_images/bottom_shell_part}    &
+    \shortstack[l]{\textbf{Нижняя часть ЭВТИ:}                                                      \\
+                    Момент инерции вокруг продольной оси: 0,18 $kg \cdot m^{2}$;                    \\
+                    Момент инерции вокруг каждой из двух поперечных  осей: 0,18 $kg \cdot m^{2}$;   \\
+                    Масса: 4,37 $kg$;                                                               \\
+                    Продольная длина = 0,5 $m$;
+                  }                                                                                         \\
+\hline
+    \includegraphics[height=20mm, keepaspectratio]{./src/pictures/sattelite_3d_images/top_shell_part}       &
+    \shortstack[l]{\textbf{Верхняя часть ЭВТИ:}                                                     \\
+                    Момент инерции вокруг продольной оси: 0,07 $kg \cdot m^{2}$;                    \\
+                    Момент инерции вокруг каждой из двух поперечных  осей: 0,04 $kg \cdot m^{2}$;   \\
+                    Масса: 1,53 $kg$;                                                               \\
+                    Продольная длина = 0,25 $m$;
+                  }                                                                                         \\
+\hline
+    \includegraphics[height=20mm, keepaspectratio]{./src/pictures/sattelite_3d_images/star_sensor}          &
+    \shortstack[l]{\textbf{Звездный датчик (2 шт.):}                                                \\
+                    Момент инерции вокруг продольной оси: 0,00 $kg \cdot m^{2}$;                    \\
+                    Момент инерции вокруг каждой из двух поперечных  осей: 0,02 $kg \cdot m^{2}$;   \\
+                    Масса: 2,08 $kg$;
+                  }                                                                                         \\
+\hline
+    \includegraphics[height=20mm, keepaspectratio]{./src/pictures/sattelite_3d_images/sleeve}               &
+    \shortstack[l]{\textbf{Рукав (2 шт.):}                                                          \\
+                    Момент инерции вокруг продольной оси: 0,00 $kg \cdot m^{2}$;                    \\
+                    Момент инерции вокруг каждой из двух поперечных  осей: 0,02 $kg \cdot m^{2}$;   \\
+                    Масса: 0,3 $kg$;
+                  }                                                                                         \\
+\hline
+\end{tabular}
+
+\caption{Составные элементы объекта управления}
+\end{table}
 
 Общая масса камеры и ее навесных элементов: 60.5 кг. С учетом запаса, выберем
 массу объекта управления манипулятора: 80 кг.
 Расстояние от оси привода до центра масс камеры: 400 мм (с учетом запаса
 на более габаритную камеру и запаса на ускорение камеры);
 Собственный момент инерции объекта управления вокруг оси, параллельной оси привода:
-$$
-    J_{pl} = 2.84 kg \cdot m^2
-$$
+$ J_{pl} = 2.84 $ $kg \cdot m^2 $
 
 Момент инерции относительно оси привода:
-$$
-    15.7 kg \cdot m^2
-$$
+$ 15.7 $ $ kg \cdot m^2 $
 
 %\section{Требуемые параметры перенацеливания приводных блоков}
 
