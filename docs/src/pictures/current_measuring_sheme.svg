@@ -116,9 +116,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="519.02608"
-     inkscape:cy="249.81871"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="572.47043"
+     inkscape:cy="583.64364"
      inkscape:current-layer="g4436"
      showgrid="false"
      inkscape:snap-bbox="true"
@@ -915,6 +915,7 @@
            style="font-size:12.57005787px;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:ArialMT"><tspan
    id="tspan28222"
    style="font-family:Courier;-inkscape-font-specification:Courier">1000</tspan>
+
 пФ</tspan>
       </text>
       <text
@@ -1068,7 +1069,7 @@
          sodipodi:nodetypes="ccccc"
          id="path7252-1"
          style="fill:none;stroke:#800080;stroke-width:1.58994818;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none"
-         d="m 259.87504,428.71086 0,361.75438 126.16657,0 0,-361.75438 z"
+         d="m 259.87504,412.73799 0,361.75438 126.16657,0 0,-361.75438 z"
          inkscape:connector-curvature="0" />
       <path
          sodipodi:nodetypes="cc"
@@ -1224,14 +1225,14 @@
       </text>
       <text
          style="font-size:33.41397476px"
-         y="402.51334"
+         y="387.3024"
          x="275.18991"
          id="text5460-4-6"
-         transform="scale(0.95229829,1.0500911)">
+         transform="scale(0.95229832,1.0500911)">
         <tspan
            id="tspan5462-4-5"
            sodipodi:role="line"
-           y="402.51334"
+           y="387.3024"
            x="275.18991"
            style="font-size:15.89057064px;font-variant:normal;font-weight:bold;font-stretch:normal;writing-mode:lr-tb;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Courier;-inkscape-font-specification:Courier">DD1</tspan>
       </text>
@@ -1366,6 +1367,7 @@
            style="font-size:12.57005692px;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:ArialMT"><tspan
    id="tspan28222-5"
    style="font-family:Courier;-inkscape-font-specification:Courier">1000</tspan>
+
 пФ</tspan>
       </text>
       <text
@@ -1382,6 +1384,7 @@
            style="font-size:12.57005596px;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:ArialMT"><tspan
    id="tspan28222-5-6"
    style="font-family:Courier;-inkscape-font-specification:Courier">1000</tspan>
+
 пФ</tspan>
       </text>
       <text
@@ -1398,6 +1401,7 @@
            style="font-size:12.57005501px;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:ArialMT"><tspan
    id="tspan28222-5-6-3"
    style="font-family:Courier;-inkscape-font-specification:Courier">1000</tspan>
+
 пФ</tspan>
       </text>
       <text
@@ -1414,6 +1418,7 @@
            style="font-size:12.57005405px;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#008000;fill-opacity:1;fill-rule:nonzero;stroke:none;font-family:Arial;-inkscape-font-specification:ArialMT"><tspan
    id="tspan28222-5-6-3-5"
    style="font-family:Courier;-inkscape-font-specification:Courier">1000</tspan>
+
 пФ</tspan>
       </text>
     </g>
