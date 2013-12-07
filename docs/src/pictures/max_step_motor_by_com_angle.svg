@@ -15,11 +15,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="drawing.svg">
+   sodipodi:docname="max_step_motor_by_com_angle.svg">
   <defs
      id="defs4">
     <linearGradient
-       inkscape:collect="always"
        id="linearGradient13068"
        osb:paint="gradient">
       <stop
@@ -230,10 +229,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="296.14477"
-     inkscape:cy="459.37988"
+     inkscape:cx="246.69466"
+     inkscape:cy="621.63812"
      inkscape:document-units="px"
-     inkscape:current-layer="g13313"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:snap-grids="true"
      inkscape:snap-bbox="false"
@@ -246,11 +245,13 @@
      inkscape:snap-center="true"
      inkscape:snap-nodes="false"
      inkscape:snap-global="false"
-     inkscape:window-width="1035"
-     inkscape:window-height="1027"
+     inkscape:window-width="1301"
+     inkscape:window-height="744"
      inkscape:window-x="65"
      inkscape:window-y="24"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -259,7 +260,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -277,7 +278,7 @@
            height="41.785713"
            x="375"
            y="252.71933" /></flowRegion><flowPara
-         id="flowPara3025"></flowPara></flowRoot>    <flowRoot
+         id="flowPara3025" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot11762"
        style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
@@ -287,7 +288,7 @@
            height="83.571426"
            x="313.57144"
            y="341.64789" /></flowRegion><flowPara
-         id="flowPara11768"></flowPara></flowRoot>    <g
+         id="flowPara11768" /></flowRoot>    <g
        id="g13288"
        transform="translate(119.71429,51.428571)">
       <path
@@ -306,7 +307,8 @@
            y="156.21574"
            x="358.39728"
            id="tspan3029"
-           sodipodi:role="line">t</tspan></text>
+           sodipodi:role="line"
+           style="-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:23.99999997px">t</tspan></text>
       <path
          inkscape:connector-curvature="0"
          id="path3031"
@@ -351,7 +353,8 @@
            y="57.853233"
            x="144.83891"
            id="tspan11608"
-           sodipodi:role="line">d1</tspan></text>
+           sodipodi:role="line"
+           style="font-size:24.00000003999999976px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">d1</tspan></text>
       <text
          transform="scale(0.98468936,1.0155487)"
          sodipodi:linespacing="125%"
@@ -363,7 +366,8 @@
            y="218.06752"
            x="88.395355"
            id="tspan11608-0"
-           sodipodi:role="line">d2</tspan></text>
+           sodipodi:role="line"
+           style="-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">d2</tspan></text>
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
@@ -387,7 +391,8 @@
            y="174.80907"
            x="77.051643"
            id="tspan11715"
-           sodipodi:role="line">T1</tspan></text>
+           sodipodi:role="line"
+           style="font-size:24.00000003999999976px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">T1</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text11758"
@@ -395,7 +400,7 @@
          x="318.57141"
          style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
          xml:space="preserve"><tspan
-           style="font-size:27px"
+           style="font-size:24px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
            y="40.933594"
            x="318.57141"
            id="tspan11760"
@@ -407,7 +412,7 @@
          x="319.04825"
          style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
          xml:space="preserve"><tspan
-           style="font-size:27px"
+           style="font-size:24px;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-style:italic;font-stretch:normal;font-variant:normal"
            y="80.71933"
            x="319.04825"
            id="tspan11760-0"
@@ -477,7 +482,8 @@
            y="327.37122"
            x="235.35228"
            id="tspan3029-1"
-           sodipodi:role="line">t</tspan></text>
+           sodipodi:role="line"
+           style="font-size:23.99999997000000107px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">t</tspan></text>
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
@@ -501,7 +507,8 @@
            y="333.82928"
            x="80.59819"
            id="tspan11715-8"
-           sodipodi:role="line">T2</tspan></text>
+           sodipodi:role="line"
+           style="font-size:24.00000003999999976px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">T2</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text11758-3"
@@ -509,7 +516,7 @@
          x="239.45305"
          style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
          xml:space="preserve"><tspan
-           style="font-size:27px"
+           style="font-size:24px;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-style:italic;font-stretch:normal;font-variant:normal"
            y="210.71335"
            x="239.45305"
            id="tspan11760-2"
@@ -521,7 +528,7 @@
          x="239.92989"
          style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
          xml:space="preserve"><tspan
-           style="font-size:27px"
+           style="font-size:24px;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-style:italic;font-stretch:normal;font-variant:normal"
            y="250.49908"
            x="239.92989"
            id="tspan11760-0-5"
@@ -549,7 +556,7 @@
            height="25.253813"
            x="195.96959"
            y="795.78345" /></flowRegion><flowPara
-         id="flowPara13086"></flowPara></flowRoot>    <flowRoot
+         id="flowPara13086" /></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot13088"
        style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><flowRegion
@@ -586,7 +593,7 @@
              id="tspan13078"
              x="141.60411"
              y="902.28583"
-             style="font-style:italic;-inkscape-font-specification:Sans Italic">угол коммутации, шаг</tspan></text>
+             style="font-style:italic;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-stretch:normal;font-variant:normal">угол коммутации, шаг</tspan></text>
         <text
            xml:space="preserve"
            style="font-size:25px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -599,12 +606,12 @@
              id="tspan13098"
              x="-655.90723"
              y="47.183517"
-             style="font-style:italic;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Italic">максимальная </tspan><tspan
+             style="font-style:italic;text-align:center;text-anchor:middle;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-stretch:normal;font-variant:normal;font-size:26.01956896px">максимальная </tspan><tspan
              id="tspan13352"
              sodipodi:role="line"
              x="-659.88672"
              y="78.433517"
-             style="font-style:italic;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Italic">шаговая частота вращения, кГц</tspan></text>
+             style="font-style:italic;text-align:center;text-anchor:middle;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-stretch:normal;font-variant:normal;font-size:26.01956896px">шаговая частота вращения, кГц</tspan></text>
         <g
            id="g13193"
            transform="translate(30,0)"
@@ -714,7 +721,8 @@
                height="31.31473"
                x="207.08127"
                y="965.48907" /></flowRegion><flowPara
-             id="flowPara13226">5</flowPara></flowRoot>        <text
+             id="flowPara13226"
+             style="-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:26.01956896px">5</flowPara></flowRoot>        <text
            xml:space="preserve"
            style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
            x="94.446808"
@@ -724,7 +732,8 @@
              sodipodi:role="line"
              id="tspan13230"
              x="94.446808"
-             y="660.53986">10</tspan></text>
+             y="660.53986"
+             style="font-size:26.01956896000000086px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">10</tspan></text>
         <text
            xml:space="preserve"
            style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -735,7 +744,8 @@
              sodipodi:role="line"
              id="tspan13234"
              x="222.34752"
-             y="880.24756">1</tspan></text>
+             y="880.24756"
+             style="font-size:26.01956896000000086px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">1</tspan></text>
         <text
            xml:space="preserve"
            style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -746,7 +756,8 @@
              sodipodi:role="line"
              id="tspan13238"
              x="323.15573"
-             y="879.89197">2</tspan></text>
+             y="879.89197"
+             style="font-size:26.01956896000000086px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">2</tspan></text>
         <text
            xml:space="preserve"
            style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -757,7 +768,8 @@
              sodipodi:role="line"
              id="tspan13242"
              x="422.41641"
-             y="879.7326">3</tspan></text>
+             y="879.7326"
+             style="-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:26.01956896px">3</tspan></text>
         <text
            xml:space="preserve"
            style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -768,7 +780,8 @@
              sodipodi:role="line"
              id="tspan13230-9"
              x="95.448608"
-             y="556.73157">15</tspan></text>
+             y="556.73157"
+             style="-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:26.01956896px">15</tspan></text>
         <path
            style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
            d="m 228.57143,819.50504 c 90,-31.42857 108.15302,-67.56128 108.15302,-67.56128 20.94537,-26.25875 35.82982,-58.57844 48.69397,-94.93872 12.86415,-40.4009 25.72831,-68.67998 45.66353,-95.94889 7.14286,-14.04761 22.84662,-28.21778 31.7752,-29.40826 17.2619,1.54762 29.5238,25.95239 38.21428,38.21429 l 20,32.85714"
