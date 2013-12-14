@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="drive_model_current_equation.pdf">
+   sodipodi:docname="drive_model_current_equation.svg">
   <defs
      id="defs4">
     <linearGradient
@@ -23673,9 +23673,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="537.04681"
-     inkscape:cy="300.53699"
+     inkscape:zoom="1.979899"
+     inkscape:cx="693.24244"
+     inkscape:cy="514.09295"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -25485,21 +25485,6 @@
       </defs>
     </g>
     <g
-       style="font-size:50px;font-style:normal;font-weight:400;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica"
-       transform="matrix(1.8390368,0,0,1.8390361,468.30515,1569.4434)"
-       font-size="50"
-       font-weight="400"
-       font-style="normal"
-       clip-path="url(#clip2054)"
-       id="g32916">
-      <path
-         style="fill-rule:nonzero"
-         inkscape:connector-curvature="0"
-         vector-effect="none"
-         d="M 30,15 C 30,23.2843 23.2843,30 15,30 6.71573,30 0,23.2843 0,15 0,6.71573 6.71573,0 15,0 23.2843,0 30,6.71573 30,15 z"
-         id="path32918" />
-    </g>
-    <g
        style="font-size:50px;font-style:normal;font-weight:400;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-opacity:1;font-family:Helvetica"
        transform="matrix(1.8390368,0,0,1.8390361,388.19923,1162.3991)"
        font-size="50"
@@ -25644,21 +25629,6 @@
              id="path32990" />
         </clipPath>
       </defs>
-    </g>
-    <g
-       style="font-size:50px;font-style:normal;font-weight:400;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica"
-       transform="matrix(1.8390368,0,0,1.8390361,587.84255,1563.9263)"
-       font-size="50"
-       font-weight="400"
-       font-style="normal"
-       clip-path="url(#clip2060)"
-       id="g32992">
-      <path
-         style="fill-rule:evenodd"
-         inkscape:connector-curvature="0"
-         vector-effect="none"
-         d="M 0,0 60,0 60,36 0,36 0,0 z"
-         id="path32994" />
     </g>
     <g
        style="font-size:50px;font-style:normal;font-weight:400;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-opacity:1;font-family:Helvetica"
@@ -26077,21 +26047,6 @@
       </defs>
     </g>
     <g
-       style="font-size:50px;font-style:normal;font-weight:400;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica"
-       transform="matrix(1.8390368,0,0,1.8390361,799.33184,1563.9263)"
-       font-size="50"
-       font-weight="400"
-       font-style="normal"
-       clip-path="url(#clip2077)"
-       id="g33147">
-      <path
-         style="fill-rule:evenodd"
-         inkscape:connector-curvature="0"
-         vector-effect="none"
-         d="M 0,0 40,0 40,71 0,71 0,0 z"
-         id="path33149" />
-    </g>
-    <g
        style="font-size:50px;font-style:normal;font-weight:400;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-opacity:1;font-family:Helvetica"
        transform="matrix(1.8390368,0,0,1.8390361,719.22586,1156.882)"
        font-size="50"
@@ -26212,20 +26167,6 @@
       </defs>
     </g>
     <g
-       style="font-size:50px;font-style:normal;font-weight:400;fill:none;stroke:none;font-family:Helvetica"
-       transform="matrix(1.8390368,0,0,1.8390361,836.11254,1698.176)"
-       font-size="50"
-       font-weight="400"
-       font-style="normal"
-       clip-path="url(#clip2083)"
-       id="g33211">
-      <path
-         inkscape:connector-curvature="0"
-         vector-effect="none"
-         d="m -20.875,0 41.75,0 0,15 -41.75,0 0,-15 z"
-         id="path33213" />
-    </g>
-    <g
        style="font-size:40px;font-style:normal;font-weight:400;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-opacity:1;font-family:Arial"
        transform="matrix(0.4597592,0,0,0.45975903,717.6167,1291.1317)"
        font-size="40"
@@ -26336,21 +26277,6 @@
              id="path33258" />
         </clipPath>
       </defs>
-    </g>
-    <g
-       style="font-size:50px;font-style:normal;font-weight:400;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica"
-       transform="matrix(1.8390368,0,0,1.8390361,597.03775,1449.9061)"
-       font-size="50"
-       font-weight="400"
-       font-style="normal"
-       clip-path="url(#clip2088)"
-       id="g33260">
-      <path
-         style="fill-rule:nonzero"
-         inkscape:connector-curvature="0"
-         vector-effect="none"
-         d="M 50,30 0,15 50,0 50,30 z"
-         id="path33262" />
     </g>
     <g
        style="font-size:50px;font-style:normal;font-weight:400;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-opacity:1;font-family:Helvetica"
@@ -26570,20 +26496,6 @@
              id="path33332" />
         </clipPath>
       </defs>
-    </g>
-    <g
-       style="font-size:50px;font-style:normal;font-weight:400;fill:none;stroke:none;font-family:Helvetica"
-       transform="matrix(1.8390368,0,0,1.8390361,643.01365,1446.228)"
-       font-size="50"
-       font-weight="400"
-       font-style="normal"
-       clip-path="url(#clip2096)"
-       id="g33334">
-      <path
-         inkscape:connector-curvature="0"
-         vector-effect="none"
-         d="m -12.875,-15 25.75,0 0,15 -25.75,0 0,-15 z"
-         id="path33336" />
     </g>
     <g
        style="font-size:40px;font-style:normal;font-weight:400;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-opacity:1;font-family:Arial"
@@ -30972,21 +30884,6 @@
       </defs>
     </g>
     <g
-       style="font-size:50px;font-style:normal;font-weight:400;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica"
-       transform="matrix(1.8390368,0,0,1.8390361,-121.77215,1768.6185)"
-       font-size="50"
-       font-weight="400"
-       font-style="normal"
-       clip-path="url(#clip2306)"
-       id="g35366">
-      <path
-         style="fill-rule:nonzero"
-         inkscape:connector-curvature="0"
-         vector-effect="none"
-         d="M 0,0 65,15 0,30 0,0 z"
-         id="path35368" />
-    </g>
-    <g
        style="font-size:50px;font-style:normal;font-weight:400;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-opacity:1;font-family:Helvetica"
        transform="matrix(1.8390368,0,0,1.8390361,-227.8781,1318.7172)"
        font-size="50"
@@ -31166,20 +31063,6 @@
              id="path35438" />
         </clipPath>
       </defs>
-    </g>
-    <g
-       style="font-size:50px;font-style:normal;font-weight:400;fill:none;stroke:none;font-family:Helvetica"
-       transform="matrix(1.8390368,0,0,1.8390361,-62.003457,1827.4677)"
-       font-size="50"
-       font-weight="400"
-       font-style="normal"
-       clip-path="url(#clip2314)"
-       id="g35440">
-      <path
-         inkscape:connector-curvature="0"
-         vector-effect="none"
-         d="m -15.25,0 30.5,0 0,15 -30.5,0 0,-15 z"
-         id="path35442" />
     </g>
     <g
        style="font-size:40px;font-style:normal;font-weight:400;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-opacity:1;font-family:Arial"
@@ -37336,7 +37219,7 @@
     <g
        style="font-size:50px;font-style:normal;font-weight:400;fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:2;stroke-opacity:1;font-family:Helvetica"
        stroke-miterlimit="2"
-       transform="matrix(1.8390368,0,0,1.8390361,-602.71704,1455.9787)"
+       transform="matrix(1.8390368,0,0,1.8390361,-602.00276,1456.693)"
        font-size="50"
        font-weight="400"
        font-style="normal"
@@ -37435,7 +37318,7 @@
     </g>
     <g
        style="font-size:50px;font-style:normal;font-weight:400;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica"
-       transform="matrix(1.8390368,0,0,1.8390361,865.9072,1676.929)"
+       transform="matrix(1.8390368,0,0,1.8390361,866.62148,1677.6433)"
        font-size="50"
        font-weight="400"
        font-style="normal"
@@ -38748,7 +38631,7 @@
     </g>
     <g
        style="font-size:50px;font-style:normal;font-weight:400;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica"
-       transform="matrix(0,-1.8390368,1.8390361,0,794.11401,1705.3927)"
+       transform="matrix(0,-1.8390368,1.8390361,0,793.86147,1704.635)"
        font-size="50"
        font-weight="400"
        font-style="normal"
