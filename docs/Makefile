@@ -30,4 +30,3 @@ all: hello prepare
 c112: hello prepare 
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/c112.tex 
 
-
