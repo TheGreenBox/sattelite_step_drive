@@ -18,7 +18,6 @@ $$
 \subsubsection{Описание аппаратной части реализации токовой обратной связи}
 
 \paragraph{Схематика аппаратной части}
-
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\textwidth, keepaspectratio, clip=true, trim=0mm 25mm 0mm 25mm]
@@ -115,14 +114,14 @@ $$
 
 \begin{equation}
     \label{eq_noise_free_code_resolution}
-    N_{noise free} = \log_{2}{( \frac{ 2^{N} }{ m_{adc} - p_{adc} } )}
+    N_{\text{незашум}} = \log_{2}{( \frac{ 2^{N} }{ m_{\text{ацп}} - p_{\text{ацп}} } )}
 \end{equation}
 
 \begin{itemize}
     \item $ N $ - разрядность АЦП
-    \item $ N_{noise free} $ - количество незашумленных разрядов
-    \item $ m_{adc} $ - математичекое ожидание измеренного сигнала
-    \item $ p_{adc} $ - максимальное значение измеренного сигнала
+    \item $ N_{\text{незашум}} $ - количество незашумленных разрядов
+    \item $ m_{\text{ацп}} $ - математичекое ожидание измеренного сигнала
+    \item $ p_{\text{ацп}} $ - максимальное значение измеренного сигнала
 \end{itemize}
 
 Самым примитивным и легко реализуемым фильтром будет простое отрезание шумящих разрядов,
