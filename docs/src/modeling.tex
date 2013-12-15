@@ -101,19 +101,19 @@ $$
 
 Вязкое трение аппроксимировано до составляющей, пропорциональной первой производной от угла поворота:
 \begin{equation}
-    \tau_{\text{тр.вязк.}} = D_{\text{вяз.тр}} \omega_{p}
+    \tau_{\text{тр.вязк}} = D_{\text{тр.вязк}} \cdot \omega_{p}
 \end{equation}
 
 Сухое трение получено из формулы:
 \begin{equation}
-    \tau_{\text{тр.сух.}} = \begin{cases}
-         |\tau| \cdot \frac{\omega_{p}}{|\omega_{p}|}, & \text{если} ~|\tau|  <  D_{\text{сух.тр}}; \\[2mm]
-         D_{\text{сух.тр}}  \cdot \frac{\omega_{p}}{|\omega_{p}|}, & \text{если} ~|\tau| \ge D_{\text{сух.тр}}.
+    \tau_{\text{тр.сух}} = \begin{cases}
+         |\tau| \cdot \frac{\omega_{p}}{|\omega_{p}|}, & \text{если} ~|\tau|  <  D_{\text{тр.сух}}, \\[2mm]
+         D_{\text{тр.сух}}  \cdot \frac{\omega_{p}}{|\omega_{p}|}, & \text{если} ~|\tau| \ge D_{\text{тр.сух}}
     \end{cases}
 \end{equation}
 
 \begin{equation}
-    \tau_{\text{тр.}} = \tau_{\text{тр.вязк.}} + \tau_{\text{тр.сух.}}
+    \tau_{\text{тр}} = \tau_{\text{тр.вязк}} + \tau_{\text{тр.сух}}
 \end{equation}
 
 \begin{figure}[ht!]
