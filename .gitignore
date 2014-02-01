@@ -1,10 +1,9 @@
-*.o 
+*.o
 *.obj
 *.lib
 *.so
 *.dll
 *.exe
-*.out
 
 *.acn
 *.acr
@@ -45,3 +44,11 @@
 *thumbs.db
 
 *.pyc
+
+.metadata
+.settings
+*.opt
+*.pp
+*.map
+*.mk
+
