@@ -10,7 +10,7 @@
 
 #include "encoder.h"
 
-static int encoderMasks[16] = { 0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 0};
+static int encoderMasks[16] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 0};
 /**
  positive
  [1 -> 1] [1 -> 0] [0 -> 0] [0 -> 1]
