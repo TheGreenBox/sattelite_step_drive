@@ -1,0 +1,27 @@
+\subsection{Расчёт параметров привода}
+
+\subfile{src/retarget_parameters}
+
+\newpage
+\subsubsection{Сводная таблица результатов}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|l|c|l|}
+        \hline
+        Параметр                                    & Обозначение      & Значение                           \\
+        \hline
+        Напряжение питания                          & $U_1$            & $24 \textit{В} $                   \\
+        Шаг единичного углового перемещения нагрузки& $q_d$            & $ \le 1' $                         \\
+        Ресурс                                      &                  & $30000 \textit{ч} $                \\
+        Диапазон углового перенацеливания нагрузки  & $q_{max}$        & $[-135^\circ .. 135^\circ] $       \\
+        Максимальная угловая скорость нагрузки      & $\dot{q}_{max}$  & $1.722 \textit{рад} \cdot \textit{c}^{-1}$ \\
+        Максимальное ускорение нагрузки             & $\ddot{q}_{max}$ & $1.293 \textit{рад} \cdot \textit{c}^{-2}$ \\
+        Момент инерции нагрузки                     & $J_{oy}$         & $3 ~\textit{кг} \cdot \textit{м}^2 $   \\
+        \hline
+    \end{tabular}
+    \caption{Требуемые параметры привода}
+    \label{drive_parameters_tbl}
+\end{table}
+
+\endinput

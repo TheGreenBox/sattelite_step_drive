@@ -1,10 +1,9 @@
-*.o 
+*.o
 *.obj
 *.lib
 *.so
 *.dll
 *.exe
-*.out
 
 *.acn
 *.acr
@@ -38,10 +37,18 @@
 *.vrb
 *.xdy
 *.tdo
-*.pdf
-
+*product*
 *.swp
 *.swo
 *.~
 *thumbs.db
+
+*.pyc
+
+.metadata
+.settings
+*.opt
+*.pp
+*.map
+*.mk
 

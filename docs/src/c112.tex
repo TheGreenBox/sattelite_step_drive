@@ -1,0 +1,121 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+
+% Подключение гиперссылок
+\usepackage{xcolor}
+\usepackage[unicode]{hyperref}
+
+% Настройка внешнего вида гиперссылок
+\definecolor{LINKCOLOUR}{rgb}{0.1,0.0,0.9}
+\hypersetup{colorlinks,breaklinks,urlcolor=LINKCOLOUR,linkcolor=LINKCOLOUR}
+
+% Выбор внутренней TEX−кодировки
+\usepackage [T2A]{fontenc}
+% Включение переносов для русского и английского языков
+\usepackage[english,russian]{babel}
+
+% Начинать первый параграф раздела следует с красной строки
+\usepackage{indentfirst}
+
+
+% Дополнительные математические пакеты
+%\usepackage{weird,querr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% Для корректного копирования из документа
+\usepackage{cmap}
+
+% Кто нибудь помнит зачем это тут? A: Неа...
+\usepackage{multirow}
+
+% Меняем поля страницы
+\usepackage{geometry}
+\geometry{left=2cm}    % левое поле
+\geometry{right=1.5cm} % правое поле
+\geometry{top=2cm}     % верхнее поле
+\geometry{bottom=2cm}  % нижнее поле
+
+\usepackage{subfiles}
+
+% работа с импортом изображений
+\ifx\pdfoutput\undefined
+\usepackage{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\fi
+
+% секции и их структура
+\usepackage[section]{placeins}
+\usepackage{subcaption}
+
+\begin{document}
+
+%\maketitle
+\begin{titlepage}
+\begin{center}
+    {\large Московский Государственный Технический Университет им. Н. Э. Баумана}
+    \\[50mm]
+    {\LargeКурсовой проект по теме}
+    \\[7mm]
+    {\LARGE ``Система управления \\ приводами двухстепенного манипулятора \\ на основе шаговых двигателей''}
+    \\[37mm]
+
+    \begin{flushright}
+        \begin{minipage}{0.5\textwidth}
+            \begin{flushleft}
+                \textit{Авторы:} \\
+                \hbox to 8cm {Киндяков Александр Андреевич \hfil \underline{\hspace{2cm} } }
+                \vspace{\baselineskip}
+                \hbox to 8cm {Никитин Сергей Владимирович \hfil \underline{\hspace{2cm} } }
+                \vspace{2cm}
+                \textit{Руководитель:} \\
+                \hbox to 8cm {Бошляков Андрей Анатольевич \hfil \underline{\hspace{2cm} } }
+            \end{flushleft}
+        \end{minipage}
+    \end{flushright}
+
+    \vfill % Заполнить все доступное пространство
+    Москва, 2013 г. \\
+    \LaTeX
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\subfile{src/common_using_symbol}
+\subfile{src/task_description}
+\subfile{src/intermediate_task_list}
+\subfile{src/theoretical_base}
+\subfile{src/modeling}
+\subfile{src/current_feedback_description}
+\newpage
+
+\section{Заключение}
+
+В результате проведенной работы, были разработаны алгоритмы переключения фаз при
+работе с заданным углом коммутации и алгоритм управления ШД без обратной связи.
+Решена задачa определения коэффициета заполнения ШИМ внутри импульса
+управления.
+
+Найден способ определения угла коммутации для текущей скорости. Изучена методика
+расчета предельной скорости, ниже которой двигатель гарантировано не выйдет из
+синхронизма при постоянной динамической нагрузке.
+
+Принято решение использовать обратную связь по току для управления моментом на
+выходе двигателя. Выполнен анализ аппаратного решения датчика тока в фазах двигателя
+предлагаемого TexasInstruments. Cформированы требования к аппаратной части датчиков
+тока, изучена методика исследования свойств аналогово цифрового преобразователя.
+
+Выполнено моделирование на готовой модели из пакета
+\textit{SimPower Systems -> Second Generation -> Motors and Generators -> Hybrid Stepper Motor}.
+А так же была разработана и отлажена своя матическая моделей в MATLAB Simulink на основе
+уравнений электрических процессов в фазах двигателя и математическом аппарате резонансных явлений.
+
+На моделях были опробованы и отлажены разработанные алгоритмы управления.
+
+\subfile{src/bibliography}
+
+\end{document}

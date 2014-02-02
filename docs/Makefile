@@ -1,22 +1,32 @@
-HELLO_MSG="Drafts for step motor student work"
+HELLO_MSG="Documentation for step motor sattelaite student work"
 PRODUCT_DIR='product'
 
-PROJECT_LIST=math_model
+help: hello
+	@echo "----------------------------------------"
+	@echo
+	@echo "  * if you want to build the course 112 milestone documentation please get the /make c112/"
+	@echo
+	@echo "  * if you want to build full doc please get the /make all/"
+	@echo
+	@echo "----------------------------------------"
+	@echo
 
-all:
-	@for path in $(PROJECT_LIST); do \
-		cd $$path ; \
-		make ; \
-		cd ../ ; \
-	done
-
-rebuild:
-	@for path in $(PROJECT_LIST); do \
-		cd $$path ; \
-		make rebuild; \
-		cd ../ ; \
-	done
+hello:
+	@echo "========================================"
+	@echo
+	@echo ${HELLO_MSG}
+	@echo "----------------------------------------"
+	@echo
 
 clean:
 	@rm -f ${PRODUCT_DIR}/*
+
+prepare:
+	@mkdir -p ${PRODUCT_DIR}/
+
+all: hello prepare
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main.tex
+
+c112: hello prepare
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/c112.tex
 
