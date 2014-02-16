@@ -1,6 +1,6 @@
 /* ========================================================
- * Organization: The green box 
- *   
+ * Organization: The green box
+ *
  * Project name: Satellite stepper drive
  * File name: init.h
  * Description: implementation of init processes
@@ -103,12 +103,11 @@ static void PLLset(Uint16 val)
 {
     // This function initializes the PLLCR register.
     //void InitPll(Uint16 val, Uint16 clkindiv)
-    
+
     volatile Uint16 iVol;
 
     // Make sure the PLL is not running in limp mode
-    if (SysCtrlRegs.PLLSTS.bit.MCLKSTS != 0)
-    {
+    if (SysCtrlRegs.PLLSTS.bit.MCLKSTS != 0) {
         EALLOW;
         // OSCCLKSRC1 failure detected. PLL running in limp mode.
         // Re-enable missing clock logic.
@@ -122,16 +121,14 @@ static void PLLset(Uint16 val)
     // DIVSEL MUST be 0 before PLLCR can be changed from
     // 0x0000. It is set to 0 by an external reset XRSn
     // This puts us in 1/4
-    if (SysCtrlRegs.PLLSTS.bit.DIVSEL != 0)
-    {
+    if (SysCtrlRegs.PLLSTS.bit.DIVSEL != 0) {
         EALLOW;
         SysCtrlRegs.PLLSTS.bit.DIVSEL = 0;
         EDIS;
     }
 
     // Change the PLLCR
-    if (SysCtrlRegs.PLLCR.bit.DIV != val)
-    {
+    if (SysCtrlRegs.PLLCR.bit.DIV != val) {
         EALLOW;
         // Before setting PLLCR turn off missing clock detect logic
         SysCtrlRegs.PLLSTS.bit.MCLKOFF = 1;
@@ -184,7 +181,7 @@ static void setSystemClockSpeed()
     // 0x2 =  10	MHz		(2)
 
     PLLset(0xC);	// choose from options above
-    
+
     EALLOW; // below registers are "protected", allow access.
     // LOW SPEED CLOCKS prescale register settings
     SysCtrlRegs.LOSPCP.all = 0x0002;		// Sysclk / 4 (15 MHz)
@@ -219,11 +216,11 @@ static void adcCalibrate()
     // in the Boot ROM. If the boot ROM code is bypassed during the debug process, the
     // following function MUST be called for the ADC and oscillators to function according
     // to specification.
-    
+
     // Enable ADC peripheral clock
     SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 1;
     // Auto-calibrate from TI OTP
-    (*Device_cal)();					  
+    (*Device_cal)();
     // Return ADC clock to original state
     SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 0;
     EDIS;	// Disable register access
@@ -279,7 +276,7 @@ static void peripheryClockEnable()
 static void initGPIO()
 {
     EALLOW; // below registers are "protected", allow access.
-    
+
     //--------------------------------------------------------------------------------------
     // GPIO (GENERAL PURPOSE I/O) CONFIG
     //--------------------------------------------------------------------------------------
@@ -566,7 +563,7 @@ void deviceInit()
     DINT;			// Global Disable all Interrupts
     IER = 0x0000;	// Disable CPU interrupts
     IFR = 0x0000;	// Clear all CPU interrupt flags
-    
+
     switchInternalOscilator();
     setSystemClockSpeed();
     peripheryInit();
@@ -579,10 +576,10 @@ void motorControlInit()
     gState.motorControl.pwmDutyCycle = 990;
     gState.motorControl.rotationDirection = 1;
     gState.motorControl.stepTimeout = 0xFFFF;
- }
+}
 
 void enableGlobalInterrupts()
 {
     EINT;   // Enable Global interrupt INTM
-    ERTM;  // Enable Global realtime interrupt DBGM 
+    ERTM;  // Enable Global realtime interrupt DBGM
 }

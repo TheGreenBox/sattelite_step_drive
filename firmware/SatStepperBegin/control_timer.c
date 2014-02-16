@@ -1,10 +1,10 @@
 /* ========================================================
  * Organization: The Green Box
- * 
+ *
  * Project name: Satellite stepper drive
- * File name:  SatStepperBegin/control_timer.c 
+ * File name:  SatStepperBegin/control_timer.c
  * Description:
- * Author:  AKindyakov 
+ * Author:  AKindyakov
  * ========================================================
  */
 
@@ -21,7 +21,7 @@ interrupt void TMR0_Interrupt(void)
 {
     _tmr0Handler();
     CpuTimer0Regs.TCR.bit.TIF = 0;
-    
+
     // The TIMH:TIM is loaded with the value in the PRDH:PRD,
     //  and the prescaler counter (PSCH:PSC) is loaded with the
     //  value in the timer divide- down register (TDDRH:TDDR).
@@ -33,30 +33,29 @@ interrupt void TMR0_Interrupt(void)
 void timer0Init( _controlTimerInterruptHandler handler )
 {
     _tmr0Handler = handler;
- 
+
     EALLOW; // This is needed to write to EALLOW protected registers
     PieVectTable.TINT0 = TMR0_Interrupt;
     EDIS;
-   
+
     // Enable PIE for TINT0
     PieCtrlRegs.PIEIER1.bit.INTx7 = 1;
     IER |= M_INT1;
-    
+
     // enable timer 0 interrupt
     CpuTimer0Regs.TCR.bit.TIE = 1;
     // free run mode switch on
     CpuTimer0Regs.TCR.bit.FREE = 1;
     CpuTimer0Regs.TCR.bit.SOFT = 0;
 
-    // set preload value and timer prescaler 
+    // set preload value and timer prescaler
     CpuTimer0Regs.PRD.all = 0xFFFF;
-    CpuTimer0Regs.TPR.all = 0x1770; //600 
+    CpuTimer0Regs.TPR.all = 0x1770; //600
 }
 
 void setTimer0Peiod (unsigned _period) // ~ usec
 {
-    if (_period != CpuTimer0Regs.PRD.all)
-    {
+    if (_period != CpuTimer0Regs.PRD.all) {
         CpuTimer0Regs.PRD.all = _period;
     }
 }
