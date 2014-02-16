@@ -1,6 +1,6 @@
 /* ========================================================
  * Organization: The Green Box
- * 
+ *
  * Project name: Satellite stepper drive
  * File name:  SatStepperBegin/state.h
  * Description:
@@ -13,15 +13,13 @@
 
 #define MAX_PWM_DUTY 1024
 
-typedef struct _MotorControl
-{
+typedef struct _MotorControl {
     unsigned pwmDutyCycle;
     unsigned stepTimeout;
     short rotationDirection;		//1 or -1
 } MotorControl;
 
-typedef struct _GlobalState
-{
+typedef struct _GlobalState {
     long long systemTimer;
     long long stepTicker;
     MotorControl motorControl;
@@ -29,8 +27,7 @@ typedef struct _GlobalState
 
 extern volatile GlobalState gState;
 
-typedef struct _GlobalConfig
-{
+typedef struct _GlobalConfig {
     unsigned short pwmPeriod;
     unsigned short algoType;
 } GlobalConfig;
