@@ -1,0 +1,6 @@
+digraph sat_step_ach {
+    a -> b -> c;
+    b -> d;
+    b -> e;
+}
+
