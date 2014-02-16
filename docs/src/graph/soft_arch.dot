@@ -1,6 +1,31 @@
 digraph sat_step_ach {
-    a -> b -> c;
-    b -> d;
-    b -> e;
+    start="random";
+    // headers
+    node[shape=box, style=filled, fillcolor="#0033FF"];
+        main_loop
+        interrupt
+
+    //units
+    node[shape=oval, style=filled, fillcolor="#DCA80A"];
+        init
+        reset
+        uart_buf_parsing
+        message_handling
+
+    //time-citical units
+    node[shape=oval, style=filled, fillcolor="#BC1C1C"];
+        sensor_counter
+        motor_control
+        uart_hanling
+        adc_conversion
+
+    init -> main_loop;
+    main_loop -> uart_buf_parsing -> message_handling -> main_loop;
+
+    interrupt;
+    interrupt -> sensor_counter;
+    interrupt -> motor_control;
+    interrupt -> uart_hanling;
+    interrupt -> adc_conversion;
 }
 
