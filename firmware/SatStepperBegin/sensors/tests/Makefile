@@ -1,5 +1,5 @@
 CC=gcc
-FLAGS=-B ../ -std=c99
+FLAGS=-B ../ -std=c99 -DSAT_STEPPER___TEST
 UNITS=../encoder.c
 WORK_DIR=product
 
