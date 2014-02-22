@@ -17,12 +17,11 @@
 #include "control_timer.h"
 #include "state.h"
 
-void defaultInit()
-{
+void defaultInit() {
     deviceInit();
-    initPwm( gConfig.pwmPeriod );
+    initPwm(gConfig.pwmPeriod);
     motorControlInit();
-    timer0Init( &motorISR );
+    timer0Init(&motorISR);
 
     enableGlobalInterrupts();
 
@@ -30,16 +29,14 @@ void defaultInit()
     gState.stepTicker = 0;
 }
 
-void mainLoop()
-{
+void mainLoop() {
     while (1) {
         // Put here debug functions
         // For instance - fuction for simulate input signal
     }
 }
 
-int main(void)
-{
+int main(void) {
     defaultInit();
 
     resetDriver(0);

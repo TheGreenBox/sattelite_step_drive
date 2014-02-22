@@ -8,10 +8,10 @@
  */
 #include <PeripheralHeaderIncludes.h>
 #include <f2803xbmsk.h>
+
 #include "pwm_wrap_module.h"
 
-static void initAPWM( short int prescaler )
-{
+static void initAPWM(short int prescaler) {
     EPwm1Regs.TBCTL.bit.SYNCOSEL = 0;   // Pass through
 
     // Allow each timer to be sync'ed
@@ -74,8 +74,7 @@ static void initAPWM( short int prescaler )
     EDIS;
 }
 
-static void initBPWM( short int prescaler )
-{
+static void initBPWM(short int prescaler) {
     // Pass through
     EPwm2Regs.TBCTL.bit.SYNCOSEL = 0;
 
@@ -135,32 +134,31 @@ static void initBPWM( short int prescaler )
     EDIS;  // Disable EALLOW
 }
 
-void initPwm( short int prescaler )
-{
-    initAPWM( prescaler );
-    initBPWM( prescaler );
+void initPwm(short int prescaler) {
+    initAPWM(prescaler);
+    initBPWM(prescaler);
 }
 
-void setPwm( unsigned pwmDutyCycle )
-{
+void setPwm(unsigned pwmDutyCycle) {
     EPwm1Regs.CMPA.half.CMPA = pwmDutyCycle;
     EPwm2Regs.CMPA.half.CMPA = pwmDutyCycle;
 }
 
-void setADirection(int direct)
-{
-    if ( direct == 0 ) {
+void setADirection(int direct) {
+    if (direct == 0) {
         //EPWM1A forced low
         EPwm1Regs.AQCSFRC.bit.CSFA = 1;
         //EPWM1B forced low
         EPwm1Regs.AQCSFRC.bit.CSFB = 1;
-    } else {
-        if ( direct > 0 ) {
+    }
+    else {
+        if (direct > 0) {
             //Forcing Disabled on EPWM1A
             EPwm1Regs.AQCSFRC.bit.CSFA = 0;
             //EPWM1B forced low
             EPwm1Regs.AQCSFRC.bit.CSFB = 1;
-        } else {
+        }
+        else {
             //EPWM1A forced low
             EPwm1Regs.AQCSFRC.bit.CSFA = 1;
             //EPWM1B forced low
@@ -171,18 +169,20 @@ void setADirection(int direct)
 
 void setBDirection(int direct)
 {
-    if ( direct == 0 ) {
+    if (direct == 0) {
         //EPWM1A forced low
         EPwm2Regs.AQCSFRC.bit.CSFA = 1;
         //EPWM1B forced low
         EPwm2Regs.AQCSFRC.bit.CSFB = 1;
-    } else {
-        if ( direct > 0 ) {
+    }
+    else {
+        if (direct > 0) {
             //Forcing Disabled on EPWM1A
             EPwm2Regs.AQCSFRC.bit.CSFA = 0;
             //EPWM1B forced low
             EPwm2Regs.AQCSFRC.bit.CSFB = 1;
-        } else {
+        }
+        else {
             //EPWM1A forced low
             EPwm2Regs.AQCSFRC.bit.CSFA = 1;
             //EPWM1B forced low
@@ -193,10 +193,11 @@ void setBDirection(int direct)
 
 void resetDriver(int drv_reset)
 {
-    if( drv_reset ) {
+    if(drv_reset) {
         GpioDataRegs.GPACLEAR.bit.GPIO19 = 1;
         GpioDataRegs.GPBCLEAR.bit.GPIO32 = 1;
-    } else {
+    }
+    else {
         GpioDataRegs.GPASET.bit.GPIO19 = 1;
         GpioDataRegs.GPBSET.bit.GPIO32 = 1;
     }

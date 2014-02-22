@@ -16,29 +16,26 @@
 
 #define Device_cal (void   (*)(void))0x3D7C80
 
-static void WDogDisable(void)
-{
+static void WDogDisable(void) {
     EALLOW;
     SysCtrlRegs.WDCR= 0x0068;
     EDIS;
 }
 
-static void switchInternalOscilator()
-{
+static void switchInternalOscilator() {
     // Switch to Internal Oscillator 1 and turn off all other clock
     // sources to minimize power consumption
     EALLOW; // below registers are "protected", allow access.
-    SysCtrlRegs.CLKCTL.bit.INTOSC1OFF = 0;
-    SysCtrlRegs.CLKCTL.bit.OSCCLKSRCSEL = 0;  // Clk Src = INTOSC1
-    SysCtrlRegs.CLKCTL.bit.XCLKINOFF = 1;     // Turn off XCLKIN
-    SysCtrlRegs.CLKCTL.bit.XTALOSCOFF = 1;    // Turn off XTALOSC
-    SysCtrlRegs.CLKCTL.bit.INTOSC2OFF = 1;    // Turn off INTOSC2
+    SysCtrlRegs.CLKCTL.bit.INTOSC1OFF   = 0;
+    SysCtrlRegs.CLKCTL.bit.OSCCLKSRCSEL = 0; // Clk Src = INTOSC1
+    SysCtrlRegs.CLKCTL.bit.XCLKINOFF    = 1; // Turn off XCLKIN
+    SysCtrlRegs.CLKCTL.bit.XTALOSCOFF   = 1; // Turn off XTALOSC
+    SysCtrlRegs.CLKCTL.bit.INTOSC2OFF   = 1; // Turn off INTOSC2
     EDIS;	// Disable register access
 }
 
 // This function initializes the PIE control registers to a known state.
-void PieCntlInit(void)
-{
+void PieCntlInit() {
     // Disable Interrupts at the CPU level:
     DINT;
 
@@ -74,8 +71,8 @@ void PieCntlInit(void)
     PieCtrlRegs.PIEIFR12.all = 0;
 }
 
-interrupt void ISR_ILLEGAL(void) // Illegal operation TRAP
-{
+// Illegal operation TRAP
+interrupt void ISR_ILLEGAL() {
     // Insert ISR Code here
 
     // Next two lines for debug only to halt the processor here
@@ -85,8 +82,7 @@ interrupt void ISR_ILLEGAL(void) // Illegal operation TRAP
 
 }
 
-void PieVectTableInit(void)
-{
+void PieVectTableInit() {
     int16 i;
     PINT *Dest = &PieVectTable.TINT1;
 
@@ -99,8 +95,7 @@ void PieVectTableInit(void)
     PieCtrlRegs.PIECTRL.bit.ENPIE = 1;
 }
 
-static void PLLset(Uint16 val)
-{
+static void PLLset(Uint16 val) {
     // This function initializes the PLLCR register.
     //void InitPll(Uint16 val, Uint16 clkindiv)
 
@@ -165,8 +160,7 @@ static void PLLset(Uint16 val)
     EDIS;
 }
 
-static void setSystemClockSpeed()
-{
+static void setSystemClockSpeed() {
     // SYSTEM CLOCK speed based on internal oscillator = 10 MHz
     // 0xC =  60	MHz		(12)
     // 0xB =  55	MHz		(11)
@@ -189,16 +183,14 @@ static void setSystemClockSpeed()
     EDIS;	// Disable register access
 }
 
-static void interruptInit()
-{
+static void interruptInit() {
     // Initialise interrupt controller and Vector Table
     // to defaults for now. Application ISR mapping done later.
     PieCntlInit();
     PieVectTableInit();
 }
 
-static void settingPeripheryCLK()
-{
+static void settingPeripheryCLK() {
     EALLOW; // below registers are "protected", allow access.
     // LOW SPEED CLOCKS prescale register settings
     SysCtrlRegs.LOSPCP.all = 0x0002;		// Sysclk / 4 (15 MHz)
@@ -206,8 +198,7 @@ static void settingPeripheryCLK()
     EDIS;	// Disable register access
 }
 
-static void adcCalibrate()
-{
+static void adcCalibrate() {
     EALLOW; // below registers are "protected", allow access.
     // ADC CALIBRATION
     //---------------------------------------------------
@@ -226,8 +217,7 @@ static void adcCalibrate()
     EDIS;	// Disable register access
 }
 
-static void peripheryClockEnable()
-{
+static void peripheryClockEnable() {
     EALLOW; // below registers are "protected", allow access.
     // PERIPHERAL CLOCK ENABLES
     //---------------------------------------------------
@@ -273,8 +263,7 @@ static void peripheryClockEnable()
     EDIS;	// Disable register access
 }
 
-static void initGPIO()
-{
+static void initGPIO() {
     EALLOW; // below registers are "protected", allow access.
 
     //--------------------------------------------------------------------------------------
@@ -548,8 +537,7 @@ static void initGPIO()
     EDIS;	// Disable register access
 }
 
-static void peripheryInit()
-{
+static void peripheryInit() {
     settingPeripheryCLK();
     interruptInit();
     adcCalibrate();
@@ -557,8 +545,7 @@ static void peripheryInit()
     initGPIO();
 }
 
-void deviceInit()
-{
+void deviceInit() {
     WDogDisable();
     DINT;			// Global Disable all Interrupts
     IER = 0x0000;	// Disable CPU interrupts
@@ -567,19 +554,15 @@ void deviceInit()
     switchInternalOscilator();
     setSystemClockSpeed();
     peripheryInit();
-
-
 }
 
-void motorControlInit()
-{
+void motorControlInit() {
     gState.motorControl.pwmDutyCycle = 990;
     gState.motorControl.rotationDirection = 1;
     gState.motorControl.stepTimeout = 0xFFFF;
 }
 
-void enableGlobalInterrupts()
-{
+void enableGlobalInterrupts() {
     EINT;   // Enable Global interrupt INTM
     ERTM;  // Enable Global realtime interrupt DBGM
 }
