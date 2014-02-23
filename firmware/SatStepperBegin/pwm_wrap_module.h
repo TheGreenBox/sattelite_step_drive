@@ -17,7 +17,8 @@ void setPwm(unsigned pwmDutyCycle);
 void setADirection(int direct);
 void setBDirection(int direct);
 
-void resetDriver(int);
+void activate_pwm_driver();
+void deactivate_pwm_driver();
 
 #endif //_PWM_WRAP_MODULE__H_
 

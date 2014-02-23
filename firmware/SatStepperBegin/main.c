@@ -17,7 +17,7 @@
 #include "control_timer.h"
 #include "state.h"
 
-void defaultInit() {
+void init() {
     deviceInit();
     initPwm(gConfig.pwmPeriod);
     motorControlInit();
@@ -37,9 +37,9 @@ void mainLoop() {
 }
 
 int main(void) {
-    defaultInit();
+    init();
 
-    resetDriver(0);
+    activate_pwm_driver();
     setAlgoType(gConfig.algoType);
 
     mainLoop();
