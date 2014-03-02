@@ -1,6 +1,6 @@
 CC=gcc
-FLAGS=-B ../ -std=c99
-UNITS=../encoder.c
+FLAGS=-std=c99 -I ..
+UNITS=../gray_code_decoder.c
 WORK_DIR=product
 
 all: prepare

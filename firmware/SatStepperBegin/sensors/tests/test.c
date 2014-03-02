@@ -2,7 +2,7 @@
 */
 
 #include <stdio.h>
-#include "../encoder.h"
+#include "gray_code_decoder.h"
 
 const unsigned int PERIOD = 4;
 
