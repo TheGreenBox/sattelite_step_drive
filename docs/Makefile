@@ -6,7 +6,11 @@ help: hello
 	@echo
 	@echo "  * if you want to build the course 112 milestone documentation please get the /make c112/"
 	@echo
-	@echo "  * if you want to build full doc please get the /make all/"
+	@echo "  * if you want to build full doc please get the /make full/"
+	@echo
+	@echo "  * if you want to build all docs please get the /make all/"
+	@echo
+	@echo "  * if you want to build workshop report (full plan) please get the /make plan/"
 	@echo
 	@echo "----------------------------------------"
 	@echo
@@ -24,9 +28,14 @@ clean:
 prepare:
 	@mkdir -p ${PRODUCT_DIR}/
 
-all: hello prepare
-	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main.tex
+all: full c112 plan
+
+full: hello prepare
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main_full.tex
 
 c112: hello prepare
-	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/c112.tex
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main_c112.tex
+
+plan: hello prepare
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main_plan.tex
 
