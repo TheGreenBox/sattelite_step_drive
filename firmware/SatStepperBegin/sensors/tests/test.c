@@ -1,6 +1,8 @@
 /**
 */
 
+#ifdef SAT_STEPPER___TEST
+
 #include <stdio.h>
 #include "gray_code_decoder.h"
 
@@ -56,3 +58,5 @@ int main() {
 
     return 0;
 }
+#endif
+
