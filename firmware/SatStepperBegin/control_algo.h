@@ -31,6 +31,6 @@ int setAlgoType(unsigned short);
 
 int getPhasePulseByStep(long long step, int* phaseA, int* phaseB);
 
-int getPwmDutyByStep(long long step, unsigned currentPwmDuty, unsigned* pwmDuty);
+int getPwmDurationByStep(long long step, unsigned currentPwmDuration, unsigned* pwmDuration);
 
 #endif //_CONTROL_ALGO_INCLUDED_

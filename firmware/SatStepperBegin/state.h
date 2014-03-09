@@ -11,7 +11,7 @@
 #ifndef _GLOBAL_STATE_H_
 #define _GLOBAL_STATE_H_
 
-#define MAX_PWM_DUTY 1024
+#define MAX_PWM_DURATION 1024
 
 typedef struct _MotorControl {
     unsigned pwmDutyCycle;
