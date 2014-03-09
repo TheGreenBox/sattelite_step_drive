@@ -29,7 +29,7 @@ void motorISR(void)
     if ( gState.motorControl.rotationDirection == 0 ) {
         setADirection( 0 );
         setBDirection( 0 );
-        setPwm( MAX_PWM_DURATION );
+        setPwm( MAX_PWM_DUTY );
         return;
     }
 
@@ -47,12 +47,12 @@ void motorISR(void)
     setADirection( phaseVSignA );
     setBDirection( phaseVSignB );
 
-    unsigned pwmDuration;
+    unsigned pwmDuty;
 
-    getPwmDurationByStep ( gState.stepTicker,
+    getPwmDutyByStep ( gState.stepTicker,
                        gState.motorControl.pwmDutyCycle,
-                       &pwmDuration );
-    setPwm( pwmDuration );
+                       &pwmDuty );
+    setPwm( pwmDuty );
 
     // set speed step motor
     setTimer0Peiod(gState.motorControl.stepTimeout);

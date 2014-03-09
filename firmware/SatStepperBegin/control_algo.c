@@ -18,19 +18,19 @@
 static int onePhaseAlgoA[ONE_PHASE_STEPS_NUMBER]  = { 1 , 0 , -1 ,  0 };
 static int onePhaseAlgoB[ONE_PHASE_STEPS_NUMBER]  = { 0 , 1 ,  0 , -1 };
 
-static unsigned onePhasePwmDuration[ONE_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DURATION };
+static unsigned onePhasePwmDuty[ONE_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DUTY };
 
 
 static int twoPhaseAlgoA[TWO_PHASE_STEPS_NUMBER]  = { 1 , -1 , -1 ,  1 };
 static int twoPhaseAlgoB[TWO_PHASE_STEPS_NUMBER]  = { 1 ,  1 , -1 , -1 };
 
-static unsigned twoPhasePwmDuration[TWO_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DURATION };
+static unsigned twoPhasePwmDuty[TWO_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DUTY };
 
 
 static int halfPhaseAlgoA[HALF_PHASE_STEPS_NUMBER] = { 1 , 1 , 0 , -1 , -1 , -1,   0 ,  1 };
 static int halfPhaseAlgoB[HALF_PHASE_STEPS_NUMBER] = { 0 , 1 , 1 ,  1 ,  0 , -1 , -1 , -1 };
 
-static unsigned halfPhasePwmDuration[HALF_PHASE_PWM_STEPS_NUMBER] = { (unsigned)(MAX_PWM_DURATION*1), (unsigned)(MAX_PWM_DURATION*0.707) };
+static unsigned halfPhasePwmDuty[HALF_PHASE_PWM_STEPS_NUMBER] = { (unsigned)(MAX_PWM_DUTY*1), (unsigned)(MAX_PWM_DUTY*0.707) };
 
 typedef struct _AlgoType {
     int* phaseA;
@@ -38,38 +38,38 @@ typedef struct _AlgoType {
 
     unsigned algoStepsNumber;
 
-    unsigned* pwmDuration;
+    unsigned* pwmDuty;
     unsigned algoPwmStepsNumber;
 } AlgoType;
 
 //const structure variables init
 AlgoType onePhaseParametrs = {
-    .phaseA = onePhaseAlgoA,
-    .phaseB = onePhaseAlgoB,
+    .phaseA             = onePhaseAlgoA,
+    .phaseB             = onePhaseAlgoB,
 
-    .algoStepsNumber = ONE_PHASE_STEPS_NUMBER,
+    .algoStepsNumber    = ONE_PHASE_STEPS_NUMBER,
 
-    .pwmDuration = onePhasePwmDuration,
+    .pwmDuty            = onePhasePwmDuty,
     .algoPwmStepsNumber = ONE_PHASE_PWM_STEPS_NUMBER
 }
 
 AlgoType twoPhaseParametrs = {
-    .phaseA = twoPhaseAlgoA,
-    .phaseB = twoPhaseAlgoB,
+    .phaseA             = twoPhaseAlgoA,
+    .phaseB             = twoPhaseAlgoB,
 
-    .algoStepsNumber = ONE_PHASE_STEPS_NUMBER,
+    .algoStepsNumber    = ONE_PHASE_STEPS_NUMBER,
 
-    .pwmDuration = twoPhasePwmDuration,
+    .pwmDuty            = twoPhasePwmDuty,
     .algoPwmStepsNumber = TWO_PHASE_PWM_STEPS_NUMBER
 }
 
 AlgoType halfPhaseParametrs = {
-    .phaseA = halfPhaseAlgoA,
-    .phaseB = halfPhaseAlgoB,
+    .phaseA             = halfPhaseAlgoA,
+    .phaseB             = halfPhaseAlgoB,
 
-    .algoStepsNumber = HALF_PHASE_STEPS_NUMBER,
+    .algoStepsNumber    = HALF_PHASE_STEPS_NUMBER,
 
-    .pwmDuration = halfPhasePwmDuration,
+    .pwmDuty            = halfPhasePwmDuty,
     .algoPwmStepsNumber = HALF_PHASE_PWM_STEPS_NUMBER
 }
 
@@ -107,17 +107,17 @@ int getPhasePulseByStep(long long step, int* phaseA, int* phaseB)
     return 0;
 }
 
-int getPwmDurationByStep(long long step, unsigned currentPwmDuration, unsigned* pwmDuration)
+int getPwmDutyByStep(long long step, unsigned currentPwmDuty, unsigned* pwmDuty)
 {
     if (pCurrentAlgoStruct == NULL) {
         return 1;
     }
     unsigned nextStep = step % pCurrentAlgoStruct->algoPwmStepsNumber;
 
-    unsigned long pwm = MAX_PWM_DURATION - currentPwmDuration;
-    pwm *= pCurrentAlgoStruct->pwmDuration[nextStep];
-    pwm /= MAX_PWM_DURATION;
-    *pwmDuration = (unsigned)(MAX_PWM_DURATION - pwm);
+    unsigned long pwm = MAX_PWM_DUTY - currentPwmDuty;
+    pwm *= pCurrentAlgoStruct->pwmDuty[nextStep];
+    pwm /= MAX_PWM_DUTY;
+    *pwmDuty = (unsigned)(MAX_PWM_DUTY - pwm);
 
     return 0;
 }

@@ -22,15 +22,15 @@
 #define HALF_PHASE_PWM_STEPS_NUMBER 2
 
 #define NUMBER_OF_ALGOS             3
-#define CTRL_ALGO_INVALID       0
-#define CTRL_ALGO_ONE_PHASE     1
-#define CTRL_ALGO_TWO_PHASE     2
-#define CTRL_ALGO_HALF_PHASE    3
+#define CTRL_ALGO_INVALID           0
+#define CTRL_ALGO_ONE_PHASE         1
+#define CTRL_ALGO_TWO_PHASE         2
+#define CTRL_ALGO_HALF_PHASE        3
 
 int setAlgoType(unsigned short);
 
 int getPhasePulseByStep(long long step, int* phaseA, int* phaseB);
 
-int getPwmDurationByStep(long long step, unsigned currentPwmDuration, unsigned* pwmDuration);
+int getPwmDutyByStep(long long step, unsigned currentPwmDuty, unsigned* pwmDuty);
 
 #endif //_CONTROL_ALGO_INCLUDED_
