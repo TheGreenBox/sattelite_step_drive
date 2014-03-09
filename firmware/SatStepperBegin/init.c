@@ -404,15 +404,15 @@ static void initGPIO() {
     //--------------------------------------------------------------------------------------
     //  GPIO-20 - PIN FUNCTION = Encoder1A
     GpioCtrlRegs.GPAMUX2.bit.GPIO20 = 1;	// 0=GPIO,  1=EQEPA-1,  2=Resv,  3=COMP1OUT
-    //	GpioCtrlRegs.GPADIR.bit.GPIO20 = 0;		// 1=OUTput,  0=INput
-    //	GpioDataRegs.GPACLEAR.bit.GPIO20 = 1;	// uncomment if --> Set Low initially
-    //	GpioDataRegs.GPASET.bit.GPIO20 = 1;		// uncomment if --> Set High initially
+    GpioCtrlRegs.GPADIR.bit.GPIO20 = 0;		// 1=OUTput,  0=INput
+    GpioDataRegs.GPACLEAR.bit.GPIO20 = 1;	// uncomment if --> Set Low initially
+    GpioDataRegs.GPASET.bit.GPIO20 = 1;		// uncomment if --> Set High initially
     //--------------------------------------------------------------------------------------
     //  GPIO-21 - PIN FUNCTION = Encoder1B
     GpioCtrlRegs.GPAMUX2.bit.GPIO21 = 1;	// 0=GPIO,  1=EQEPB-1,  2=Resv,  3=COMP2OUT
-    //	GpioCtrlRegs.GPADIR.bit.GPIO21 = 0;		// 1=OUTput,  0=INput
-    //	GpioDataRegs.GPACLEAR.bit.GPIO21 = 1;	// uncomment if --> Set Low initially
-    //	GpioDataRegs.GPASET.bit.GPIO21 = 1;		// uncomment if --> Set High initially
+    GpioCtrlRegs.GPADIR.bit.GPIO21 = 0;		// 1=OUTput,  0=INput
+    GpioDataRegs.GPACLEAR.bit.GPIO21 = 1;	// uncomment if --> Set Low initially
+    GpioDataRegs.GPASET.bit.GPIO21 = 1;		// uncomment if --> Set High initially
     //--------------------------------------------------------------------------------------
     //  GPIO-22 - PIN FUNCTION = STATUS (LED)
     GpioCtrlRegs.GPAMUX2.bit.GPIO22 = 0;	// 0=GPIO,  1=EQEPS-1,  2=Resv,  3=LINTX-A
@@ -422,27 +422,27 @@ static void initGPIO() {
     //--------------------------------------------------------------------------------------
     //  GPIO-23 - PIN FUNCTION = Encoder1C
     GpioCtrlRegs.GPAMUX2.bit.GPIO23 = 1;	// 0=GPIO,  1=EQEPI-1,  2=Resv,  3=LINRX-A
-    //	GpioCtrlRegs.GPADIR.bit.GPIO23 = 0;		// 1=OUTput,  0=INput
-    //	GpioDataRegs.GPACLEAR.bit.GPIO23 = 1;	// uncomment if --> Set Low initially
-    //	GpioDataRegs.GPASET.bit.GPIO23 = 1;		// uncomment if --> Set High initially
+    GpioCtrlRegs.GPADIR.bit.GPIO23 = 0;		// 1=OUTput,  0=INput
+    GpioDataRegs.GPACLEAR.bit.GPIO23 = 1;	// uncomment if --> Set Low initially
+    GpioDataRegs.GPASET.bit.GPIO23 = 1;		// uncomment if --> Set High initially
     //--------------------------------------------------------------------------------------
     //  GPIO-24 - PIN FUNCTION = Encoder2A
     GpioCtrlRegs.GPAMUX2.bit.GPIO24 = 0;	// 0=GPIO,  1=ECAP1,  2=Resv,  3=SPISIMO-B
     GpioCtrlRegs.GPADIR.bit.GPIO24 = 0;		// 1=OUTput,  0=INput
-    //	GpioDataRegs.GPACLEAR.bit.GPIO24 = 1;	// uncomment if --> Set Low initially
-    //	GpioDataRegs.GPASET.bit.GPIO24 = 1;		// uncomment if --> Set High initially
+    GpioDataRegs.GPACLEAR.bit.GPIO24 = 1;	// uncomment if --> Set Low initially
+    GpioDataRegs.GPASET.bit.GPIO24 = 1;		// uncomment if --> Set High initially
     //--------------------------------------------------------------------------------------
     //  GPIO-25 - PIN FUNCTION = Encoder2B
     GpioCtrlRegs.GPAMUX2.bit.GPIO25 = 0;	// 0=GPIO,  1=Resv,  2=Resv,  3=SPISOMI-B
     GpioCtrlRegs.GPADIR.bit.GPIO25 = 0;		// 1=OUTput,  0=INput
-    //	GpioDataRegs.GPACLEAR.bit.GPIO25 = 1;	// uncomment if --> Set Low initially
-    //	GpioDataRegs.GPASET.bit.GPIO25 = 1;		// uncomment if --> Set High initially
+    GpioDataRegs.GPACLEAR.bit.GPIO25 = 1;	// uncomment if --> Set Low initially
+    GpioDataRegs.GPASET.bit.GPIO25 = 1;		// uncomment if --> Set High initially
     //--------------------------------------------------------------------------------------
     //  GPIO-26 - PIN FUNCTION = Encoder2C
     GpioCtrlRegs.GPAMUX2.bit.GPIO26 = 0;	// 0=GPIO,  1=Resv,  2=Resv,  3=SPICLK-B
     GpioCtrlRegs.GPADIR.bit.GPIO26 = 0;		// 1=OUTput,  0=INput
-    //	GpioDataRegs.GPACLEAR.bit.GPIO26 = 1;	// uncomment if --> Set Low initially
-    //	GpioDataRegs.GPASET.bit.GPIO26 = 1;		// uncomment if --> Set High initially
+    GpioDataRegs.GPACLEAR.bit.GPIO26 = 1;	// uncomment if --> Set Low initially
+    GpioDataRegs.GPASET.bit.GPIO26 = 1;		// uncomment if --> Set High initially
     //--------------------------------------------------------------------------------------
     //  GPIO-27 - PIN FUNCTION = --Spare--
     GpioCtrlRegs.GPAMUX2.bit.GPIO27 = 0;	// 0=GPIO,  1=Resv,  2=Resv,  3=SPISTE-B
