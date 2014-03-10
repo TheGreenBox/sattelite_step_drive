@@ -47,6 +47,8 @@
 
 .metadata
 .settings
+.launches
+F2803x_RAM
 *.opt
 *.pp
 *.map
