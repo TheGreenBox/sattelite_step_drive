@@ -84,7 +84,6 @@ interrupt void ISR_ILLEGAL() {
     // Remove after inserting ISR Code
     asm("          ESTOP0");
     for(;;);
-
 }
 
 void PieVectTableInit() {
@@ -196,16 +195,13 @@ static void interruptInit() {
 }
 
 static void settingPeripheryCLK() {
-    EALLOW; // below registers are "protected", allow access.
     // LOW SPEED CLOCKS prescale register settings
     SysCtrlRegs.LOSPCP.all = 0x0002;        // Sysclk / 4 (15 MHz)
     SysCtrlRegs.XCLK.bit.XCLKOUTDIV=2;
-    EDIS;   // Disable register access
 }
 
 static void adcCalibrate() {
     EALLOW; // below registers are "protected", allow access.
-    // ADC CALIBRATION
     //---------------------------------------------------
     // The Device_cal function, which copies the ADC & oscillator calibration values
     // from TI reserved OTP into the appropriate trim registers, occurs automatically
@@ -219,10 +215,11 @@ static void adcCalibrate() {
     (*Device_cal)();
     // Return ADC clock to original state
     // SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 0;
-    EDIS;	// Disable register access
+    EDIS; // Disable register access
 }
 
 static void powerUpAdc() {
+    EALLOW; // below registers are "protected", allow access.
     // *IMPORTANT*
     // To powerup the ADC the ADCENCLK bit should be set first to enable
     // clocks, followed by powering up the bandgap, reference circuitry, and ADC core.
@@ -232,20 +229,52 @@ static void powerUpAdc() {
     // Please note that for the delay function below to operate correctly the
     // CPU_RATE define statement in the DSP2803x_Examples.h file must
     // contain the correct CPU clock period in nanoseconds.
-    EALLOW;
     AdcRegs.ADCCTL1.bit.ADCBGPWD  = 1;      // Power ADC BG
     AdcRegs.ADCCTL1.bit.ADCREFPWD = 1;      // Power reference
     AdcRegs.ADCCTL1.bit.ADCPWDN   = 1;      // Power ADC
     AdcRegs.ADCCTL1.bit.ADCENABLE = 1;      // Enable ADC
     AdcRegs.ADCCTL1.bit.ADCREFSEL = 0;      // Select interal BG
-    EDIS;
+    EDIS; // Disable register access
 
-    DELAY_US(ADC_usDELAY);         // Delay before converting ADC channels
+    DELAY_US(ADC_usDELAY);  // Delay before converting ADC channels
+}
+
+static void socSetUp() {
+    // The term SOC is configuration set defining the single conversion
+    // of a single channel. In that set there are three configurations:
+    // the trigger source that starts the conversion, the channel to convert,
+    // and the acquisition (sample) window size. Each SOC is independently
+    // configured and can have any combination of the trigger, channel,
+    // and sample window size available. Multiple SOC’s can be configured
+    // for the same trigger, channel, and/or acquisition window as desired.
+
+    EALLOW; // below registers are "protected", allow access.
+    AdcRegs.ADCSOC0CTL.bit.CHSEL    = 0;    // ChSelect: ADC A0-> Phase A
+    AdcRegs.ADCSOC0CTL.bit.TRIGSEL  = 5;    // Set SOC0 start trigger on EPWM1A, due to round-robin SOC0 converts first then SOC1
+    AdcRegs.ADCSOC0CTL.bit.ACQPS    = 6;    // Set SOC0 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
+
+    AdcRegs.ADCSOC1CTL.bit.CHSEL    = 1;    // ChSelect: ADC A1-> Phase B
+    AdcRegs.ADCSOC1CTL.bit.TRIGSEL  = 5;
+    AdcRegs.ADCSOC1CTL.bit.ACQPS    = 6;
+
+    AdcRegs.ADCSOC2CTL.bit.CHSEL    = 4;    // ChSelect: ADC A4-> DC Bus Voltage
+    AdcRegs.ADCSOC2CTL.bit.TRIGSEL  = 5;
+    AdcRegs.ADCSOC2CTL.bit.ACQPS    = 6;
+
+    AdcRegs.ADCSOC3CTL.bit.CHSEL    = 2;    // ChSelect: ADC A2-> Phase C
+    AdcRegs.ADCSOC3CTL.bit.TRIGSEL  = 5;
+    AdcRegs.ADCSOC3CTL.bit.ACQPS    = 6;
+
+    AdcRegs.ADCSOC4CTL.bit.CHSEL    = 3;    // ChSelect: ADC A3-> Phase D
+    AdcRegs.ADCSOC4CTL.bit.TRIGSEL  = 5;
+    AdcRegs.ADCSOC4CTL.bit.ACQPS    = 6;
+    EDIS; // Disable register access
 }
 
 static void adcInit() {
     adcCalibrate();
     powerUpAdc();
+    socSetUp();
 }
 
 static void peripheryClockEnable() {
