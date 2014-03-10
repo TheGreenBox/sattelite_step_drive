@@ -218,13 +218,8 @@ static void adcCalibrate() {
     // Auto-calibrate from TI OTP
     (*Device_cal)();
     // Return ADC clock to original state
-<<<<<<< HEAD
-    SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 0;
-    EDIS;   // Disable register access
-=======
     // SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 0;
     EDIS;	// Disable register access
->>>>>>> 39c0bc809b710945a1f29b6dd12a167594b21e4e
 }
 
 static void powerUpAdc() {
