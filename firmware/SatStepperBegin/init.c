@@ -248,7 +248,7 @@ static void powerUpAdc() {
     DELAY_US(ADC_usDELAY);         // Delay before converting ADC channels
 }
 
-static adcInit() {
+static void adcInit() {
     adcCalibrate();
     powerUpAdc();
 }
