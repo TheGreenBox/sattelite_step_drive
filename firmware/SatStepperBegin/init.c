@@ -10,11 +10,16 @@
 #include "PeripheralHeaderIncludes.h"
 #include "state.h"
 
+#define CPU_CLOCK_SPEED 6.000L   // for 60 Mhz; 10.000L for a 100MHz CPU clock speed
+#define ADC_usDELAY     10000L
+#define DELAY_US(A)     DSP28x_usDelay(((((long double) A * 1000.0L) / (long double)CPU_CLOCK_SPEED) - 9.0L) / 5.0L)
+
+extern void DSP28x_usDelay(unsigned long Count);
+
 // Functions that will be run from RAM need to be assigned to
 // a different section.  This section will then be mapped to a load and
 // run address using the linker cmd file.
-
-#define Device_cal (void   (*)(void))0x3D7C80
+#define Device_cal (void (*)(void))0x3D7C80
 
 static void WDogDisable(void) {
     EALLOW;
@@ -213,8 +218,39 @@ static void adcCalibrate() {
     // Auto-calibrate from TI OTP
     (*Device_cal)();
     // Return ADC clock to original state
+<<<<<<< HEAD
     SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 0;
     EDIS;   // Disable register access
+=======
+    // SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 0;
+    EDIS;	// Disable register access
+>>>>>>> 39c0bc809b710945a1f29b6dd12a167594b21e4e
+}
+
+static void powerUpAdc() {
+    // *IMPORTANT*
+    // To powerup the ADC the ADCENCLK bit should be set first to enable
+    // clocks, followed by powering up the bandgap, reference circuitry, and ADC core.
+    // Before the first conversion is performed a 5ms delay must be observed
+    // after power up to give all analog circuits time to power up and settle
+
+    // Please note that for the delay function below to operate correctly the
+    // CPU_RATE define statement in the DSP2803x_Examples.h file must
+    // contain the correct CPU clock period in nanoseconds.
+    EALLOW;
+    AdcRegs.ADCCTL1.bit.ADCBGPWD  = 1;      // Power ADC BG
+    AdcRegs.ADCCTL1.bit.ADCREFPWD = 1;      // Power reference
+    AdcRegs.ADCCTL1.bit.ADCPWDN   = 1;      // Power ADC
+    AdcRegs.ADCCTL1.bit.ADCENABLE = 1;      // Enable ADC
+    AdcRegs.ADCCTL1.bit.ADCREFSEL = 0;      // Select interal BG
+    EDIS;
+
+    DELAY_US(ADC_usDELAY);         // Delay before converting ADC channels
+}
+
+static adcInit() {
+    adcCalibrate();
+    powerUpAdc();
 }
 
 static void peripheryClockEnable() {
@@ -227,7 +263,7 @@ static void peripheryClockEnable() {
     // Note: not all peripherals are available on all 280x derivates.
     // Refer to the datasheet for your particular device.
 
-    SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 1;    // ADC
+    // SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 1;    // ADC
     //------------------------------------------------
     SysCtrlRegs.PCLKCR3.bit.COMP1ENCLK = 1; // COMP1
     SysCtrlRegs.PCLKCR3.bit.COMP2ENCLK = 1; // COMP2
@@ -540,7 +576,7 @@ static void initGPIO() {
 static void peripheryInit() {
     settingPeripheryCLK();
     interruptInit();
-    adcCalibrate();
+    adcInit();
     peripheryClockEnable();
     initGPIO();
 }

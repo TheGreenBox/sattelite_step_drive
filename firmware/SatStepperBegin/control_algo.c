@@ -15,20 +15,20 @@
 #include "state.h"
 
 //arrays of step by step phase states for different algorythms
-static int onePhaseAlgoA[ONE_PHASE_STEPS_NUMBER]  = { 1 , 0 , -1 ,  0 };
-static int onePhaseAlgoB[ONE_PHASE_STEPS_NUMBER]  = { 0 , 1 ,  0 , -1 };
+static int onePhaseAlgoA[ONE_PHASE_STEPS_NUMBER]  = {1, 0, -1,  0};
+static int onePhaseAlgoB[ONE_PHASE_STEPS_NUMBER]  = {0, 1,  0, -1};
 
-static unsigned onePhasePwmDuty[ONE_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DUTY };
-
-
-static int twoPhaseAlgoA[TWO_PHASE_STEPS_NUMBER]  = { 1 , -1 , -1 ,  1 };
-static int twoPhaseAlgoB[TWO_PHASE_STEPS_NUMBER]  = { 1 ,  1 , -1 , -1 };
-
-static unsigned twoPhasePwmDuty[TWO_PHASE_PWM_STEPS_NUMBER]  = { MAX_PWM_DUTY };
+static unsigned onePhasePwmDuty[ONE_PHASE_PWM_STEPS_NUMBER]  = {MAX_PWM_DUTY};
 
 
-static int halfPhaseAlgoA[HALF_PHASE_STEPS_NUMBER] = { 1 , 1 , 0 , -1 , -1 , -1,   0 ,  1 };
-static int halfPhaseAlgoB[HALF_PHASE_STEPS_NUMBER] = { 0 , 1 , 1 ,  1 ,  0 , -1 , -1 , -1 };
+static int twoPhaseAlgoA[TWO_PHASE_STEPS_NUMBER]  = {1, -1, -1,  1};
+static int twoPhaseAlgoB[TWO_PHASE_STEPS_NUMBER]  = {1,  1, -1, -1};
+
+static unsigned twoPhasePwmDuty[TWO_PHASE_PWM_STEPS_NUMBER]  = {MAX_PWM_DUTY};
+
+
+static int halfPhaseAlgoA[HALF_PHASE_STEPS_NUMBER] = {1, 1, 0, -1, -1, -1,  0,  1};
+static int halfPhaseAlgoB[HALF_PHASE_STEPS_NUMBER] = {0, 1, 1,  1,  0, -1, -1, -1};
 
 static unsigned halfPhasePwmDuty[HALF_PHASE_PWM_STEPS_NUMBER] = { (unsigned)(MAX_PWM_DUTY*1), (unsigned)(MAX_PWM_DUTY*0.707) };
 
@@ -44,36 +44,36 @@ typedef struct _AlgoType {
 
 //const structure variables init
 AlgoType onePhaseParametrs = {
-    .phaseA             = onePhaseAlgoA,
-    .phaseB             = onePhaseAlgoB,
+    onePhaseAlgoA,
+    onePhaseAlgoB,
 
-    .algoStepsNumber    = ONE_PHASE_STEPS_NUMBER,
+    ONE_PHASE_STEPS_NUMBER,
 
-    .pwmDuty            = onePhasePwmDuty,
-    .algoPwmStepsNumber = ONE_PHASE_PWM_STEPS_NUMBER
-}
+    onePhasePwmDuty,
+    ONE_PHASE_PWM_STEPS_NUMBER
+};
 
 AlgoType twoPhaseParametrs = {
-    .phaseA             = twoPhaseAlgoA,
-    .phaseB             = twoPhaseAlgoB,
+    twoPhaseAlgoA,
+    twoPhaseAlgoB,
 
-    .algoStepsNumber    = ONE_PHASE_STEPS_NUMBER,
+    ONE_PHASE_STEPS_NUMBER,
 
-    .pwmDuty            = twoPhasePwmDuty,
-    .algoPwmStepsNumber = TWO_PHASE_PWM_STEPS_NUMBER
-}
+    twoPhasePwmDuty,
+    TWO_PHASE_PWM_STEPS_NUMBER
+};
 
 AlgoType halfPhaseParametrs = {
-    .phaseA             = halfPhaseAlgoA,
-    .phaseB             = halfPhaseAlgoB,
+    halfPhaseAlgoA,
+    halfPhaseAlgoB,
 
-    .algoStepsNumber    = HALF_PHASE_STEPS_NUMBER,
+    HALF_PHASE_STEPS_NUMBER,
 
-    .pwmDuty            = halfPhasePwmDuty,
-    .algoPwmStepsNumber = HALF_PHASE_PWM_STEPS_NUMBER
-}
+    halfPhasePwmDuty,
+    HALF_PHASE_PWM_STEPS_NUMBER
+};
 
-static struct AlgoType* pCurrentAlgoStruct = NULL;
+static AlgoType* pCurrentAlgoStruct = NULL;
 
 // sets control algorythm type that will be used
 int setAlgoType(unsigned short algoTypeCode)
