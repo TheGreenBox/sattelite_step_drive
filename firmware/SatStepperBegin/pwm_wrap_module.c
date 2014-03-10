@@ -191,19 +191,6 @@ void setBDirection(int direct)
     }
 }
 
-#warn function is out of time, kill it later
-void resetDriver(int drv_reset)
-{
-    if(drv_reset) {
-        GpioDataRegs.GPACLEAR.bit.GPIO19 = 1;
-        GpioDataRegs.GPBCLEAR.bit.GPIO32 = 1;
-    }
-    else {
-        GpioDataRegs.GPASET.bit.GPIO19 = 1;
-        GpioDataRegs.GPBSET.bit.GPIO32 = 1;
-    }
-}
-
 void deactivate_pwm_driver() {
     GpioDataRegs.GPACLEAR.bit.GPIO19 = 1;
     GpioDataRegs.GPBCLEAR.bit.GPIO32 = 1;

@@ -3,7 +3,7 @@
 *
 */
 
-//void input_encoder_signal_handler(bool A, bool nA,
+//void inputEncoder_signal_handler(bool A, bool nA,
 //                                  bool B, bool nB,
 //                                  bool index, bool nIndex) {
 //
@@ -16,10 +16,9 @@
 interrupt void encoderInputInterruptHandler(void)
 {
     //handler_body(); //TODO: write
-
 }
 
-void __pass()
+void encoderInit()
 {
     EALLOW; // This is needed to write to EALLOW protected registers
     //PieVectTable.TINT0 = TMR0_Interrupt;
@@ -30,9 +29,13 @@ void __pass()
     // 10 Interrupt generated on a falling edge (high-to-low transition)
     // 11 Interrupt generated on both a falling edge and a rising edge
     //  (high-to-low and low-to-high transition)
-    //XIntruptRegs.XINT1CR.XINTCR_BITS.Polarity = 3; //0b11
+    XIntruptRegs.XINT1CR.bit.POLARITY = 3;
+    XIntruptRegs.XINT2CR.bit.POLARITY = 3;
+    XIntruptRegs.XINT3CR.bit.POLARITY = 3;
 
-    //GpioCtrlRegs.GPAMUX2.bit.GPIO21 = 1;
+    XIntruptRegs.XINT1CR.bit.ENABLE   = 1;
+    XIntruptRegs.XINT2CR.bit.ENABLE   = 1;
+    XIntruptRegs.XINT3CR.bit.ENABLE   = 1;
 
     //XIntruptRegs.XINT1CR.XINTCR_BITS.Enable = 1;
 
