@@ -191,7 +191,7 @@ void setBDirection(int direct)
     }
 }
 
-#warning function is out of time, kill it later
+#warn function is out of time, kill it later
 void resetDriver(int drv_reset)
 {
     if(drv_reset) {
