@@ -31,7 +31,7 @@ struct XINTCR_BITS {
 union XINTCR_REG {
    Uint16               all;
    struct XINTCR_BITS   bit;
-};  
+};
 
 struct XNMICR_BITS {
     Uint16   ENABLE:1;    // 0      enable/disable
@@ -43,7 +43,7 @@ struct XNMICR_BITS {
 union XNMICR_REG {
    Uint16               all;
    struct XNMICR_BITS   bit;
-};  
+};
 
 
 

@@ -31,7 +31,7 @@ struct PIECTRL_BITS {      // bits description
 union PIECTRL_REG {
    Uint16                 all;
    struct PIECTRL_BITS  bit;
-};  
+};
 
 // PIEIER: Register bit definitions:
 struct PIEIER_BITS {       // bits description
@@ -49,7 +49,7 @@ struct PIEIER_BITS {       // bits description
 union PIEIER_REG {
    Uint16              all;
    struct PIEIER_BITS  bit;
-}; 
+};
 
 // PIEIFR: Register bit definitions:
 struct PIEIFR_BITS {       // bits description
@@ -97,31 +97,31 @@ union PIEACK_REG {
 struct PIE_CTRL_REGS {
    union PIECTRL_REG PIECTRL;       // PIE control register
    union PIEACK_REG  PIEACK;        // PIE acknowledge
-   union PIEIER_REG  PIEIER1;       // PIE INT1 IER register  
+   union PIEIER_REG  PIEIER1;       // PIE INT1 IER register
    union PIEIFR_REG  PIEIFR1;       // PIE INT1 IFR register
-   union PIEIER_REG  PIEIER2;       // PIE INT2 IER register 
+   union PIEIER_REG  PIEIER2;       // PIE INT2 IER register
    union PIEIFR_REG  PIEIFR2;       // PIE INT2 IFR register
-   union PIEIER_REG  PIEIER3;       // PIE INT3 IER register 
+   union PIEIER_REG  PIEIER3;       // PIE INT3 IER register
    union PIEIFR_REG  PIEIFR3;       // PIE INT3 IFR register
-   union PIEIER_REG  PIEIER4;       // PIE INT4 IER register             
+   union PIEIER_REG  PIEIER4;       // PIE INT4 IER register
    union PIEIFR_REG  PIEIFR4;       // PIE INT4 IFR register
-   union PIEIER_REG  PIEIER5;       // PIE INT5 IER register  
+   union PIEIER_REG  PIEIER5;       // PIE INT5 IER register
    union PIEIFR_REG  PIEIFR5;       // PIE INT5 IFR register
-   union PIEIER_REG  PIEIER6;       // PIE INT6 IER register 
+   union PIEIER_REG  PIEIER6;       // PIE INT6 IER register
    union PIEIFR_REG  PIEIFR6;       // PIE INT6 IFR register
-   union PIEIER_REG  PIEIER7;       // PIE INT7 IER register 
+   union PIEIER_REG  PIEIER7;       // PIE INT7 IER register
    union PIEIFR_REG  PIEIFR7;       // PIE INT7 IFR register
    union PIEIER_REG  PIEIER8;       // PIE INT8 IER register
    union PIEIFR_REG  PIEIFR8;       // PIE INT8 IFR register
-   union PIEIER_REG  PIEIER9;       // PIE INT9 IER register  
+   union PIEIER_REG  PIEIER9;       // PIE INT9 IER register
    union PIEIFR_REG  PIEIFR9;       // PIE INT9 IFR register
-   union PIEIER_REG  PIEIER10;      // PIE INT10 IER register 
+   union PIEIER_REG  PIEIER10;      // PIE INT10 IER register
    union PIEIFR_REG  PIEIFR10;      // PIE INT10 IFR register
-   union PIEIER_REG  PIEIER11;      // PIE INT11 IER register 
+   union PIEIER_REG  PIEIER11;      // PIE INT11 IER register
    union PIEIFR_REG  PIEIFR11;      // PIE INT11 IFR register
    union PIEIER_REG  PIEIER12;      // PIE INT12 IER register
    union PIEIFR_REG  PIEIFR12;      // PIE INT12 IFR register
-};     
+};
 
 #define PIEACK_GROUP1   0x0001
 #define PIEACK_GROUP2   0x0002
