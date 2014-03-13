@@ -91,7 +91,7 @@ void PieVectTableInit() {
     PINT *Dest = &PieVectTable.TINT1;
 
     EALLOW;
-    for(i=0; i < 115; i++)
+    for (i=0; i < 115; i++)
         *Dest++ = &ISR_ILLEGAL;
     EDIS;
 
@@ -234,9 +234,13 @@ static void powerUpAdc() {
     AdcRegs.ADCCTL1.bit.ADCPWDN   = 1;      // Power ADC
     AdcRegs.ADCCTL1.bit.ADCENABLE = 1;      // Enable ADC
     AdcRegs.ADCCTL1.bit.ADCREFSEL = 0;      // Select interal BG
-    EDIS; // Disable register access
 
     DELAY_US(ADC_usDELAY);  // Delay before converting ADC channels
+
+    AdcRegs.ADCCTL1.bit.INTPULSEPOS = 1;    // INT pulse generation after conversion                                                          \
+    AdcRegs.ADCCTL1.bit.TEMPCONV    = 0;    // Temperature sensor disconnected from ADC                                                             \
+
+    EDIS; // Disable register access
 }
 
 static void socSetUp() {
@@ -249,6 +253,9 @@ static void socSetUp() {
     // for the same trigger, channel, and/or acquisition window as desired.
 
     EALLOW; // below registers are "protected", allow access.
+    AdcRegs.ADCINTSOCSEL1.all       = 0;     // TRIGSEL field determines SOCx triggers
+    AdcRegs.ADCINTSOCSEL2.all       = 0;     // TRIGSEL field determines SOCx triggers
+
     AdcRegs.ADCSOC0CTL.bit.CHSEL    = 0;    // ChSelect: ADC A0-> Phase A
     AdcRegs.ADCSOC0CTL.bit.TRIGSEL  = 5;    // Set SOC0 start trigger on EPWM1A, due to round-robin SOC0 converts first then SOC1
     AdcRegs.ADCSOC0CTL.bit.ACQPS    = 6;    // Set SOC0 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
