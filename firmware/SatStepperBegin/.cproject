@@ -48,10 +48,12 @@
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../libs/app_libs/motor_control/drivers/f2803x_v1.1&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../device_support/f2803x/v122/DSP2803x_headers/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../device_support/f2803x/v122/DSP2803x_common/include&quot;"/>
+									<listOptionValue builtIn="false" value="${PROJECT_ROOT}"/>
 								</option>
 								<option id="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.DIAG_WARNING.1702496491" name="Treat diagnostic &lt;id&gt; as warning (--diag_warning, -pdsw)" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.DIAG_WARNING" valueType="stringList">
 									<listOptionValue builtIn="false" value="225"/>
 								</option>
+								<option id="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.C_C_PLUS_PLUS_DIALECT.1083819045" name="C/C++ Dialect" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.C_C_PLUS_PLUS_DIALECT" value="com.ti.ccstudio.buildDefinitions.C2000_6.1.compilerID.C_C_PLUS_PLUS_DIALECT._none" valueType="enumerated"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_6.1.compiler.inputType__C_SRCS.1175916710" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.compiler.inputType__C_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_6.1.compiler.inputType__CPP_SRCS.638659475" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.compiler.inputType__CPP_SRCS"/>
 								<inputType id="com.ti.ccstudio.buildDefinitions.C2000_6.1.compiler.inputType__ASM_SRCS.551606078" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.C2000_6.1.compiler.inputType__ASM_SRCS"/>

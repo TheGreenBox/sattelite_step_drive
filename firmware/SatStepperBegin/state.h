@@ -19,10 +19,19 @@ typedef struct _MotorControl {
     short rotationDirection;		//1 or -1
 } MotorControl;
 
+typedef struct _EncoderCounts {
+    long long raw;
+    long long precise;
+#ifdef _DEBUG
+    unsigned int error;
+#endif // _DEBUG
+} EncoderCounts;
+
 typedef struct _GlobalState {
     long long systemTimer;
     long long stepTicker;
     MotorControl motorControl;
+    EncoderCounts encoder;
 } GlobalState;
 
 extern volatile GlobalState gState;

@@ -32,7 +32,7 @@ void init() {
 void mainLoop() {
     while (1) {
         // Put here debug functions
-        // For instance - fuction for simulate input signal
+        // For instance - function for simulate input signal
     }
 }
 

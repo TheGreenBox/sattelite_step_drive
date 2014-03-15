@@ -3,27 +3,61 @@
 *
 */
 
-//void inputEncoder_signal_handler(bool A, bool nA,
-//                                  bool B, bool nB,
-//                                  bool index, bool nIndex) {
-//
-//}
-
 #include <PeripheralHeaderIncludes.h>
+#include <f2803xbmsk.h>
 
-#include "f2803xbmsk.h"
+#include "encoder.h"
+#include "gray_code_decoder.h"
+#include "state.h"
 
-interrupt void encoderInputInterruptHandler(void)
-{
-    //handler_body(); //TODO: write
+//#define STATIC_ASSERT(condition, msg) \
+//    #if not condition \
+//    #   error msg \
+//    #endif
+
+#define ASSERT(condition, event) \
+    if (condition) { \
+        event; \
+    }
+
+#define ENCODER_RANGE 1000  //TODO: check it!!
+#define ENCODER_HALF_OF_RANGE ENCODER_RANGE/2
+
+interrupt void encoderInputABIntHandler(void) {
+#ifdef DEBUG
+    ASSERT(GpioDataRegs.GPADAT.bit.GPIO20 == GpioDataRegs.GPADAT.bit.GPIO24, gState.encoder.errors++)
+    ASSERT(GpioDataRegs.GPADAT.bit.GPIO21 == GpioDataRegs.GPADAT.bit.GPIO25, gState.encoder.errors++)
+#endif // DEBUG
+
+    static int oldA = 0, oldB = 0;
+    gState.encoder.precise += GREY_CODE_STEP_DECODER(oldA, oldB, GpioDataRegs.GPADAT.bit.GPIO20, GpioDataRegs.GPADAT.bit.GPIO21);
+    oldA = GpioDataRegs.GPADAT.bit.GPIO20;
+    oldB = GpioDataRegs.GPADAT.bit.GPIO21;
 }
 
-void encoderInit()
-{
+interrupt void encoderInputCIntHandler(void) {
+#ifdef _DEBUG
+    ASSERT(GpioDataRegs.GPADAT.bit.GPIO23 == GpioDataRegs.GPADAT.bit.GPIO26, gState.encoder.errors++)
+#endif // DEBUG
+//    STATIC_ASSERT(defined ENCODER_RANGE, "ENCODER_RANGE must be defined")
+
+    if (GpioDataRegs.GPADAT.bit.GPIO23) {
+        if (gState.encoder.precise > ENCODER_HALF_OF_RANGE) {
+            gState.encoder.raw += 1;
+            gState.encoder.precise = 0;
+        }
+        else {
+            gState.encoder.raw -= 1;
+            gState.encoder.precise = ENCODER_RANGE;
+        }
+    }
+}
+
+void encoderInit() {
     EALLOW; // This is needed to write to EALLOW protected registers
-    PieVectTable.XINT1 = encoderInputInterruptHandler;
-    PieVectTable.XINT2 = encoderInputInterruptHandler;
-    PieVectTable.XINT3 = encoderInputInterruptHandler;
+    PieVectTable.XINT1 = encoderInputABIntHandler;
+    PieVectTable.XINT2 = encoderInputABIntHandler;
+    PieVectTable.XINT3 = encoderInputCIntHandler;
     EDIS;
 
     /*
@@ -35,7 +69,7 @@ void encoderInit()
     */
     XIntruptRegs.XINT1CR.bit.POLARITY = 3;
     XIntruptRegs.XINT2CR.bit.POLARITY = 3;
-    XIntruptRegs.XINT3CR.bit.POLARITY = 3;
+    XIntruptRegs.XINT3CR.bit.POLARITY = 1;
 
     XIntruptRegs.XINT1CR.bit.ENABLE   = 1;
     XIntruptRegs.XINT2CR.bit.ENABLE   = 1;

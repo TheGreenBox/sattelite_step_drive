@@ -8,9 +8,10 @@
  * ========================================================
  */
 
-#include "encoder.h"
+#include "gray_code_decoder.h"
 
-static int encoderMasks[16] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 0};
+int gray_code_encoder_masks[16] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 0};
+
 /**
  positive
  [1 -> 1] [1 -> 0] [0 -> 0] [0 -> 1]
@@ -48,24 +49,28 @@ static int encoderMasks[16] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 
  0b00001001 = 0x09 ( 9  )
 */
 
-typedef union {
-    struct {
-        unsigned char oldA  : 1; //!< old state a channel
-        unsigned char oldB  : 1; //!< old state b channel
-        unsigned char newA  : 1; //!< new state a channel
-        unsigned char newB  : 1; //!< new state b channel
-        unsigned char empty : 4; //!< reserved sace
-    } step;
-    unsigned char bin;
-} EncoderKey;
-
-int greyCodeStepDecoder(unsigned char oldA, unsigned char oldB, unsigned char newA, unsigned char newB) {
-    EncoderKey key;
-    key.bin = 0;
-    key.step.oldA = oldA;
-    key.step.oldB = oldB;
-    key.step.newA = newA;
-    key.step.newB = newB;
-    return encoderMasks[key.bin];
-}
+/*
+*
+* typedef union {
+*     struct {
+*         unsigned char oldA  : 1; //!< old state a channel
+*         unsigned char oldB  : 1; //!< old state b channel
+*         unsigned char newA  : 1; //!< new state a channel
+*         unsigned char newB  : 1; //!< new state b channel
+*         unsigned char empty : 4; //!< reserved sace
+*     } step;
+*     unsigned char bin;
+* } EncoderKey;
+*
+* int greyCodeStepDecoder(unsigned char oldA, unsigned char oldB, unsigned char newA, unsigned char newB) {
+*     EncoderKey key;
+*     key.bin = 0;
+*     key.step.oldA = oldA;
+*     key.step.oldB = oldB;
+*     key.step.newA = newA;
+*     key.step.newB = newB;
+*     return gray_code_encoder_masks[key.bin];
+* }
+*
+*/
 
