@@ -91,6 +91,11 @@ void encoderInit() {
     PieCtrlRegs.PIEIER12.bit.INTx1 = 1;
 
     IER |= M_INT12;
+
+    // init global encoder counter
+    gState.encoder.raw     = 0;
+    gState.encoder.precise = 0;
+    gState.encoder.errors  = 0;
 }
 
 /* TODO: don't forget about it! -->

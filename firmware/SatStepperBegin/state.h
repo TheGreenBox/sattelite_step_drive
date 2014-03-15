@@ -22,9 +22,9 @@ typedef struct _MotorControl {
 typedef struct _EncoderCounts {
     long long raw;
     long long precise;
-#ifdef _DEBUG
-    unsigned int error;
-#endif // _DEBUG
+#ifdef DEBUG
+    unsigned int errors;
+#endif // DEBUG
 } EncoderCounts;
 
 typedef struct _GlobalState {
