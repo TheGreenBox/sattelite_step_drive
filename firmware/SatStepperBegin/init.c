@@ -10,6 +10,7 @@
 #include "PeripheralHeaderIncludes.h"
 #include "adc.h"
 #include "state.h"
+#include "sensors/encoder/encoder.h"
 
 static void WDogDisable(void) {
     EALLOW;
@@ -436,10 +437,10 @@ static void initGPIO() {
     // GpioDataRegs.GPACLEAR.bit.GPIO29 = 1; // uncomment if --> Set Low initially
     // GpioDataRegs.GPASET.bit.GPIO29 = 1; // uncomment if --> Set High initially
     //----------------------------------------------------------------------------
+    // GpioDataRegs.GPACLEAR.bit.GPIO30 = 1; // uncomment if --> Set Low initially
     // GPIO-30 - PIN FUNCTION = --Spare--
     GpioCtrlRegs.GPAMUX2.bit.GPIO30 = 0; // 0=GPIO, 1=CANRX-A, 2=Resv, 3=Resv
     GpioCtrlRegs.GPADIR.bit.GPIO30 = 0; // 1=OUTput, 0=INput
-    // GpioDataRegs.GPACLEAR.bit.GPIO30 = 1; // uncomment if --> Set Low initially
     // GpioDataRegs.GPASET.bit.GPIO30 = 1; // uncomment if --> Set High initially
     //----------------------------------------------------------------------------
     // GPIO-31 - PIN FUNCTION = LED2 on controlCARD
@@ -517,6 +518,7 @@ static void peripheryInit() {
     adcInit();
     peripheryClockEnable();
     initGPIO();
+    encoderInit();
 }
 
 void deviceInit() {
