@@ -18,15 +18,15 @@
 typedef struct _MotorControl {
     unsigned pwmDutyCycle;
     unsigned stepTimeout;
-    short rotationDirection;		// 1 or -1
+    short rotationDirection;		// 1 or -1 or 0
 } MotorControl;
 
 typedef struct _EncoderCounts {
     long long raw;
     long long precise;
-#ifdef _DEBUG
-    unsigned int error;
-#endif // _DEBUG
+#ifdef DEBUG
+    unsigned int errors;
+#endif // DEBUG
 } EncoderCounts;
 
 typedef struct _GlobalState {
@@ -47,3 +47,4 @@ typedef struct _GlobalConfig {
 extern const GlobalConfig gConfig;
 
 #endif //_GLOBAL_STATE_H_
+
