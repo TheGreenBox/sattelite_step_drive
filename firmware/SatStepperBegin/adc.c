@@ -155,9 +155,7 @@ static void adcInterruptInit() {
     PieVectTable.ADCINT4 = ADCINT4_ISR;
     PieVectTable.ADCINT5 = ADCINT5_ISR;
 
-    EDIS; // Disable register access
-
-    // Enable PIE for XINT1
+    // Enable PIE for ADCINTx
     PieCtrlRegs.PIEIER12.bit.INTx1 = 1;
     PieCtrlRegs.PIEIER12.bit.INTx2 = 1;
     PieCtrlRegs.PIEIER12.bit.INTx3 = 1;
@@ -165,6 +163,8 @@ static void adcInterruptInit() {
     PieCtrlRegs.PIEIER12.bit.INTx5 = 1;
 
     IER |= M_INT10;
+
+    EDIS; // Disable register access
 }
 
 void adcInit() {
