@@ -11,18 +11,21 @@
 #ifndef _GLOBAL_STATE_H_
 #define _GLOBAL_STATE_H_
 
+#include "stdint.h"
+
 #define MAX_PWM_DUTY 1024
 
 typedef struct _MotorControl {
     unsigned pwmDutyCycle;
     unsigned stepTimeout;
-    short rotationDirection;		//1 or -1
+    short rotationDirection;		// 1 or -1
 } MotorControl;
 
 typedef struct _GlobalState {
     long long systemTimer;
     long long stepTicker;
     MotorControl motorControl;
+    uint_fast16_t adc[5];
 } GlobalState;
 
 extern volatile GlobalState gState;
