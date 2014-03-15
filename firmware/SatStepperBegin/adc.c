@@ -105,23 +105,55 @@ static void socSetUp() {
     EDIS; // Disable register access
 }
 
+interrupt void ADCINT1_ISR(void) {
+    gState.adc[0] = AdcResult.ADCRESULT0;
+}
+
+interrupt void ADCINT2_ISR(void) {
+    gState.adc[1] = AdcResult.ADCRESULT1;
+}
+
+interrupt void ADCINT3_ISR(void) {
+    gState.adc[2] = AdcResult.ADCRESULT2;
+}
+
+interrupt void ADCINT4_ISR(void) {
+    gState.adc[3] = AdcResult.ADCRESULT3;
+}
+
+interrupt void ADCINT5_ISR(void) {
+    gState.adc[4] = AdcResult.ADCRESULT4;
+}
+
 static void adcInterruptInit() {
     EALLOW; // Below registers are "protected", allow access.
 
-    // Disable continuous sampling for ADCINT1 and ADCINT2
-    AdcRegs.INTSEL1N2.bit.INT1CONT = 0;
-    AdcRegs.INTSEL1N2.bit.INT2CONT = 0;
-    // Disable continuous sampling for ADCINT3 and ADCINT4
-    AdcRegs.INTSEL3N4.bit.INT3CONT = 0;
-    AdcRegs.INTSEL3N4.bit.INT4CONT = 0;
-    // Disable continuous sampling for ADCINT5
-    AdcRegs.INTSEL5N6.bit.INT5CONT = 0;
+    // Enable continuous mode for ADCINT1 and ADCINT2
+    AdcRegs.INTSEL1N2.bit.INT1CONT = 1;
+    AdcRegs.INTSEL1N2.bit.INT2CONT = 1;
+    // Enable continuous mode for ADCINT3 and ADCINT4
+    AdcRegs.INTSEL3N4.bit.INT3CONT = 1;
+    AdcRegs.INTSEL3N4.bit.INT4CONT = 1;
+    // Enable continuous mode for ADCINT5
+    AdcRegs.INTSEL5N6.bit.INT5CONT = 1;
+
+    AdcRegs.INTSEL1N2.bit.INT1E = 1;
+    AdcRegs.INTSEL1N2.bit.INT2E = 1;
+    AdcRegs.INTSEL3N4.bit.INT3E = 1;
+    AdcRegs.INTSEL3N4.bit.INT4E = 1;
+    AdcRegs.INTSEL5N6.bit.INT5E = 1;
 
     AdcRegs.INTSEL1N2.bit.INT1SEL  = 0; // EOC0 is trigger for ADCINT1
     AdcRegs.INTSEL1N2.bit.INT2SEL  = 1; // EOC1 is trigger for ADCINT2
     AdcRegs.INTSEL3N4.bit.INT3SEL  = 2; // EOC2 is trigger for ADCINT3
     AdcRegs.INTSEL3N4.bit.INT4SEL  = 3; // EOC3 is trigger for ADCINT4
     AdcRegs.INTSEL5N6.bit.INT5SEL  = 4; // EOC4 is trigger for ADCINT5
+
+    PieVectTable.ADCINT1 = ADCINT1_ISR;
+    PieVectTable.ADCINT2 = ADCINT2_ISR;
+    PieVectTable.ADCINT3 = ADCINT3_ISR;
+    PieVectTable.ADCINT4 = ADCINT4_ISR;
+    PieVectTable.ADCINT5 = ADCINT5_ISR;
 
     EDIS; // Disable register access
 }
@@ -133,22 +165,3 @@ void adcInit() {
     powerUpAdc();
 }
 
-interrupt void ADCINT0_ISR(void) {
-    gState.adc[0] = AdcResult.ADCRESULT0;
-}
-
-interrupt void ADCINT1_ISR(void) {
-    gState.adc[1] = AdcResult.ADCRESULT1;
-}
-
-interrupt void ADCINT2_ISR(void) {
-    gState.adc[2] = AdcResult.ADCRESULT2;
-}
-
-interrupt void ADCINT3_ISR(void) {
-    gState.adc[3] = AdcResult.ADCRESULT3;
-}
-
-interrupt void ADCINT4_ISR(void) {
-    gState.adc[4] = AdcResult.ADCRESULT4;
-}
