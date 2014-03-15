@@ -95,7 +95,9 @@ void encoderInit() {
     // init global encoder counter
     gState.encoder.raw     = 0;
     gState.encoder.precise = 0;
+#ifdef DEBUG
     gState.encoder.errors  = 0;
+#endif // DEBUG
 }
 
 /* TODO: don't forget about it! -->
