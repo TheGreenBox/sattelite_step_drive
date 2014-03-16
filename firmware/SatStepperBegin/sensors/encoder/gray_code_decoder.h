@@ -1,11 +1,10 @@
-/* ========================================================
+/**
  * Organization: The Green Box
- *
  * Project name:    Satellite stepper drive
- * File name:       encoder.h
- * Description:
- * Author:          AKindyakov
- * ========================================================
+ *
+ * @file    gray_code_encoder.h
+ * @brief   Parsing 2lines binary gray code for relative incremental sensors
+ *  [wiki](https://github.com/TheGreenBox/sattelite_step_drive/wiki/sensor_encoder)
  */
 
 #pragma once

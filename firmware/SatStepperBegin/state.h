@@ -11,6 +11,15 @@
 #ifndef _GLOBAL_STATE_H_
 #define _GLOBAL_STATE_H_
 
+#define __ASSERT_CONCAT(a, b) a##b
+#define STATIC_ASSERT(e) \
+    enum { __ASSERT_CONCAT(static_assert_, __LINE__) = 1/(!!(e)) }
+
+#define ASSERT(condition, event) \
+    if (condition) { \
+        event; \
+    }
+
 #include "stdint.h"
 
 #define MAX_PWM_DUTY 1024
