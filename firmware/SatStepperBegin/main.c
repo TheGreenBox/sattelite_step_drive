@@ -14,7 +14,7 @@
 #include "led_control.h"
 #include "init.h"
 #include "control_interrupt.h"
-#include "control_timer.h"
+#include "timers.h"
 #include "state.h"
 
 void init() {

@@ -11,7 +11,7 @@
 #include "control_interrupt.h"
 #include "state.h"
 #include "control_algo.h"
-#include "control_timer.h"
+#include "timers.h"
 #include "pwm_wrap_module.h"
 
 // for debug purposes

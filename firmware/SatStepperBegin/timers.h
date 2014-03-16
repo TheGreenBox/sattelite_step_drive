@@ -2,9 +2,8 @@
  * Organization: The Green Box
  *
  * Project name: Satellite stepper drive
- * File name:  SatStepperBegin/control_timer.h
+ * File name:  SatStepperBegin/timers.h
  * Description:
- * Author:  AKindyakov
  * ========================================================
  */
 
@@ -15,11 +14,14 @@
 
 typedef void (* _controlTimerInterruptHandler)(void);
 
-void timer0Init( _controlTimerInterruptHandler );
+void timer0Init(_controlTimerInterruptHandler);
+void timer1Init(_controlTimerInterruptHandler);
 
 void setTimer0Peiod(unsigned _period); // ~ usec*10
+void setTimer1Peiod(unsigned _period); // ~ usec*10
 
 void timer0Stop();
+void timer1Stop();
 
 void timer0Start();
 
