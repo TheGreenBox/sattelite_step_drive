@@ -105,24 +105,37 @@ static void socSetUp() {
     EDIS; // Disable register access
 }
 
+void acknowledgeInterruptFromGroup(uint_fast8_t groupNum) {
+    // To receive more interrupts from this PIE group, acknowledge this interrupt
+    uint_fast8_t correlatingBitNum = groupNum - 1;
+    PieCtrlRegs.PIEACK.all |= 1 << correlatingBitNum;
+}
+
+static const ADC_INTERRUPT_GROUP = 10;
+
 interrupt void ADCINT1_ISR(void) {
     gState.adc[0] = AdcResult.ADCRESULT0;
+    acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT2_ISR(void) {
     gState.adc[1] = AdcResult.ADCRESULT1;
+    acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT3_ISR(void) {
     gState.adc[2] = AdcResult.ADCRESULT2;
+    acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT4_ISR(void) {
     gState.adc[3] = AdcResult.ADCRESULT3;
+    acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT5_ISR(void) {
     gState.adc[4] = AdcResult.ADCRESULT4;
+    acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
 }
 
 static void adcInterruptInit() {
@@ -149,20 +162,20 @@ static void adcInterruptInit() {
     AdcRegs.INTSEL3N4.bit.INT4SEL  = 3; // EOC3 is trigger for ADCINT4
     AdcRegs.INTSEL5N6.bit.INT5SEL  = 4; // EOC4 is trigger for ADCINT5
 
-    PieVectTable.ADCINT1 = ADCINT1_ISR;
-    PieVectTable.ADCINT2 = ADCINT2_ISR;
-    PieVectTable.ADCINT3 = ADCINT3_ISR;
-    PieVectTable.ADCINT4 = ADCINT4_ISR;
-    PieVectTable.ADCINT5 = ADCINT5_ISR;
+    PieVectTable.ADCINT1 = &ADCINT1_ISR;
+    PieVectTable.ADCINT2 = &ADCINT2_ISR;
+    PieVectTable.ADCINT3 = &ADCINT3_ISR;
+    PieVectTable.ADCINT4 = &ADCINT4_ISR;
+    PieVectTable.ADCINT5 = &ADCINT5_ISR;
 
-    // Enable PIE for ADCINTx
-    PieCtrlRegs.PIEIER12.bit.INTx1 = 1;
-    PieCtrlRegs.PIEIER12.bit.INTx2 = 1;
-    PieCtrlRegs.PIEIER12.bit.INTx3 = 1;
-    PieCtrlRegs.PIEIER12.bit.INTx4 = 1;
-    PieCtrlRegs.PIEIER12.bit.INTx5 = 1;
+    // Enable PIE for ADCINT1..ADCINT5 in interrupt group 10
+    PieCtrlRegs.PIEIER10.bit.INTx1 = 1;
+    PieCtrlRegs.PIEIER10.bit.INTx2 = 1;
+    PieCtrlRegs.PIEIER10.bit.INTx3 = 1;
+    PieCtrlRegs.PIEIER10.bit.INTx4 = 1;
+    PieCtrlRegs.PIEIER10.bit.INTx5 = 1;
 
-    IER |= M_INT10;
+    IER |= M_INT10; // Enable interrupt level 10 (group 10)
 
     EDIS; // Disable register access
 }
@@ -173,4 +186,3 @@ void adcInit() {
     adcInterruptInit();
     powerUpAdc();
 }
-
