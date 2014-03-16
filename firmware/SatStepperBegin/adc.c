@@ -105,13 +105,13 @@ static void socSetUp() {
     EDIS; // Disable register access
 }
 
-void acknowledgeInterruptFromGroup(uint_fast8_t groupNum) {
+void acknowledgeInterruptFromGroup(uint_fast16_t groupID) {
     // To receive more interrupts from this PIE group, acknowledge this interrupt
-    uint_fast8_t correlatingBitNum = groupNum - 1;
-    PieCtrlRegs.PIEACK.all |= 1 << correlatingBitNum;
+    // Writing 0 to bits is ignored, so there is no point using OR operator
+    PieCtrlRegs.PIEACK.all = groupID;
 }
 
-static const ADC_INTERRUPT_GROUP = 10;
+static const uint_fast16_t ADC_INTERRUPT_GROUP = PIEACK_GROUP10;
 
 interrupt void ADCINT1_ISR(void) {
     gState.adc[0] = AdcResult.ADCRESULT0;
