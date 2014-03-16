@@ -2,7 +2,7 @@
  * Organization: The Green Box
  *
  * Project name: Satellite stepper drive
- * File name:  SatStepperBegin/control_timer.c
+ * File name:  SatStepperBegin/timers.c
  * Description:
  * Author:  AKindyakov
  * ========================================================
@@ -12,10 +12,11 @@
 #include <PeripheralHeaderIncludes.h>
 //-----------------------------------------------------------------------------
 #include "f2803xbmsk.h"
-#include "control_timer.h"
+#include "timers.h"
 //-----------------------------------------------------------------------------
 
 static _controlTimerInterruptHandler _tmr0Handler;
+static _controlTimerInterruptHandler _tmr1Handler;
 
 interrupt void TMR0_Interrupt(void)
 {
@@ -26,11 +27,24 @@ interrupt void TMR0_Interrupt(void)
     // and the prescaler counter (PSCH:PSC) is loaded with the
     // value in the timer divide- down register (TDDRH:TDDR).
     CpuTimer0Regs.TCR.bit.TRB = 1;
-    // Acknowledge interrupt to recieve more interrupts from PIE group 3
+    // Acknowledge interrupt to recieve more interrupts from PIE group 1
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
 }
 
-void timer0Init( _controlTimerInterruptHandler handler )
+interrupt void TMR1_Interrupt(void)
+{
+    _tmr1Handler();
+    CpuTimer1Regs.TCR.bit.TIF = 0;
+
+    // The TIMH:TIM is loaded with the value in the PRDH:PRD,
+    // and the prescaler counter (PSCH:PSC) is loaded with the
+    // value in the timer divide- down register (TDDRH:TDDR).
+    CpuTimer1Regs.TCR.bit.TRB = 1;
+    // TINT1 is not part of any interrupt group, so it doesn't require
+    // acknowledgement
+}
+
+void timer0Init(_controlTimerInterruptHandler handler)
 {
     _tmr0Handler = handler;
 
@@ -53,16 +67,51 @@ void timer0Init( _controlTimerInterruptHandler handler )
     CpuTimer0Regs.TPR.all = 0x1770; //600
 }
 
-void setTimer0Peiod (unsigned _period) // ~ usec
+void timer1Init(_controlTimerInterruptHandler handler)
+{
+    _tmr1Handler = handler;
+
+    EALLOW; // This is needed to write to EALLOW protected registers
+    PieVectTable.TINT1 = &TMR1_Interrupt;
+    EDIS;
+
+    // Enable TINT1
+    IER |= M_INT13;
+
+    // enable timer 0 interrupt
+    CpuTimer1Regs.TCR.bit.TIE = 1;
+    // free run mode switch on
+    CpuTimer1Regs.TCR.bit.FREE = 1;
+    CpuTimer1Regs.TCR.bit.SOFT = 0;
+
+    // set preload value and timer prescaler
+    CpuTimer1Regs.PRD.all = 0xFFFF;
+    CpuTimer1Regs.TPR.all = 0x1770; //600
+}
+
+
+void setTimer0Peiod(unsigned _period) // ~ usec
 {
     if (_period != CpuTimer0Regs.PRD.all) {
         CpuTimer0Regs.PRD.all = _period;
     }
 }
 
+void setTimer1Peiod(unsigned _period) // ~ usec
+{
+    if (_period != CpuTimer1Regs.PRD.all) {
+        CpuTimer1Regs.PRD.all = _period;
+    }
+}
+
 void timer0Stop()
 {
     CpuTimer0Regs.TCR.bit.TSS = 1;
+}
+
+void timer1Stop()
+{
+    CpuTimer1Regs.TCR.bit.TSS = 1;
 }
 
 void timer0Start()
