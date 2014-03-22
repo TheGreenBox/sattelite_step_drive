@@ -77,23 +77,23 @@ static void socSetUp() {
     AdcRegs.ADCINTSOCSEL2.all       = 0;    // TRIGSEL field determines SOCx triggers
 
     AdcRegs.ADCSOC0CTL.bit.CHSEL    = 0;    // ChSelect: ADC A0-> Phase A
-    AdcRegs.ADCSOC0CTL.bit.TRIGSEL  = 1;    // Set SOC0 start trigger on TINT0 (CPU Timer 0), due to round-robin SOC0 converts first then SOC1
+    AdcRegs.ADCSOC0CTL.bit.TRIGSEL  = 2;    // Set SOC0 start trigger on TINT1 (CPU Timer 0), due to round-robin SOC0 converts first then SOC1
     AdcRegs.ADCSOC0CTL.bit.ACQPS    = 6;    // Set SOC0 S/H Window to 7 ADC Clock Cycles, (6 ACQPS plus 1)
 
     AdcRegs.ADCSOC1CTL.bit.CHSEL    = 1;    // ChSelect: ADC A1-> Phase B
-    AdcRegs.ADCSOC1CTL.bit.TRIGSEL  = 1;
+    AdcRegs.ADCSOC1CTL.bit.TRIGSEL  = 2;
     AdcRegs.ADCSOC1CTL.bit.ACQPS    = 6;
 
     AdcRegs.ADCSOC2CTL.bit.CHSEL    = 2;    // ChSelect: ADC A2-> Phase C
-    AdcRegs.ADCSOC2CTL.bit.TRIGSEL  = 1;
+    AdcRegs.ADCSOC2CTL.bit.TRIGSEL  = 2;
     AdcRegs.ADCSOC2CTL.bit.ACQPS    = 6;
 
     AdcRegs.ADCSOC3CTL.bit.CHSEL    = 3;    // ChSelect: ADC A3-> Phase D
-    AdcRegs.ADCSOC3CTL.bit.TRIGSEL  = 1;
+    AdcRegs.ADCSOC3CTL.bit.TRIGSEL  = 2;
     AdcRegs.ADCSOC3CTL.bit.ACQPS    = 6;
 
     AdcRegs.ADCSOC4CTL.bit.CHSEL    = 4;    // ChSelect: ADC A4-> DC Bus Voltage
-    AdcRegs.ADCSOC4CTL.bit.TRIGSEL  = 1;
+    AdcRegs.ADCSOC4CTL.bit.TRIGSEL  = 2;
     AdcRegs.ADCSOC4CTL.bit.ACQPS    = 6;
 
     EDIS; // Disable register access
