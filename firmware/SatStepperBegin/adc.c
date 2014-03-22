@@ -150,8 +150,8 @@ static void adcInterruptInit() {
     // Enable continuous mode for ADCINT5
     AdcRegs.INTSEL5N6.bit.INT5CONT = 1;
 
-    AdcRegs.INTSEL1N2.bit.INT1E = 1;
-    AdcRegs.INTSEL1N2.bit.INT2E = 1;
+    // AdcRegs.INTSEL1N2.bit.INT1E = 1;
+    // AdcRegs.INTSEL1N2.bit.INT2E = 1;
     AdcRegs.INTSEL3N4.bit.INT3E = 1;
     AdcRegs.INTSEL3N4.bit.INT4E = 1;
     AdcRegs.INTSEL5N6.bit.INT5E = 1;
@@ -162,18 +162,18 @@ static void adcInterruptInit() {
     AdcRegs.INTSEL3N4.bit.INT4SEL  = 3; // EOC3 is trigger for ADCINT4
     AdcRegs.INTSEL5N6.bit.INT5SEL  = 4; // EOC4 is trigger for ADCINT5
 
-    PieVectTable.ADCINT1 = &ADCINT1_ISR;
-    PieVectTable.ADCINT2 = &ADCINT2_ISR;
-    PieVectTable.ADCINT3 = &ADCINT3_ISR;
-    PieVectTable.ADCINT4 = &ADCINT4_ISR;
-    PieVectTable.ADCINT5 = &ADCINT5_ISR;
-
     // Enable PIE for ADCINT1..ADCINT5 in interrupt group 10
     PieCtrlRegs.PIEIER10.bit.INTx1 = 1;
     PieCtrlRegs.PIEIER10.bit.INTx2 = 1;
     PieCtrlRegs.PIEIER10.bit.INTx3 = 1;
     PieCtrlRegs.PIEIER10.bit.INTx4 = 1;
     PieCtrlRegs.PIEIER10.bit.INTx5 = 1;
+
+    PieVectTable.ADCINT1 = &ADCINT1_ISR;
+    PieVectTable.ADCINT2 = &ADCINT2_ISR;
+    PieVectTable.ADCINT3 = &ADCINT3_ISR;
+    PieVectTable.ADCINT4 = &ADCINT4_ISR;
+    PieVectTable.ADCINT5 = &ADCINT5_ISR;
 
     IER |= M_INT10; // Enable interrupt level 10 (group 10)
 
