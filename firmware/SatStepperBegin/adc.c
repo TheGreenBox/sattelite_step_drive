@@ -8,15 +8,9 @@
  */
 
 #include "PeripheralHeaderIncludes.h"
+#include "utils/macros.h"
 #include "state.h"
 #include "adc.h"
-
-#define CPU_CLOCK_SPEED 6.000L   // for 60 Mhz; 10.000L for a 100MHz CPU clock speed
-#define ADC_usDELAY     10000L
-#define DELAY_US(A)     DSP28x_usDelay(((((long double) A * 1000.0L)    \
-                        / (long double)CPU_CLOCK_SPEED) - 9.0L) / 5.0L)
-
-extern void DSP28x_usDelay(unsigned long Count);
 
 // Functions that will be run from RAM need to be assigned to
 // a different section. This section will then be mapped to a load and
@@ -105,37 +99,31 @@ static void socSetUp() {
     EDIS; // Disable register access
 }
 
-void acknowledgeInterruptFromGroup(uint_fast16_t groupID) {
-    // To receive more interrupts from this PIE group, acknowledge this interrupt
-    // Writing 0 to bits is ignored, so there is no point using OR operator
-    PieCtrlRegs.PIEACK.all = groupID;
-}
-
 static const uint_fast16_t ADC_INTERRUPT_GROUP = PIEACK_GROUP10;
 
 interrupt void ADCINT3_ISR(void) {
     gState.adc[0] = AdcResult.ADCRESULT0;
-    acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
+    ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT4_ISR(void) {
     gState.adc[1] = AdcResult.ADCRESULT1;
-    acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
+    ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT5_ISR(void) {
     gState.adc[2] = AdcResult.ADCRESULT2;
-    acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
+    ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT6_ISR(void) {
     gState.adc[3] = AdcResult.ADCRESULT3;
-    acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
+    ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT7_ISR(void) {
     gState.adc[4] = AdcResult.ADCRESULT4;
-    acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
+    ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(ADC_INTERRUPT_GROUP);
 }
 
 static void adcInterruptInit() {
