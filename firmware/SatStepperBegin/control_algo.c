@@ -76,43 +76,46 @@ AlgoType halfPhaseParametrs = {
 static AlgoType* pCurrentAlgoStruct = NULL;
 
 // sets control algorythm type that will be used
-int setAlgoType(unsigned short algoTypeCode)
-{
+int setAlgoType(unsigned short algoTypeCode) {
     switch (algoTypeCode) {
-    case CTRL_ALGO_ONE_PHASE:
-        pCurrentAlgoStruct = &onePhaseParametrs;
-        break;
-    case CTRL_ALGO_TWO_PHASE:
-        pCurrentAlgoStruct = &twoPhaseParametrs;
-        break;
-    case CTRL_ALGO_HALF_PHASE:
-        pCurrentAlgoStruct = &halfPhaseParametrs;
-        break;
-    default:
-        return 1;
+        case CTRL_ALGO_ONE_PHASE:
+            pCurrentAlgoStruct = &onePhaseParametrs;
+            break;
+        case CTRL_ALGO_TWO_PHASE:
+            pCurrentAlgoStruct = &twoPhaseParametrs;
+            break;
+        case CTRL_ALGO_HALF_PHASE:
+            pCurrentAlgoStruct = &halfPhaseParametrs;
+            break;
+        default:
+            return 1;
     }
     return 0;
 }
 
 // writes phase states for next step to PWM registers
-int getPhasePulseByStep(long long step, int* phaseA, int* phaseB)
-{
+int getPhasePulseByStep(long long step, int* phaseA, int* phaseB) {
     // if setAlgoType wasn't used
     if (pCurrentAlgoStruct == NULL) {
         return 1;
     }
-    unsigned nextStep = step % pCurrentAlgoStruct->algoStepsNumber;
+    long int nextStep = step % pCurrentAlgoStruct->algoStepsNumber;
+    if (nextStep < 0) {
+        nextStep = pCurrentAlgoStruct->algoStepsNumber + nextStep;
+    }
     *phaseA = pCurrentAlgoStruct->phaseA[nextStep];
     *phaseB = pCurrentAlgoStruct->phaseB[nextStep];
     return 0;
 }
 
-int getPwmDutyByStep(long long step, unsigned currentPwmDuty, unsigned* pwmDuty)
-{
+int getPwmDutyByStep(long long step, unsigned currentPwmDuty, unsigned* pwmDuty) {
     if (pCurrentAlgoStruct == NULL) {
         return 1;
     }
-    unsigned nextStep = step % pCurrentAlgoStruct->algoPwmStepsNumber;
+    long int nextStep = step % pCurrentAlgoStruct->algoPwmStepsNumber;
+    if (nextStep < 0) {
+        nextStep = pCurrentAlgoStruct->algoStepsNumber + nextStep;
+    }
 
     unsigned long pwm = MAX_PWM_DUTY - currentPwmDuty;
     pwm *= pCurrentAlgoStruct->pwmDuty[nextStep];

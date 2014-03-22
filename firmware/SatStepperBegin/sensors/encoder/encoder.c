@@ -1,6 +1,6 @@
 /**
  * Organization: The Green Box
- * Project name:    Satellite stepper drive
+ * Project name: Satellite stepper drive
  *
  * @file    encoder.c
  * @brief
@@ -13,8 +13,7 @@
 #include "encoder.h"
 #include "gray_code_decoder.h"
 #include "state.h"
-
-#define ENCODER_RANGE 1000  //TODO: check it!!
+#define ENCODER_RANGE 13475  //TODO: check it!!
 #define ENCODER_HALF_OF_RANGE ENCODER_RANGE/2
 
 interrupt void encoderInputABIntHandler(void) {
@@ -30,15 +29,22 @@ interrupt void encoderInputABIntHandler(void) {
 #endif // DEBUG
 
     static int oldA = 0, oldB = 0;
-    gState.encoder.precise += GREY_CODE_STEP_DECODER(
+    gState.encoder.direction = GREY_CODE_STEP_DECODER(
         oldA,
         oldB,
         GpioDataRegs.GPADAT.bit.GPIO20,
         GpioDataRegs.GPADAT.bit.GPIO21
     );
+    gState.encoder.precise += gState.encoder.direction;
     oldA = GpioDataRegs.GPADAT.bit.GPIO20;
     oldB = GpioDataRegs.GPADAT.bit.GPIO21;
 
+#ifdef DEBUG
+    ASSERT(
+        gState.encoder.direction,
+        ++gState.encoder.errors
+    );
+#endif // DEBUG
     // Acknowledge interrupt to recieve more interrupts from PIE group 1
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
 }
@@ -51,14 +57,12 @@ interrupt void encoderInputCIntHandler(void) {
     );
 #endif // DEBUG
     STATIC_ASSERT(ENCODER_RANGE);
-
     if (GpioDataRegs.GPADAT.bit.GPIO23) {
-        if (gState.encoder.precise > ENCODER_HALF_OF_RANGE) {
-            gState.encoder.raw += 1;
+        gState.encoder.raw += gState.encoder.direction;
+        if (gState.encoder.direction > 0) {
             gState.encoder.precise = 0;
         }
-        else {
-            gState.encoder.raw -= 1;
+        if (gState.encoder.direction < 0) {
             gState.encoder.precise = ENCODER_RANGE;
         }
     }

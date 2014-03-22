@@ -35,7 +35,7 @@ void motorISR(void) {
         ++gState.stepTicker;
     }
     else {
-        ++gState.stepTicker;
+        --gState.stepTicker;
     }
 
     int phaseVSignA, phaseVSignB;
