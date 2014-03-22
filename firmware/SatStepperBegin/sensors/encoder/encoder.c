@@ -38,6 +38,9 @@ interrupt void encoderInputABIntHandler(void) {
     );
     oldA = GpioDataRegs.GPADAT.bit.GPIO20;
     oldB = GpioDataRegs.GPADAT.bit.GPIO21;
+
+    // Acknowledge interrupt to recieve more interrupts from PIE group 1
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
 }
 
 interrupt void encoderInputCIntHandler(void) {
@@ -59,6 +62,9 @@ interrupt void encoderInputCIntHandler(void) {
             gState.encoder.precise = ENCODER_RANGE;
         }
     }
+
+    // Acknowledge interrupt to recieve more interrupts from PIE group 12
+    PieCtrlRegs.PIEACK.all = PIEACK_GROUP12;
 }
 
 void encoderInit() {
@@ -83,12 +89,12 @@ void encoderInit() {
     XIntruptRegs.XINT3CR.bit.ENABLE   = 1;
 
     /*
-    * GPIO-20 -> S1A -> Encoder1A
-    * GPIO-21 -> S1B -> Encoder1B
-    * GPIO-23 -> S1C -> Encoder1C
-    * GPIO-24 -> S2A -> Encoder2A
-    * GPIO-25 -> S2B -> Encoder2B
-    * GPIO-26 -> S2C -> Encoder2C
+    * GPIO20 -> S1A -> Encoder1A
+    * GPIO21 -> S1B -> Encoder1B
+    * GPIO23 -> S1C -> Encoder1C
+    * GPIO24 -> S2A -> Encoder2A
+    * GPIO25 -> S2B -> Encoder2B
+    * GPIO26 -> S2C -> Encoder2C
     */
 
     // Encoder1A - A
@@ -100,16 +106,16 @@ void encoderInit() {
     // Encoder1C - C
     GpioIntRegs.GPIOXINT3SEL.bit.GPIOSEL = 23;
 
-    // Enable PIE interrupt group for XINT1 and XINT2
-    IER |= M_INT1;
-    // Enable PIE interrupt group for XINT3
-    IER |= M_INT12;
-
     // Enable PIE for XINT1 and XINT2
     PieCtrlRegs.PIEIER1.bit.INTx4 = 1;
     PieCtrlRegs.PIEIER1.bit.INTx5 = 1;
     // Enable PIE for XINT1
     PieCtrlRegs.PIEIER12.bit.INTx1 = 1;
+
+    // Enable PIE interrupt group for XINT1 and XINT2
+    IER |= M_INT1;
+    // Enable PIE interrupt group for XINT3
+    IER |= M_INT12;
     EDIS;
 
     // init global encoder counter
