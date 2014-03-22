@@ -62,8 +62,8 @@ static void powerUpAdc() {
 
     DELAY_US(ADC_usDELAY);  // Delay before converting ADC channels
 
-    AdcRegs.ADCCTL1.bit.INTPULSEPOS = 1;    // INT pulse generation after conversion                                                          \
-    AdcRegs.ADCCTL1.bit.TEMPCONV    = 0;    // Temperature sensor disconnected from ADC                                                             \
+    AdcRegs.ADCCTL1.bit.INTPULSEPOS = 1;    // INT pulse generation after conversion
+    AdcRegs.ADCCTL1.bit.TEMPCONV    = 0;    // Temperature sensor disconnected from ADC
 
     EDIS; // Disable register access
 }
@@ -113,27 +113,27 @@ void acknowledgeInterruptFromGroup(uint_fast16_t groupID) {
 
 static const uint_fast16_t ADC_INTERRUPT_GROUP = PIEACK_GROUP10;
 
-interrupt void ADCINT1_ISR(void) {
+interrupt void ADCINT3_ISR(void) {
     gState.adc[0] = AdcResult.ADCRESULT0;
     acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
 }
 
-interrupt void ADCINT2_ISR(void) {
+interrupt void ADCINT4_ISR(void) {
     gState.adc[1] = AdcResult.ADCRESULT1;
     acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
 }
 
-interrupt void ADCINT3_ISR(void) {
+interrupt void ADCINT5_ISR(void) {
     gState.adc[2] = AdcResult.ADCRESULT2;
     acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
 }
 
-interrupt void ADCINT4_ISR(void) {
+interrupt void ADCINT6_ISR(void) {
     gState.adc[3] = AdcResult.ADCRESULT3;
     acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
 }
 
-interrupt void ADCINT5_ISR(void) {
+interrupt void ADCINT7_ISR(void) {
     gState.adc[4] = AdcResult.ADCRESULT4;
     acknowledgeInterruptFromGroup(ADC_INTERRUPT_GROUP);
 }
@@ -141,39 +141,39 @@ interrupt void ADCINT5_ISR(void) {
 static void adcInterruptInit() {
     EALLOW; // Below registers are "protected", allow access.
 
-    // Enable continuous mode for ADCINT1 and ADCINT2
-    AdcRegs.INTSEL1N2.bit.INT1CONT = 1;
-    AdcRegs.INTSEL1N2.bit.INT2CONT = 1;
     // Enable continuous mode for ADCINT3 and ADCINT4
     AdcRegs.INTSEL3N4.bit.INT3CONT = 1;
     AdcRegs.INTSEL3N4.bit.INT4CONT = 1;
-    // Enable continuous mode for ADCINT5
+    // Enable continuous mode for ADCINT5 and ADCINT6
     AdcRegs.INTSEL5N6.bit.INT5CONT = 1;
+    AdcRegs.INTSEL5N6.bit.INT6CONT = 1;
+    // Enable continuous mode for ADCINT7
+    AdcRegs.INTSEL7N8.bit.INT7CONT = 1;
 
-    // AdcRegs.INTSEL1N2.bit.INT1E = 1;
-    // AdcRegs.INTSEL1N2.bit.INT2E = 1;
     AdcRegs.INTSEL3N4.bit.INT3E = 1;
     AdcRegs.INTSEL3N4.bit.INT4E = 1;
     AdcRegs.INTSEL5N6.bit.INT5E = 1;
+    AdcRegs.INTSEL5N6.bit.INT6E = 1;
+    AdcRegs.INTSEL7N8.bit.INT7E = 1;
 
-    AdcRegs.INTSEL1N2.bit.INT1SEL  = 0; // EOC0 is trigger for ADCINT1
-    AdcRegs.INTSEL1N2.bit.INT2SEL  = 1; // EOC1 is trigger for ADCINT2
-    AdcRegs.INTSEL3N4.bit.INT3SEL  = 2; // EOC2 is trigger for ADCINT3
-    AdcRegs.INTSEL3N4.bit.INT4SEL  = 3; // EOC3 is trigger for ADCINT4
-    AdcRegs.INTSEL5N6.bit.INT5SEL  = 4; // EOC4 is trigger for ADCINT5
+    AdcRegs.INTSEL3N4.bit.INT3SEL  = 0; // EOC0 is trigger for ADCINT3
+    AdcRegs.INTSEL3N4.bit.INT4SEL  = 1; // EOC1 is trigger for ADCINT4
+    AdcRegs.INTSEL5N6.bit.INT5SEL  = 2; // EOC2 is trigger for ADCINT5
+    AdcRegs.INTSEL5N6.bit.INT6SEL  = 3; // EOC3 is trigger for ADCINT6
+    AdcRegs.INTSEL7N8.bit.INT7SEL  = 4; // EOC4 is trigger for ADCINT7
 
-    // Enable PIE for ADCINT1..ADCINT5 in interrupt group 10
-    PieCtrlRegs.PIEIER10.bit.INTx1 = 1;
-    PieCtrlRegs.PIEIER10.bit.INTx2 = 1;
+    // Enable PIE for ADCINT3..ADCINT7 in interrupt group 10
     PieCtrlRegs.PIEIER10.bit.INTx3 = 1;
     PieCtrlRegs.PIEIER10.bit.INTx4 = 1;
     PieCtrlRegs.PIEIER10.bit.INTx5 = 1;
+    PieCtrlRegs.PIEIER10.bit.INTx6 = 1;
+    PieCtrlRegs.PIEIER10.bit.INTx7 = 1;
 
-    PieVectTable.ADCINT1 = &ADCINT1_ISR;
-    PieVectTable.ADCINT2 = &ADCINT2_ISR;
     PieVectTable.ADCINT3 = &ADCINT3_ISR;
     PieVectTable.ADCINT4 = &ADCINT4_ISR;
     PieVectTable.ADCINT5 = &ADCINT5_ISR;
+    PieVectTable.ADCINT6 = &ADCINT6_ISR;
+    PieVectTable.ADCINT7 = &ADCINT7_ISR;
 
     IER |= M_INT10; // Enable interrupt level 10 (group 10)
 
