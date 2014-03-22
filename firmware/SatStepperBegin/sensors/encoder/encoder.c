@@ -136,4 +136,3 @@ void encoderInit() {
 * reached. The counter is a read  only register and can only be reset to zero
 * by a valid interrupt edge or by reset. ->|
 */
-
