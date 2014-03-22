@@ -22,6 +22,7 @@ void init() {
     initPwm(gConfig.pwmPeriod);
     motorControlInit();
     timer0Init(&motorISR);
+    timer1Init(&emptyFunction);
 
     enableGlobalInterrupts();
 
