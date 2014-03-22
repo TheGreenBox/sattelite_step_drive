@@ -146,22 +146,16 @@ void setPwm(unsigned pwmDutyCycle) {
 
 void setADirection(int direct) {
     if (direct == 0) {
-        //EPWM1A forced low
         EPwm1Regs.AQCSFRC.bit.CSFA = 1;
-        //EPWM1B forced low
         EPwm1Regs.AQCSFRC.bit.CSFB = 1;
     }
     else {
         if (direct > 0) {
-            //Forcing Disabled on EPWM1A
             EPwm1Regs.AQCSFRC.bit.CSFA = 0;
-            //EPWM1B forced low
             EPwm1Regs.AQCSFRC.bit.CSFB = 1;
         }
         else {
-            //EPWM1A forced low
             EPwm1Regs.AQCSFRC.bit.CSFA = 1;
-            //EPWM1B forced low
             EPwm1Regs.AQCSFRC.bit.CSFB = 0;
         }
     }
@@ -170,23 +164,17 @@ void setADirection(int direct) {
 void setBDirection(int direct)
 {
     if (direct == 0) {
-        //EPWM1A forced low
         EPwm2Regs.AQCSFRC.bit.CSFA = 1;
-        //EPWM1B forced low
         EPwm2Regs.AQCSFRC.bit.CSFB = 1;
     }
     else {
         if (direct > 0) {
-            //Forcing Disabled on EPWM1A
-            EPwm2Regs.AQCSFRC.bit.CSFA = 0;
-            //EPWM1B forced low
-            EPwm2Regs.AQCSFRC.bit.CSFB = 1;
+            EPwm2Regs.AQCSFRC.bit.CSFA = 1;
+            EPwm2Regs.AQCSFRC.bit.CSFB = 0;
         }
         else {
-            //EPWM1A forced low
-            EPwm2Regs.AQCSFRC.bit.CSFA = 1;
-            //EPWM1B forced low
-            EPwm2Regs.AQCSFRC.bit.CSFB = 0;
+            EPwm2Regs.AQCSFRC.bit.CSFA = 0;
+            EPwm2Regs.AQCSFRC.bit.CSFB = 1;
         }
     }
 }

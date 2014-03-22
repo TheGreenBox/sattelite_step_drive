@@ -31,8 +31,9 @@ typedef struct _MotorControl {
 } MotorControl;
 
 typedef struct _EncoderCounts {
-    long long raw;
-    long long precise;
+    int32_t raw;
+    int32_t precise;
+    short int  direction;
 #ifdef DEBUG
     unsigned int errors;
 #endif // DEBUG
