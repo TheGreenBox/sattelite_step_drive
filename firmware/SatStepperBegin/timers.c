@@ -90,7 +90,7 @@ static volatile struct CPUTIMER_REGS* const timerRegs[3] = {
     &CpuTimer2Regs
 };
 
-void setTimerPeriodByNum(uint_fast8_t timerNum, uint_fast8_t period) {
+void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t period) {
     timerRegs[timerNum]->PRD.all = period;
 }
 

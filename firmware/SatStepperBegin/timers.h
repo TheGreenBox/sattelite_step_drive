@@ -18,7 +18,7 @@ void timer0Init(_controlTimerInterruptHandler);
 void timer1Init(_controlTimerInterruptHandler);
 
 // [period] = [10^3] / [System Clock Frequency in Hz]
-void setTimerPeriodByNum(uint_fast8_t timerNum, uint_fast8_t period);
+void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t period);
 void stopTimerByNum(uint_fast8_t timerNum);
 void startTimerByNum(uint_fast8_t timerNum);
 

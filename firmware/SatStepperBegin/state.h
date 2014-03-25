@@ -25,9 +25,9 @@
 #define MAX_PWM_DUTY 1024
 
 typedef struct _MotorControl {
-    unsigned pwmDutyCycle;
-    unsigned stepTimeout;
-    short rotationDirection;		// 1 or -1 or 0
+    unsigned    pwmDutyCycle;
+    uint32_t    stepTimeout;
+    short       rotationDirection;		// 1 or -1 or 0
 } MotorControl;
 
 typedef struct _EncoderCounts {
