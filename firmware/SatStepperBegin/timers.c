@@ -4,7 +4,6 @@
  * Project name: Satellite stepper drive
  * File name:  SatStepperBegin/timers.c
  * Description:
- * Author:  AKindyakov
  * ========================================================
  */
 
