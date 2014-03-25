@@ -8,7 +8,6 @@
  */
 
 #include <PeripheralHeaderIncludes.h>
-#include "f2803xbmsk.h"
 #include "timers.h"
 
 static _controlTimerInterruptHandler _tmr0Handler;
@@ -91,15 +90,15 @@ static volatile struct CPUTIMER_REGS* const timerRegs[3] = {
     &CpuTimer2Regs
 };
 
-void setTimerPeriodByNum(unsigned timerNum, unsigned period) {
+void setTimerPeriodByNum(uint_fast8_t timerNum, uint_fast8_t period) {
     timerRegs[timerNum]->PRD.all = period;
 }
 
-void stopTimerByNum(unsigned timerNum) {
+void stopTimerByNum(uint_fast8_t timerNum) {
     timerRegs[timerNum]->TCR.bit.TSS = 1;
 }
 
-void startTimerByNum(unsigned timerNum) {
+void startTimerByNum(uint_fast8_t timerNum) {
     // still i don't know how to start int without
     // initialisation
 }
