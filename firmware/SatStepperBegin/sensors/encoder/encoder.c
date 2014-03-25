@@ -13,8 +13,7 @@
 #include "encoder.h"
 #include "gray_code_decoder.h"
 #include "state.h"
-#define ENCODER_RANGE 13475  //TODO: check it!!
-#define ENCODER_HALF_OF_RANGE ENCODER_RANGE/2
+#define ENCODER_RANGE 25000
 
 interrupt void encoderInputABIntHandler(void) {
 #ifdef DEBUG

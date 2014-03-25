@@ -8,8 +8,21 @@
  */
 
 #include "gray_code_decoder.h"
+#define MAX_STEP 1<<4
 
-int gray_code_encoder_masks[16] = {0, 1, -1, 0, -1, 0, 0, 1, 1, 0, 0, -1, 0, -1, 1, 0};
+int gray_code_encoder_masks[MAX_STEP] = {0, -1, 1, 0, 1, 0, 0, -1, -1, 0, 0, 1, 0, 1, -1, 0};
+
+void debugRecorder(int a, int b) {
+    static int first [MAX_STEP] = {0, };
+    static int second[MAX_STEP] = {0, };
+    static int index = 0;
+    first[index]  = a;
+    second[index] = b;
+    ++index;
+    if (index >= MAX_STEP) {
+        index = 0;
+    }
+}
 
 /**
  positive
