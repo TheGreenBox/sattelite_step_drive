@@ -54,5 +54,5 @@ void motorISR(void) {
     setPwm(pwmDuty);
 
     // set speed step motor
-    setTimer0Period(gState.motorControl.stepTimeout);
+    setTimerPeriodByNum(0, gState.motorControl.stepTimeout);
 }
