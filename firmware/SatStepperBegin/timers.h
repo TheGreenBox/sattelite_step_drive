@@ -17,13 +17,10 @@ typedef void (* _controlTimerInterruptHandler)(void);
 void timer0Init(_controlTimerInterruptHandler);
 void timer1Init(_controlTimerInterruptHandler);
 
-void setTimer0Period(unsigned period); // 10^3 / System Clock Frequency in Hz
-void setTimer1Period(unsigned period); // 10^3 / System Clock Frequency in Hz
-
-void timer0Stop();
-void timer1Stop();
-
-void timer0Start();
+// [period] = [10^3] / [System Clock Frequency in Hz]
+void setTimerPeriodByNum(unsigned timerNum, unsigned period);
+void stopTimerByNum(unsigned timerNum);
+void startTimerByNum(unsigned timerNum);
 
 #endif //_CONTROL_TIMER_H_
 

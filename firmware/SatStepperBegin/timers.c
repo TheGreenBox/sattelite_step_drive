@@ -86,32 +86,21 @@ void timer1Init(_controlTimerInterruptHandler handler)
     CpuTimer1Regs.TPR.all = 0x1770; //600
 }
 
-void setTimer0Period(unsigned period)
-{
-    if (period != CpuTimer0Regs.PRD.all) {
-        CpuTimer0Regs.PRD.all = period;
-    }
+static volatile struct CPUTIMER_REGS* const timerRegs[3] = {
+    &CpuTimer0Regs,
+    &CpuTimer1Regs,
+    &CpuTimer2Regs
+};
+
+void setTimerPeriodByNum(unsigned timerNum, unsigned period) {
+    timerRegs[timerNum]->PRD.all = period;
 }
 
-void setTimer1Period(unsigned period)
-{
-    if (period != CpuTimer1Regs.PRD.all) {
-        CpuTimer1Regs.PRD.all = period;
-    }
+void stopTimerByNum(unsigned timerNum) {
+    timerRegs[timerNum]->TCR.bit.TSS = 1;
 }
 
-void timer0Stop()
-{
-    CpuTimer0Regs.TCR.bit.TSS = 1;
-}
-
-void timer1Stop()
-{
-    CpuTimer1Regs.TCR.bit.TSS = 1;
-}
-
-void timer0Start()
-{
+void startTimerByNum(unsigned timerNum) {
     // still i don't know how to start int without
     // initialisation
 }
