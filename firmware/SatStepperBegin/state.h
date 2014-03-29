@@ -4,7 +4,6 @@
  * Project name: Satellite stepper drive
  * File name:  SatStepperBegin/state.h
  * Description:
- * Author: akindyakov, snikitin
  * ========================================================
  */
 
