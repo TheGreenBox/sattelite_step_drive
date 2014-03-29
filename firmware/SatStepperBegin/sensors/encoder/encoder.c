@@ -10,6 +10,7 @@
 #include <PeripheralHeaderIncludes.h>
 #include <f2803xbmsk.h>
 
+#include "utils/macros.h"
 #include "encoder.h"
 #include "gray_code_decoder.h"
 #include "state.h"
@@ -44,8 +45,7 @@ interrupt void encoderInputABIntHandler(void) {
         ++gState.encoder.errors
     );
 #endif // DEBUG
-    // Acknowledge interrupt to recieve more interrupts from PIE group 1
-    PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
+    ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP1);
 }
 
 interrupt void encoderInputCIntHandler(void) {
