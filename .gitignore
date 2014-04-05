@@ -48,7 +48,10 @@
 .metadata
 .settings
 .launches
+RemoteSystemsTempFiles
+dvt
 F2803x_RAM
+
 *.opt
 *.pp
 *.map
