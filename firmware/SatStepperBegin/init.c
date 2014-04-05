@@ -212,7 +212,7 @@ static void peripheryClockEnable() {
     //------------------------------------------------
     SysCtrlRegs.PCLKCR1.bit.ECAP1ENCLK = 1; //eCAP1
     //------------------------------------------------
-    SysCtrlRegs.PCLKCR0.bit.ECANAENCLK=0;   // eCAN-A
+    SysCtrlRegs.PCLKCR0.bit.ECANAENCLK = 0;   // eCAN-A
     //------------------------------------------------
     SysCtrlRegs.PCLKCR1.bit.EQEP1ENCLK = 1; // eQEP1
     //------------------------------------------------
@@ -537,7 +537,7 @@ void deviceInit() {
 void motorControlInit() {
     gState.motorControl.pwmDutyCycle        = 990;
     gState.motorControl.rotationDirection   = 1;
-    gState.motorControl.stepTimeout         = 0xFFFF;
+    gState.motorControl.stepTimeoutUsec     = 255;
 }
 
 void enableGlobalInterrupts() {

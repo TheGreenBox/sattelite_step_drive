@@ -25,7 +25,7 @@
 
 typedef struct _MotorControl {
     unsigned    pwmDutyCycle;
-    uint32_t    stepTimeout;
+    uint32_t    stepTimeoutUsec;
     short       rotationDirection;		// 1 or -1 or 0
 } MotorControl;
 
