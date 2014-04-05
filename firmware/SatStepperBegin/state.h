@@ -33,6 +33,7 @@ typedef struct _EncoderCounts {
     int32_t raw;
     int32_t precise;
     short int  direction;
+    uint16_t invSpeed;
 #ifdef DEBUG
     unsigned int errors;
 #endif // DEBUG

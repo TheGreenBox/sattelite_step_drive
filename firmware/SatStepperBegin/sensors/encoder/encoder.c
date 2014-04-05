@@ -16,29 +16,53 @@
 #include "state.h"
 #define ENCODER_RANGE 25000
 
-interrupt void encoderInputABIntHandler(void) {
+interrupt void encoderInputAIntHandler(void) {
 #ifdef DEBUG
     ASSERT(
         GpioDataRegs.GPADAT.bit.GPIO20 == GpioDataRegs.GPADAT.bit.GPIO24,
         ++gState.encoder.errors
     );
+#endif // DEBUG
+
+    static int oldA = 0;
+    gState.encoder.direction = GREY_CODE_STEP_DECODER(
+        oldA,
+        GpioDataRegs.GPADAT.bit.GPIO21,
+        GpioDataRegs.GPADAT.bit.GPIO20,
+        GpioDataRegs.GPADAT.bit.GPIO21
+    );
+    gState.encoder.precise += gState.encoder.direction;
+    oldA = GpioDataRegs.GPADAT.bit.GPIO20;
+
+    gState.encoder.invSpeed = XIntruptRegs.XINT2CTR;
+#ifdef DEBUG
+    ASSERT(
+        gState.encoder.direction,
+        ++gState.encoder.errors
+    );
+#endif // DEBUG
+    ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP1);
+}
+
+interrupt void encoderInputBIntHandler(void) {
+#ifdef DEBUG
     ASSERT(
         GpioDataRegs.GPADAT.bit.GPIO21 == GpioDataRegs.GPADAT.bit.GPIO25,
         ++gState.encoder.errors
     );
 #endif // DEBUG
 
-    static int oldA = 0, oldB = 0;
+    static int oldB = 0;
     gState.encoder.direction = GREY_CODE_STEP_DECODER(
-        oldA,
+        GpioDataRegs.GPADAT.bit.GPIO20,
         oldB,
         GpioDataRegs.GPADAT.bit.GPIO20,
         GpioDataRegs.GPADAT.bit.GPIO21
     );
     gState.encoder.precise += gState.encoder.direction;
-    oldA = GpioDataRegs.GPADAT.bit.GPIO20;
     oldB = GpioDataRegs.GPADAT.bit.GPIO21;
 
+    gState.encoder.invSpeed = XIntruptRegs.XINT1CTR;
 #ifdef DEBUG
     ASSERT(
         gState.encoder.direction,
@@ -72,8 +96,8 @@ interrupt void encoderInputCIntHandler(void) {
 
 void encoderInit() {
     EALLOW; // This is needed to write to EALLOW protected registers
-    PieVectTable.XINT1 = encoderInputABIntHandler;
-    PieVectTable.XINT2 = encoderInputABIntHandler;
+    PieVectTable.XINT1 = encoderInputAIntHandler;
+    PieVectTable.XINT2 = encoderInputBIntHandler;
     PieVectTable.XINT3 = encoderInputCIntHandler;
 
     /*
