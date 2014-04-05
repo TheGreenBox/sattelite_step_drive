@@ -11,6 +11,12 @@
 #include "utils/macros.h"
 #include "timers.h"
 
+static volatile struct CPUTIMER_REGS* const timerRegs[3] = {
+    &CpuTimer0Regs,
+    &CpuTimer1Regs,
+    &CpuTimer2Regs
+};
+
 static _controlTimerInterruptHandler _tmr0Handler;
 static _controlTimerInterruptHandler _tmr1Handler;
 
@@ -36,6 +42,19 @@ interrupt void TMR1_Interrupt(void)
     // acknowledgement
 }
 
+static inline void setTimerSettingsToDefaultByNum(uint_fast8_t timerNum) {
+    // enable timer interrupt
+    timerRegs[timerNum]->TCR.bit.TIE = 1;
+    // free run mode switch on
+    timerRegs[timerNum]->TCR.bit.FREE = 1;
+    timerRegs[timerNum]->TCR.bit.SOFT = 0;
+
+    // set preload value and timer prescaler
+    timerRegs[timerNum]->PRD.all           = 0xFFFF;
+    timerRegs[timerNum]->TPR.bit.TDDR      = 0x0;
+    timerRegs[timerNum]->TPRH.bit.TDDRH    = 0x0;
+}
+
 void timer0Init(_controlTimerInterruptHandler handler)
 {
     _tmr0Handler = handler;
@@ -48,16 +67,7 @@ void timer0Init(_controlTimerInterruptHandler handler)
     PieCtrlRegs.PIEIER1.bit.INTx7 = 1;
     IER |= M_INT1;
 
-    // enable timer 0 interrupt
-    CpuTimer0Regs.TCR.bit.TIE = 1;
-    // free run mode switch on
-    CpuTimer0Regs.TCR.bit.FREE = 1;
-    CpuTimer0Regs.TCR.bit.SOFT = 0;
-
-    // set preload value and timer prescaler
-    CpuTimer0Regs.PRD.all           = 0xFFFF;
-    CpuTimer1Regs.TPR.bit.TDDR      = 0xFF;
-    CpuTimer1Regs.TPRH.bit.TDDRH    = 0xFF;
+    setTimerSettingsToDefaultByNum(0);
 }
 
 void timer1Init(_controlTimerInterruptHandler handler)
@@ -71,23 +81,8 @@ void timer1Init(_controlTimerInterruptHandler handler)
     // Enable TINT1
     IER |= M_INT13;
 
-    // enable timer 0 interrupt
-    CpuTimer1Regs.TCR.bit.TIE = 1;
-    // free run mode switch on
-    CpuTimer1Regs.TCR.bit.FREE = 1;
-    CpuTimer1Regs.TCR.bit.SOFT = 0;
-
-    // set preload value and timer prescaler
-    CpuTimer1Regs.PRD.all           = 0xFFFF;
-    CpuTimer1Regs.TPR.bit.TDDR      = 0xFF;
-    CpuTimer1Regs.TPRH.bit.TDDRH    = 0xFF;
+    setTimerSettingsToDefaultByNum(1);
 }
-
-static volatile struct CPUTIMER_REGS* const timerRegs[3] = {
-    &CpuTimer0Regs,
-    &CpuTimer1Regs,
-    &CpuTimer2Regs
-};
 
 void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t periodInUsec) {
     // The TIMH:TIM is loaded with the value in the PRDH:PRD,
@@ -96,8 +91,9 @@ void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t periodInUsec) {
 
     uint16_t timerDivider =     timerRegs[timerNum]->TPR.bit.TDDR
                             +  (timerRegs[timerNum]->TPRH.bit.TDDRH << 8) + 1;
-    uint32_t period = (periodInUsec * timerDivider) / (10*CPU_CLOCK_SPEED);
-    timerRegs[timerNum]->PRD.all    = period;
+    uint32_t period = (periodInUsec * 10*CPU_CLOCK_SPEED) / timerDivider;
+
+    timerRegs[timerNum]->PRD.all = period;
     // timerRegs[timerNum]->PRD.all = periodInUsec;
 }
 
