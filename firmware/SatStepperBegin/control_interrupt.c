@@ -32,16 +32,16 @@ void motorISR(void) {
     }
 
     if (gState.motorControl.rotationDirection > 0) {
-        ++gState.stepTicker;
+       ++gState.stepTicker;
     }
     else {
-        --gState.stepTicker;
-    }
+      --gState.stepTicker;
+    } // TODO: rework it
 
     int phaseVSignA, phaseVSignB;
 
     getPhasePulseByStep(gState.stepTicker,
-                        &phaseVSignA , &phaseVSignB);
+                        &phaseVSignA, &phaseVSignB);
 
     setADirection(phaseVSignA);
     setBDirection(phaseVSignB);
@@ -54,5 +54,5 @@ void motorISR(void) {
     setPwm(pwmDuty);
 
     // set speed step motor
-    setTimerPeriodByNum(0, gState.motorControl.stepTimeout);
+    // setTimerPeriodByNum(0, gState.motorControl.stepTimeoutUsec);
 }

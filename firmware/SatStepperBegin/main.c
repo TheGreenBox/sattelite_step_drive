@@ -23,6 +23,7 @@ void init() {
     motorControlInit();
     timer0Init(&motorISR);
     timer1Init(&emptyFunction);
+    setTimerPeriodByNum(0, 100000);
 
     enableGlobalInterrupts();
 
