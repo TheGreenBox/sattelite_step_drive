@@ -22,4 +22,3 @@ void stopTimerByNum(uint_fast8_t timerNum);
 void startTimerByNum(uint_fast8_t timerNum);
 
 #endif //_CONTROL_TIMER_H_
-

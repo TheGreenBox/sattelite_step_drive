@@ -17,12 +17,12 @@ static _controlTimerInterruptHandler _tmr1Handler;
 interrupt void TMR0_Interrupt(void)
 {
     _tmr0Handler();
-    CpuTimer0Regs.TCR.bit.TIF = 0;
+    // CpuTimer0Regs.TCR.bit.TIF = 0; // TODO: writes of 0 are ignored, check it
 
-    // The TIMH:TIM is loaded with the value in the PRDH:PRD,
-    // and the prescaler counter (PSCH:PSC) is loaded with the
-    // value in the timer divide- down register (TDDRH:TDDR).
+    // TIMH:TIM is loaded with the value in the PRDH:PRD,
+    // PSCH:PSC is loaded with the value in the TDDRH:TDDR.
     CpuTimer0Regs.TCR.bit.TRB = 1;
+
     // Acknowledge interrupt to recieve more interrupts from PIE group 1
     PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
 }
@@ -30,11 +30,7 @@ interrupt void TMR0_Interrupt(void)
 interrupt void TMR1_Interrupt(void)
 {
     _tmr1Handler();
-    CpuTimer1Regs.TCR.bit.TIF = 0;
-
-    // The TIMH:TIM is loaded with the value in the PRDH:PRD,
-    // and the prescaler counter (PSCH:PSC) is loaded with the
-    // value in the timer divide- down register (TDDRH:TDDR).
+    // CpuTimer1Regs.TCR.bit.TIF = 0;
     CpuTimer1Regs.TCR.bit.TRB = 1;
     // TINT1 is not part of any interrupt group, so it doesn't require
     // acknowledgement
@@ -94,8 +90,12 @@ static volatile struct CPUTIMER_REGS* const timerRegs[3] = {
 };
 
 void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t periodInUsec) {
+    // The TIMH:TIM is loaded with the value in the PRDH:PRD,
+    // and the prescaler counter (PSCH:PSC) is loaded with the
+    // value in the timer divide-down register (TDDRH:TDDR).
+
     uint16_t timerDivider =     timerRegs[timerNum]->TPR.bit.TDDR
-                            +   (timerRegs[timerNum]->TPRH.bit.TDDRH << 8) + 1;
+                            +  (timerRegs[timerNum]->TPRH.bit.TDDRH << 8) + 1;
     uint32_t period = (periodInUsec * timerDivider) / (10*CPU_CLOCK_SPEED);
     timerRegs[timerNum]->PRD.all    = period;
     // timerRegs[timerNum]->PRD.all = periodInUsec;
