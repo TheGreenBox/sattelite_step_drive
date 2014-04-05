@@ -8,6 +8,7 @@
  */
 
 #include <PeripheralHeaderIncludes.h>
+#include "utils/macros.h"
 #include "timers.h"
 
 static _controlTimerInterruptHandler _tmr0Handler;
@@ -58,8 +59,9 @@ void timer0Init(_controlTimerInterruptHandler handler)
     CpuTimer0Regs.TCR.bit.SOFT = 0;
 
     // set preload value and timer prescaler
-    CpuTimer0Regs.PRD.all = 0xFFFF;
-    CpuTimer0Regs.TPR.all = 0x1770; //600
+    CpuTimer0Regs.PRD.all           = 0xFFFF;
+    CpuTimer1Regs.TPR.bit.TDDR      = 0xFF;
+    CpuTimer1Regs.TPRH.bit.TDDRH    = 0xFF;
 }
 
 void timer1Init(_controlTimerInterruptHandler handler)
@@ -80,8 +82,9 @@ void timer1Init(_controlTimerInterruptHandler handler)
     CpuTimer1Regs.TCR.bit.SOFT = 0;
 
     // set preload value and timer prescaler
-    CpuTimer1Regs.PRD.all = 0xFFFF;
-    CpuTimer1Regs.TPR.all = 0x1770; //600
+    CpuTimer1Regs.PRD.all           = 0xFFFF;
+    CpuTimer1Regs.TPR.bit.TDDR      = 0xFF;
+    CpuTimer1Regs.TPRH.bit.TDDRH    = 0xFF;
 }
 
 static volatile struct CPUTIMER_REGS* const timerRegs[3] = {
@@ -90,8 +93,12 @@ static volatile struct CPUTIMER_REGS* const timerRegs[3] = {
     &CpuTimer2Regs
 };
 
-void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t period) {
-    timerRegs[timerNum]->PRD.all = period;
+void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t periodInUsec) {
+    uint16_t timerDivider =     timerRegs[timerNum]->TPR.bit.TDDR
+                            +   (timerRegs[timerNum]->TPRH.bit.TDDRH << 8) + 1;
+    uint32_t period = (periodInUsec * timerDivider) / (10*CPU_CLOCK_SPEED);
+    timerRegs[timerNum]->PRD.all    = period;
+    // timerRegs[timerNum]->PRD.all = periodInUsec;
 }
 
 void stopTimerByNum(uint_fast8_t timerNum) {
