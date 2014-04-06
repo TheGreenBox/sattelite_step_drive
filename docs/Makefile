@@ -5,13 +5,12 @@ PARTIAL_DIR='src/partial_compiles'
 help: hello
 	@echo "----------------------------------------"
 	@echo
-	@echo "  * if you want to build the course 112 milestone documentation please get the /make c112/"
-	@echo
-	@echo "  * if you want to build full doc please get the /make full/"
-	@echo
-	@echo "  * if you want to build all docs please get the /make all/"
-	@echo
-	@echo "  * if you want to build workshop report (full plan) please get the /make plan/"
+	@echo "List of available options:"
+	@echo -e 	"\t full - full doc"
+	@echo -e 	"\t c112 - course 112 milestone documentation"
+	@echo -e 	"\t all - all docs"
+	@echo -e 	"\t plan - workshop report (full plan)"
+	@echo -e 	"\t ecology - only ecology part"
 	@echo
 	@echo "----------------------------------------"
 	@echo
@@ -29,7 +28,7 @@ clean:
 prepare:
 	@mkdir -p ${PRODUCT_DIR}/
 
-all: full c112 plan
+all: full c112 plan ecology
 
 full: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main_full.tex
@@ -40,3 +39,5 @@ c112: hello prepare
 plan: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf ${PARTIAL_DIR}/main_plan.tex
 
+ecology: hello prepare
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf ${PARTIAL_DIR}/only_ecology.tex
