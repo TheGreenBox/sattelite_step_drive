@@ -25,11 +25,11 @@
 
 \usepackage{multirow}
 
-\usepackage{geometry} % Меняем поля страницы
-\geometry{left=2cm}% левое поле
-\geometry{right=1.5cm}% правое поле
-\geometry{top=2cm}% верхнее поле
-\geometry{bottom=2cm}% нижнее поле
+\usepackage{geometry}   % Меняем поля страницы
+\geometry{left=2cm}     % левое поле
+\geometry{right=1.5cm}  % правое поле
+\geometry{top=2cm}      % верхнее поле
+\geometry{bottom=2cm}   % нижнее поле
 
 \usepackage{subfiles}
 
@@ -40,6 +40,9 @@
 \usepackage[pdftex]{graphicx}
 \fi
 
+% символ градуса и т.д.
+\usepackage{gensymb}
+
 \begin{document}
 \tableofcontents
 \newpage
@@ -47,6 +50,7 @@
 \subfile{src/current_feedback_description}
 \subfile{src/task_description}
 \subfile{src/drive_parameters}
+\subfile{src/ecology/workplace_analysis}
 \subfile{src/bibliography}
 \end{document}
 
