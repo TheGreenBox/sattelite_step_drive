@@ -55,6 +55,7 @@
 
 \begin{document}
 
+\pagenumbering{alph} % необходимо для обеспечения уникального идентификатора страницы для титула
 %\maketitle
 \begin{titlepage}
 \begin{center}
@@ -86,6 +87,8 @@
 \end{titlepage}
 
 \tableofcontents
+
+\pagenumbering{arabic} % возврат к обычным номерам страниц
 \subfile{src/ecology/workplace_analysis}
 
 \newpage

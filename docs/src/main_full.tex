@@ -44,7 +44,11 @@
 \usepackage{gensymb}
 
 \begin{document}
+\pagenumbering{alph} % необходимо для обеспечения уникального идентификатора страницы для титула
+
 \tableofcontents
+
+\pagenumbering{arabic} % возврат к обычным номерам страниц
 \newpage
 
 \subfile{src/current_feedback_description}
