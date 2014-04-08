@@ -1,10 +1,9 @@
-\renewcommand{\tabularxcolumn}[1]{m{#1}}
-\newcolumntype{C}{>{\centering\arraybackslash}X}
-\newcolumntype{L}{>{\raggedright\arraybackslash}X}
-
 \begin{table}[ht]
+    \renewcommand{\tabularxcolumn}[1]{m{#1}}
+    \newcolumntype{C}{>{\centering\arraybackslash}X}
+    \newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
     \centering
-    % \begin{tabular}{|p{3.5cm}|c|c|c|c|}
     \begin{tabularx}{\textwidth}{|L|C|C|C|C|}
         \hline
         \multirow{4}{*}{\parbox{\linewidth}{\centering Показатели тяжести трудового процесса}}
@@ -13,8 +12,8 @@
         & \multirow{3}{*}{\parbox{\linewidth}{Оптимальный (легкая физ. нагрузка)}}
         & \multirow{3}{*}{\parbox{\linewidth}{Допустимый (средняя физ. нагрузка)}}
         & \multicolumn{2}{c|}{Вредный (тяжелый труд)}                                                       \\
-        & &                                                             & \multicolumn{2}{c|}{}             \\ \cline{4-5}
-        & &                                                         & 1-й степени & 2-й степени             \\ \cline{2-5}
+        &                                                   &               & \multicolumn{2}{c|}{}         \\ \cline{4-5}
+        &                                                   &               & 1-й степени & 2-й степени     \\ \cline{2-5}
 
                                                             & 1             & 2             & 3.1   & 3.2   \\ \hline
 
