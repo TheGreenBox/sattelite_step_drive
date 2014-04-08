@@ -37,7 +37,6 @@
 *.vrb
 *.xdy
 *.tdo
-*product*
 *.swp
 *.swo
 *.~
@@ -45,6 +44,7 @@
 
 *.pyc
 
+product
 .metadata
 .settings
 .launches
