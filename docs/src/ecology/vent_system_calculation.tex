@@ -125,20 +125,28 @@ $$
 
 \begin{equation}
 \label{fan_productivity}
-    L_s = 1,1 \cdot L_{\sum} \approx 3,56 \text{ м}^3 / \text{с} \approx 12,83 \cdot 10^3 \text{ м}^3 / \text{ч}
+    L_s = 1,1 \cdot L_{\sum}
+        \approx 3,56 \text{ м}^3 / \text{с}
+        \approx 12,83 \cdot 10^3 \text{ м}^3 / \text{ч}
 \end{equation}
 
-% TODO: вставить рисунок расчётной схемы вентиляции
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio, clip=true, trim=0mm 35mm 0mm 40mm]
+                    {./src/ecology/pictures/vent_system_arrangement}
+    \caption{Расчётная схема системы вентиляции}
+    \label{pic_vent_system_arrangement}
+\end{figure}
+
 
 \begin{table}[h]
     \centering
     \begin{tabular}{|l|r|r|r|r|r|r|r|r|r|r|}
     \hline
-        № уч-ка & L, $\text{м}^3/\text{ч}$ & \textit{l}, мм & d, мм & V, $\text{м/c}$
-        & R, $\text{Н/м}^2$ & R $\cdot$ \textit{l}, $\text{Н/м}$ & $\sum \rho$
-        & $V_{\rho}^2 / 2g, \text{ Н/м}^2$ & $Z, \text{ Н/м}^2$ & P                     \\
+        № уч-ка & L, $\text{м}^3/\text{ч}$  & \textit{l}, мм & d, мм                & V, $\text{м/c}$
+        & R, $\text{Н/м}^2$                 & R $\cdot$ \textit{l}, $\text{Н/м}$    & $\sum \rho$
+        & $V_{\rho}^2 / 2g, \text{ Н/м}^2$  & $Z, \text{ Н/м}^2$                    & P                 \\
     \hline
-
 
     \end{tabular}
     \caption{Основные показатели при расчёте потерь давления в вентиляции}
