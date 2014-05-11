@@ -1,0 +1,56 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+
+% Подключение гиперссылок
+\usepackage{xcolor}
+\usepackage[unicode]{hyperref}
+
+% Настройка внешнего вида гиперссылок
+\definecolor{LINKCOLOUR}{rgb}{0.1,0.0,0.9}
+\hypersetup{colorlinks,breaklinks,urlcolor=LINKCOLOUR,linkcolor=LINKCOLOUR}
+
+% Выбор внутренней TEX−кодировки
+\usepackage [T2A]{fontenc}
+% Включение переносов для русского и английского языков
+\usepackage[english,russian]{babel}
+
+% Начинать первый параграф раздела следует с красной строки
+\usepackage{indentfirst}
+
+% Дополнительные математические пакеты
+%\usepackage{weird,querr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% Для корректного копирования из документа
+\usepackage{cmap}
+
+% Кто нибудь помнит зачем это тут? A: Неа...
+% это многострочный текст, мы используем для многострочности в ячейках таблицы
+\usepackage{multirow}
+
+% Меняем поля страницы
+\usepackage{geometry}
+\geometry{left=2cm}    % левое поле
+\geometry{right=1.5cm} % правое поле
+\geometry{top=2cm}     % верхнее поле
+\geometry{bottom=2cm}  % нижнее поле
+
+\usepackage{subfiles}
+
+% работа с импортом изображений
+\ifx\pdfoutput\undefined
+\usepackage{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\fi
+
+% секции и их структура
+\usepackage[section]{placeins}
+\usepackage{subcaption}
+
+\begin{document}
+There is only the Emperor, and he is our shield and protector.
+\subfile{src/technology/bibliography}
+\end{document}
