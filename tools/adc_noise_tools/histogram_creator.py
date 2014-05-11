@@ -1,6 +1,3 @@
-# import matplotlib
-# matplotlib.use('pdf')
-
 import math
 import matplotlib.pyplot as plotter
 from matplotlib.backends.backend_pdf import PdfPages
@@ -75,7 +72,15 @@ def calculateRmsNoiseFrom(filename):
     histKeys, histHeights = formHistogramDataFor(filename)
     mainBinMissProbability = 1 - max(histHeights) / sum(histHeights)
     x0 = calculateX0(mainBinMissProbability)
+    sigma = 0.5 / (-x0)
+    return sigma
 
-    print('miss probability is ' + str(mainBinMissProbability))
-    print('x0 = ' + str(x0))
-    print('sigma (rms nose) is ' + str(0.5 / (-x0)) + ' LSB')
+
+ALL_ADC_BITS = 12
+
+def calculateNoiseFreeBitsFrom(filename):
+    rmsNoise = calculateRmsNoiseFrom(filename)
+    peakToPeakNoise = 6.6 * rmsNoise
+    noiseFreeBits = math.floor(math.log((2 ** ALL_ADC_BITS) / peakToPeakNoise, 2))
+
+    print('adc has ' + str(noiseFreeBits) + ' noise-free bits')
