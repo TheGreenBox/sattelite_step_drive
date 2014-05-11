@@ -1,6 +1,10 @@
 \documentclass{article}
 
 \usepackage[utf8]{inputenc}
+% Выбор внутренней TEX−кодировки
+\usepackage [T2A]{fontenc}
+% Включение переносов для русского и английского языков
+\usepackage[english,russian]{babel}
 
 % Подключение гиперссылок
 \usepackage{xcolor}
@@ -9,11 +13,6 @@
 % Настройка внешнего вида гиперссылок
 \definecolor{LINKCOLOUR}{rgb}{0.1,0.0,0.9}
 \hypersetup{colorlinks,breaklinks,urlcolor=LINKCOLOUR,linkcolor=LINKCOLOUR}
-
-% Выбор внутренней TEX−кодировки
-\usepackage [T2A]{fontenc}
-% Включение переносов для русского и английского языков
-\usepackage[english,russian]{babel}
 
 % Начинать первый параграф раздела следует с красной строки
 \usepackage{indentfirst}
@@ -30,12 +29,15 @@
 % это многострочный текст, мы используем для многострочности в ячейках таблицы
 \usepackage{multirow}
 
+% стилевой пакет, открывающий доступ к большому числу типографских значков
+\usepackage{textcomp}
+
 % Меняем поля страницы
 \usepackage{geometry}
 \geometry{left=2cm}    % левое поле
 \geometry{right=1.5cm} % правое поле
-\geometry{top=2cm}     % верхнее поле
-\geometry{bottom=2cm}  % нижнее поле
+\geometry{top=1.5cm}     % верхнее поле
+\geometry{bottom=1.5cm}  % нижнее поле
 
 \usepackage{subfiles}
 
@@ -51,7 +53,101 @@
 \usepackage{subcaption}
 
 \begin{document}
-There is only the Emperor, and he is our shield and protector.
+\section{Разработка платы управления}
+\begin{flushright}
+    \itshape
+    There is only the Emperor, and he is our shield and protector.\\
+    \ldots
+\end{flushright}
+\subsection{Перечень требований}
+\subsection{Выбор компонентов}
+\paragraph{Шины питания}
+Все микросхемы можно разделить на три группы по уровню питающего напряжения:
+\begin{itemize}
+    \item \textbf{+12В}:
+        \begin{itemize}
+            \item Драйвер ШИМ.
+        \end{itemize}
+        Исполльзовали линейный регулятор напряжения, \textit{TPS54160DGQ Texas Instruments}
+    \item \textbf{+5В}:
+        \begin{itemize}
+            \item Энкодер \textit{ЛИР-137А 6250-05-ПИ}
+            \item Операционный усилитель OPA2350
+            \item Преобразователь сигнала энекодера \textit{TXB0106PW}
+            \item Интерфейс \textit{RS-422/485 SN75176B}
+        \end{itemize}
+        Исполльзовали линейный регулятор напряжения \textit{UA78M05CDCY Texas Instruments}
+    \item \textbf{+3.3В}:
+        \begin{itemize}
+            \item Преобразователь сигнала энекодера \textit{TXB0106PW}
+            \item Микроконтролер \textit{TMS320F28035}
+        \end{itemize}
+        Исполльзовали линейный регулятор напряжения, \textit{UA78M33CDCY Texas Instruments}
+\end{itemize}
+
+%    \item Операционный усилитель, DA6, DA5, OPA2350 Texas Instruments
+
+
+\paragraph{Cигнал энекодера}
+Выбранный энкодер имеет TTL логику, а микроконтролер имеет логику 0..+3.3.
+Для этого поставили 6-разрядный двунаправленный преобразователь нарпяжения, OPA2350 Texas Instruments.
+
+\paragraph{Cвязь с бортовой шиной данных}
+Согласно тезническому заданию плата должна управляться со стороны бортовой \textit{ЭВМ} посредством
+интерфейса \textit{RS-485}, в полудуплексном режиме. В кабеле используется экранированная витая пара.
+Baud rate 115200. Выбран интерфейс \textit{RS-422/485 SN75176B} от Texas Instruments.
+
+%   TODO: ПЕРЕНЕСТИ это остюда в ТЗ !!!
+%   В качетсве протокола передачи данных использовали модифицированны STX-ETX протокол.
+%   Сообщение состояит из:
+%
+%   \begin{tabular}{|c|c|l|}
+%   \hline
+%   Тип & Длина, байт & Значение \\
+%   \hline
+%   STX    & 1      & 0x02 \\
+%   \hline
+%   Длина  & 1      & 0x04..0xff \\
+%   \hline
+%   Адрec  & 1      & 0x00..0x7f \\
+%   \hline
+%   Строка & 0..251 & 0x00..0x7f \\
+%   \hline
+%   ETX    & 1      & 0x03 \\
+%   \hline
+%   \end{tabular}
+
+\paragraph{Индикация состояния}
+В числе прочего для целей отладки, тестирования и последущих процедур контроля
+необхрдимо иметь визуальное средство для котроля состояния платы.
+Перечень ``жизненно важных'' систем платы включает:
+шину бортового питания,
+шину питаня 12В,
+шину питаня 5В,
+шину питаня 3.3В,
+бортовая шина передачи информации RS485,
+микроконтролер.
+
+Для этого на плату установлены:
+\begin{enumerate}
+    \item Индикатор статуса основной программы микроконтролера, светодиод зеленый \textit{KP-1608MGC}.
+    \item Индикатор статуса бртовой сети связи, светодиод голубой \textit{KPH-1608PBC-A}.
+    \item Индикатор критических ошибок микроконтролера, светодиод красный \textit{KPH-1608SEC}.
+    \item Индикатор напряжения на шине бортового питания, светодиод белый \textit{KPT-1608QWF-E}.
+    \item Индикатор напряжения на шине питания \textit{+12В}, светодиод желтый \textit{KPT-1608YD}.
+    \item Индикатор напряжения на шине питания \textit{+5В}, светодиод зеленый \textit{KP-1608VGC(A)}.
+    \item Индикатор напряжения на шине питания \textit{+3.3В}, светодиод оранжевый \textit{KP-1608VS}.
+\end{enumerate}
+
+\subsection{Технологические параметры платы}
+\paragraph{Выбор материала заготовки}
+В качестве диэлектрика выбрали стеклотекстолит СТЕФ-У.
+Длительная рабочая температура от \textit{-65\textcelcius} до \textit{+155\textcelcius}.
+Предназначен для работы в условиях нормальной относительной влажности
+окружающей среды при напряжении свыше \textit{1000В}.
+
+\paragraph{Выбор класса точности платы}
+
 
 \newpage
 \section[Список использованной литературы]{}
