@@ -41,5 +41,5 @@ plan: hello prepare
 ecology: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/ecology/main_ecology.tex
 
-technology: hello prepare
-	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/technology/main_technology.tex
+pcb_develop: hello prepare
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/pcb_develop/main_pcb_develop.tex
