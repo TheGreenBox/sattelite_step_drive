@@ -1,6 +1,5 @@
 HELLO_MSG="Documentation for step motor sattelaite student work"
 PRODUCT_DIR='product'
-PARTIAL_DIR='src/partial_compiles'
 
 help: hello
 	@echo "----------------------------------------"
@@ -28,16 +27,19 @@ clean:
 prepare:
 	@mkdir -p ${PRODUCT_DIR}/
 
-all: full c112 plan ecology
+all: full c112 plan ecology technology
 
 full: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main_full.tex
 
 c112: hello prepare
-	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf ${PARTIAL_DIR}/main_c112.tex
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/course_112/main_c112.tex
 
 plan: hello prepare
-	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf ${PARTIAL_DIR}/main_plan.tex
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/practice_report/main_plan.tex
 
 ecology: hello prepare
-	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf ${PARTIAL_DIR}/only_ecology.tex
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/ecology/main_ecology.tex
+
+pcb_develop: hello prepare
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/pcb_develop/main_pcb_develop.tex
