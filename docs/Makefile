@@ -27,7 +27,7 @@ clean:
 prepare:
 	@mkdir -p ${PRODUCT_DIR}/
 
-all: full c112 plan ecology technology
+all: full c112 plan ecology pcb_develop economics
 
 full: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main_full.tex
@@ -43,3 +43,7 @@ ecology: hello prepare
 
 pcb_develop: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/pcb_develop/main_pcb_develop.tex
+
+economics: hello prepare
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/economics/main_economics.tex
+	@evince ${PRODUCT_DIR}/main_economics.pdf

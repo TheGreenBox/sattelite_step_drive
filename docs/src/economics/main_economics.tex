@@ -1,0 +1,82 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+% Выбор внутренней TEX−кодировки
+\usepackage [T2A]{fontenc}
+% Включение переносов для русского и английского языков
+\usepackage[english,russian]{babel}
+
+% Подключение гиперссылок
+\usepackage{xcolor}
+\usepackage[unicode]{hyperref}
+
+% Настройка внешнего вида гиперссылок
+\definecolor{LINKCOLOUR}{rgb}{0.1,0.0,0.9}
+\hypersetup{colorlinks,breaklinks,urlcolor=LINKCOLOUR,linkcolor=LINKCOLOUR}
+
+% Начинать первый параграф раздела следует с красной строки
+\usepackage{indentfirst}
+
+% Дополнительные математические пакеты
+%\usepackage{weird,querr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% Для корректного копирования из документа
+\usepackage{cmap}
+
+% Кто нибудь помнит зачем это тут? A: Неа...
+% это многострочный текст, мы используем для многострочности в ячейках таблицы
+\usepackage{multirow}
+
+% стилевой пакет, открывающий доступ к большому числу типографских значков
+\usepackage{textcomp}
+
+% Меняем поля страницы
+\usepackage{geometry}
+\geometry{left=2cm}    % левое поле
+\geometry{right=1.5cm} % правое поле
+\geometry{top=1.5cm}     % верхнее поле
+\geometry{bottom=1.5cm}  % нижнее поле
+
+\usepackage{subfiles}
+
+% работа с импортом изображений
+\ifx\pdfoutput\undefined
+\usepackage{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\fi
+
+% Схемы
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc}
+
+% секции и их структура
+\usepackage[section]{placeins}
+\usepackage{subcaption}
+
+\begin{document}
+\tableofcontents
+\newpage
+\part{
+    Применение функционально-стоимостного
+    анализа при выборе варианта конструкции
+    изделия "Система управления двухзвенным манипулятором спутника".
+    Организационно экономическая часть
+}
+\begin{flushright}
+    \itshape
+    Blessed is the mind too small for doubt.\\
+    Isador Akios
+\end{flushright}
+
+\subfile{src/economics/economics_intro}
+
+\newpage
+\section[Список использованной литературы]{}
+\begin{thebibliography}{30}
+    \subfile{src/economics/bibliography}
+\end{thebibliography}
+
+\end{document}
