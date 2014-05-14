@@ -155,9 +155,9 @@
 оказывает влияние на выбор количества и типа других элементов, т.е. на структуру
 изделия в целом.
 
-\subsection{Функционально-структурный анализ}
+\subsection{Функционально--структурный анализ}
 Изучили систему с целью определения основных направлений его совершенствования.
-Для этого использовали функционально-последовательную стратегию ФСА.
+Для этого использовали функционально--последовательную стратегию ФСА.
 Резделение на подсистемы выполнили в соответствии с функциональной схемой.
 
 По каждой функции выявили возможные способы её осуществления.
@@ -175,10 +175,10 @@
             \hline
             Вариант 1 & Вариант 2 & Вариант 3 & Вариант 4 \\
             \hline
-            AM1802 - Sitara ARM &
-            TMS320F28035 32bit&
-            LPC2132FBD64 16bit&
-            AT89C51ED2-SLSUM 8bit\\
+            \textit{AM1802--Sitara ARM} &
+            \textit{TMS320F28035 32bit} &
+            \textit{LPC2132FBD64 16bit} &
+            \textit{AT89C51ED2--SLSUM 8bit} \\
             \hline
         \end{tabular}
 
@@ -218,10 +218,10 @@
             \hline
             Вариант 1 & Вариант 2 & Вариант 3 & Вариант 4 \\
             \hline
-            TI DRV8412 &
-            FSBB15CH60 SPM27CA &
-            L6205N &
-            L293DNE \\
+            \textit{TI DRV8412} &
+            \textit{FSBB15CH60 SPM27CA} &
+            \textit{L6205N} &
+            \textit{L293DNE} \\
             \hline
         \end{tabular}
 
@@ -259,27 +259,154 @@
 \end{enumerate}
 
 \subsection{Сравнение альтернатив по техническому уровню}
-В таблице 4.2 каждой паре альтернатив соответствуют две ячейки
-( i , j ) и
-( j , i ) .
-Если
-технический
-технического уровня альтернативы
-уровень
-( j ) ,
-альтернативы
-(i )
-выше
-то в ячейке проставляют 1, и
-наоборот.
-В последней колонке таблице 4.2 весовые коэффициенты
-(технический уровень соответствующих альтернатив).
-Таблица 4.2
-
+В таблице (\ref{technical_lvl_comparison_table}) каждой паре альтернатив
+соответствуют две ячейки $(i, j)$ и $(j, i)$.
+Если технический уровень альтернативы $i$ выше технического уровня альтернативы
+$j$, то в ячейке $(i, j)$ проставляют $1$, а в $(j, i)$ $0$, и наоборот.
+В последней колонке таблице (\ref{technical_lvl_comparison_table}) весовые
+коэффициенты $D_{\text{ТУ}}$ (технический уровень соответствующих альтернатив).
 \begin{table}[h!]
     \centering
-    \begin{tabular}{|p{3.5cm}|p{3.5cm}|}
+    \begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+        \hline
+        \begin{center} Номер варианта (алтернативы) $(i = \overline{1:n})$ \end{center} &
+        \multicolumn{3}{c|}{
+            \parbox{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) $(j = \overline{1:m})$
+            }
+        } &
+        \begin{center} $$1 + \sum_{i=1}^n E$$ \end{center} &
+        \begin{center} $$\frac{1 + \sum_{i=1}^n E}{\sum_{i=1}^m E}$$ \end{center} \\
+
+        \hline &
+        \begin{center} 1 \end{center} &
+        \begin{center} 2 \end{center} &
+        \begin{center} 3 \end{center} &
+        &
+        \begin{center} $D_\text{ТУ}$ \end{center}\\
+
+        \hline
+        \centering{1} & --- &  1  &  1  & 3 & 0.5  \\ \hline
+        \centering{2} &  0  & --- &  1  & 2 & 0.33 \\ \hline
+        \centering{3} &  0  &  0  & --- & 1 & 0.17 \\ \hline
+
+        \hline
+        \multicolumn{4}{|c|}{итого:} & 6 & 1 \\
+        \hline
     \end{tabular}
-    \caption{а}
-    \label{}
+    \caption{Cравнение альтернатив по техническому уровню}
+    \label{technical_lvl_comparison_table}
 \end{table}
+
+
+\subsection{Сравнение альтернатив по затратам}
+Аналогично заполняем таблицу (\ref{costs_lvl_comparison_table}) весовыми
+коэффициентами $D_\text{СТ}$ (затраты на осуществление соответствующего варианта
+изделия).
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|p{2.4cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+        \hline
+        \begin{center} Номер варианта (алтернативы) $(i = \overline{1:n})$ \end{center} &
+        \multicolumn{3}{c|}{
+            \parbox{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) $(j = \overline{1:m})$
+            }
+        } &
+        \begin{center} $$1 + \sum_{i=1}^n E$$ \end{center} &
+        \begin{center} $$\frac{1 + \sum_{i=1}^n E}{\sum_{i=1}^m E}$$ \end{center} \\
+
+        \hline &
+        \begin{center} 1 \end{center} &
+        \begin{center} 2 \end{center} &
+        \begin{center} 3 \end{center} &
+        &
+        \begin{center} $D_\text{СТ}$ \end{center}\\
+
+        \hline
+        \centering{1} & --- &  1  &  1  & 1 & 0.17 \\ \hline
+        \centering{2} &  0  & --- &  1  & 3 & 0.5  \\ \hline
+        \centering{3} &  0  &  0  & --- & 2 & 0.33 \\ \hline
+
+        \hline
+        \multicolumn{4}{|c|}{итого:} & 6 & 1 \\
+        \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив по затратам}
+    \label{costs_lvl_comparison_table}
+\end{table}
+
+\subsection{Функционально--стоимостная гистограмма}
+
+  \begin{tikzpicture}[scale=0.7]
+    %Draw axis
+    \coordinate (py) at (0,4);
+    \coordinate (ny) at (0,-4);
+    \coordinate (px) at (10,0);
+    \draw[->,  very thick]   (0,0) --  (px);
+    \draw[<->, very thick]   (ny)  --  (py);
+
+    \coordinate (dtu) at (10,0);
+    \coordinate (dst) at (10,0);
+
+    \coordinate (dtu) at (10,0);
+    \coordinate (dst) at (10,0);
+
+    \coordinate (dtu) at (10,0);
+    \coordinate (dst) at (10,0);
+
+    \draw (0, -0.85) rectangle (2.5,2.5);
+    \draw (2.5,-2.5) rectangle (5,  1.65);
+    \draw (5, -1.65) rectangle (7.5,0.85);
+
+    \node at (1.25, 0.45)  {\textit{1}};
+    \node at (1.25, 3)     {\textit{0.5}};
+    \node at (1.25, -1.35) {\textit{0.17}};
+
+    \node at (3.75, 0.45) {\textit{2}};
+    \node at (3.75, 2.15) {\textit{0.33}};
+    \node at (3.75, -3)   {\textit{0.5}};
+
+    \node at (6.25, 0.45)  {\textit{3}};
+    \node at (6.25, 1.35)  {\textit{1.17}};
+    \node at (6.25, -2.15) {\textit{0.33}};
+
+    \node at ($(py) + (1,0)$) {$D_\text{ТУ}$};
+    \node at ($(ny) + (1,0)$) {$D_\text{СТ}$};
+    \node at ($(px) + (0,0.5)$) {Номер элемента};
+
+  \end{tikzpicture}
+%   \coordinate (alphaas) at ($0.8*(py)$);
+%   \coordinate (alphabs) at ($0.533*(py)$);
+%   \coordinate (cfas) at ($.6*(px)$);
+%   \coordinate (cfbs) at ($.9*(px)$);
+%   \coordinate (rl) at ($(cfas)-.2*(px)$);
+%   \coordinate (rla) at ($(rl)-.1*(px)$);
+%   \coordinate (rlb) at ($(rl)+.1*(px)$);
+
+%   \draw[important line] let \p1=(alphaas), \p2=(cfas) in
+%   (\p1) node[left] {$\alpha_s^\A$} -| (\x2, \y1) -| (\p2)
+%   node[below] {$\mathit{NV^\A_s}$};
+%   \draw[] let \p1=(alphabs), \p2=(cfbs) in
+%   (\p1) node[left] {$\alpha_s^\B$} -| (\x2, \y1) -| (\p2)
+%   node[below] {$\mathit{NV^\B_s}$};
+%   \draw[help lines] let \p1=(rl), \p2=(y) in
+%   (\p1) node[below] {$\hat{r}_L$} -- (\x1, \y2);
+
+%   \draw let \p1=($(alphaas)-(alphabs)$), \p2=(rl), \p3=(alphabs) in
+%   ($(.5*\x2, .5*\y1+\y3)$) node {$C$};
+%   %%D
+%   \draw let \p1=($(alphaas)-(alphabs)$), \p2=($(cfas)-(rl)$),
+%   \p3=(alphabs), \p4=(rl) in
+%   ($(.5*\x2+\x4, .5*\y1+\y3)$) node {$D$};
+%   %%E
+%   \draw let \p1=(alphabs), \p2=(rl) in
+%   ($(.5*\x2, .5*\y1)$) node {$E$};
+%   %%F
+%   \draw let \p1=(alphabs), \p2=($(cfas)-(rl)$), \p3=(rl) in
+%   ($(.5*\x2+\x3, .5*\y1)$) node {$F$};
+%   %%G
+%   \draw let \p1=(alphabs), \p2=($(cfbs)-(cfas)$), \p3=(cfas) in
+%   ($(.5*\x2+\x3, .5*\y1)$) node {$G$};
