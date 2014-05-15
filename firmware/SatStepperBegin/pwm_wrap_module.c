@@ -140,4 +140,3 @@ void activate_pwm_driver() {
     GpioDataRegs.GPASET.bit.GPIO19 = 1;
     GpioDataRegs.GPBSET.bit.GPIO32 = 1;
 }
-
