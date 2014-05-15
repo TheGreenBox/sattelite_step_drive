@@ -5,7 +5,6 @@
  * File name: control_algo.c
  * Description: module for setting algo type and sending
  * A and B phase states for next step
- * Author: SNikitin
  * ========================================================
  */
 
@@ -14,113 +13,130 @@
 
 #include "state.h"
 
-//arrays of step by step phase states for different algorythms
-static int onePhaseAlgoA[ONE_PHASE_STEPS_NUMBER]  = {1, 0, -1,  0};
-static int onePhaseAlgoB[ONE_PHASE_STEPS_NUMBER]  = {0, 1,  0, -1};
+const int onePhaseAlgoA[ONE_PHASE_ALGO_STEPS] = {1, 0, -1,  0};
+const int onePhaseAlgoB[ONE_PHASE_ALGO_STEPS] = {0, 1,  0, -1};
 
-static unsigned onePhasePwmDuty[ONE_PHASE_PWM_STEPS_NUMBER]  = {MAX_PWM_DUTY};
-
-
-static int twoPhaseAlgoA[TWO_PHASE_STEPS_NUMBER]  = {1, -1, -1,  1};
-static int twoPhaseAlgoB[TWO_PHASE_STEPS_NUMBER]  = {1,  1, -1, -1};
-
-static unsigned twoPhasePwmDuty[TWO_PHASE_PWM_STEPS_NUMBER]  = {MAX_PWM_DUTY};
+const unsigned onePhasePwmDuty[ONE_PHASE_ALGO_PWM_STEPS] = {MAX_PWM_DUTY};
 
 
-static int halfPhaseAlgoA[HALF_PHASE_STEPS_NUMBER] = {1, 1, 0, -1, -1, -1,  0,  1};
-static int halfPhaseAlgoB[HALF_PHASE_STEPS_NUMBER] = {0, 1, 1,  1,  0, -1, -1, -1};
+const int twoPhaseAlgoA[TWO_PHASE_ALGO_STEPS] = {1, -1, -1,  1};
+const int twoPhaseAlgoB[TWO_PHASE_ALGO_STEPS] = {1,  1, -1, -1};
 
-static unsigned halfPhasePwmDuty[HALF_PHASE_PWM_STEPS_NUMBER] = { (unsigned)(MAX_PWM_DUTY*1), (unsigned)(MAX_PWM_DUTY*0.707) };
+const unsigned twoPhasePwmDuty[TWO_PHASE_ALGO_PWM_STEPS] = {MAX_PWM_DUTY};
+
+
+const int halfPhaseAlgoA[HALF_PHASE_ALGO_STEPS] = {1, 1, 0, -1, -1, -1,  0,  1};
+const int halfPhaseAlgoB[HALF_PHASE_ALGO_STEPS] = {0, 1, 1,  1,  0, -1, -1, -1};
+
+const unsigned halfPhasePwmDuty[HALF_PHASE_ALGO_PWM_STEPS] = {  (unsigned)(MAX_PWM_DUTY*1),
+                                                                (unsigned)(MAX_PWM_DUTY*0.707) };
 
 typedef struct _AlgoType {
-    int* phaseA;
-    int* phaseB;
+    const int* phaseA;
+    const int* phaseB;
 
-    unsigned algoStepsNumber;
+    const unsigned algoStepsNumber;
 
-    unsigned* pwmDuty;
-    unsigned algoPwmStepsNumber;
+    const unsigned* pwmDuty;
+    const unsigned algoPwmStepsNumber;
 } AlgoType;
 
-//const structure variables init
 AlgoType onePhaseParametrs = {
     onePhaseAlgoA,
     onePhaseAlgoB,
 
-    ONE_PHASE_STEPS_NUMBER,
+    ONE_PHASE_ALGO_STEPS,
 
     onePhasePwmDuty,
-    ONE_PHASE_PWM_STEPS_NUMBER
+    ONE_PHASE_ALGO_PWM_STEPS
 };
 
 AlgoType twoPhaseParametrs = {
     twoPhaseAlgoA,
     twoPhaseAlgoB,
 
-    ONE_PHASE_STEPS_NUMBER,
+    TWO_PHASE_ALGO_STEPS,
 
     twoPhasePwmDuty,
-    TWO_PHASE_PWM_STEPS_NUMBER
+    TWO_PHASE_ALGO_PWM_STEPS
 };
 
 AlgoType halfPhaseParametrs = {
     halfPhaseAlgoA,
     halfPhaseAlgoB,
 
-    HALF_PHASE_STEPS_NUMBER,
+    HALF_PHASE_ALGO_STEPS,
 
     halfPhasePwmDuty,
-    HALF_PHASE_PWM_STEPS_NUMBER
+    HALF_PHASE_ALGO_PWM_STEPS
 };
 
-static AlgoType* pCurrentAlgoStruct = NULL;
+static AlgoType* currentAlgo        = NULL;
+static uint_fast8_t feedbackFlag    = FEEDBACK_DISABLED;
 
-// sets control algorythm type that will be used
-int setAlgoType(unsigned short algoTypeCode) {
-    switch (algoTypeCode) {
-        case CTRL_ALGO_ONE_PHASE:
-            pCurrentAlgoStruct = &onePhaseParametrs;
+void setAlgoType(uint_fast8_t algoType) {
+    switch (algoType) {
+        case ONE_PHASE_CTRL_ALGO:
+            currentAlgo = &onePhaseParametrs;
             break;
-        case CTRL_ALGO_TWO_PHASE:
-            pCurrentAlgoStruct = &twoPhaseParametrs;
+        case TWO_PHASE_CTRL_ALGO:
+            currentAlgo = &twoPhaseParametrs;
             break;
-        case CTRL_ALGO_HALF_PHASE:
-            pCurrentAlgoStruct = &halfPhaseParametrs;
+        case HALF_PHASE_CTRL_ALGO:
+            currentAlgo = &halfPhaseParametrs;
             break;
         default:
-            return 1;
+        // TODO: add static assert here
     }
-    return 0;
 }
 
-// writes phase states for next step to PWM registers
-int getPhasePulseByStep(long long step, int* phaseA, int* phaseB) {
-    // if setAlgoType wasn't used
-    if (pCurrentAlgoStruct == NULL) {
-        return 1;
-    }
-    long int nextStep = step % pCurrentAlgoStruct->algoStepsNumber;
-    if (nextStep < 0) {
-        nextStep = pCurrentAlgoStruct->algoStepsNumber + nextStep;
-    }
-    *phaseA = pCurrentAlgoStruct->phaseA[nextStep];
-    *phaseB = pCurrentAlgoStruct->phaseB[nextStep];
-    return 0;
+void setFeedbackFlagTo(uint_fast8_t state) {
+    feedbackFlag = state;
 }
 
-int getPwmDutyByStep(long long step, unsigned currentPwmDuty, unsigned* pwmDuty) {
-    if (pCurrentAlgoStruct == NULL) {
-        return 1;
+static unsigned getNextAlgoStepNum() {
+    int nextStep;
+
+    if (feedbackFlag == FEEDBACK_ENABLED) {
+        // nextStep = nextAlgoStepByCommAngle();
     }
-    long int nextStep = step % pCurrentAlgoStruct->algoPwmStepsNumber;
-    if (nextStep < 0) {
-        nextStep = pCurrentAlgoStruct->algoStepsNumber + nextStep;
+    else {
+        nextStep = gState.stepTicker % currentAlgo->algoStepsNumber;
+        if (nextStep < 0) {
+            nextStep = currentAlgo->algoStepsNumber + nextStep;
+        }
     }
 
-    unsigned long pwm = MAX_PWM_DUTY - currentPwmDuty;
-    pwm *= pCurrentAlgoStruct->pwmDuty[nextStep];
-    pwm /= MAX_PWM_DUTY;
-    *pwmDuty = (unsigned)(MAX_PWM_DUTY - pwm);
+    return (unsigned)nextStep;
+}
 
-    return 0;
+PhaseSigns getNextPhaseSigns() {
+    PhaseSigns phaseSigns;
+
+    if (currentAlgo == NULL) {
+        phaseSigns.A       = 0;
+        phaseSigns.B       = 0;
+        return phaseSigns;
+    }
+
+    unsigned nextStep = getNextAlgoStepNum();
+
+    phaseSigns.A = currentAlgo->phaseA[nextStep];
+    phaseSigns.B = currentAlgo->phaseB[nextStep];
+
+    return phaseSigns;
+}
+
+// TODO: this mustn't be here, it will be done in current feedback module
+uint16_t getPwmDutyByStep() {
+    if (currentAlgo == NULL) {
+        return MAX_PWM_DUTY;
+    }
+
+    unsigned nextStep = getNextAlgoStepNum();
+
+    uint16_t pwm = MAX_PWM_DUTY - gState.motorControl.pwmDutyCycle;
+    pwm *= currentAlgo->pwmDuty[nextStep] / MAX_PWM_DUTY;
+
+    return (MAX_PWM_DUTY - pwm);
 }

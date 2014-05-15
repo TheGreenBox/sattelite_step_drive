@@ -19,7 +19,7 @@
         event; \
     }
 
-#include "stdint.h"
+#include <stdint.h>
 
 #define MAX_PWM_DUTY 1024
 
@@ -50,8 +50,8 @@ typedef struct _GlobalState {
 extern volatile GlobalState gState;
 
 typedef struct _GlobalConfig {
-    unsigned short pwmPeriod;
-    unsigned short algoType;
+    uint_fast16_t   pwmPeriod;
+    uint_fast8_t    algoType;
 } GlobalConfig;
 
 extern const GlobalConfig gConfig;

@@ -4,11 +4,10 @@
  * Project name: Satellite stepper drive
  * File name:  main.c
  * Description:
- * Author: SNikitin, AKindyakov
  * ========================================================
  */
 
-#include "PeripheralHeaderIncludes.h"
+#include <PeripheralHeaderIncludes.h>
 #include "pwm_wrap_module.h"
 #include "control_algo.h"
 #include "led_control.h"

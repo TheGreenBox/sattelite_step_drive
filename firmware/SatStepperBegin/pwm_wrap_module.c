@@ -11,7 +11,6 @@
 #include <DSP2803x_EPwm.h>
 #include <DSP2803x_EPwm_defines.h>
 
-
 #include "pwm_wrap_module.h"
 
 static volatile struct EPWM_REGS* pwm_control_regs[2] = {

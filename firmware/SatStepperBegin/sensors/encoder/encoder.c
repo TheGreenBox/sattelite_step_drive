@@ -16,9 +16,6 @@
 #include "state.h"
 #define ENCODER_RANGE 25000
 
-#include "control_modules/modules_list.h"
-
-
 interrupt void encoderInputAIntHandler(void) {
 #ifdef DEBUG
     ASSERT(
@@ -45,8 +42,6 @@ interrupt void encoderInputAIntHandler(void) {
     );
 #endif // DEBUG
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP1);
-
-    // runEnabledModules();
 }
 
 interrupt void encoderInputBIntHandler(void) {
@@ -75,8 +70,6 @@ interrupt void encoderInputBIntHandler(void) {
     );
 #endif // DEBUG
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP1);
-
-    // runEnabledModules();
 }
 
 interrupt void encoderInputCIntHandler(void) {

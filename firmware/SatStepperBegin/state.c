@@ -4,7 +4,6 @@
  * Project name: Satellite stepper drive
  * File name:  SatStepperBegin/state.c
  * Description:
- * Author: akindyakov, snikitin
  * ========================================================
  */
 
@@ -15,5 +14,5 @@ volatile GlobalState gState;
 
 const GlobalConfig gConfig = {
     MAX_PWM_DUTY,
-    CTRL_ALGO_HALF_PHASE
+    HALF_PHASE_CTRL_ALGO
 };
