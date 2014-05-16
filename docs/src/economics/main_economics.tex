@@ -34,12 +34,17 @@
 
 % Меняем поля страницы
 \usepackage{geometry}
-\geometry{left=2cm}    % левое поле
-\geometry{right=1.5cm} % правое поле
-\geometry{top=1.5cm}     % верхнее поле
-\geometry{bottom=1.5cm}  % нижнее поле
+\geometry{left=2cm}     % левое поле
+\geometry{right=1.5cm}  % правое поле
+\geometry{top=1.5cm}    % верхнее поле
+\geometry{bottom=1.5cm} % нижнее поле
 
+% работа с множеством include
 \usepackage{subfiles}
+
+% This package improves the interface for defining floating objects such
+% as figures and tables in LaTeX
+\usepackage{float}
 
 % работа с импортом изображений
 \ifx\pdfoutput\undefined

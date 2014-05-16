@@ -177,8 +177,8 @@
             Вариант 1 & Вариант 2 & Вариант 3 \\
             \hline
             \textit{AM1802--Sitara ARM} &
-            \textit{TMS320F28035 32bit} &
-            \textit{AT89C51ED2--SLSUM 8bit} \\
+            \textit{AT89C51ED2--SLSUM 8bit} &
+            \textit{TMS320F28035 32bit} \\
             \hline
         \end{tabular}
 
@@ -204,9 +204,9 @@
             \hline
             Вариант 1 & Вариант 2 & Вариант 3 \\
             \hline
-            Оптический, цифровой &
+            Потенциоиетр + АЦП &
             Индукционный, цифровой &
-            Потенциоиетр + АЦП \\
+            Оптический, цифровой \\
             \hline
         \end{tabular}
 
@@ -219,9 +219,9 @@
             \hline
             Вариант 1 & Вариант 2 & Вариант 3 & Вариант 4 \\
             \hline
-            \textit{TI DRV8412} &
+            \textit{L293DNE} &
             \textit{FSBB15CH60 SPM27CA} &
-            \textit{L293DNE} \\
+            \textit{TI DRV8412} \\
             \hline
         \end{tabular}
 
@@ -371,7 +371,7 @@ $j$, то в ячейке $(i, j)$ проставляют $1$, а в $(j, i)$ $0
 Функционально--стоимостная гистограмма строится на основании данных таблиц
 (\ref{tbl_technical_lvl_comparison}) и (\ref{tbl_costs_lvl_comparison}).
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[scale=0.2]
         \coordinate (dtu1) at (0, 14.2857);
@@ -434,56 +434,657 @@ $j$, то в ячейке $(i, j)$ проставляют $1$, а в $(j, i)$ $0
     \label{pic_function_costs_histogram}
 \end{figure}
 
+\begin{equation}
+    D_\text{ТУ} =
+    \begin{bmatrix}
+        0.142857 \\
+        0.285714 \\
+        0.190476 \\
+        0.095238 \\
+        0.238095 \\
+        0.047619 \\
+    \end{bmatrix}
+    \label{eq_tu_matrix}
+\end{equation}
+
+\begin{equation}
+    D_\text{CТ} =
+    \begin{bmatrix}
+        0.142857 \\
+        0.238095 \\
+        0.190476 \\
+        0.095238 \\
+        0.285714 \\
+        0.047619 \\
+    \end{bmatrix}
+    \label{eq_st_matrix}
+\end{equation}
 
 \subsection{Оценка способов исполнения функций}
 Составим функционально-стоимостные матрицы:
 \begin{enumerate}
-    \item Матрица $U(i,j)$ --- матрица оценки технического уровня
-    \item Матрица $С(i,j)$ --- матрица оценки затрат
+    \item $U(i,j)$ --- матрица оценки технического уровня
+    \item $С(i,j)$ --- матрица оценки затрат
 \end{enumerate}
 
 Следующие далее таблицы составлены попарно аналогично таблицам
 (\ref{tbl_technical_lvl_comparison}) и (\ref{tbl_costs_lvl_comparison}).
 соответственно. В них последний столбец будет соответствовать строке, отвечающей
 за технический уровень или затраты по каждому элементу (исполняемой функции).
-Сравнение альтернатив по техническому уровню
+%Сравнение альтернатив по техническому уровню
 
 \begin{enumerate}
-    \item Микроконтролер
-    \begin{table}[h!]
-        \centering
-        \begin{tabular}{|c|p{2cm}|p{2cm}|p{2cm}|c|}
-            \hline
-            \multirow{2}{2.4cm}{
-                \centering
-                Номер варианта (алтернативы) $(i = \overline{1:n})$
-            } &
-            \multicolumn{3}{p{6cm}|}{
-                \begin{center}
-                    Номер варианта (алтернативы) $(j = \overline{1:m})$
-                \end{center}
-            } &
-            \multirow{2}{2cm}{
-                $$1 + \sum_{i=1}^n E$$
-            } \\
-            & \centering{ 1 } & \centering{ 2 } & \centering{ 3 } & \\
-            \hline
-            \centering{1} & \centering{---} & \centering{ 1 } & \centering{ 1 } & 1 \\ \hline
-            \centering{2} & \centering{ 0 } & \centering{---} & \centering{ 1 } & 3 \\ \hline
-            \centering{3} & \centering{ 0 } & \centering{ 0 } & \centering{---} & 2 \\ \hline
-        \end{tabular}
-        \caption{Сравнение альтернатив микроконтролеров по техническому уровню}
-        \label{tbl_mcu_tech_lvl_comparison}
-    \end{table}
+    \item Микроконтролер. таблицы
+        (\ref{tbl_mcu_tech_lvl_comparison}),
+        (\ref{tbl_mcu_cost_lvl_comparison}).
 
-    \item Двигатель
+    \item Двигатель. таблицы
+        (\ref{tbl_motor_tech_lvl_comparison}),
+        (\ref{tbl_motor_cost_lvl_comparison}).
 
-    \item Цифровой датчик угла
+    \item Цифровой датчик угла. таблицы
+        (\ref{tbl_sensor_tech_lvl_comparison}),
+        (\ref{tbl_sensor_cost_lvl_comparison}).
 
-    \item Драйвер ШИМ:
+    \item Драйвер ШИМ. таблицы
+        (\ref{tbl_drv_tech_lvl_comparison}),
+        (\ref{tbl_drv_cost_lvl_comparison}).
 
-    \item Редуктор
+    \item Редуктор. таблицы
+        (\ref{tbl_red_tech_lvl_comparison}),
+        (\ref{tbl_red_cost_lvl_comparison}).
 
-    \item Операционная система
+    \item Операционная система. таблицы
+        (\ref{tbl_os_tech_lvl_comparison}),
+        (\ref{tbl_os_cost_lvl_comparison}).
 
 \end{enumerate}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 1 & 1 & 3 \\ \hline
+        \centering{2} & 0 &---& 1 & 2 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив микроконтролера по техническому уровню}
+    \label{tbl_mcu_tech_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 1 & 1 & 3 \\ \hline
+        \centering{2} & 0 &---& 1 & 2 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив микроконтролера по затратам}
+    \label{tbl_mcu_cost_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 1 & 1 & 3 \\ \hline
+        \centering{2} & 0 &---& 1 & 2 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив двигателя по техническому уровню}
+    \label{tbl_motor_tech_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 0 & 1 & 2 \\ \hline
+        \centering{2} & 1 &---& 1 & 3 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив двигателя по затратам}
+    \label{tbl_motor_cost_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 1 & 1 & 3 \\ \hline
+        \centering{2} & 0 &---& 1 & 2 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив цифрового датчика угла по техническому уровню}
+    \label{tbl_sensor_tech_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 0 & 1 & 2 \\ \hline
+        \centering{2} & 1 &---& 1 & 3 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив цифрового датчика угла по затратам}
+    \label{tbl_sensor_cost_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 1 & 1 & 3 \\ \hline
+        \centering{2} & 0 &---& 1 & 2 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив драйвера ШИМ по техническому уровню}
+    \label{tbl_drv_tech_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 0 & 1 & 2 \\ \hline
+        \centering{2} & 1 &---& 1 & 3 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив драйвера ШИМ по затратам}
+    \label{tbl_drv_cost_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 1 & 1 & 3 \\ \hline
+        \centering{2} & 0 &---& 1 & 2 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив редуктора по техническому уровню}
+    \label{tbl_red_tech_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 1 & 1 & 3 \\ \hline
+        \centering{2} & 0 &---& 1 & 2 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив редуктора по затратам}
+    \label{tbl_red_cost_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 0 & 0 & 1 \\ \hline
+        \centering{2} & 1 &---& 0 & 2 \\ \hline
+        \centering{3} & 1 & 1 &---& 3 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив ОС по техническому уровню}
+    \label{tbl_os_tech_lvl_comparison}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multirow{2}{2.4cm}[-0.5pc]{
+            \centering
+            Номер варианта (алтернативы) ($i = \overline{1:n}$)
+        } &
+        \multicolumn{3}{c|}{
+            \parbox[t]{2.4cm}{
+                \centering
+                Номер варианта (алтернативы) ($j = \overline{1:m}$)
+            }
+        } &
+        \multirow{2}{1.7cm}{
+            \centering
+            $$1 + \sum_{i=1}^n E$$
+        } \\
+        &
+        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
+        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
+        \hline \hline
+        \centering{1} &---& 1 & 1 & 3 \\ \hline
+        \centering{2} & 0 &---& 1 & 2 \\ \hline
+        \centering{3} & 0 & 0 &---& 1 \\ \hline
+    \end{tabular}
+    \caption{Сравнение альтернатив ОС по затратам}
+    \label{tbl_os_cost_lvl_comparison}
+\end{table}
+
+
+\paragraph{Матрица оценки технического уровня}
+
+На основании таблиц (
+    \ref{tbl_mcu_tech_lvl_comparison}
+  , \ref{tbl_motor_tech_lvl_comparison}
+  , \ref{tbl_sensor_tech_lvl_comparison}
+  , \ref{tbl_drv_tech_lvl_comparison}
+  , \ref{tbl_red_tech_lvl_comparison}
+  , \ref{tbl_os_tech_lvl_comparison}
+)
+формируем матрицу оценки технического уровня:
+(\ref{eq_matrix_tech_lvl_estimate})
+
+\begin{equation}
+    U(6,3) =
+    \begin{bmatrix}
+        3 & 2 & 1 \\
+        3 & 2 & 1 \\
+        3 & 2 & 1 \\
+        3 & 2 & 1 \\
+        3 & 2 & 1 \\
+        1 & 2 & 3 \\
+    \end{bmatrix}
+    \label{eq_matrix_tech_lvl_estimate}
+\end{equation}
+
+\paragraph{Матрица оценки затрат}
+
+На основании таблиц (
+    \ref{tbl_mcu_cost_lvl_comparison}
+  , \ref{tbl_motor_cost_lvl_comparison}
+  , \ref{tbl_sensor_cost_lvl_comparison}
+  , \ref{tbl_drv_cost_lvl_comparison}
+  , \ref{tbl_red_cost_lvl_comparison}
+  , \ref{tbl_os_cost_lvl_comparison}
+)
+формируем матрицу оценки затрат:
+(\ref{eq_matrix_cost_lvl_estimate})
+
+\begin{equation}
+    C(6,3) =
+    \begin{bmatrix}
+        3 & 2 & 1 \\
+        2 & 3 & 1 \\
+        2 & 3 & 1 \\
+        2 & 3 & 1 \\
+        3 & 2 & 1 \\
+        3 & 2 & 1 \\
+    \end{bmatrix}
+    \label{eq_matrix_cost_lvl_estimate}
+\end{equation}
+
+\subsection{Формирование и оценка лучшего варианта изделия}
+Взвешенную матрицу технического уровня $UR(i, j)$, по формуле
+(\ref{eq_ur_computing_form}).
+
+\begin{equation}
+    UR(6,3) =
+        \begin{bmatrix}
+            D_\text{ТУ}[1] & 0 & 0 & 0 & 0 & 0 \\
+            0 & D_\text{ТУ}[2] & 0 & 0 & 0 & 0 \\
+            0 & 0 & D_\text{ТУ}[3] & 0 & 0 & 0 \\
+            0 & 0 & 0 & D_\text{ТУ}[4] & 0 & 0 \\
+            0 & 0 & 0 & 0 & D_\text{ТУ}[5] & 0 \\
+            0 & 0 & 0 & 0 & 0 & D_\text{ТУ}[6] \\
+        \end{bmatrix}
+        \cdot
+        U(6,3)
+    \label{eq_ur_computing_form}
+\end{equation}
+
+$$
+    UR(6,3) =
+        \begin{bmatrix}
+            0.142857 & 0.0      & 0.0      & 0.0      & 0.0      & 0.0      \\
+            0.0      & 0.285714 & 0.0      & 0.0      & 0.0      & 0.0      \\
+            0.0      & 0.0      & 0.190476 & 0.0      & 0.0      & 0.0      \\
+            0.0      & 0.0      & 0.0      & 0.095238 & 0.0      & 0.0      \\
+            0.0      & 0.0      & 0.0      & 0.0      & 0.238095 & 0.0      \\
+            0.0      & 0.0      & 0.0      & 0.0      & 0.0      & 0.047619 \\
+        \end{bmatrix}
+        \cdot
+        \begin{bmatrix}
+            3 & 2 & 1 \\
+            3 & 2 & 1 \\
+            3 & 2 & 1 \\
+            3 & 2 & 1 \\
+            3 & 2 & 1 \\
+            1 & 2 & 3 \\
+        \end{bmatrix}
+$$
+
+\begin{equation}
+    UR(6,3) =
+        \begin{bmatrix}
+            0.428571 & 0.285714 & 0.142857 \\
+            0.857142 & 0.571428 & 0.285714 \\
+            0.571428 & 0.380952 & 0.190476 \\
+            0.285714 & 0.190476 & 0.095238 \\
+            0.714285 & 0.47619  & 0.238095 \\
+            0.047619 & 0.095238 & 0.142857 \\
+        \end{bmatrix}
+    \label{eq_cd_computing_form}
+\end{equation}
+
+Взвешенную матрицу технического уровня $CD(i, j)$, по формуле
+(\ref{eq_cd_computing_form}).
+
+\begin{equation}
+    UR(6,3) =
+        \begin{bmatrix}
+            D_\text{СТ}[1] & 0 & 0 & 0 & 0 & 0 \\
+            0 & D_\text{СТ}[2] & 0 & 0 & 0 & 0 \\
+            0 & 0 & D_\text{СТ}[3] & 0 & 0 & 0 \\
+            0 & 0 & 0 & D_\text{СТ}[4] & 0 & 0 \\
+            0 & 0 & 0 & 0 & D_\text{СТ}[5] & 0 \\
+            0 & 0 & 0 & 0 & 0 & D_\text{СТ}[6] \\
+        \end{bmatrix}
+        \cdot
+        C(6,3)
+    \label{eq_cd_computing_form}
+\end{equation}
+
+$$
+    UR(6,3) =
+        \begin{bmatrix}
+            0.142857 & 0.0      & 0.0      & 0.0      & 0.0      & 0.0      \\
+            0.0      & 0.238095 & 0.0      & 0.0      & 0.0      & 0.0      \\
+            0.0      & 0.0      & 0.190476 & 0.0      & 0.0      & 0.0      \\
+            0.0      & 0.0      & 0.0      & 0.095238 & 0.0      & 0.0      \\
+            0.0      & 0.0      & 0.0      & 0.0      & 0.285714 & 0.0      \\
+            0.0      & 0.0      & 0.0      & 0.0      & 0.0      & 0.047619 \\
+        \end{bmatrix}
+        \cdot
+        \begin{bmatrix}
+            3 & 2 & 1 \\
+            2 & 3 & 1 \\
+            2 & 3 & 1 \\
+            2 & 3 & 1 \\
+            3 & 2 & 1 \\
+            3 & 2 & 1 \\
+        \end{bmatrix}
+$$
+\begin{equation}
+        UR(6,3) =
+        \begin{bmatrix}
+            0.428571 & 0.285714 & 0.142857 \\
+            0.47619  & 0.714285 & 0.238095 \\
+            0.380952 & 0.571428 & 0.190476 \\
+            0.190476 & 0.285714 & 0.095238 \\
+            0.857142 & 0.571428 & 0.285714 \\
+            0.142857 & 0.095238 & 0.047619 \\
+        \end{bmatrix}
+    \label{eq_cd_computing_form}
+\end{equation}
+
+В качестве критерия для отбора лучшего варианта используем
+критерий из \cite[стр. 21]{econ_FSA}:
+
+\begin{equation}
+    K = \frac{UR}{CD^2}
+    \label{eq_econ_best_var_form}
+\end{equation}
+
+Согласно формуле (\ref{eq_econ_best_var_form}):
+\begin{equation}
+    K =
+        \begin{bmatrix}
+            2.333335 & 3.500003 & \textbf{7.0000070} \\
+            3.780003 & 1.120001 & \textbf{5.0400050} \\
+            3.937503 & 1.166667 & \textbf{5.2500052} \\
+            7.875007 & 2.333335 & \textbf{10.500010} \\
+            0.972223 & 1.458334 & \textbf{2.9166695} \\
+            2.333335 & 10.50001 & \textbf{63.000063} \\
+        \end{bmatrix}
+    \label{eq_econ_best_var}
+\end{equation}
+
+Эта величина характеризует качество или технический уровень
+элемента, приходящийся на единицу затрат. Знаменатель возведён в квадрат,
+чтобы разделить варианты, которые при разных величинах UR и CD имеют
+одинаковое значение K.
+
+\subsection{Выбор лучшего варианта}
+В каждой строке полученной матрицы $K(i, j)$ находим элементы,
+имеющие максимальное значение, соответствующее лучшему варианту
+исполнения функции.
+В результате проведённого функционально--стоимостного анализа
+вариантов конструкции системы управления приводами двухстепенного манипулятора
+спутника видеонаблюдения земной поверхности были определены оптимальные
+реализации функцианальных, наиболее значимых частей системы
+(cм \ref{tbl_econ_result}).
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        Функция & Выбранная альтернатива \\
+        Микроконтролер & \textit{TMS320F28035 32bit} \\
+        \hline
+        Двигатель & Шаговый \\
+        \hline
+        Цифровой датчик угла & Оптический, цифровой \\
+        \hline
+        Драйвер ШИМ & \textit{TI DRV8412} \\
+        \hline
+        Редуктор & Редуктор с прямозубыми ЗК \\
+        \hline
+        Операционная система & без ОС \\
+        \hline
+    \end{tabular}
+    \caption{Выбранные с помощью ФСА реализации основных функций}
+    \label{tbl_econ_result}
+\end{table}
+
