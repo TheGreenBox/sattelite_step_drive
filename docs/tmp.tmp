@@ -1,3 +1,14 @@
-( 1 * 0.019027 + 1 * 1 + 0.75 * 0.904412 + 0.5 * 0 + 0.31 * 0.838235 + 0.187 * 1 ) / ( 1 + 1 + 0.75 + 0.5 + 0.31 + 0.187 )
-
-
+    \label{tbl_technical_lvl_comparison}
+    \label{tbl_costs_lvl_comparison}
+    \label{tbl_mcu_tech_lvl_comparison}
+    \label{tbl_mcu_cost_lvl_comparison}
+    \label{tbl_motor_tech_lvl_comparison}
+    \label{tbl_motor_cost_lvl_comparison}
+    \label{tbl_sensor_tech_lvl_comparison}
+    \label{tbl_sensor_cost_lvl_comparison}
+    \label{tbl_drv_tech_lvl_comparison}
+    \label{tbl_drv_cost_lvl_comparison}
+    \label{tbl_red_tech_lvl_comparison}
+    \label{tbl_red_cost_lvl_comparison}
+    \label{tbl_os_tech_lvl_comparison}
+    \label{tbl_os_cost_lvl_comparison}

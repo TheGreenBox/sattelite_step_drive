@@ -46,4 +46,3 @@ pcb_develop: hello prepare
 
 economics: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/economics/main_economics.tex
-	@evince ${PRODUCT_DIR}/main_economics.pdf
