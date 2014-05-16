@@ -57,4 +57,3 @@ typedef struct _GlobalConfig {
 extern const GlobalConfig gConfig;
 
 #endif //_GLOBAL_STATE_H_
-

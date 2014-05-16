@@ -43,5 +43,7 @@ void motorISR(void) {
     setADirection(phaseSigns.A);
     setBDirection(phaseSigns.B);
 
-    setPwm(getPwmDutyByStep());
+    uint16_t pwm = getPwmDutyByStep();
+
+    setPwm(pwm);
 }

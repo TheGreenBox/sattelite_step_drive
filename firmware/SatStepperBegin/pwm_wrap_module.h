@@ -10,12 +10,14 @@
 #ifndef _PWM_WRAP_MODULE__H_
 #define _PWM_WRAP_MODULE__H_
 
-void initPwm(short int prescaler);
+#include <stdint.h>
 
-void setPwm(unsigned pwmDutyCycle);
+void initPwm(uint16_t prescaler);
 
-void setADirection(int direct);
-void setBDirection(int direct);
+void setPwm(uint16_t pwmDutyCycle);
+
+void setADirection(int_fast8_t direct);
+void setBDirection(int_fast8_t direct);
 
 void activate_pwm_driver();
 void deactivate_pwm_driver();

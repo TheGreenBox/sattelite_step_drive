@@ -12,32 +12,41 @@
 
 #include <stdint.h>
 
-#define ONE_PHASE_ALGO_STEPS        4
-#define ONE_PHASE_ALGO_PWM_STEPS    1
+enum ControlAlgos {
+    ONE_PHASE_CTRL_ALGO     = 1,
+    TWO_PHASE_CTRL_ALGO     = 2,
+    HALF_PHASE_CTRL_ALGO    = 3
+};
 
-#define TWO_PHASE_ALGO_STEPS        4
-#define TWO_PHASE_ALGO_PWM_STEPS    1
+enum ControlAlgoPhaseSteps {
+    ONE_PHASE_ALGO_STEPS    = 4,
+    TWO_PHASE_ALGO_STEPS    = 4,
+    HALF_PHASE_ALGO_STEPS   = 8
+};
 
-#define HALF_PHASE_ALGO_STEPS       8
-#define HALF_PHASE_ALGO_PWM_STEPS   2
+enum ControlAlgoPwmSteps {
+    ONE_PHASE_ALGO_PWM_STEPS    = 1,
+    TWO_PHASE_ALGO_PWM_STEPS    = 1,
+    HALF_PHASE_ALGO_PWM_STEPS   = 2
+};
 
-#define NUMBER_OF_ALGOS             3
-#define INVALID_CTRL_ALGO           0
-#define ONE_PHASE_CTRL_ALGO         1
-#define TWO_PHASE_CTRL_ALGO         2
-#define HALF_PHASE_CTRL_ALGO        3
+enum controlAlgoFlagBits {
+    SENSOR_FEEDBACK = 1
+};
 
-#define FEEDBACK_DISABLED           0
-#define FEEDBACK_ENABLED            1
+typedef struct _controlAlgoFlags {
+    uint_fast8_t feedbackActive : 1;
+    uint_fast8_t reserved       : 7;
+} controlAlgoFlags;
+
+extern controlAlgoFlags ctrlFlags;
 
 typedef struct _PhaseSigns {
-    int A;
-    int B;
+    int_fast8_t A;
+    int_fast8_t B;
 } PhaseSigns;
 
 void setAlgoType(uint_fast8_t algoType);
-void setFeedbackFlagTo(uint_fast8_t state);
-
 PhaseSigns getNextPhaseSigns();
 
 // TODO: this mustn't be here, it will be done in current feedback module
