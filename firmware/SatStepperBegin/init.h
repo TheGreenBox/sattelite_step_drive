@@ -12,7 +12,7 @@
 
 void emptyFunction();
 void deviceInit();
-void motorControlInit();
+void stateInit();
 void enableGlobalInterrupts();
 
 #endif //_INIT__H_
