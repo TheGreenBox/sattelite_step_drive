@@ -20,38 +20,45 @@
     }
 
 #include <stdint.h>
+#include "control_algo.h"
 
 #define MAX_PWM_DUTY 1024
 
 typedef struct _MotorControl {
-    unsigned    pwmDutyCycle;
+    uint32_t    pwmDutyCycle;
     uint32_t    stepTimeoutUsec;
-    short       rotationDirection;		// 1 or -1 or 0
+    int_fast8_t rotationDirection;  // 1 or -1 or 0
 } MotorControl;
 
 typedef struct _EncoderCounts {
-    int32_t raw;
-    int32_t precise;
-    short int  direction;
-    uint16_t invSpeed;
+    int32_t     raw;
+    int32_t     precise;
+    int_fast8_t direction;
+    uint16_t    invSpeed;
 #ifdef DEBUG
-    unsigned int errors;
+    uint32_t    errors;
 #endif // DEBUG
 } EncoderCounts;
 
+typedef struct _SetPoint {
+    uint32_t position;
+    uint16_t speed;
+} SetPoint;
+
 typedef struct _GlobalState {
-    long long systemTimer;
-    long long stepTicker;
-    MotorControl motorControl;
-    EncoderCounts encoder;
-    uint_fast16_t adc[5];
+    uint64_t        stepTicker;
+    uint16_t        currentSpeed;
+    uint_fast16_t   adc[5];
+    SetPoint        setPoint;
+    MotorControl    motorControl;
+    EncoderCounts   encoder;
 } GlobalState;
 
 extern volatile GlobalState gState;
 
 typedef struct _GlobalConfig {
     uint_fast16_t   pwmPeriod;
-    uint_fast8_t    algoType;
+    uint_fast8_t    connectionType;
 } GlobalConfig;
 
 extern const GlobalConfig gConfig;

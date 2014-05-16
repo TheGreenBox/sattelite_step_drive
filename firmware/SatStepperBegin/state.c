@@ -9,10 +9,11 @@
 
 #include "state.h"
 #include "control_algo.h"
+#include "connection_types.h"
 
 volatile GlobalState gState;
 
 const GlobalConfig gConfig = {
     MAX_PWM_DUTY,
-    HALF_PHASE_CTRL_ALGO
+    HALF_PHASE_CONNECTION
 };
