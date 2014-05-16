@@ -11,7 +11,6 @@
 #include <DSP2803x_EPwm.h>
 #include <DSP2803x_EPwm_defines.h>
 
-
 #include "pwm_wrap_module.h"
 
 static volatile struct EPWM_REGS* pwm_control_regs[2] = {
@@ -86,17 +85,17 @@ static inline void initPWMChannel(volatile struct EPWM_REGS* pwmRegs, short int 
     EDIS;
 }
 
-void initPwm(short int prescaler) {
+void initPwm(uint16_t prescaler) {
     initPWMChannel(pwm_control_regs[0], prescaler);
     initPWMChannel(pwm_control_regs[1], prescaler);
 }
 
-void setPwm(unsigned pwmDutyCycle) {
+void setPwm(uint16_t pwmDutyCycle) {
     EPwm1Regs.CMPA.half.CMPA = pwmDutyCycle;
     EPwm2Regs.CMPA.half.CMPA = pwmDutyCycle;
 }
 
-void setADirection(int direct) {
+void setADirection(int_fast8_t direct) {
     if (direct == 0) {
         EPwm1Regs.AQCSFRC.bit.CSFA = 1;
         EPwm1Regs.AQCSFRC.bit.CSFB = 1;
@@ -113,7 +112,7 @@ void setADirection(int direct) {
     }
 }
 
-void setBDirection(int direct)
+void setBDirection(int_fast8_t direct)
 {
     if (direct == 0) {
         EPwm2Regs.AQCSFRC.bit.CSFA = 1;

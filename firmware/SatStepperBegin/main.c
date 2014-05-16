@@ -4,12 +4,12 @@
  * Project name: Satellite stepper drive
  * File name:  main.c
  * Description:
- * Author: SNikitin, AKindyakov
  * ========================================================
  */
 
-#include "PeripheralHeaderIncludes.h"
+#include <PeripheralHeaderIncludes.h>
 #include "pwm_wrap_module.h"
+#include "connection_types.h"
 #include "control_algo.h"
 #include "led_control.h"
 #include "init.h"
@@ -42,7 +42,7 @@ int main(void) {
     init();
 
     activate_pwm_driver();
-    setAlgoType(gConfig.algoType);
+    setConnectionType(gConfig.connectionType);
 
     mainLoop();
 

@@ -4,33 +4,29 @@
  * Project name: Satellite stepper drive
  * File name: control_algo.h
  * Description: head of control_algo module
- * Author: SNikitin
  * ========================================================
  */
 
 #ifndef _CONTROL_ALGO_INCLUDED_
 #define _CONTROL_ALGO_INCLUDED_
 
+#include <stdint.h>
 
-#define ONE_PHASE_STEPS_NUMBER      4
-#define ONE_PHASE_PWM_STEPS_NUMBER  1
+typedef struct _controlAlgoFlags {
+    uint_fast8_t feedbackActive : 1;
+    uint_fast8_t reserved       : 7;
+} controlAlgoFlags;
 
-#define TWO_PHASE_STEPS_NUMBER      4
-#define TWO_PHASE_PWM_STEPS_NUMBER  1
+extern controlAlgoFlags     ctrlFlags;
 
-#define HALF_PHASE_STEPS_NUMBER     8
-#define HALF_PHASE_PWM_STEPS_NUMBER 2
+typedef struct _PhaseSigns {
+    int_fast8_t A;
+    int_fast8_t B;
+} PhaseSigns;
 
-#define NUMBER_OF_ALGOS             3
-#define CTRL_ALGO_INVALID           0
-#define CTRL_ALGO_ONE_PHASE         1
-#define CTRL_ALGO_TWO_PHASE         2
-#define CTRL_ALGO_HALF_PHASE        3
+PhaseSigns getNextPhaseSigns();
 
-int setAlgoType(unsigned short);
-
-int getPhasePulseByStep(long long step, int* phaseA, int* phaseB);
-
-int getPwmDutyByStep(long long step, unsigned currentPwmDuty, unsigned* pwmDuty);
+// TODO: this mustn't be here, it will be done in current feedback module
+uint16_t getPwmDutyByStep();
 
 #endif //_CONTROL_ALGO_INCLUDED_

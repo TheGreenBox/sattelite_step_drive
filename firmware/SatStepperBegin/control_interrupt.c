@@ -38,21 +38,12 @@ void motorISR(void) {
       --gState.stepTicker;
     } // TODO: rework it
 
-    int phaseVSignA, phaseVSignB;
+    PhaseSigns phaseSigns = getNextPhaseSigns();
 
-    getPhasePulseByStep(gState.stepTicker,
-                        &phaseVSignA, &phaseVSignB);
+    setADirection(phaseSigns.A);
+    setBDirection(phaseSigns.B);
 
-    setADirection(phaseVSignA);
-    setBDirection(phaseVSignB);
+    uint16_t pwm = getPwmDutyByStep();
 
-    unsigned pwmDuty;
-
-    getPwmDutyByStep(gState.stepTicker,
-                     gState.motorControl.pwmDutyCycle,
-                     &pwmDuty);
-    setPwm(pwmDuty);
-
-    // set speed step motor
-    // setTimerPeriodByNum(0, gState.motorControl.stepTimeoutUsec);
+    setPwm(pwm);
 }
