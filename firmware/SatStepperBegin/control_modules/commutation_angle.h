@@ -1,1 +1,1 @@
-void computeCommutationAngle();
+void nextAlgoStepByCommAngle();
