@@ -20,6 +20,7 @@
     }
 
 #include <stdint.h>
+#include "algo_types.h"
 #include "control_algo.h"
 
 #define MAX_PWM_DUTY 1024
@@ -49,6 +50,7 @@ typedef struct _GlobalState {
     uint64_t        stepTicker;
     uint16_t        currentSpeed;
     uint_fast16_t   adc[5];
+    uint_fast8_t    currentCommAngle;
     SetPoint        setPoint;
     MotorControl    motorControl;
     EncoderCounts   encoder;
@@ -58,7 +60,7 @@ extern volatile GlobalState gState;
 
 typedef struct _GlobalConfig {
     uint_fast16_t   pwmPeriod;
-    uint_fast8_t    connectionType;
+    uint_fast16_t   algoType;
 } GlobalConfig;
 
 extern const GlobalConfig gConfig;

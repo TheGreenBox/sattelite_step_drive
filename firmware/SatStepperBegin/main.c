@@ -9,7 +9,7 @@
 
 #include <PeripheralHeaderIncludes.h>
 #include "pwm_wrap_module.h"
-#include "connection_types.h"
+#include "algo_types.h"
 #include "control_algo.h"
 #include "led_control.h"
 #include "init.h"
@@ -20,7 +20,7 @@
 void init() {
     deviceInit();
     initPwm(gConfig.pwmPeriod);
-    motorControlInit();
+    stateInit();
     timer0Init(&motorISR);
     timer1Init(&emptyFunction);
     setTimerPeriodByNum(0, 20000);
@@ -28,7 +28,6 @@ void init() {
     enableGlobalInterrupts();
 
     setGreenStatusLed(1);
-    gState.stepTicker = 0;
 }
 
 void mainLoop() {
@@ -42,7 +41,7 @@ int main(void) {
     init();
 
     activate_pwm_driver();
-    setConnectionType(gConfig.connectionType);
+    setAlgoType(gConfig.algoType);
 
     mainLoop();
 

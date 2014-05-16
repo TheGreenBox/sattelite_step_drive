@@ -534,13 +534,20 @@ void deviceInit() {
     peripheryInit();
 }
 
-void motorControlInit() {
+static void motorControlInit() {
     gState.motorControl.pwmDutyCycle        = 990;
     gState.motorControl.rotationDirection   = 1;
     gState.motorControl.stepTimeoutUsec     = 255;
+}
 
+void stateInit() {
+    gState.stepTicker           = 0;
+    gState.currentSpeed         = 0;
+    gState.currentCommAngle     = 1;
     gState.setPoint.position    = 0;
     gState.setPoint.speed       = 0;
+
+    motorControlInit();
 }
 
 void enableGlobalInterrupts() {

@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include "utils/macros.h"
 #include "state.h"
-#include "connection_types.h"
+#include "algo_types.h"
 #include "control_algo.h"
 
 #include "control_modules/commutation_angle.h"
@@ -25,9 +25,10 @@ static uint_fast8_t getNextAlgoStepNum() {
         // nextStep = nextAlgoStepByCommAngle();
     }
     else {
-        nextStep = gState.stepTicker % engineConnection->algoStepsNumber;
+        nextStep =  gState.stepTicker
+                    % currentAlgo->algoStepsNumber;
         if (nextStep < 0) {
-            nextStep += engineConnection->algoStepsNumber;
+            nextStep += currentAlgo->algoStepsNumber;
         }
     }
 
@@ -37,7 +38,7 @@ static uint_fast8_t getNextAlgoStepNum() {
 PhaseSigns getNextPhaseSigns() {
     PhaseSigns phaseSigns;
 
-    if (engineConnection == NULL) {
+    if (currentAlgo == NULL) {
         phaseSigns.A = 0;
         phaseSigns.B = 0;
         return phaseSigns;
@@ -45,22 +46,23 @@ PhaseSigns getNextPhaseSigns() {
 
     uint_fast8_t nextStep = getNextAlgoStepNum();
 
-    phaseSigns.A = engineConnection->phaseA[nextStep];
-    phaseSigns.B = engineConnection->phaseB[nextStep];
+    phaseSigns.A = currentAlgo->phaseA[nextStep];
+    phaseSigns.B = currentAlgo->phaseB[nextStep];
 
     return phaseSigns;
 }
 
 // TODO: this mustn't be here, it will be done in current feedback module
 uint16_t getPwmDutyByStep() {
-    if (engineConnection == NULL) {
+    if (currentAlgo == NULL) {
         return MAX_PWM_DUTY;
     }
 
-    uint_fast8_t nextPwmStep = getNextAlgoStepNum() % engineConnection->algoPwmStepsNumber;
+    uint_fast8_t nextPwmStep =  getNextAlgoStepNum()
+                                % currentAlgo->algoPwmStepsNumber;
 
     uint16_t pwm = MAX_PWM_DUTY - gState.motorControl.pwmDutyCycle;
-    pwm *= engineConnection->pwmCoeff[nextPwmStep];
+    pwm *= currentAlgo->pwmCoeff[nextPwmStep];
 
     return (MAX_PWM_DUTY - pwm);
 }

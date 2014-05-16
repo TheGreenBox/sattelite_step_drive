@@ -51,6 +51,7 @@ product
 RemoteSystemsTempFiles
 dvt
 F2803x_RAM
+F2803x_FLASH
 
 *.opt
 *.pp
