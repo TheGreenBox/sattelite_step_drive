@@ -14,7 +14,6 @@
 #include "encoder.h"
 #include "gray_code_decoder.h"
 #include "state.h"
-#define ENCODER_RANGE 25000
 
 interrupt void encoderInputAIntHandler(void) {
 #ifdef DEBUG
