@@ -38,13 +38,10 @@
 # -v          - Enable verbose mode
 #		dot -o$$(name).pdfsoft_arch.dot ; \
 
-TARGETS=soft_arch.dot loop.dot
 DEFAULT_PARAMS=-Tpdf -s72
 
 all:
-	@for name in ${TARGETS} ; do \
-		dot ${DEFAULT_PARAMS} -oproduct/$${name}.pdf $${name}; \
-	done
+	dot ${DEFAULT_PARAMS} -oproduct/soft_arch.pdf soft_arch.dot
 
 prepare:
 	mkdir -p product
