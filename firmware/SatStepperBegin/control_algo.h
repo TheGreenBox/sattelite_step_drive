@@ -11,6 +11,9 @@
 #define _CONTROL_ALGO_INCLUDED_
 
 #include <stdint.h>
+
+void setAlgoType(uint_fast8_t algoType);
+
 void step(int_fast8_t dist);
 
 void nextStep();

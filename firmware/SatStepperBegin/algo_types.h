@@ -45,6 +45,6 @@ enum EngineAlgoTypes {
 
 extern AlgoParams* currentAlgo;
 
-void setAlgoType(uint_fast8_t algoType);
+uint_fast8_t getEngineStepMultiplier();
 
 #endif //_ALGO_TYPES_H_

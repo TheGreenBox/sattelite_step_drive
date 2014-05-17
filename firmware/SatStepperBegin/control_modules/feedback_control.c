@@ -14,8 +14,9 @@ static inline int64_t currentRelativePos() {
 static inline int16_t encTicsInOneAlgoStep() {
     int16_t encoderTicsOnEngineRevol =      gConfig.encoderRange
                                         /   gConfig.motorReduction;
-    return  encoderTicsOnEngineRevol / gConfig.oneRevolEngineSteps;
-
+    int16_t algoStepsInOneRevol = getEngineStepMultiplier()
+                                    * gConfig.oneRevolEngineSteps;
+    return  encoderTicsOnEngineRevol / algoStepsInOneRevol;
 }
 
 static int_fast8_t rotationDirection() {
