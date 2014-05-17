@@ -29,14 +29,11 @@ void switchPhasesIfNecessary() {
     int64_t relativePos = currentRelativePos();
     int16_t algoStepInEncTicks = encTicsInOneAlgoStep();
 
-    int64_t commAngleInEncTicks =   gState.currentCommAngle / COMM_ANGLE_DIVIDER
-                                    * algoStepInEncTicks;
+    int64_t commAngleInEncTicks = gState.currentCommAngle * algoStepInEncTicks;
+    commAngleInEncTicks = commAngleInEncTicks << COMM_ANGLE_RANG;
 
     if (abs(relativePos - lastSwitchPos) >= commAngleInEncTicks) {
-        lastSwitchPos = relativePos
-                        - relativePos % algoStepInEncTicks;
-
-
+        lastSwitchPos = relativePos - relativePos % algoStepInEncTicks;
         step(rotationDirection());
     }
 }
