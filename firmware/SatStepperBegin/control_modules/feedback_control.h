@@ -1,6 +1,8 @@
-#ifndef _COMMUTATION_ANGLE_H_
-#define _COMMUTATION_ANGLE_H_
+#ifndef _FEEDBACK_CONTROL__H_
+#define _FEEDBACK_CONTROL__H_
 
-uint_fast8_t nextAlgoStepByCommAngle();
+#define COMM_ANGLE_DIVIDER 1024
 
-#endif //_COMMUTATION_ANGLE_H_
+void switchPhasesIfNecessary();
+
+#endif //_FEEDBACK_CONTROL__H_

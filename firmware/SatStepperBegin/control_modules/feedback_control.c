@@ -1,37 +1,41 @@
+#include <stdlib.h>
 #include "../state.h"
-#include "../utils/macros.h"
-#include "../sensors/encoder/encoder.h"
-#include "commutation_angle.h"
+#include "feedback_control.h"
 
-static inline int64_t totalEncoderTicks() {
-    return gState.encoder.raw * ENCODER_RANGE + gState.encoder.precise;
-}
-
-static inline int64_t currentReletivePos() {
-    int64_t rawSensorDeviation  =   (gState.encoder.raw % MOTOR_REDUCTION)
-                                    * ENCODER_RANGE;
-    int64_t fullSensorDeviation =   rawSensorDeviation + gState.encoder.precise;
-    int64_t rotorDevInOneRevol = fullSensorDeviation * MOTOR_REDUCTION;
+static inline int64_t currentRelativePos() {
+    int64_t rawSensorDeviation  =   (gState.encoder.raw % gConfig.motorReduction)
+                                    * gConfig.encoderRange;
+    int64_t fullSensorDeviation = rawSensorDeviation + gState.encoder.precise;
+    int64_t rotorDevInOneRevol  = fullSensorDeviation * gConfig.motorReduction;
 
     return rotorDevInOneRevol;
 }
 
-uint_fast8_t nextAlgoStepByCommAngle() {
-    int_fast8_t nextState;
+static inline int16_t encTicsInOneAlgoStep() {
+    int16_t encoderTicsOnEngineRevol =      gConfig.encoderRange
+                                        /   gConfig.motorReduction;
+    return  encoderTicsOnEngineRevol / gConfig.oneRevolEngineSteps;
 
-    int64_t currentRelativePos = currentReletivePos();
-    float fuzzyEngineStep = currentRelativePos
-                            / currentAlgo->engineStepDegree;
+}
 
-    int_fast8_t direction = (totalEncoderTicks() <= gState.setPoint.position)
-                            ? 1 : -1;
+static int_fast8_t rotationDirection() {
+    return (currentRelativePos() < gState.setPoint.position) ? 1 : -1;
+}
 
-    // if (direction > 0) {
-        // nextState = floor(fuzzyEngineStep + gState.currentCommAngle);
-    // }
-    // else {
-        // nextState = ceil(fuzzyEngineStep - gState.currentCommAngle);
-    // }
+void switchPhasesIfNecessary() {
+    static int64_t lastSwitchPos = 0;
 
-    return nextState % currentAlgo->algoStepsNumber;
+    int64_t relativePos = currentRelativePos();
+    int16_t algoStepInEncTicks = encTicsInOneAlgoStep();
+
+    int64_t commAngleInEncTicks =   gState.currentCommAngle / COMM_ANGLE_DIVIDER
+                                    * algoStepInEncTicks;
+
+    if (abs(relativePos - lastSwitchPos) >= commAngleInEncTicks) {
+        lastSwitchPos = relativePos
+                        - relativePos % algoStepInEncTicks;
+
+
+        step(rotationDirection());
+    }
 }
