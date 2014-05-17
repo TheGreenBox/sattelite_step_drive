@@ -14,6 +14,7 @@
 
 void setAlgoType(uint_fast8_t algoType);
 
+void stop();
 void step(int_fast8_t dist);
 
 void nextStep();

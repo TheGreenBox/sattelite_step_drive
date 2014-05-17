@@ -13,6 +13,7 @@
 #include "state.h"
 #include "algo_types.h"
 #include "control_algo.h"
+#include "pwm_wrap_module.h"
 
 static AlgoParams* currentAlgo = NULL;
 
