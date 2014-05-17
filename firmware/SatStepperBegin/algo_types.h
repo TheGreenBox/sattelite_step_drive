@@ -9,7 +9,7 @@ typedef struct _AlgoParams {
 
     const uint_fast8_t algoStepsNumber;
 
-    const float* pwmCoeff;
+    const uint16_t* pwmCoeff;
     const uint_fast8_t algoPwmStepsNumber;
 
     const uint_fast8_t engineStepMultiplier;
