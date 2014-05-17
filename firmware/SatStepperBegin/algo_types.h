@@ -43,8 +43,6 @@ enum EngineAlgoTypes {
     HALF_PHASE_ALGO   = 3
 };
 
-extern AlgoParams* currentAlgo;
-
-void setAlgoType(uint_fast8_t algoType);
+uint_fast8_t getEngineStepMultiplier();
 
 #endif //_ALGO_TYPES_H_

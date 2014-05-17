@@ -50,18 +50,6 @@ AlgoParams halfPhaseParameters = {
 
 AlgoParams* currentAlgo = NULL;
 
-void setAlgoType(uint_fast8_t algoType) {
-    switch (algoType) {
-        case ONE_PHASE_ALGO:
-            currentAlgo = &onePhaseParameters;
-            break;
-        case TWO_PHASE_ALGO:
-            currentAlgo = &twoPhaseParameters;
-            break;
-        case HALF_PHASE_ALGO:
-            currentAlgo = &halfPhaseParameters;
-            break;
-        default:
-            // TODO: add static assert here
-    }
+uint_fast8_t getEngineStepMultiplier() {
+    return currentAlgo->engineStepMultiplier;
 }

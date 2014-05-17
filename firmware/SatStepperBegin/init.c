@@ -7,7 +7,7 @@
  * ========================================================
  */
 
-#include "PeripheralHeaderIncludes.h"
+#include <PeripheralHeaderIncludes.h>
 #include "adc.h"
 #include "state.h"
 #include "sensors/encoder/encoder.h"
