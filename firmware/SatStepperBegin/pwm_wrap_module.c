@@ -13,6 +13,9 @@
 
 #include "pwm_wrap_module.h"
 
+#define MAX_PWM_DUTY 1024
+static int16_t pmwCoefficient = 0;
+
 static volatile struct EPWM_REGS* pwm_control_regs[2] = {
     &EPwm1Regs,
     &EPwm2Regs
@@ -90,7 +93,15 @@ void initPwm(uint16_t prescaler) {
     initPWMChannel(pwm_control_regs[1], prescaler);
 }
 
-void setPwm(uint16_t pwmDutyCycle) {
+void setPwm(uint16_t pwm) {
+    if (pwm > MAX_PWM_DUTY) {
+        pwm = MAX_PWM_DUTY;
+    }
+    uint32_t truePwm = pwm;
+    truePwm *= pmwCoefficient;
+    truePwm >>= PWM_COEFF_RANK;
+    uint16_t pwmDutyCycle = MAX_PWM_DUTY - truePwm;
+
     EPwm1Regs.CMPA.half.CMPA = pwmDutyCycle;
     EPwm2Regs.CMPA.half.CMPA = pwmDutyCycle;
 }
@@ -129,7 +140,8 @@ void setBDirection(int_fast8_t direct) {
     }
 }
 
-void setCoeff(float pwmCoeff) {
+void setCoeff(uint16_t pwmCoeff) {
+    pmwCoefficient = pwmCoeff;
 }
 
 void deactivate_pwm_driver() {

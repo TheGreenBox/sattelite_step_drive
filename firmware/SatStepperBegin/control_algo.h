@@ -11,6 +11,7 @@
 #define _CONTROL_ALGO_INCLUDED_
 
 #include <stdint.h>
+void stop();
 void step(int_fast8_t dist);
 
 void nextStep();

@@ -1,13 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <?ccsproject version="1.0"?>
-
 <projectOptions>
-<deviceVariant value="TMS320C28XX.TMS320F28035"/>
-<deviceEndianness value="little"/>
-<codegenToolVersion value="5.2.3"/>
-<isElfFormat value="false"/>
-<rts value="libc.a"/>
-<defaultAssemblyOnly value="false"/>
-<deviceFamily value="C2000"/>
-<isTargetManual value="true"/>
+	<deviceVariant value="TMS320C28XX.TMS320F28035"/>
+	<deviceEndianness value="little"/>
+	<codegenToolVersion value="5.2.3"/>
+	<isElfFormat value="false"/>
+	<rts value="libc.a"/>
+	<defaultAssemblyOnly value="false"/>
+	<deviceFamily value="C2000"/>
+	<isTargetManual value="true"/>
 </projectOptions>

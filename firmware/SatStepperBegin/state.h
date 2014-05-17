@@ -23,8 +23,6 @@
 #include "algo_types.h"
 #include "control_algo.h"
 
-#define MAX_PWM_DUTY 1024
-
 typedef struct _MotorControl {
     uint32_t    pwmDutyCycle;
     uint32_t    stepTimeoutUsec;
