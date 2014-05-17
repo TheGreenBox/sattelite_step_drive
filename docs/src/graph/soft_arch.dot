@@ -1,31 +1,39 @@
 digraph sat_step_ach {
     start="random";
-    // headers
-    node[shape=box, style=filled, fillcolor="#0033FF"];
-        main_loop
-        interrupt
 
-    //units
-    node[shape=oval, style=filled, fillcolor="#DCA80A"];
-        init
-        reset
-        uart_buf_parsing
-        message_handling
+    {
+        rank=same
+        user_input[shape=actor];
+    }
+    {
+        rank=same
+        moment[shape=actor];
+        speed[shape=actor];
+        mode[shape=actor];
+    }
+    {
+        rank=same
+        synchronize_control[shape=box];
+        feedback_control[shape=box];
+        current_feedback[shape=box];
+    }
+    {
+        rank=same
+        control_algo[shape=box];
+    }
+    pwm_wrap_module[shape=box];
 
-    //time-citical units
-    node[shape=oval, style=filled, fillcolor="#BC1C1C"];
-        sensor_counter
-        motor_control
-        uart_hanling
-        adc_conversion
+    user_input -> moment;
+    user_input -> speed;
+    user_input -> mode;
+    speed -> synchronize_control;
+    speed -> feedback_control;
+    moment -> current_feedback;
 
-    init -> main_loop;
-    main_loop -> uart_buf_parsing -> message_handling -> main_loop;
+    synchronize_control -> control_algo;
+    feedback_control -> control_algo;
 
-    interrupt;
-    interrupt -> sensor_counter;
-    interrupt -> motor_control;
-    interrupt -> uart_hanling;
-    interrupt -> adc_conversion;
+    mode -> control_algo -> pwm_wrap_module;
+    current_feedback -> pwm_wrap_module;
 }
 
