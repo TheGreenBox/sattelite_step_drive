@@ -78,14 +78,15 @@ interrupt void encoderInputCIntHandler(void) {
         ++gState.encoder.errors
     );
 #endif // DEBUG
-    STATIC_ASSERT(ENCODER_RANGE);
+    // TODO: do this check some other way, doesn't work anymore
+    // STATIC_ASSERT(gConfig.encoderRange);
     if (GpioDataRegs.GPADAT.bit.GPIO23) {
         gState.encoder.raw += gState.encoder.direction;
         if (gState.encoder.direction > 0) {
             gState.encoder.precise = 0;
         }
         if (gState.encoder.direction < 0) {
-            gState.encoder.precise = ENCODER_RANGE;
+            gState.encoder.precise = gConfig.encoderRange;
         }
     }
 

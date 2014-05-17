@@ -22,8 +22,6 @@ extern void DSP28x_usDelay(unsigned long Count);
 #define ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(GROUP_ID) \
     PieCtrlRegs.PIEACK.all = GROUP_ID
 
-#define PI                  3.14159265358979
-#define MOTOR_REDUCTION     1
-#define ENGINE_STEP_DEGREE  1.8
+#define PI 3.14159265358979
 
 #endif //_MACROS_H_

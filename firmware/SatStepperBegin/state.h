@@ -42,7 +42,7 @@ typedef struct _EncoderCounts {
 } EncoderCounts;
 
 typedef struct _SetPoint {
-    uint32_t position;
+    uint64_t position;
     uint16_t speed;
 } SetPoint;
 
@@ -50,7 +50,7 @@ typedef struct _GlobalState {
     uint64_t        stepTicker;
     uint16_t        currentSpeed;
     uint_fast16_t   adc[5];
-    uint_fast8_t    currentCommAngle;
+    uint_fast16_t   currentCommAngle;
     SetPoint        setPoint;
     MotorControl    motorControl;
     EncoderCounts   encoder;
@@ -59,8 +59,11 @@ typedef struct _GlobalState {
 extern volatile GlobalState gState;
 
 typedef struct _GlobalConfig {
-    uint_fast16_t   pwmPeriod;
-    uint_fast16_t   algoType;
+    uint16_t   pwmPeriod;
+    uint16_t   algoType;
+    uint16_t   encoderRange;
+    uint16_t   motorReduction;
+    uint16_t   oneRevolEngineSteps;
 } GlobalConfig;
 
 extern const GlobalConfig gConfig;
