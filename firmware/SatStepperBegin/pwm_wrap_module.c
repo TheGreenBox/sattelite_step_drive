@@ -112,8 +112,7 @@ void setADirection(int_fast8_t direct) {
     }
 }
 
-void setBDirection(int_fast8_t direct)
-{
+void setBDirection(int_fast8_t direct) {
     if (direct == 0) {
         EPwm2Regs.AQCSFRC.bit.CSFA = 1;
         EPwm2Regs.AQCSFRC.bit.CSFB = 1;
@@ -128,6 +127,9 @@ void setBDirection(int_fast8_t direct)
             EPwm2Regs.AQCSFRC.bit.CSFB = 1;
         }
     }
+}
+
+void setCoeff(float pwmCoeff) {
 }
 
 void deactivate_pwm_driver() {

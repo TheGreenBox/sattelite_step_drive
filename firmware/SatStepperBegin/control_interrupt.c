@@ -25,25 +25,9 @@ unsigned int cycleLimiter(unsigned val, unsigned hi, unsigned low) {
 
 void motorISR(void) {
     if (gState.motorControl.rotationDirection == 0) {
-        setADirection(0);
-        setBDirection(0);
-        setPwm(MAX_PWM_DUTY);
-        return;
-    }
-
-    if (gState.motorControl.rotationDirection > 0) {
-       ++gState.stepTicker;
+        stop();
     }
     else {
-      --gState.stepTicker;
-    } // TODO: rework it
-
-    PhaseSigns phaseSigns = getNextPhaseSigns();
-
-    setADirection(phaseSigns.A);
-    setBDirection(phaseSigns.B);
-
-    uint16_t pwm = getPwmDutyByStep();
-
-    setPwm(pwm);
+        step(gState.motorControl.rotationDirection);
+    }
 }

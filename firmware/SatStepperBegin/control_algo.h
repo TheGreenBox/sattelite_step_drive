@@ -11,22 +11,9 @@
 #define _CONTROL_ALGO_INCLUDED_
 
 #include <stdint.h>
+void step(int_fast8_t dist);
 
-typedef struct _controlAlgoFlags {
-    uint_fast8_t feedbackActive : 1;
-    uint_fast8_t reserved       : 7;
-} controlAlgoFlags;
-
-extern controlAlgoFlags     ctrlFlags;
-
-typedef struct _PhaseSigns {
-    int_fast8_t A;
-    int_fast8_t B;
-} PhaseSigns;
-
-PhaseSigns getNextPhaseSigns();
-
-// TODO: this mustn't be here, it will be done in current feedback module
-uint16_t getPwmDutyByStep();
+void nextStep();
+void prevStep();
 
 #endif //_CONTROL_ALGO_INCLUDED_

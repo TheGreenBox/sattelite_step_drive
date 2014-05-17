@@ -15,6 +15,7 @@
 void initPwm(uint16_t prescaler);
 
 void setPwm(uint16_t pwmDutyCycle);
+void setCoeff(float pwmCoeff);
 
 void setADirection(int_fast8_t direct);
 void setBDirection(int_fast8_t direct);
