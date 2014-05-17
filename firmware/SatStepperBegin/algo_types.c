@@ -23,7 +23,7 @@ AlgoParams onePhaseParameters = {
 
     onePhasePwmCoeff,
     ONE_PHASE_ALGO_PWM_STEPS,
-    ENGINE_STEP_DEGREE
+    ONE_PHASE_ALGO_STEP_MULTIPL
 };
 
 AlgoParams twoPhaseParameters = {
@@ -34,7 +34,7 @@ AlgoParams twoPhaseParameters = {
 
     twoPhasePwmCoeff,
     TWO_PHASE_ALGO_PWM_STEPS,
-    ENGINE_STEP_DEGREE
+    TWO_PHASE_ALGO_STEP_MULTIPL
 };
 
 AlgoParams halfPhaseParameters = {
@@ -45,7 +45,7 @@ AlgoParams halfPhaseParameters = {
 
     halfPhasePwmCoeff,
     HALF_PHASE_ALGO_PWM_STEPS,
-    ENGINE_STEP_DEGREE / 2
+    HALF_PHASE_ALGO_STEP_MULTIPL
 };
 
 AlgoParams* currentAlgo = NULL;

@@ -12,8 +12,14 @@ typedef struct _AlgoParams {
     const float* pwmCoeff;
     const uint_fast8_t algoPwmStepsNumber;
 
-    const float engineStepDegree;
+    const uint_fast8_t engineStepMultiplier;
 } AlgoParams;
+
+enum MinimalEngineStepMultipliers {
+    ONE_PHASE_ALGO_STEP_MULTIPL     = 1,
+    TWO_PHASE_ALGO_STEP_MULTIPL     = 1,
+    HALF_PHASE_ALGO_STEP_MULTIPL    = 2
+};
 
 enum PhaseStepsByConnection {
     ONE_PHASE_ALGO_STEPS  = 4,
