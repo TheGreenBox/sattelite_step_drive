@@ -14,6 +14,8 @@
 #include "algo_types.h"
 #include "control_algo.h"
 
+static AlgoParams* currentAlgo = NULL;
+
 void setAlgoType(uint_fast8_t algoType) {
     switch (algoType) {
         case ONE_PHASE_ALGO:
