@@ -3,11 +3,11 @@
 #include "../sensors/encoder/encoder.h"
 #include "commutation_angle.h"
 
-static int64_t totalEncoderTicks() {
+static inline int64_t totalEncoderTicks() {
     return gState.encoder.raw * ENCODER_RANGE + gState.encoder.precise;
 }
 
-static int64_t currentReletivePos() {
+static inline int64_t currentReletivePos() {
     int64_t rawSensorDeviation  =   (gState.encoder.raw % MOTOR_REDUCTION)
                                     * ENCODER_RANGE;
     int64_t fullSensorDeviation =   rawSensorDeviation + gState.encoder.precise;

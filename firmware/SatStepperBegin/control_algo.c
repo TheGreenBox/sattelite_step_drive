@@ -64,5 +64,5 @@ uint16_t getPwmDutyByStep() {
     uint16_t pwm = MAX_PWM_DUTY - gState.motorControl.pwmDutyCycle;
     pwm *= currentAlgo->pwmCoeff[nextPwmStep];
 
-    return (MAX_PWM_DUTY - pwm);
+    return MAX_PWM_DUTY - pwm;
 }

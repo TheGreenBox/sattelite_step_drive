@@ -3,17 +3,17 @@
 #include "state.h"
 #include "algo_types.h"
 
-const int_fast8_t onePhaseAlgoA[ONE_PHASE_ALGO_STEPS]   = {1, 0, -1,  0};
-const int_fast8_t onePhaseAlgoB[ONE_PHASE_ALGO_STEPS]   = {0, 1,  0, -1};
-const float onePhasePwmCoeff[ONE_PHASE_ALGO_PWM_STEPS]  = {1};
+static const int_fast8_t onePhaseAlgoA[ONE_PHASE_ALGO_STEPS]   = {1, 0, -1,  0};
+static const int_fast8_t onePhaseAlgoB[ONE_PHASE_ALGO_STEPS]   = {0, 1,  0, -1};
+static const float onePhasePwmCoeff[ONE_PHASE_ALGO_PWM_STEPS]  = {1};
 
-const int_fast8_t twoPhaseAlgoA[TWO_PHASE_ALGO_STEPS]   = {1, -1, -1,  1};
-const int_fast8_t twoPhaseAlgoB[TWO_PHASE_ALGO_STEPS]   = {1,  1, -1, -1};
-const float twoPhasePwmCoeff[TWO_PHASE_ALGO_PWM_STEPS]  = {1};
+static const int_fast8_t twoPhaseAlgoA[TWO_PHASE_ALGO_STEPS]   = {1, -1, -1,  1};
+static const int_fast8_t twoPhaseAlgoB[TWO_PHASE_ALGO_STEPS]   = {1,  1, -1, -1};
+static const float twoPhasePwmCoeff[TWO_PHASE_ALGO_PWM_STEPS]  = {1};
 
-const int_fast8_t halfPhaseAlgoA[HALF_PHASE_ALGO_STEPS] = {1, 1, 0, -1, -1, -1,  0,  1};
-const int_fast8_t halfPhaseAlgoB[HALF_PHASE_ALGO_STEPS] = {0, 1, 1,  1,  0, -1, -1, -1};
-const float halfPhasePwmCoeff[HALF_PHASE_ALGO_PWM_STEPS]= {1, 0.707};
+static const int_fast8_t halfPhaseAlgoA[HALF_PHASE_ALGO_STEPS] = {1, 1, 0, -1, -1, -1,  0,  1};
+static const int_fast8_t halfPhaseAlgoB[HALF_PHASE_ALGO_STEPS] = {0, 1, 1,  1,  0, -1, -1, -1};
+static const float halfPhasePwmCoeff[HALF_PHASE_ALGO_PWM_STEPS]= {1, 0.707};
 
 AlgoParams onePhaseParameters = {
     onePhaseAlgoA,
