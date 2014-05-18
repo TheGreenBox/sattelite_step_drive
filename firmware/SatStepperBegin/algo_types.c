@@ -6,15 +6,15 @@
 
 static const int_fast8_t onePhaseAlgoA[ONE_PHASE_ALGO_STEPS]   = {1, 0, -1,  0};
 static const int_fast8_t onePhaseAlgoB[ONE_PHASE_ALGO_STEPS]   = {0, 1,  0, -1};
-static const uint16_t onePhasePwmCoeff[ONE_PHASE_ALGO_PWM_STEPS]  = {1 * PWM_COEFF_DEVIDER};
+static const uint16_t onePhasePwmCoeff[ONE_PHASE_ALGO_PWM_STEPS]  = {1 * PWM_COEFF_DIVIDER};
 
 static const int_fast8_t twoPhaseAlgoA[TWO_PHASE_ALGO_STEPS]   = {1, -1, -1,  1};
 static const int_fast8_t twoPhaseAlgoB[TWO_PHASE_ALGO_STEPS]   = {1,  1, -1, -1};
-static const uint16_t twoPhasePwmCoeff[TWO_PHASE_ALGO_PWM_STEPS]  = {1 * PWM_COEFF_DEVIDER};
+static const uint16_t twoPhasePwmCoeff[TWO_PHASE_ALGO_PWM_STEPS]  = {1 * PWM_COEFF_DIVIDER};
 
 static const int_fast8_t halfPhaseAlgoA[HALF_PHASE_ALGO_STEPS] = {1, 1, 0, -1, -1, -1,  0,  1};
 static const int_fast8_t halfPhaseAlgoB[HALF_PHASE_ALGO_STEPS] = {0, 1, 1,  1,  0, -1, -1, -1};
-static const uint16_t halfPhasePwmCoeff[HALF_PHASE_ALGO_PWM_STEPS]= {1 * PWM_COEFF_DEVIDER, 0.707 * PWM_COEFF_DEVIDER};
+static const uint16_t halfPhasePwmCoeff[HALF_PHASE_ALGO_PWM_STEPS]= {1 * PWM_COEFF_DIVIDER, 0.707 * PWM_COEFF_DIVIDER};
 
 AlgoParams onePhaseParameters = {
     onePhaseAlgoA,
