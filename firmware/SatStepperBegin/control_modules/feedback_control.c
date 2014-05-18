@@ -19,7 +19,7 @@ static inline int16_t encTicsInOneAlgoStep() {
     return  encoderTicsOnEngineRevol / algoStepsInOneRevol;
 }
 
-static int_fast8_t rotationDirection() {
+static inline int_fast8_t rotationDirection() {
     return (currentRelativePos() < gState.setPoint.position) ? 1 : -1;
 }
 
