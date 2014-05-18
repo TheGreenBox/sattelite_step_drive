@@ -30,8 +30,6 @@ static void switchInternalOscilator() {
     EDIS;   // Disable register access
 }
 
-//void emptyFunction() {}
-
 // This function initializes the PIE control registers to a known state.
 void PieCntlInit() {
     // Disable Interrupts at the CPU level:
