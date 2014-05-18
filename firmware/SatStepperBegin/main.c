@@ -19,7 +19,7 @@
 
 void init() {
     deviceInit();
-    initPwm(gConfig.pwmPeriod);
+    initPwm();
     stateInit();
     timer0Init(&emptyTimerIntrHandler);
     timer1Init(&emptyTimerIntrHandler);
