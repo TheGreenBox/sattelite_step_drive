@@ -66,9 +66,3 @@ AlgoParams halfPhaseParameters = {
     HALF_PHASE_ALGO_PWM_STEPS,
     HALF_PHASE_ALGO_STEP_MULTIPL
 };
-
-AlgoParams* currentAlgo = NULL;
-
-uint_fast8_t getEngineStepMultiplier() {
-    return currentAlgo->engineStepMultiplier;
-}

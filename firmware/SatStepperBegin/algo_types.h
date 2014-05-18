@@ -25,6 +25,4 @@ enum EngineAlgoTypes {
     HALF_PHASE_ALGO   = 3
 };
 
-uint_fast8_t getEngineStepMultiplier();
-
 #endif //_ALGO_TYPES_H_

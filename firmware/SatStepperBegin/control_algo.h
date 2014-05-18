@@ -13,6 +13,7 @@
 #include <stdint.h>
 
 void setAlgoType(uint_fast8_t algoType);
+uint_fast8_t getEngineStepMultiplier();
 
 void stop();
 void step(int_fast8_t dist);

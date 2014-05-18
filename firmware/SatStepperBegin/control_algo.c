@@ -33,6 +33,10 @@ void setAlgoType(uint_fast8_t algoType) {
     }
 }
 
+uint_fast8_t getEngineStepMultiplier() {
+    return currentAlgo->engineStepMultiplier;
+}
+
 void stop() {
     setADirection(0);
     setBDirection(0);
