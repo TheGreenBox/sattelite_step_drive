@@ -30,7 +30,7 @@ static void switchInternalOscilator() {
     EDIS;   // Disable register access
 }
 
-void emptyFunction() {}
+//void emptyFunction() {}
 
 // This function initializes the PIE control registers to a known state.
 void PieCntlInit() {

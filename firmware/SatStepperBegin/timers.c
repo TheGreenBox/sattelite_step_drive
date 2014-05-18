@@ -7,6 +7,7 @@
  * ========================================================
  */
 
+#include <stddef.h>
 #include <PeripheralHeaderIncludes.h>
 #include "utils/macros.h"
 #include "timers.h"
@@ -19,6 +20,8 @@ static volatile struct CPUTIMER_REGS* const timerRegs[3] = {
 
 static _controlTimerInterruptHandler _tmr0Handler;
 static _controlTimerInterruptHandler _tmr1Handler;
+
+void emptyTimerIntrHandler(){}
 
 interrupt void TMR0_Interrupt(void)
 {
@@ -82,6 +85,18 @@ void timer1Init(_controlTimerInterruptHandler handler)
     IER |= M_INT13;
 
     setTimerSettingsToDefaultByNum(1);
+}
+
+void swapTimer0IntrHandler(_controlTimerInterruptHandler handler) {
+    if (handler != NULL) {
+        _tmr0Handler = handler;
+    }
+}
+
+void swapTimer1IntrHandler(_controlTimerInterruptHandler handler) {
+    if (handler != NULL) {
+        _tmr1Handler = handler;
+    }
 }
 
 void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t periodInUsec) {

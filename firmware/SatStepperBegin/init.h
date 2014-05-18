@@ -10,7 +10,6 @@
 #ifndef _INIT__H_
 #define _INIT__H_
 
-void emptyFunction();
 void deviceInit();
 void stateInit();
 void enableGlobalInterrupts();

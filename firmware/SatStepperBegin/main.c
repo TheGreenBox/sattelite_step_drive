@@ -2,7 +2,7 @@
  * Organization: The Green Box
  *
  * Project name: Satellite stepper drive
- * File name:  main.c
+ * File name:    main.c
  * Description:
  * ========================================================
  */
@@ -13,7 +13,7 @@
 #include "control_algo.h"
 #include "led_control.h"
 #include "init.h"
-#include "control_interrupt.h"
+#include "synchronized_control.h"
 #include "timers.h"
 #include "state.h"
 
@@ -21,8 +21,8 @@ void init() {
     deviceInit();
     initPwm(gConfig.pwmPeriod);
     stateInit();
-    timer0Init(&motorISR);
-    timer1Init(&emptyFunction);
+    timer0Init(&emptyTimerIntrHandler);
+    timer1Init(&emptyTimerIntrHandler);
     setTimerPeriodByNum(0, 20000);
 
     enableGlobalInterrupts();
