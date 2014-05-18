@@ -31,6 +31,10 @@ void init() {
 }
 
 void mainLoop() {
+    // just for testing
+    // enableSyncControl();
+    enableFeedbackControl();
+
     while (1) {
         // until dont have current feedback
         setPwm(MAX_PWM / 30);
@@ -42,9 +46,6 @@ void mainLoop() {
 
 int main(void) {
     init();
-
-    // just for testing
-    enableSyncControl();
 
     activate_pwm_driver();
     setAlgoType(gConfig.algoType);
