@@ -85,25 +85,17 @@ void timer1Init() {
     setTimerSettingsToDefaultByNum(1);
 }
 
-<<<<<<< HEAD
 void setTimer0IntrHandler(_controlTimerInterruptHandler handler) {
-=======
-void installTimer0IntrHandler(_controlTimerInterruptHandler handler) {
->>>>>>> 43da75bbeb3629a01497d820b8bf6a3439c3e1d6
     if (handler != NULL) {
         _tmr0Handler = handler;
     }
 }
 
-<<<<<<< HEAD
 void clearTimer0IntrHandler() {
     _tmr0Handler = &emptyTimerIntrHandler;
 }
 
 void setTimer1IntrHandler(_controlTimerInterruptHandler handler) {
-=======
-void installTimer1IntrHandler(_controlTimerInterruptHandler handler) {
->>>>>>> 43da75bbeb3629a01497d820b8bf6a3439c3e1d6
     if (handler != NULL) {
         _tmr1Handler = handler;
     }

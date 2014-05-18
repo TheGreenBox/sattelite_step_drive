@@ -33,9 +33,9 @@ void syncControlInterruptHadler(void) {
 }
 
 void enableSyncControl() {
-    installTimer0IntrHandler(&syncControlInterruptHadler);
+    setTimer0IntrHandler(&syncControlInterruptHadler);
 }
 
 void disableSyncControl() {
-    installTimer0IntrHandler(&emptyTimerIntrHandler);
+    clearTimer0IntrHandler();
 }
