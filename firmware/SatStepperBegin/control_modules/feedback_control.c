@@ -28,7 +28,7 @@ void switchPhasesIfNecessary() {
     int16_t algoStepInEncTicks = encTicsInOneAlgoStep();
 
     int32_t commAngleInEncTicks = gState.currentCommAngle * algoStepInEncTicks;
-    commAngleInEncTicks <<= COMM_ANGLE_RANK;
+    commAngleInEncTicks >>= COMM_ANGLE_RANK;
 
     if (abs(currentPos - lastSwitchPos) >= commAngleInEncTicks) {
         lastSwitchPos = currentPos - currentPos % algoStepInEncTicks;
