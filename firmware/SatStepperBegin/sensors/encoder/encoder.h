@@ -8,5 +8,8 @@
  */
 
 #pragma once
+typedef void (* _sharedEncoderHandler)(void);
 
 void encoderInit();
+void installSharedEncoderHandler(_sharedEncoderHandler handler);
+void disableSharedEncoderHandler();

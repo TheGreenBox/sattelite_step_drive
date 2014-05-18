@@ -15,6 +15,9 @@
 #include "gray_code_decoder.h"
 #include "state.h"
 
+static void emptySharedHandler() {}
+static _sharedEncoderHandler sharedHandler = &emptySharedHandler;
+
 interrupt void encoderInputAIntHandler(void) {
 #ifdef DEBUG
     ASSERT(
@@ -40,6 +43,7 @@ interrupt void encoderInputAIntHandler(void) {
         ++gState.encoder.errors
     );
 #endif // DEBUG
+    (*sharedHandler)();
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP1);
 }
 
@@ -68,6 +72,7 @@ interrupt void encoderInputBIntHandler(void) {
         ++gState.encoder.errors
     );
 #endif // DEBUG
+    (*sharedHandler)();
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP1);
 }
 
@@ -90,14 +95,15 @@ interrupt void encoderInputCIntHandler(void) {
         }
     }
 
+    (*sharedHandler)();
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP12);
 }
 
 void encoderInit() {
     EALLOW; // This is needed to write to EALLOW protected registers
-    PieVectTable.XINT1 = encoderInputAIntHandler;
-    PieVectTable.XINT2 = encoderInputBIntHandler;
-    PieVectTable.XINT3 = encoderInputCIntHandler;
+    PieVectTable.XINT1 = &emptySharedHandler;
+    PieVectTable.XINT2 = &emptySharedHandler;
+    PieVectTable.XINT3 = &emptySharedHandler;
 
     /*
     * 00 Interrupt generated on a falling edge (high-to-low transition)
@@ -162,3 +168,11 @@ void encoderInit() {
 * reached. The counter is a read  only register and can only be reset to zero
 * by a valid interrupt edge or by reset. ->|
 */
+
+void installSharedEncoderHandler(_sharedEncoderHandler handler) {
+    sharedHandler = handler;
+}
+
+void disableSharedEncoderHandler() {
+    sharedHandler = emptySharedHandler;
+}
