@@ -4,6 +4,24 @@
 #include "algo_types.h"
 #include "pwm_wrap_module.h"
 
+enum MinimalEngineStepMultipliers {
+    ONE_PHASE_ALGO_STEP_MULTIPL     = 1,
+    TWO_PHASE_ALGO_STEP_MULTIPL     = 1,
+    HALF_PHASE_ALGO_STEP_MULTIPL    = 2
+};
+
+enum PhaseStepsByConnection {
+    ONE_PHASE_ALGO_STEPS  = 4,
+    TWO_PHASE_ALGO_STEPS  = 4,
+    HALF_PHASE_ALGO_STEPS = 8
+};
+
+enum PwmStepsByConnection {
+    ONE_PHASE_ALGO_PWM_STEPS  = 1,
+    TWO_PHASE_ALGO_PWM_STEPS  = 1,
+    HALF_PHASE_ALGO_PWM_STEPS = 2
+};
+
 static const int_fast8_t onePhaseAlgoA[ONE_PHASE_ALGO_STEPS]   = {1, 0, -1,  0};
 static const int_fast8_t onePhaseAlgoB[ONE_PHASE_ALGO_STEPS]   = {0, 1,  0, -1};
 static const uint16_t onePhasePwmCoeff[ONE_PHASE_ALGO_PWM_STEPS]  = {1 * PWM_COEFF_DIVIDER};
