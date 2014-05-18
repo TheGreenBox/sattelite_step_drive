@@ -31,7 +31,7 @@ typedef struct _EncoderCounts {
 } EncoderCounts;
 
 typedef struct _SetPoint {
-    uint64_t position;
+    uint32_t position;
     uint16_t speed;
 } SetPoint;
 

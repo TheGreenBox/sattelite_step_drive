@@ -3,12 +3,10 @@
 #include "../sensors/encoder/encoder.h"
 #include "feedback_control.h"
 
-static inline int64_t currentRelativePos() {
-    int64_t fullSensorDeviation = gState.encoder.raw * gConfig.encoderRange
+static inline int32_t currentRelativePos() {
+    int32_t fullSensorDeviation = gState.encoder.raw * gConfig.encoderRange
                                     + gState.encoder.precise;
-    int64_t rotorDevInOneRevol  = fullSensorDeviation * gConfig.motorReduction;
-
-    return rotorDevInOneRevol;
+    return fullSensorDeviation * gConfig.motorReduction;
 }
 
 static inline int16_t encTicsInOneAlgoStep() {
@@ -24,16 +22,16 @@ static inline int_fast8_t rotationDirection() {
 }
 
 void switchPhasesIfNecessary() {
-    static int64_t lastSwitchPos = 0;
+    static int32_t lastSwitchPos = 0;
 
-    int64_t relativePos = currentRelativePos();
+    int32_t currentPos = currentRelativePos();
     int16_t algoStepInEncTicks = encTicsInOneAlgoStep();
 
-    int64_t commAngleInEncTicks = gState.currentCommAngle * algoStepInEncTicks;
+    int32_t commAngleInEncTicks = gState.currentCommAngle * algoStepInEncTicks;
     commAngleInEncTicks <<= COMM_ANGLE_RANK;
 
-    if (abs(relativePos - lastSwitchPos) >= commAngleInEncTicks) {
-        lastSwitchPos = relativePos - relativePos % algoStepInEncTicks;
+    if (abs(currentPos - lastSwitchPos) >= commAngleInEncTicks) {
+        lastSwitchPos = currentPos - currentPos % algoStepInEncTicks;
         switchPhasesOnce();
     }
 }
