@@ -22,8 +22,7 @@ void init() {
     deviceInit();
     initPwm();
     stateInit();
-    timer0Init();
-    timer1Init();
+    timersInit();
     setTimerPeriodByNum(0, 20000);
 
     enableGlobalInterrupts();
@@ -32,11 +31,10 @@ void init() {
 }
 
 void mainLoop() {
-
-    // until dont have current feedback
-    setPwm(MAX_PWM);
-
     while (1) {
+        // until dont have current feedback
+        setPwm(MAX_PWM / 30);
+
         // Put here debug functions
         // For instance - function for simulate input signal
     }
@@ -44,6 +42,9 @@ void mainLoop() {
 
 int main(void) {
     init();
+
+    // just for testing
+    enableSyncControl();
 
     activate_pwm_driver();
     setAlgoType(gConfig.algoType);
