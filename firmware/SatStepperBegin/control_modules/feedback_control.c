@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "../state.h"
+#include "../sensors/encoder/encoder.h"
 #include "feedback_control.h"
 
 static inline int64_t currentRelativePos() {
@@ -34,6 +35,18 @@ void switchPhasesIfNecessary() {
 
     if (abs(relativePos - lastSwitchPos) >= commAngleInEncTicks) {
         lastSwitchPos = relativePos - relativePos % algoStepInEncTicks;
-        step(rotationDirection());
+        switchPhasesOnce();
     }
+}
+
+void switchPhasesOnce() {
+    step(rotationDirection());
+}
+
+void enableFeedbackControl() {
+    installSharedEncoderHandler(&switchPhasesIfNecessary);
+}
+
+void disableFeedbackControl() {
+    disableSharedEncoderHandler();
 }
