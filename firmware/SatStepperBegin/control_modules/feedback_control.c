@@ -4,9 +4,8 @@
 #include "feedback_control.h"
 
 static inline int64_t currentRelativePos() {
-    int64_t rawSensorDeviation  =   (gState.encoder.raw % gConfig.motorReduction)
-                                    * gConfig.encoderRange;
-    int64_t fullSensorDeviation = rawSensorDeviation + gState.encoder.precise;
+    int64_t fullSensorDeviation = gState.encoder.raw * gConfig.encoderRange
+                                    + gState.encoder.precise;
     int64_t rotorDevInOneRevol  = fullSensorDeviation * gConfig.motorReduction;
 
     return rotorDevInOneRevol;
@@ -31,7 +30,7 @@ void switchPhasesIfNecessary() {
     int16_t algoStepInEncTicks = encTicsInOneAlgoStep();
 
     int64_t commAngleInEncTicks = gState.currentCommAngle * algoStepInEncTicks;
-    commAngleInEncTicks = commAngleInEncTicks << COMM_ANGLE_RANK;
+    commAngleInEncTicks <<= COMM_ANGLE_RANK;
 
     if (abs(relativePos - lastSwitchPos) >= commAngleInEncTicks) {
         lastSwitchPos = relativePos - relativePos % algoStepInEncTicks;
