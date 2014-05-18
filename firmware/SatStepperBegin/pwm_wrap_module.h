@@ -12,12 +12,12 @@
 
 #include <stdint.h>
 
-void initPwm(uint16_t prescaler);
+void initPwm();
 
 void setPwm(uint16_t pwmDutyCycle);
 
 #define PWM_COEFF_RANK 10
-#define PWM_COEFF_DEVIDER (1 << PWM_COEFF_RANK)
+#define PWM_COEFF_DIVIDER (1 << PWM_COEFF_RANK)
 void setCoeff(uint16_t pwmCoeff);
 
 void setADirection(int_fast8_t direct);

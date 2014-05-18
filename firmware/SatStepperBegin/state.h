@@ -48,7 +48,6 @@ typedef struct _GlobalState {
 extern volatile GlobalState gState;
 
 typedef struct _GlobalConfig {
-    uint16_t   pwmPeriod;
     uint16_t   algoType;
     uint16_t   encoderRange;
     uint16_t   motorReduction;

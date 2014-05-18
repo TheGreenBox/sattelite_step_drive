@@ -21,14 +21,14 @@ static volatile struct EPWM_REGS* pwm_control_regs[2] = {
     &EPwm2Regs
 };
 
-static inline void initPWMChannel(volatile struct EPWM_REGS* pwmRegs, short int prescaler) {
+static inline void initPWMChannel(volatile struct EPWM_REGS* pwmRegs) {
     pwmRegs->TBCTL.bit.SYNCOSEL = 0;   // Pass through
 
     // Init Timer-Base Period Register for EPWM1-EPWM3
-    pwmRegs->TBPRD = prescaler;
+    pwmRegs->TBPRD = MAX_PWM_DUTY;
 
     // Init Compare Register for EPWM1-EPWM3
-    pwmRegs->CMPA.half.CMPA = prescaler;
+    pwmRegs->CMPA.half.CMPA = MAX_PWM_DUTY;
 
     // Init Timer-Base Phase Register for EPWM1-EPWM3
     pwmRegs->TBPHS.half.TBPHS = 0;
@@ -88,9 +88,9 @@ static inline void initPWMChannel(volatile struct EPWM_REGS* pwmRegs, short int 
     EDIS;
 }
 
-void initPwm(uint16_t prescaler) {
-    initPWMChannel(pwm_control_regs[0], prescaler);
-    initPWMChannel(pwm_control_regs[1], prescaler);
+void initPwm() {
+    initPWMChannel(pwm_control_regs[0]);
+    initPWMChannel(pwm_control_regs[1]);
 }
 
 void setPwm(uint16_t pwm) {
