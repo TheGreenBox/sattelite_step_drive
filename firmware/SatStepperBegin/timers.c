@@ -32,8 +32,7 @@ interrupt void TMR0_Interrupt(void)
     // PSCH:PSC is loaded with the value in the TDDRH:TDDR.
     CpuTimer0Regs.TCR.bit.TRB = 1;
 
-    // Acknowledge interrupt to recieve more interrupts from PIE group 1
-    PieCtrlRegs.PIEACK.all = PIEACK_GROUP1;
+    ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP1);
 }
 
 interrupt void TMR1_Interrupt(void)
@@ -41,6 +40,7 @@ interrupt void TMR1_Interrupt(void)
     _tmr1Handler();
     // CpuTimer1Regs.TCR.bit.TIF = 0;
     CpuTimer1Regs.TCR.bit.TRB = 1;
+
     // TINT1 is not part of any interrupt group, so it doesn't require
     // acknowledgement
 }
@@ -85,17 +85,25 @@ void timer1Init() {
     setTimerSettingsToDefaultByNum(1);
 }
 
+<<<<<<< HEAD
 void setTimer0IntrHandler(_controlTimerInterruptHandler handler) {
+=======
+void installTimer0IntrHandler(_controlTimerInterruptHandler handler) {
+>>>>>>> 43da75bbeb3629a01497d820b8bf6a3439c3e1d6
     if (handler != NULL) {
         _tmr0Handler = handler;
     }
 }
 
+<<<<<<< HEAD
 void clearTimer0IntrHandler() {
     _tmr0Handler = &emptyTimerIntrHandler;
 }
 
 void setTimer1IntrHandler(_controlTimerInterruptHandler handler) {
+=======
+void installTimer1IntrHandler(_controlTimerInterruptHandler handler) {
+>>>>>>> 43da75bbeb3629a01497d820b8bf6a3439c3e1d6
     if (handler != NULL) {
         _tmr1Handler = handler;
     }

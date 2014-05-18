@@ -13,8 +13,7 @@
 
 #include "pwm_wrap_module.h"
 
-#define MAX_PWM_DUTY 1024
-static int16_t pmwCoefficient = 0;
+static int16_t pwmCoefficient = 0;
 
 static volatile struct EPWM_REGS* pwm_control_regs[2] = {
     &EPwm1Regs,
@@ -25,10 +24,10 @@ static inline void initPWMChannel(volatile struct EPWM_REGS* pwmRegs) {
     pwmRegs->TBCTL.bit.SYNCOSEL = 0;   // Pass through
 
     // Init Timer-Base Period Register for EPWM1-EPWM3
-    pwmRegs->TBPRD = MAX_PWM_DUTY;
+    pwmRegs->TBPRD = MAX_PWM;
 
     // Init Compare Register for EPWM1-EPWM3
-    pwmRegs->CMPA.half.CMPA = MAX_PWM_DUTY;
+    pwmRegs->CMPA.half.CMPA = MAX_PWM;
 
     // Init Timer-Base Phase Register for EPWM1-EPWM3
     pwmRegs->TBPHS.half.TBPHS = 0;
@@ -97,10 +96,11 @@ void setPwm(uint16_t pwm) {
     if (pwm > MAX_PWM) {
         pwm = MAX_PWM;
     }
-    uint32_t truePwm = pwm;
-    truePwm *= pmwCoefficient;
-    truePwm >>= PWM_COEFF_RANK;
-    uint16_t pwmDutyCycle = MAX_PWM - truePwm;
+
+    uint32_t algoStepPwm = pwm;
+    algoStepPwm *= pwmCoefficient;
+    algoStepPwm >>= PWM_COEFF_RANK;
+    uint16_t pwmDutyCycle = MAX_PWM - algoStepPwm;
 
     EPwm1Regs.CMPA.half.CMPA = pwmDutyCycle;
     EPwm2Regs.CMPA.half.CMPA = pwmDutyCycle;
@@ -141,7 +141,7 @@ void setBDirection(int_fast8_t direct) {
 }
 
 void setCoeff(uint16_t pwmCoeff) {
-    pmwCoefficient = pwmCoeff;
+    pwmCoefficient = pwmCoeff;
 }
 
 void deactivate_pwm_driver() {

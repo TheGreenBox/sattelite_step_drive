@@ -15,7 +15,7 @@
 void initPwm();
 
 #define MAX_PWM 1024
-void setPwm(uint16_t pwmDutyCycle);
+void setPwm(uint16_t pwm);
 
 #define PWM_COEFF_RANK 10
 #define PWM_COEFF_DIVIDER (1 << PWM_COEFF_RANK)
