@@ -44,9 +44,9 @@ void switchPhasesOnce() {
 }
 
 void enableFeedbackControl() {
-    installSharedEncoderHandler(&switchPhasesIfNecessary);
+    setSharedEncoderHandler(&switchPhasesIfNecessary);
 }
 
 void disableFeedbackControl() {
-    disableSharedEncoderHandler();
+    clearSharedEncoderHandler();
 }

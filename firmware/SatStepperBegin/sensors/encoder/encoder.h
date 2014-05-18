@@ -11,5 +11,5 @@
 typedef void (* _sharedEncoderHandler)(void);
 
 void encoderInit();
-void installSharedEncoderHandler(_sharedEncoderHandler handler);
-void disableSharedEncoderHandler();
+void setSharedEncoderHandler(_sharedEncoderHandler handler);
+void clearSharedEncoderHandler();

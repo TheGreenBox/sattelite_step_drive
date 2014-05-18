@@ -169,10 +169,10 @@ void encoderInit() {
 * by a valid interrupt edge or by reset. ->|
 */
 
-void installSharedEncoderHandler(_sharedEncoderHandler handler) {
+void setSharedEncoderHandler(_sharedEncoderHandler handler) {
     sharedHandler = handler;
 }
 
-void disableSharedEncoderHandler() {
+void clearSharedEncoderHandler() {
     sharedHandler = emptySharedHandler;
 }
