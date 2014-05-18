@@ -14,7 +14,7 @@
 
 static void WDogDisable(void) {
     EALLOW;
-    SysCtrlRegs.WDCR= 0x0068;
+    SysCtrlRegs.WDCR = 0x0068;
     EDIS;
 }
 

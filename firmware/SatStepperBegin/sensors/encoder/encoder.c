@@ -101,9 +101,9 @@ interrupt void encoderInputCIntHandler(void) {
 
 void encoderInit() {
     EALLOW; // This is needed to write to EALLOW protected registers
-    PieVectTable.XINT1 = &emptySharedHandler;
-    PieVectTable.XINT2 = &emptySharedHandler;
-    PieVectTable.XINT3 = &emptySharedHandler;
+    PieVectTable.XINT1 = encoderInputAIntHandler;
+    PieVectTable.XINT2 = encoderInputBIntHandler;
+    PieVectTable.XINT3 = encoderInputCIntHandler;
 
     /*
     * 00 Interrupt generated on a falling edge (high-to-low transition)
