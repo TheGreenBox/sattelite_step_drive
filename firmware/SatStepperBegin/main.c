@@ -13,7 +13,8 @@
 #include "control_algo.h"
 #include "led_control.h"
 #include "init.h"
-#include "synchronized_control.h"
+#include "control_modules/synchronized_control.h"
+#include "control_modules/feedback_control.h"
 #include "timers.h"
 #include "state.h"
 
