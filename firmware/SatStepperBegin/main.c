@@ -22,8 +22,8 @@ void init() {
     deviceInit();
     initPwm();
     stateInit();
-    timer0Init(&emptyTimerIntrHandler);
-    timer1Init(&emptyTimerIntrHandler);
+    timer0Init();
+    timer1Init();
     setTimerPeriodByNum(0, 20000);
 
     enableGlobalInterrupts();

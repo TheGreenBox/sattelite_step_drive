@@ -58,9 +58,8 @@ static inline void setTimerSettingsToDefaultByNum(uint_fast8_t timerNum) {
     timerRegs[timerNum]->TPRH.bit.TDDRH    = 0x0;
 }
 
-void timer0Init(_controlTimerInterruptHandler handler)
-{
-    _tmr0Handler = handler;
+void timer0Init() {
+    clearTimer0IntrHandler();
 
     EALLOW; // This is needed to write to EALLOW protected registers
     PieVectTable.TINT0 = TMR0_Interrupt;
@@ -73,9 +72,8 @@ void timer0Init(_controlTimerInterruptHandler handler)
     setTimerSettingsToDefaultByNum(0);
 }
 
-void timer1Init(_controlTimerInterruptHandler handler)
-{
-    _tmr1Handler = handler;
+void timer1Init() {
+    clearTimer1IntrHandler();
 
     EALLOW; // This is needed to write to EALLOW protected registers
     PieVectTable.TINT1 = &TMR1_Interrupt;
@@ -87,16 +85,24 @@ void timer1Init(_controlTimerInterruptHandler handler)
     setTimerSettingsToDefaultByNum(1);
 }
 
-void swapTimer0IntrHandler(_controlTimerInterruptHandler handler) {
+void setTimer0IntrHandler(_controlTimerInterruptHandler handler) {
     if (handler != NULL) {
         _tmr0Handler = handler;
     }
 }
 
-void swapTimer1IntrHandler(_controlTimerInterruptHandler handler) {
+void clearTimer0IntrHandler() {
+    _tmr0Handler = &emptyTimerIntrHandler;
+}
+
+void setTimer1IntrHandler(_controlTimerInterruptHandler handler) {
     if (handler != NULL) {
         _tmr1Handler = handler;
     }
+}
+
+void clearTimer1IntrHandler() {
+    _tmr1Handler = &emptyTimerIntrHandler;
 }
 
 void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t periodInUsec) {
