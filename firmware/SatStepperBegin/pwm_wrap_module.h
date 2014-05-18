@@ -14,6 +14,7 @@
 
 void initPwm(uint16_t prescaler);
 
+#define MAX_PWM 1024
 void setPwm(uint16_t pwmDutyCycle);
 
 #define PWM_COEFF_RANK 10

@@ -31,6 +31,10 @@ void init() {
 }
 
 void mainLoop() {
+
+    // until dont have current feedback
+    setPwm(MAX_PWM);
+
     while (1) {
         // Put here debug functions
         // For instance - function for simulate input signal
