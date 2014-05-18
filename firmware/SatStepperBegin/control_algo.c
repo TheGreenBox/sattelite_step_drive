@@ -40,13 +40,13 @@ void stop() {
 }
 
 void step(int_fast8_t dist) {
-    gState.stepTicker += dist;
-
     if (currentAlgo == NULL) {
         return;
     }
 
-    int_fast8_t nextStep =  gState.stepTicker % currentAlgo->algoStepsNumber;
+    gState.stepTicker += dist;
+
+    int_fast8_t nextStep = gState.stepTicker % currentAlgo->algoStepsNumber;
     if (nextStep < 0) {
         nextStep += currentAlgo->algoStepsNumber;
     }
