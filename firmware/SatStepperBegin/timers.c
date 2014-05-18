@@ -12,20 +12,19 @@
 #include "utils/macros.h"
 #include "timers.h"
 
-static volatile struct CPUTIMER_REGS* const timerRegs[3] = {
+static volatile struct CPUTIMER_REGS* const timerRegs[ALL_TIMERS] = {
     &CpuTimer0Regs,
     &CpuTimer1Regs,
     &CpuTimer2Regs
 };
 
-static _controlTimerInterruptHandler _tmr0Handler;
-static _controlTimerInterruptHandler _tmr1Handler;
+static _controlTimerInterruptHandler _tmrHandlers[ALL_TIMERS];
 
-void emptyTimerIntrHandler(){}
+static void emptyTimerIntrHandler() {}
 
 interrupt void TMR0_Interrupt(void)
 {
-    _tmr0Handler();
+    _tmrHandlers[0]();
     // CpuTimer0Regs.TCR.bit.TIF = 0; // TODO: writes of 0 are ignored, check it
 
     // TIMH:TIM is loaded with the value in the PRDH:PRD,
@@ -37,7 +36,7 @@ interrupt void TMR0_Interrupt(void)
 
 interrupt void TMR1_Interrupt(void)
 {
-    _tmr1Handler();
+    _tmrHandlers[1]();
     // CpuTimer1Regs.TCR.bit.TIF = 0;
     CpuTimer1Regs.TCR.bit.TRB = 1;
 
@@ -58,8 +57,8 @@ static inline void setTimerSettingsToDefaultByNum(uint_fast8_t timerNum) {
     timerRegs[timerNum]->TPRH.bit.TDDRH    = 0x0;
 }
 
-void timer0Init() {
-    clearTimer0IntrHandler();
+static void timer0Init() {
+    clearTimerIntrHandler(0);
 
     EALLOW; // This is needed to write to EALLOW protected registers
     PieVectTable.TINT0 = TMR0_Interrupt;
@@ -72,8 +71,8 @@ void timer0Init() {
     setTimerSettingsToDefaultByNum(0);
 }
 
-void timer1Init() {
-    clearTimer1IntrHandler();
+static void timer1Init() {
+    clearTimerIntrHandler(1);
 
     EALLOW; // This is needed to write to EALLOW protected registers
     PieVectTable.TINT1 = &TMR1_Interrupt;
@@ -85,24 +84,22 @@ void timer1Init() {
     setTimerSettingsToDefaultByNum(1);
 }
 
-void setTimer0IntrHandler(_controlTimerInterruptHandler handler) {
-    if (handler != NULL) {
-        _tmr0Handler = handler;
+void timersInit() {
+    timer0Init();
+    timer1Init();
+}
+
+void setTimerIntrHandler(  uint_fast8_t timerNum,
+                            _controlTimerInterruptHandler handler) {
+    if (handler != NULL && timerNum < ALL_TIMERS) {
+        _tmrHandlers[timerNum] = handler;
     }
 }
 
-void clearTimer0IntrHandler() {
-    _tmr0Handler = &emptyTimerIntrHandler;
-}
-
-void setTimer1IntrHandler(_controlTimerInterruptHandler handler) {
-    if (handler != NULL) {
-        _tmr1Handler = handler;
+void clearTimerIntrHandler(uint_fast8_t timerNum) {
+    if (timerNum < ALL_TIMERS) {
+        _tmrHandlers[timerNum] = &emptyTimerIntrHandler;
     }
-}
-
-void clearTimer1IntrHandler() {
-    _tmr1Handler = &emptyTimerIntrHandler;
 }
 
 void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t periodInUsec) {

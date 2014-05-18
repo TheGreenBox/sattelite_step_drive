@@ -12,16 +12,15 @@
 
 #include "stdint.h"
 
+#define ALL_TIMERS 3
+
 typedef void (* _controlTimerInterruptHandler)(void);
 
-void timer0Init();
-void timer1Init();
+void timersInit();
 
-void setTimer0IntrHandler(_controlTimerInterruptHandler);
-void clearTimer0IntrHandler();
-
-void setTimer1IntrHandler(_controlTimerInterruptHandler);
-void clearTimer1IntrHandler();
+void setTimerIntrHandler(  uint_fast8_t timerNum,
+                            _controlTimerInterruptHandler handler);
+void clearTimerIntrHandler(uint_fast8_t timerNum);
 
 void setTimerPeriodByNum(uint_fast8_t timerNum, uint32_t periodInUsec);
 void stopTimerByNum(uint_fast8_t timerNum);
