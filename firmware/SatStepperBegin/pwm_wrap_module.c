@@ -13,6 +13,7 @@
 
 #include "pwm_wrap_module.h"
 
+#define MAX_PWM_DUTY 1024
 static int16_t pmwCoefficient = 0;
 
 static volatile struct EPWM_REGS* pwm_control_regs[2] = {
