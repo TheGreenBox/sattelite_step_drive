@@ -13,7 +13,9 @@
 
 #include "pwm_wrap_module.h"
 
-static int16_t pwmCoefficient = 0;
+
+static PwmState sPwmState;
+const PwmState * const pwmState = &sPwmState;
 
 static volatile struct EPWM_REGS* pwm_control_regs[2] = {
     &EPwm1Regs,

@@ -27,5 +27,14 @@ void setBDirection(int_fast8_t direct);
 void activate_pwm_driver();
 void deactivate_pwm_driver();
 
+typedef struct PwmState {
+    int16_t coeff;
+    struct direct {
+        int8_t a;
+        int8_t b;
+    };
+};
+extern const PwmState * const pwmState;
+
 #endif //_PWM_WRAP_MODULE__H_
 
