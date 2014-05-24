@@ -13,7 +13,9 @@
 
 #include "pwm_wrap_module.h"
 
-static int16_t pwmCoefficient = 0;
+
+static PwmState sPwmState;
+const PwmState * const pwmState = &sPwmState;
 
 static volatile struct EPWM_REGS* pwm_control_regs[2] = {
     &EPwm1Regs,
@@ -98,7 +100,7 @@ void setPwm(uint16_t pwm) {
     }
 
     uint32_t algoStepPwm = pwm;
-    algoStepPwm *= pwmCoefficient;
+    algoStepPwm *= sPwmState.coeff;
     algoStepPwm >>= PWM_COEFF_RANK;
     uint16_t pwmDutyCycle = MAX_PWM - algoStepPwm;
 
@@ -141,7 +143,7 @@ void setBDirection(int_fast8_t direct) {
 }
 
 void setCoeff(uint16_t pwmCoeff) {
-    pwmCoefficient = pwmCoeff;
+    sPwmState.coeff = pwmCoeff;
 }
 
 void deactivate_pwm_driver() {
