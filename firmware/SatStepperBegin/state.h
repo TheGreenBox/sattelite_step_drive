@@ -11,7 +11,6 @@
 #define _GLOBAL_STATE_H_
 
 #include <stdint.h>
-#include "algo_types.h"
 
 typedef struct _MotorControl {
     uint32_t    pwmDutyCycle;
