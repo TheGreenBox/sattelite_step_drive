@@ -7,7 +7,8 @@
  *  [issue](https://github.com/TheGreenBox/sattelite_step_drive/issues/44)
  */
 
-#define ADC_2_CURRENT 300
+#define CURRENT_2_ADC 300
+#define ADC_BITNESS 12
 #define CURRENT_COEFF_RANK 10
 #define CURRENT_COEFF_DIVIDER (1 << PWM_COEFF_RANK)
 
@@ -15,14 +16,14 @@ static void emptySharedHandler() {}
 static int32_t setCurrent = 0;
 // >>> (2**11)/300. = 6.82666 * 300.
 
-static const uint16_t maxPositiveCurrent = ((float)(1<<11)/ADC_2_CURRENT.) * CURRENT_COEFF_DIVIDER;
+static const uint16_t maxPositiveCurrent = ((1 << (ADC_BITNES - 1)) << CURRENT_COEFF_RANK) / CURRENT_2_ADC;
 
 void setCurrent(uint16_t current) {
     if (current > maxPositiveCurrent) {
         current = maxPositiveCurrent;
     }
     setCurrent = current;
-    setCurrent *= ADC_2_CURRENT;
+    setCurrent *= CURRENT_2_ADC;
     setCurrent >>= CURRENT_COEFF_RANK;
 }
 
