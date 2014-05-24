@@ -109,6 +109,7 @@ void setPwm(uint16_t pwm) {
 }
 
 void setADirection(int_fast8_t direct) {
+    sPwmState.direct.a = direct;
     if (direct == 0) {
         EPwm1Regs.AQCSFRC.bit.CSFA = 1;
         EPwm1Regs.AQCSFRC.bit.CSFB = 1;
@@ -126,6 +127,7 @@ void setADirection(int_fast8_t direct) {
 }
 
 void setBDirection(int_fast8_t direct) {
+    sPwmState.direct.b = direct;
     if (direct == 0) {
         EPwm2Regs.AQCSFRC.bit.CSFA = 1;
         EPwm2Regs.AQCSFRC.bit.CSFB = 1;

@@ -4,37 +4,75 @@
  *
  * @file    current_feedback.c
  * @brief   Header for current feedback logic module
- *  [issue](https://github.com/TheGreenBox/sattelite_step_drive/issues/44)
+ *  [github issue #44](https://github.com/TheGreenBox/sattelite_step_drive/issues/44)
  */
 
-#define CURRENT_2_ADC 300
-#define ADC_BITNESS 12
-#define CURRENT_COEFF_RANK 10
-#define CURRENT_COEFF_DIVIDER (1 << PWM_COEFF_RANK)
+#include <stdint.h>
+#include "adc.h"
+#include "pwm_wrap_module.h"
+#include "current_feedback.h"
 
-static void emptySharedHandler() {}
-static int32_t setCurrent = 0;
-// >>> (2**11)/300. = 6.82666 * 300.
+static int16_t settedCurrent = 0;
+static uint16_t constPwm = 0;
+static uint16_t vcc = 12 << 10;
 
-static const uint16_t maxPositiveCurrent = ((1 << (ADC_BITNES - 1)) << CURRENT_COEFF_RANK) / CURRENT_2_ADC;
+#define CURENT_2_ADC 300
+#define PWM_2_ADC_CURENT 18
+
+#define VCC_NOMINAL 1400
+#define MAX_POSITIVE_CURRENT ((1 << (ADC_BITNESS - 1)) << CURENT_COEFF_RANK) / CURENT_2_ADC
 
 void setCurrent(uint16_t current) {
-    if (current > maxPositiveCurrent) {
-        current = maxPositiveCurrent;
+    if (current > MAX_POSITIVE_CURRENT) {
+        current = MAX_POSITIVE_CURRENT;
     }
-    setCurrent = current;
-    setCurrent *= CURRENT_2_ADC;
-    setCurrent >>= CURRENT_COEFF_RANK;
+    settedCurrent = current;
+    settedCurrent *= CURENT_2_ADC;
+    settedCurrent >>= CURENT_COEFF_RANK;
+    constPwm = settedCurrent / PWM_2_ADC_CURENT;
+    setPwm(constPwm);
 }
 
-void correctPwmByAdc(ECurrentChannel ch, uint16_t adc) {
-    switch(ch) {
-        case ECurrentChA:
-        case ECurrentChB:
-        case ECurrentChC:
-        case ECurrentChD:
-            break;
-        case ECurrentChVCC:
-            break;
+#define CORRECT_PWM_BY_ADC_CURENT(adc) \
+    int16_t current = (int16_t)adc - (1 << (ADC_BITNESS - 1)); \
+    int32_t delta = settedCurrent - current; \
+    delta *= vcc; \
+    delta /= VCC_NOMINAL; \
+    setPwm(delta + (int16_t)constPwm);
+
+void correctPwmByAdcCurrentChA(uint16_t adc) {
+    if (pwmState->direct.a < 0) {
+        CORRECT_PWM_BY_ADC_CURENT(adc)
     }
 }
+
+void correctPwmByAdcCurrentChB(uint16_t adc) {
+    if (pwmState->direct.a > 0) {
+        CORRECT_PWM_BY_ADC_CURENT(adc)
+    }
+}
+
+void correctPwmByAdcCurrentChC(uint16_t adc) {
+    if (pwmState->direct.b < 0) {
+        CORRECT_PWM_BY_ADC_CURENT(adc)
+    }
+}
+
+void correctPwmByAdcCurrentChD(uint16_t adc) {
+    if (pwmState->direct.b > 0) {
+        CORRECT_PWM_BY_ADC_CURENT(adc)
+    }
+}
+
+void correctPwmByAdcCurrentChVCC(uint16_t adc) {
+    vcc = adc;
+}
+
+void currentFeedbackInit() {
+    setAdcChanelHandler(0, &correctPwmByAdcCurrentChA);
+    setAdcChanelHandler(1, &correctPwmByAdcCurrentChB);
+    setAdcChanelHandler(2, &correctPwmByAdcCurrentChC);
+    setAdcChanelHandler(3, &correctPwmByAdcCurrentChD);
+    setAdcChanelHandler(4, &correctPwmByAdcCurrentChVCC);
+}
+

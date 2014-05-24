@@ -24,6 +24,7 @@ void init() {
     stateInit();
     timersInit();
     setTimerPeriodByNum(0, 20000);
+    setTimerPeriodByNum(1, 20000);
 
     enableGlobalInterrupts();
 
