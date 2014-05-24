@@ -30,15 +30,32 @@ void init() {
     setGreenStatusLed(1);
 }
 
-void mainLoop() {
-    // just for testing
-    // enableSyncControl();
+static void debugCalibration() {
+    enableSyncControl();
+
+    uint32_t ticker = 0;
+    while (ticker < 1000000) {
+        ++ticker;
+    }
+    disableSyncControl();
+
     enableFeedbackControl();
+    while (ticker < 1000000) {
+        ++ticker;
+    }
+
+    step(1);
+}
+
+void mainLoop() {
+    // until dont have current feedback
+    setPwm(MAX_PWM / 30);
+
+
+    // just for testing
+    debugCalibration();
 
     while (1) {
-        // until dont have current feedback
-        setPwm(MAX_PWM / 30);
-
         // Put here debug functions
         // For instance - function for simulate input signal
     }
