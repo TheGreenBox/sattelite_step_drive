@@ -4,7 +4,6 @@
 #define COMM_ANGLE_RANK     10
 #define COMM_ANGLE_DIVIDER  (1 << COMM_ANGLE_RANK)
 
-void switchPhasesOnce();
 void switchPhasesIfNecessary();
 
 void enableFeedbackControl();
