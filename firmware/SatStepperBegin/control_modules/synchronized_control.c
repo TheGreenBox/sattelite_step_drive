@@ -6,29 +6,26 @@
  * Description:  Module for control interrupt functions
  * ========================================================
  */
-#include <PeripheralHeaderIncludes.h>
-
 #include "synchronized_control.h"
 #include "state.h"
 #include "control_algo.h"
 #include "timers.h"
-#include "pwm_wrap_module.h"
-
-// for debug purposes
-unsigned int cycleLimiter(unsigned val, unsigned hi, unsigned low) {
-    ++val;
-    if (val > hi) {
-        return low;
-    }
-    return val;
-}
+#include "utils/macros.h"
 
 void syncControlInterruptHadler(void) {
-    if (gState.motorControl.rotationDirection == 0) {
-        stop();
+    int32_t settedPosInMotorTick =  ( gState.setPoint.position
+                                        * (int32_t)gConfig.oneRevolEngineSteps
+                                        * (int32_t)getEngineStepMultiplier()
+                                    ) / gConfig.encoderRange;
+    int_fast8_t delta = settedPosInMotorTick - gState.stepTicker;
+    if (delta > 0) {
+        step(1);
     }
-    else {
-        step(gState.motorControl.rotationDirection);
+    else if (delta < 0) {
+        step(-1);
+    }
+    else if (delta == 0) {
+        stop();
     }
 }
 
