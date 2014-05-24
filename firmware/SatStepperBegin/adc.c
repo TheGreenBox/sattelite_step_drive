@@ -1,11 +1,13 @@
-/* ========================================================
+/**
  * Organization: The Green Box
- *
  * Project name: Satellite stepper drive
- * File name: adc.c
- * Description: ADC initialization and interrupts
- * ========================================================
+ *
+ * @file adc.c
+ * @brief ADC initialization and interrupts
+ *  [github issue #44](https://github.com/TheGreenBox/sattelite_step_drive/issues/44),
+ *  [github issue #47](https://github.com/TheGreenBox/sattelite_step_drive/issues/47)
  */
+
 
 #include "PeripheralHeaderIncludes.h"
 #include "utils/macros.h"
@@ -16,6 +18,15 @@
 // a different section. This section will then be mapped to a load and
 // run address using the linker cmd file.
 #define Device_cal (void (*)(void) )0x3D7C80
+
+static void emptySharedHandler(uint16_t adc) {}
+TSharedAdcHandler adcHandlers[NUM_ACTIVE_ADC_CHANELS] = {
+    &emptySharedHandler,
+    &emptySharedHandler,
+    &emptySharedHandler,
+    &emptySharedHandler,
+    &emptySharedHandler
+};
 
 static void adcCalibrate() {
     EALLOW; // Below registers are "protected", allow access.
@@ -103,26 +114,31 @@ static const uint_fast16_t ADC_INTERRUPT_GROUP = PIEACK_GROUP10;
 
 interrupt void ADCINT3_ISR(void) {
     gState.adc[0] = AdcResult.ADCRESULT0;
+    adcHandlers[0](AdcResult.ADCRESULT0);
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT4_ISR(void) {
     gState.adc[1] = AdcResult.ADCRESULT1;
+    adcHandlers[1](AdcResult.ADCRESULT1);
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT5_ISR(void) {
     gState.adc[2] = AdcResult.ADCRESULT2;
+    adcHandlers[2](AdcResult.ADCRESULT2);
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT6_ISR(void) {
     gState.adc[3] = AdcResult.ADCRESULT3;
+    adcHandlers[3](AdcResult.ADCRESULT3);
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(ADC_INTERRUPT_GROUP);
 }
 
 interrupt void ADCINT7_ISR(void) {
     gState.adc[4] = AdcResult.ADCRESULT4;
+    adcHandlers[4](AdcResult.ADCRESULT4);
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(ADC_INTERRUPT_GROUP);
 }
 
@@ -173,4 +189,18 @@ void adcInit() {
     socSetUp();
     adcInterruptInit();
     powerUpAdc();
+}
+
+void setAdcChanelHandler(uint_fast8_t ch, TSharedAdcHandler handler) {
+    if (ch < NUM_ACTIVE_ADC_CHANELS) {
+        adcHandlers[ch] = handler;
+    }
+#ifdef DEBUG
+    else {
+        int t = 0;
+        while (1) {
+            ++t;
+        }
+    }
+#endif // DEBUG
 }
