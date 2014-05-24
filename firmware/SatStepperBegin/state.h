@@ -12,7 +12,6 @@
 
 #include <stdint.h>
 #include "algo_types.h"
-#include "control_algo.h"
 
 typedef struct _MotorControl {
     uint32_t    pwmDutyCycle;
@@ -31,13 +30,13 @@ typedef struct _EncoderCounts {
 } EncoderCounts;
 
 typedef struct _SetPoint {
-    uint32_t position;
-    uint16_t speed;
+    int32_t     position;
+    uint16_t    speed;
 } SetPoint;
 
 typedef struct _GlobalState {
-    uint64_t        stepTicker;
-    uint16_t        currentSpeed;
+    int64_t         stepTicker;
+    int16_t         currentSpeed;
     uint_fast16_t   adc[5];
     uint_fast16_t   currentCommAngle;
     SetPoint        setPoint;
