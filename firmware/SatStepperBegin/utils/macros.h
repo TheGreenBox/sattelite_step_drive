@@ -27,9 +27,12 @@ extern void DSP28x_usDelay(unsigned long Count);
     enum { __ASSERT_CONCAT(static_assert_, __LINE__) = 1/(!!(e)) }
 
 #define ASSERT(condition, event) \
-    if (condition) { \
+    if (!condition) { \
         event; \
     }
+
+#define SIGN(arg) \
+    ((arg & (1 << 8*sizeof(arg) - 1)) ? -1 : 1)
 
 #define PI 3.14159265358979
 
