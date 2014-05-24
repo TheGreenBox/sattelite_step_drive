@@ -14,7 +14,7 @@
 volatile GlobalState gState;
 
 const GlobalConfig gConfig = {
-    HALF_PHASE_ALGO,
+    ONE_PHASE_ALGO,
     25000,
     1,
     200
