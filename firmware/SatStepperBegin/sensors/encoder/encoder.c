@@ -88,10 +88,22 @@ interrupt void encoderInputCIntHandler(void) {
     if (GpioDataRegs.GPADAT.bit.GPIO23) {
         gState.encoder.raw += gState.encoder.direction;
         if (gState.encoder.direction > 0) {
-            gState.encoder.precise = 0;
+            if (gState.encoder.raw >= 0) {
+                gState.encoder.precise = 0;
+            }
+            else {
+                gState.encoder.precise = -(int32_t)gConfig.encoderRange;
+            }
         }
-        if (gState.encoder.direction < 0) {
-            gState.encoder.precise = gConfig.encoderRange;
+        else {
+            if (gState.encoder.direction < 0) {
+                if (gState.encoder.raw > 0) {
+                    gState.encoder.precise = gConfig.encoderRange;
+                }
+                else {
+                    gState.encoder.precise = 0;
+                }
+            }
         }
     }
 
