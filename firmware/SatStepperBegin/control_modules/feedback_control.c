@@ -40,9 +40,6 @@ void switchPhasesIfNecessary() {
                         + errorSign*commAngleInEncTicks;
     }
 
-    // int32_t delta = thisSwitchPos - currentPos;
-    // int32_t commDelta = commAngleInEncTicks - algoStepInEncTicks;
-
     if (currentPos <= gState.setPoint.position + algoStepInEncTicks
         && currentPos >= gState.setPoint.position - algoStepInEncTicks) {
         return;
@@ -51,16 +48,16 @@ void switchPhasesIfNecessary() {
     int32_t stepError = thisSwitchPos - currentPos;
     // int_fast8_t errorSign = SIGN(stepError);
 
+
     if (abs(stepError) <= minimalDeviation) {
         thisSwitchPos = currentPos - currentPos % algoStepInEncTicks
                         + errorSign*commAngleInEncTicks;
-        // switchPhasesOnce();
-        step((currentPos < gState.setPoint.position) ? 1 : -1);
+        step(errorSign);
     }
     else if (abs(stepError) > commAngleInEncTicks) {
         thisSwitchPos = currentPos - currentPos % algoStepInEncTicks
-                        + errorSign*commAngleInEncTicks;
-        step((currentPos < gState.setPoint.position) ? -1 : 1);
+                            + errorSign*commAngleInEncTicks;
+        step(-errorSign);
     }
 }
 

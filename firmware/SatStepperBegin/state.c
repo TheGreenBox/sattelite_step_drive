@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include "state.h"
+#include "algo_types.h"
 #include "control_algo.h"
 
 volatile GlobalState gState;
