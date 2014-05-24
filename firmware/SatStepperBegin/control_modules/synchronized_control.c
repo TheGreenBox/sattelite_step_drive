@@ -14,15 +14,6 @@
 #include "timers.h"
 #include "pwm_wrap_module.h"
 
-// for debug purposes
-unsigned int cycleLimiter(unsigned val, unsigned hi, unsigned low) {
-    ++val;
-    if (val > hi) {
-        return low;
-    }
-    return val;
-}
-
 void syncControlInterruptHadler(void) {
     if (gState.motorControl.rotationDirection == 0) {
         stop();
