@@ -100,7 +100,7 @@ void setPwm(uint16_t pwm) {
     }
 
     uint32_t algoStepPwm = pwm;
-    algoStepPwm *= pwmCoefficient;
+    algoStepPwm *= sPwmState.coeff;
     algoStepPwm >>= PWM_COEFF_RANK;
     uint16_t pwmDutyCycle = MAX_PWM - algoStepPwm;
 
@@ -143,7 +143,7 @@ void setBDirection(int_fast8_t direct) {
 }
 
 void setCoeff(uint16_t pwmCoeff) {
-    pwmCoefficient = pwmCoeff;
+    sPwmState.coeff = pwmCoeff;
 }
 
 void deactivate_pwm_driver() {
