@@ -10,7 +10,7 @@
 
 #pragma once
 
-void syncControlInterruptHadler(void);
+void syncControlInterruptHandler(void);
 
 void enableSyncControl();
 void disableSyncControl();
