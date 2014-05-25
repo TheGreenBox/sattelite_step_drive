@@ -84,7 +84,7 @@ PAGE 0 :
 
    BEGIN      : origin = 0x000000, length = 0x000002
    RAMM0      : origin = 0x000050, length = 0x0003B0
-   RAML0L1    : origin = 0x008000, length = 0x000C00
+   RAML0L1    : origin = 0x008000, length = 0x001C00
    RESET      : origin = 0x3FFFC0, length = 0x000002
    IQTABLES   : origin = 0x3FE000, length = 0x000B50     /* IQ Math Tables in Boot ROM */
    IQTABLES2  : origin = 0x3FEB50, length = 0x00008C     /* IQ Math Tables in Boot ROM */
@@ -98,7 +98,7 @@ PAGE 1 :
    BOOT_RSVD   : origin = 0x000002, length = 0x00004E     /* Part of M0, BOOT rom will use this for stack */
    RAMM1       : origin = 0x000480, length = 0x000380     /* on-chip RAM block M1 */
    RAML2       : origin = 0x008C00, length = 0x000400
-   RAML3       : origin = 0x009000, length = 0x001000
+   /*RAML3       : origin = 0x009000, length = 0x001000*/
 }
 
 
