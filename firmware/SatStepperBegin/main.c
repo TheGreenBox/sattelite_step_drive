@@ -35,23 +35,32 @@ static void debugCalibration() {
     enableSyncControl();
 
     uint32_t ticker = 0;
-    while (ticker < 1000000) {
-        ++ticker;
+    int_fast8_t iter;
+    for (iter = 0; iter < 30; ++iter) {
+        while (ticker < 1000000) {
+            ++ticker;
+        }
+        ticker = 0;
     }
+
     disableSyncControl();
 
-    enableFeedbackControl();
-    while (ticker < 1000000) {
-        ++ticker;
-    }
+    // gState.setPoint.position = -100000;
 
-    step(1);
+    gState.reference.encTicksToMotor =
+                ((int32_t)gState.encoder.raw * gConfig.encoderRange
+                + gState.encoder.precise) * gConfig.motorReduction;
+
+    gState.reference.stepTicker = gState.stepTicker;
+
+    enableFeedbackControl();
+
+    step(-1);
 }
 
 void mainLoop() {
     // until dont have current feedback
-    setPwm(MAX_PWM / 30);
-
+    setPwm(30);
 
     // just for testing
     debugCalibration();
