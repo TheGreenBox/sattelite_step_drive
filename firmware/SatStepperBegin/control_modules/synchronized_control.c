@@ -12,7 +12,7 @@
 #include "timers.h"
 #include "utils/macros.h"
 
-void syncControlInterruptHadler(void) {
+void syncControlInterruptHandler(void) {
     int32_t settedPosInMotorTick =  ( gState.setPoint.position
                                         * (int32_t)gConfig.oneRevolEngineSteps
                                         * (int32_t)getEngineStepMultiplier()
@@ -30,7 +30,7 @@ void syncControlInterruptHadler(void) {
 }
 
 void enableSyncControl() {
-    setTimerIntrHandler(0, &syncControlInterruptHadler);
+    setTimerIntrHandler(0, &syncControlInterruptHandler);
 }
 
 void disableSyncControl() {
