@@ -17,7 +17,7 @@ void syncControlInterruptHandler(void) {
                                         * (int32_t)gConfig.oneRevolEngineSteps
                                         * (int32_t)getEngineStepMultiplier()
                                     ) / gConfig.encoderRange;
-    int_fast8_t delta = settedPosInMotorTick - gState.stepTicker;
+    int32_t delta = settedPosInMotorTick - gState.stepTicker;
     if (delta > 0) {
         step(1);
     }
