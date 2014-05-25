@@ -120,7 +120,7 @@ SECTIONS
    .econst          : > RAML2,     PAGE = 1
    .esysmem         : > RAML2,     PAGE = 1
 
-   IQmath           : > RAML0L1,   PAGE = 0
+/*   IQmath           : > RAML0L1,   PAGE = 0 */
    IQmathTables     : > IQTABLES,  PAGE = 0, TYPE = NOLOAD
 
   /* Uncomment the section below if calling the IQNexp() or IQexp()
