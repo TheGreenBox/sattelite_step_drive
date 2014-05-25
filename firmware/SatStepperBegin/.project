@@ -86,6 +86,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/device_support/f2803x/v122/DSP2803x_headers/include/DSP2803x_XIntrupt.h</locationURI>
 		</link>
 		<link>
+			<name>DSP2803x_usDelay.asm</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/device_support/f2803x/v122/DSP2803x_common/source/DSP2803x_usDelay.asm</locationURI>
+		</link>
+		<link>
 			<name>PeripheralAddress_ASM.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/development_kits/~SupportFiles/F2803x_headers/PeripheralAddress_ASM.h</locationURI>

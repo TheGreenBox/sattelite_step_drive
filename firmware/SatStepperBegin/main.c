@@ -15,6 +15,7 @@
 #include "init.h"
 #include "control_modules/synchronized_control.h"
 #include "control_modules/feedback_control.h"
+#include "elementary_motions.h"
 #include "timers.h"
 #include "state.h"
 
@@ -65,6 +66,7 @@ void mainLoop() {
     // just for testing
     debugCalibration();
 
+    encoderCalibrating();
     while (1) {
         // Put here debug functions
         // For instance - function for simulate input signal
