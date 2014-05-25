@@ -84,7 +84,7 @@ PAGE 0 :
 
    BEGIN      : origin = 0x000000, length = 0x000002
    RAMM0      : origin = 0x000050, length = 0x0003B0
-   RAMTEXT    : origin = 0x008000, length = 0x001000
+   TEXT       : origin = 0x008000, length = 0x001000
    RESET      : origin = 0x3FFFC0, length = 0x000002
    IQTABLES   : origin = 0x3FE000, length = 0x000B50     /* IQ Math Tables in Boot ROM */
    IQTABLES2  : origin = 0x3FEB50, length = 0x00008C     /* IQ Math Tables in Boot ROM */
@@ -108,7 +108,7 @@ SECTIONS
       re-directs execution to the start of user code.  */
    codestart        : > BEGIN,     PAGE = 0
    ramfuncs         : > RAMM0      PAGE = 0
-   .text            : > RAMTEXT,   PAGE = 0
+   .text            : > TEXT,      PAGE = 0
    .cinit           : > RAMM0,     PAGE = 0
    .pinit           : > RAMM0,     PAGE = 0
    .switch          : > RAMM0,     PAGE = 0
@@ -119,7 +119,7 @@ SECTIONS
    .econst          : > RAML3,     PAGE = 1
    .esysmem         : > RAML3,     PAGE = 1
 
-   IQmath           : > RAMTEXT,   PAGE = 0
+   IQmath           : > TEXT,      PAGE = 0
    IQmathTables     : > IQTABLES,  PAGE = 0, TYPE = NOLOAD
 
   /* Uncomment the section below if calling the IQNexp() or IQexp()
