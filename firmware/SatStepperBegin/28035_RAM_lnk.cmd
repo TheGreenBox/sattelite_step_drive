@@ -86,9 +86,9 @@ PAGE 0 :
    RAMM0      : origin = 0x000050, length = 0x0003B0
    TEXT       : origin = 0x008000, length = 0x001000
    RESET      : origin = 0x3FFFC0, length = 0x000002
-   IQTABLES   : origin = 0x3FE000, length = 0x000B50     /* IQ Math Tables in Boot ROM */
-   IQTABLES2  : origin = 0x3FEB50, length = 0x00008C     /* IQ Math Tables in Boot ROM */
-   IQTABLES3  : origin = 0x3FEBDC, length = 0x0000AA	 /* IQ Math Tables in Boot ROM */
+//   IQTABLES   : origin = 0x3FE000, length = 0x000B50     /* IQ Math Tables in Boot ROM */
+//   IQTABLES2  : origin = 0x3FEB50, length = 0x00008C     /* IQ Math Tables in Boot ROM */
+//   IQTABLES3  : origin = 0x3FEBDC, length = 0x0000AA	 /* IQ Math Tables in Boot ROM */
 
    BOOTROM    : origin = 0x3FF27C, length = 0x000D44
 
@@ -119,8 +119,8 @@ SECTIONS
    .econst          : > RAML3,     PAGE = 1
    .esysmem         : > RAML3,     PAGE = 1
 
-   IQmath           : > TEXT,      PAGE = 0
-   IQmathTables     : > IQTABLES,  PAGE = 0, TYPE = NOLOAD
+//  IQmath           : > TEXT,      PAGE = 0
+//  IQmathTables     : > IQTABLES,  PAGE = 0, TYPE = NOLOAD
 
   /* Uncomment the section below if calling the IQNexp() or IQexp()
       functions from the IQMath.lib library in order to utilize the
