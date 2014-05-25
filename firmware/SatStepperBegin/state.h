@@ -33,12 +33,18 @@ typedef struct _SetPoint {
     uint16_t    speed;
 } SetPoint;
 
+typedef struct _Reference {
+    int32_t encTicksToMotor;
+    int32_t stepTicker;
+} Reference;
+
 typedef struct _GlobalState {
-    int64_t         stepTicker;
+    int32_t         stepTicker;
     int16_t         currentSpeed;
     uint_fast16_t   adc[5];
     uint_fast16_t   currentCommAngle;
     SetPoint        setPoint;
+    Reference       reference;
     MotorControl    motorControl;
     EncoderCounts   encoder;
 } GlobalState;
