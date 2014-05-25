@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include "utils/macros.h"
-#include "../state.h"
-#include "../sensors/encoder/encoder.h"
+#include "state.h"
+#include "sensors/encoder/encoder.h"
 #include "control_algo.h"
 #include "feedback_control.h"
 
-static uint16_t algoStepInEncTicks  = 0;
-static uint32_t commAngleInEncTicks = 0;
-static uint32_t minimalDeviation    = 0;
+static uint16_t algoStepInEncTicks      = 0;
+static uint32_t commAngleInEncTicks     = 0;
+static uint32_t minimalMgnVectsMismatch = 0;
 
 static int16_t encTicsInOneAlgoStep() {
     int16_t encoderTicsOnEngineRevol =      gConfig.encoderRange
@@ -24,7 +24,32 @@ static void recomputeAlgoConsts() {
                             (uint32_t)algoStepInEncTicks;
     commAngleInEncTicks >>= COMM_ANGLE_RANK;
 
-    minimalDeviation = commAngleInEncTicks - algoStepInEncTicks;
+    minimalMgnVectsMismatch = commAngleInEncTicks - algoStepInEncTicks;
+}
+
+static int32_t calculateNextSwitchPos(  int32_t currentPos,
+                                        int_fast8_t direction) {
+    int32_t nextSwitchPos = currentPos - currentPos % algoStepInEncTicks
+                            + direction * commAngleInEncTicks;
+
+    return nextSwitchPos;
+}
+
+static void restoreSynchronicity(int32_t currentPos) {
+    int32_t trueSteps = (currentPos - gState.reference.encTicksToMotor)
+                        / algoStepInEncTicks;
+
+    if (gState.encoder.direction < 0 && currentPos < 0) {
+        trueSteps -= 1;
+    } else if (gState.encoder.direction > 0 && currentPos > 0) {
+        trueSteps += 1;
+    }
+
+    int32_t controlledSteps = gState.stepTicker - gState.reference.stepTicker;
+
+    if (trueSteps != controlledSteps) {
+        gState.stepTicker += trueSteps - controlledSteps;
+    }
 }
 
 void switchPhasesIfNecessary() {
@@ -33,31 +58,27 @@ void switchPhasesIfNecessary() {
 
     static int32_t thisSwitchPos = 0;
 
-    int_fast8_t errorSign = (currentPos < gState.setPoint.position) ? 1 : -1;
+    int_fast8_t direction = (currentPos < gState.setPoint.position) ? 1 : -1;
 
     if (thisSwitchPos == 0) {
-        thisSwitchPos = currentPos - currentPos % algoStepInEncTicks
-                        + errorSign*commAngleInEncTicks;
+        thisSwitchPos = calculateNextSwitchPos(currentPos, direction);
     }
+
+    int32_t magneticVectorsMismatch = thisSwitchPos - currentPos;
 
     if (currentPos <= gState.setPoint.position + algoStepInEncTicks
         && currentPos >= gState.setPoint.position - algoStepInEncTicks) {
+        thisSwitchPos = currentPos - currentPos % algoStepInEncTicks;
         return;
     }
-
-    int32_t stepError = thisSwitchPos - currentPos;
-    // int_fast8_t errorSign = SIGN(stepError);
-
-
-    if (abs(stepError) <= minimalDeviation) {
-        thisSwitchPos = currentPos - currentPos % algoStepInEncTicks
-                        + errorSign*commAngleInEncTicks;
-        step(errorSign);
+    else if (labs(magneticVectorsMismatch) <= minimalMgnVectsMismatch) {
+        thisSwitchPos = calculateNextSwitchPos(currentPos, direction);
+        step(direction);
     }
-    else if (abs(stepError) > commAngleInEncTicks) {
-        thisSwitchPos = currentPos - currentPos % algoStepInEncTicks
-                            + errorSign*commAngleInEncTicks;
-        step(-errorSign);
+    else if (labs(magneticVectorsMismatch) > commAngleInEncTicks) {
+        restoreSynchronicity(currentPos);
+        thisSwitchPos = calculateNextSwitchPos(currentPos, direction);
+        step(direction);
     }
 }
 
