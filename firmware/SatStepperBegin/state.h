@@ -30,7 +30,7 @@ typedef struct _EncoderCounts {
 
 typedef struct _SetPoint {
     int32_t     position;
-    uint16_t    speed;
+    int32_t     speed;
 } SetPoint;
 
 typedef struct _GlobalState {
