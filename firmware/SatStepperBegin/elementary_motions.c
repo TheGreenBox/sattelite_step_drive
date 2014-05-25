@@ -3,8 +3,8 @@
  * Project name: Satellite stepper drive
  *
  * @file    elementary_motions.c
- * @brief   Header for pretty little simple algos for elemetnaty motions
- *  [github issue #54](https://github.com/TheGreenBox/sattelite_step_drive/issues/54)
+ * @brief   Pretty little simple algos for elemetnaty motions
+ *  github issue: [#54](https://github.com/TheGreenBox/sattelite_step_drive/issues/54)
  */
 
 
