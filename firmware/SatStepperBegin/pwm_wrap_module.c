@@ -14,7 +14,14 @@
 #include "pwm_wrap_module.h"
 
 
-static PwmState sPwmState;
+static PwmState sPwmState = {
+    PWM_COEFF_DIVIDER,
+    {
+        0,
+        0
+    }
+};
+
 const PwmState * const pwmState = &sPwmState;
 
 static volatile struct EPWM_REGS* pwm_control_regs[2] = {
