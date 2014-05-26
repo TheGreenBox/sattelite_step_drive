@@ -17,14 +17,22 @@
 #include "control_modules/feedback_control.h"
 
 void encoderCalibration() {
+    // TODO: remove this when current feedback is ready
     setPwm(MAX_PWM / 30);
+
     disableFeedbackControl();
     enableSyncControl();
 
     gState.setPoint.position = gConfig.encoderRange + gState.encoder.precise;
     while (gState.encoder.raw == 0) {
-        DELAY_US(100);
+        // TODO: remove this when current feedback is ready
+        setPwm(MAX_PWM / 30);
+        // DELAY_US(100);
     }
+
+    disableSyncControl();
+    stop();
+    setPwm(0);
 
     int32_t encTicksAfterCalibration = (int32_t)gState.encoder.raw
                                         * gConfig.encoderRange
@@ -35,8 +43,4 @@ void encoderCalibration() {
     gState.reference.stepTicker = gState.stepTicker;
 
     gState.setPoint.position = encTicksAfterCalibration;
-    disableSyncControl();
-    stop();
-    setPwm(0);
 }
-
