@@ -32,44 +32,14 @@ void init() {
     setGreenStatusLed(1);
 }
 
-static void debugCalibration() {
-    enableSyncControl();
-
-    uint32_t ticker = 0;
-    int_fast8_t iter;
-    for (iter = 0; iter < 30; ++iter) {
-        while (ticker < 1000000) {
-            ++ticker;
-        }
-        ticker = 0;
-    }
-
-    disableSyncControl();
-
-    gState.setPoint.position = 100000;
-
-    gState.reference.encTicksToMotor =
-                ((int32_t)gState.encoder.raw * gConfig.encoderRange
-                + gState.encoder.precise) * gConfig.motorReduction;
-
-    gState.reference.stepTicker = gState.stepTicker;
-
-    enableFeedbackControl();
-
-    step(1);
-}
-
 void mainLoop() {
-    // until dont have current feedback
-    // setPwm(MAX_PWM / 30);
 
     // just for testing
-    // debugCalibration();
     encoderCalibration();
 
     while (1) {
-        // Put here debug functions
-        // For instance - function for simulate input signal
+        // TODO: remove this when current feedback is ready
+        setPwm(MAX_PWM / 30);
     }
 }
 
