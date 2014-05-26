@@ -16,7 +16,7 @@
 #include "control_modules/synchronized_control.h"
 #include "control_modules/feedback_control.h"
 
-void encoderCalibrating() {
+void encoderCalibration() {
     setPwm(MAX_PWM / 30);
     disableFeedbackControl();
     enableSyncControl();
@@ -26,7 +26,15 @@ void encoderCalibrating() {
         DELAY_US(100);
     }
 
-    gState.setPoint.position = gState.encoder.precise;
+    int32_t encTicksAfterCalibration = (int32_t)gState.encoder.raw
+                                        * gConfig.encoderRange
+                                        + gState.encoder.precise;
+
+    gState.reference.encTicksToMotor =  encTicksAfterCalibration
+                                        * gConfig.motorReduction;
+    gState.reference.stepTicker = gState.stepTicker;
+
+    gState.setPoint.position = encTicksAfterCalibration;
     disableSyncControl();
     stop();
     setPwm(0);

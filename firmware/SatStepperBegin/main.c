@@ -46,7 +46,7 @@ static void debugCalibration() {
 
     disableSyncControl();
 
-    // gState.setPoint.position = -100000;
+    gState.setPoint.position = 100000;
 
     gState.reference.encTicksToMotor =
                 ((int32_t)gState.encoder.raw * gConfig.encoderRange
@@ -56,17 +56,17 @@ static void debugCalibration() {
 
     enableFeedbackControl();
 
-    step(-1);
+    step(1);
 }
 
 void mainLoop() {
     // until dont have current feedback
-    setPwm(30);
+    // setPwm(MAX_PWM / 30);
 
     // just for testing
-    debugCalibration();
+    // debugCalibration();
+    encoderCalibration();
 
-    encoderCalibrating();
     while (1) {
         // Put here debug functions
         // For instance - function for simulate input signal

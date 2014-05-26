@@ -14,5 +14,4 @@
  *      no more of one complete revolution
  *      [github issue #54](https://github.com/TheGreenBox/sattelite_step_drive/issues/54)
  */
-void encoderCalibrating();
-
+void encoderCalibration();
