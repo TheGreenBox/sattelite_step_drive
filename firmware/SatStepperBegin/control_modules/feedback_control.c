@@ -1,13 +1,14 @@
 #include <stdlib.h>
+#include <limits.h>
 #include "utils/macros.h"
 #include "state.h"
 #include "sensors/encoder/encoder.h"
 #include "control_algo.h"
 #include "feedback_control.h"
 
-static uint16_t algoStepInEncTicks      = 0;
-static uint32_t commAngleInEncTicks     = 0;
-static uint32_t minimalMgnVectsMismatch = 0;
+static int32_t algoStepInEncTicks      = 0;
+static int32_t commAngleInEncTicks     = 0;
+static int32_t minimalMgnVectsMismatch = 0;
 
 static int16_t encTicsInOneAlgoStep() {
     int16_t encoderTicsOnEngineRevol =      gConfig.encoderRange
@@ -67,23 +68,36 @@ static void restoreSynchronicity(int32_t currentPos) {
     }
 }
 
-#define TARGET_REACHED(currentPos, activePolePos)       \
-    activePolePos - algoStepInEncTicks < currentPos     \
-    && activePolePos + algoStepInEncTicks > currentPos  \
-    && labs(gState.setPoint.position - activePolePos)   \
+#define TARGET_REACHED(currentPos, activePolePos)           \
+    activePolePos - algoStepInEncTicks      < currentPos    \
+    && activePolePos + algoStepInEncTicks   > currentPos    \
+    && labs(gState.setPoint.position - activePolePos)       \
         <= algoStepInEncTicks / 2
+
+#define STEP_IN_PROGRESS(mgnVectsMismatch, direction)       \
+    minimalMgnVectsMismatch <  mgnVectsMismatch * direction \
+    && commAngleInEncTicks  >= mgnVectsMismatch * direction
+
+#define TIME_FOR_NEXT_STEP(mgnVectsMismatch, direction)                 \
+    minimalMgnVectsMismatch >= mgnVectsMismatch * direction             \
+    && minimalMgnVectsMismatch - algoStepInEncTicks < mgnVectsMismatch  \
+                                                        * direction
 
 void switchPhasesIfNecessary() {
     int32_t currentPos = ((int32_t)gState.encoder.raw * gConfig.encoderRange
                             + gState.encoder.precise)
                             * gConfig.motorReduction;
 
-    static int32_t activePolePos = 0;
+    static int32_t activePolePos = LONG_MIN;
 
-    int_fast8_t direction = (currentPos <= gState.setPoint.position) ? 1 : -1;
+    int32_t direction = (currentPos <= gState.setPoint.position) ? 1 : -1;
 
-    if (activePolePos == 0) {
-        activePolePos = calculateNextPolePos(currentPos, direction);
+    if (activePolePos == LONG_MIN) {
+        int32_t remainder = currentPos % algoStepInEncTicks;
+        activePolePos = currentPos - remainder;
+        if (remainder >= algoStepInEncTicks / 2) {
+            activePolePos += algoStepInEncTicks;
+        }
     }
 
     int32_t magneticVectorsMismatch = activePolePos - currentPos;
@@ -92,11 +106,14 @@ void switchPhasesIfNecessary() {
         // stop();
         return;
     }
-    else if (labs(magneticVectorsMismatch) <= minimalMgnVectsMismatch) {
+    else if (STEP_IN_PROGRESS(magneticVectorsMismatch, direction)) {
+        return;
+    }
+    else if (TIME_FOR_NEXT_STEP(magneticVectorsMismatch, direction)) {
         activePolePos = calculateNextPolePos(currentPos, direction);
         step(direction);
     }
-    else if (labs(magneticVectorsMismatch) > commAngleInEncTicks) {
+    else {
         restoreSynchronicity(currentPos);
         activePolePos = calculateNextPolePos(currentPos, direction);
         step(direction);
