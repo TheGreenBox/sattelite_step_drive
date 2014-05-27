@@ -98,7 +98,7 @@ interrupt void encoderInputCIntHandler(void) {
         else {
             if (gState.encoder.direction < 0) {
                 if (gState.encoder.raw > 0) {
-                    gState.encoder.precise = gConfig.encoderRange;
+                    gState.encoder.precise = (int32_t)gConfig.encoderRange;
                 }
                 else {
                     gState.encoder.precise = 0;
