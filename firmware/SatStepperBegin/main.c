@@ -37,6 +37,11 @@ void mainLoop() {
     // just for testing
     encoderCalibration();
 
+    gState.setPoint.position = 100000;
+
+    enableFeedbackControl();
+    step(1);
+
     while (1) {
         // TODO: remove this when current feedback is ready
         setPwm(MAX_PWM / 30);
