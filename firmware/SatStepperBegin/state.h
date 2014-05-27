@@ -34,7 +34,7 @@ typedef struct _SetPoint {
 } SetPoint;
 
 typedef struct _Reference {
-    int32_t encTicksToMotor;
+    int32_t encoder;
     int32_t stepTicker;
 } Reference;
 

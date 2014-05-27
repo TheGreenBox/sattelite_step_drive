@@ -545,8 +545,8 @@ void stateInit() {
     gState.setPoint.position    = -100000;
     gState.setPoint.speed       = 0;
 
-    gState.reference.encTicksToMotor = 0;
-    gState.reference.stepTicker      = 0;
+    gState.reference.encoder    = 0;
+    gState.reference.stepTicker = 0;
 
 #ifdef DEBUG
     gState.encoder.errors = 0;
