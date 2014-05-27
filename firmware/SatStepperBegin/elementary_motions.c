@@ -28,13 +28,15 @@ void encoderCalibration() {
     setPwm(MAX_PWM / 30);
 
     disableFeedbackControl();
-    enableSyncControl();
 
-    gState.setPoint.position = gConfig.encoderRange + gState.encoder.precise;
-    while (gState.encoder.raw == 0) {
+    gState.setPoint.position = gConfig.encoderRange
+                                + gState.encoder.precise + 1000;
+
+    enableSyncControl();
+    while (gState.encoder.raw * gConfig.encoderRange
+            + gState.encoder.precise <= gConfig.encoderRange + 1000) {
         // TODO: remove this when current feedback is ready
         setPwm(MAX_PWM / 30);
-        // DELAY_US(100);
     }
 
     disableSyncControl();
