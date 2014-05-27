@@ -40,7 +40,7 @@ void mainLoop() {
     gState.setPoint.position = 100000;
 
     enableFeedbackControl();
-    step(1);
+    switchPhasesIfNecessary();
 
     while (1) {
         // TODO: remove this when current feedback is ready
