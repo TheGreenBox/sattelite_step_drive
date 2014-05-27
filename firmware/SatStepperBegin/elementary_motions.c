@@ -17,7 +17,8 @@
 #include "control_modules/feedback_control.h"
 
 static void lockReferenceData() {
-    gState.reference.encoder    = gState.encoder.total;
+    gState.reference.encoder    = gState.encoder.total - gState.encoder.total
+                                    % getAlgoStepSizeInEncTicks();
     gState.reference.stepTicker = gState.stepTicker;
 }
 
@@ -27,7 +28,8 @@ void encoderCalibration() {
 
     disableFeedbackControl();
 
-    gState.setPoint.position = gConfig.encoderRange + gState.encoder.total + 1000;
+    gState.setPoint.position =  gConfig.encoderRange
+                                + gState.encoder.total + 1000;
 
     enableSyncControl();
     while (gState.encoder.total <= gConfig.encoderRange + 1000) {
@@ -40,5 +42,5 @@ void encoderCalibration() {
     setPwm(0);
 
     lockReferenceData();
-    gState.setPoint.position = gState.reference.total;
+    gState.setPoint.position = gState.reference.encoder;
 }

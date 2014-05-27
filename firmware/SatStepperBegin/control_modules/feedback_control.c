@@ -10,16 +10,20 @@ static int32_t algoStepInEncTicks      = 0;
 static int32_t commAngleInEncTicks     = 0;
 static int32_t minimalMgnVectsMismatch = 0;
 
-static int16_t encTicsInOneAlgoStep() {
-    int16_t encoderTicsOnEngineRevol =      gConfig.encoderRange
+int32_t getAlgoStepSizeInEncTicks() {
+    return algoStepInEncTicks;
+}
+
+static int32_t computeOneAlgoStepInEncTicks() {
+    int32_t encoderTicsOnEngineRevol =      gConfig.encoderRange
                                         /   gConfig.motorReduction;
-    int16_t algoStepsInOneRevol = getEngineStepMultiplier()
+    int32_t algoStepsInOneRevol = getEngineStepMultiplier()
                                     * gConfig.oneRevolEngineSteps;
     return encoderTicsOnEngineRevol / algoStepsInOneRevol;
 }
 
-static void recomputeAlgoConsts() {
-    algoStepInEncTicks = encTicsInOneAlgoStep();
+void recomputeAlgoConsts() {
+    algoStepInEncTicks = computeOneAlgoStepInEncTicks();
 
     commAngleInEncTicks =   gState.currentCommAngle *
                             (uint32_t)algoStepInEncTicks;
@@ -28,23 +32,49 @@ static void recomputeAlgoConsts() {
     minimalMgnVectsMismatch = commAngleInEncTicks - algoStepInEncTicks;
 }
 
-static int32_t calculateNextPolePos(int32_t currentPos,
-                                    int_fast8_t direction) {
-    // int32_t nextSwitchPos = currentPos - currentPos % algoStepInEncTicks
-                            // + direction * commAngleInEncTicks;
-//
-    // return nextSwitchPos;
+static int32_t experimentalCalculateNextPolePos(int32_t direction) {
+    int32_t currentPos = gState.encoder.total;
 
-    int_fast8_t posSign = (currentPos >= 0) ? 1 : -1;
+    int32_t pos;
+    if (direction > 0) {
+        int32_t T = currentPos + commAngleInEncTicks;
+        pos = T - T % algoStepInEncTicks;
+    }
+    else {
+        int32_t D = currentPos - commAngleInEncTicks - 1;
+        pos = D - D % algoStepInEncTicks + algoStepInEncTicks;
+    }
+
+    return pos;
+}
+
+static experimentalRestore(int32_t direction) {
+    int32_t currentPos = gState.encoder.total - gState.reference.encoder;
+
+    int32_t trueSteps;
+    if (direction > 0) {
+        int32_t T = currentPos + commAngleInEncTicks - algoStepInEncTicks;
+        trueSteps = T / algoStepInEncTicks;
+    }
+    else {
+        int32_t D = currentPos - commAngleInEncTicks;
+        trueSteps = D / algoStepInEncTicks + 1;
+    }
+
+    gState.stepTicker = gState.reference.stepTicker + trueSteps;
+}
+
+static int32_t calculateNextPolePos(int32_t currentPos,
+                                    int32_t direction) {
+    int32_t posSign = (currentPos >= 0) ? 1 : -1;
 
     int32_t nextPolePos =
             currentPos - currentPos % algoStepInEncTicks
-            + (int32_t)direction
-                * (commAngleInEncTicks
-                    - commAngleInEncTicks % algoStepInEncTicks
-                    + algoStepInEncTicks);
+            + direction * (commAngleInEncTicks
+                            - commAngleInEncTicks % algoStepInEncTicks
+                            + algoStepInEncTicks);
 
-    nextPolePos += (int32_t)((posSign - direction) / 2)
+    nextPolePos += ((posSign - direction) / 2)
                     * algoStepInEncTicks;
 
     return nextPolePos;
@@ -60,7 +90,8 @@ static void restoreSynchronicity(int32_t currentPos) {
         trueSteps += 1;
     }
 
-    int32_t controlledSteps = gState.stepTicker - gState.reference.stepTicker;
+    int32_t controlledSteps = gState.stepTicker
+                                - gState.reference.stepTicker;
 
     if (trueSteps != controlledSteps) {
         // gState.stepTicker += trueSteps - controlledSteps;
@@ -84,7 +115,7 @@ static void restoreSynchronicity(int32_t currentPos) {
                                                         * direction
 
 void switchPhasesIfNecessary() {
-    int32_t currentPos = gState.encoder.total * gConfig.motorReduction;
+    int32_t currentPos = gState.encoder.total;
 
     static int32_t activePolePos = LONG_MIN;
 
@@ -108,12 +139,20 @@ void switchPhasesIfNecessary() {
         return;
     }
     else if (TIME_FOR_NEXT_STEP(magneticVectorsMismatch, direction)) {
-        activePolePos = calculateNextPolePos(currentPos, direction);
+        // activePolePos = calculateNextPolePos(currentPos, direction);
+        // activePolePos = experimentalCalculateNextPolePos(direction);
+        activePolePos += direction * algoStepInEncTicks;
         step(direction);
     }
     else {
-        restoreSynchronicity(currentPos);
-        activePolePos = calculateNextPolePos(currentPos, direction);
+        // restoreSynchronicity(currentPos);
+        experimentalRestore(direction);
+        // activePolePos = calculateNextPolePos(currentPos, direction);
+        // activePolePos = experimentalCalculateNextPolePos(direction);
+
+        // wrong, need to add delta from restore
+        activePolePos += direction * algoStepInEncTicks;
+
         step(direction);
     }
 }

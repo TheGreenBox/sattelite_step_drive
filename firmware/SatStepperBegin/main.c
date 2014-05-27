@@ -35,9 +35,10 @@ void init() {
 void mainLoop() {
 
     // just for testing
+    recomputeAlgoConsts();
     encoderCalibration();
 
-    gState.setPoint.position = 100000;
+    gState.setPoint.position = -101125;
 
     enableFeedbackControl();
     switchPhasesIfNecessary();

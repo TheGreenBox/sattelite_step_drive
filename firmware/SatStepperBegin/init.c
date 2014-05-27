@@ -541,7 +541,7 @@ static void motorControlInit() {
 void stateInit() {
     gState.stepTicker           = 0;
     gState.currentSpeed         = 0;
-    gState.currentCommAngle     = 1500;
+    gState.currentCommAngle     = 1300;
     gState.setPoint.position    = -100000;
     gState.setPoint.speed       = 0;
 

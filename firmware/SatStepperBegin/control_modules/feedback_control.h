@@ -9,4 +9,7 @@ void switchPhasesIfNecessary();
 void enableFeedbackControl();
 void disableFeedbackControl();
 
+int32_t getAlgoStepSizeInEncTicks();
+void recomputeAlgoConsts();
+
 #endif //_FEEDBACK_CONTROL__H_
