@@ -34,6 +34,7 @@ interrupt void encoderInputAIntHandler(void) {
         GpioDataRegs.GPADAT.bit.GPIO21
     );
     gState.encoder.precise += gState.encoder.direction;
+    gState.encoder.total += gState.encoder.direction;
     oldA = GpioDataRegs.GPADAT.bit.GPIO20;
 
     gState.encoder.invSpeed = XIntruptRegs.XINT2CTR;
@@ -63,6 +64,7 @@ interrupt void encoderInputBIntHandler(void) {
         GpioDataRegs.GPADAT.bit.GPIO21
     );
     gState.encoder.precise += gState.encoder.direction;
+    gState.encoder.total += gState.encoder.direction;
     oldB = GpioDataRegs.GPADAT.bit.GPIO21;
 
     gState.encoder.invSpeed = XIntruptRegs.XINT1CTR;
@@ -88,26 +90,16 @@ interrupt void encoderInputCIntHandler(void) {
     if (GpioDataRegs.GPADAT.bit.GPIO23) {
         gState.encoder.raw += gState.encoder.direction;
         if (gState.encoder.direction > 0) {
-            if (gState.encoder.raw >= 0) {
-                gState.encoder.precise = 0;
-            }
-            else {
-                gState.encoder.precise = -(int32_t)gConfig.encoderRange;
-            }
+            gState.encoder.precise = 0;
+            gState.encoder.total = gState.encoder.raw * (int32_t)gConfig.encoderRange;
         }
         else {
-            if (gState.encoder.direction < 0) {
-                if (gState.encoder.raw > 0) {
-                    gState.encoder.precise = (int32_t)gConfig.encoderRange;
-                }
-                else {
-                    gState.encoder.precise = 0;
-                }
-            }
+            gState.encoder.precise = (int32_t)gConfig.encoderRange - 1;
+            gState.encoder.total = gState.encoder.raw * (int32_t)gConfig.encoderRange + gState.encoder.precise;
         }
     }
 
-    (*sharedHandler)();
+    //(*sharedHandler)();
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP12);
 }
 
@@ -165,6 +157,7 @@ void encoderInit() {
     // init global encoder counter
     gState.encoder.raw     = 0;
     gState.encoder.precise = 0;
+    gState.encoder.total   = 0;
 #ifdef DEBUG
     gState.encoder.errors  = 0;
 #endif // DEBUG

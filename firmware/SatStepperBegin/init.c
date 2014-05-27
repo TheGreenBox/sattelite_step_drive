@@ -548,10 +548,6 @@ void stateInit() {
     gState.reference.encoder    = 0;
     gState.reference.stepTicker = 0;
 
-#ifdef DEBUG
-    gState.encoder.errors = 0;
-#endif
-
     motorControlInit();
 }
 

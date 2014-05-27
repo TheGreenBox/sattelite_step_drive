@@ -17,9 +17,7 @@
 #include "control_modules/feedback_control.h"
 
 static void lockReferenceData() {
-    gState.reference.encoder    =   gState.encoder.raw
-                                    * (int32_t)gConfig.encoderRange
-                                    + gState.encoder.precise;
+    gState.reference.encoder    = gState.encoder.total;
     gState.reference.stepTicker = gState.stepTicker;
 }
 
@@ -29,12 +27,10 @@ void encoderCalibration() {
 
     disableFeedbackControl();
 
-    gState.setPoint.position = gConfig.encoderRange
-                                + gState.encoder.precise + 1000;
+    gState.setPoint.position = gConfig.encoderRange + gState.encoder.total + 1000;
 
     enableSyncControl();
-    while (gState.encoder.raw * gConfig.encoderRange
-            + gState.encoder.precise <= gConfig.encoderRange + 1000) {
+    while (gState.encoder.total <= gConfig.encoderRange + 1000) {
         // TODO: remove this when current feedback is ready
         setPwm(MAX_PWM / 30);
     }
@@ -44,6 +40,5 @@ void encoderCalibration() {
     setPwm(0);
 
     lockReferenceData();
-
-    gState.setPoint.position = gState.reference.encoder;
+    gState.setPoint.position = gState.reference.total;
 }

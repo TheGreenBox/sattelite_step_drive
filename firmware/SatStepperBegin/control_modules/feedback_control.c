@@ -84,9 +84,7 @@ static void restoreSynchronicity(int32_t currentPos) {
                                                         * direction
 
 void switchPhasesIfNecessary() {
-    int32_t currentPos = ((int32_t)gState.encoder.raw * gConfig.encoderRange
-                            + gState.encoder.precise)
-                            * gConfig.motorReduction;
+    int32_t currentPos = gState.encoder.total * gConfig.motorReduction;
 
     static int32_t activePolePos = LONG_MIN;
 

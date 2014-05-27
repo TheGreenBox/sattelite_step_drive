@@ -21,6 +21,7 @@ typedef struct _MotorControl {
 typedef struct _EncoderCounts {
     int32_t     raw;
     int32_t     precise;
+    int32_t     total;
     int_fast8_t direction;
     uint16_t    invSpeed;
 #ifdef DEBUG
