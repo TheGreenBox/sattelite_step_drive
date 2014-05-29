@@ -33,7 +33,7 @@ full: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main_full.tex
 
 c112: hello prepare
-	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/course_112/main_c112.tex
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/obsolete/main_c112.tex
 
 plan: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/practice_report/main_plan.tex
