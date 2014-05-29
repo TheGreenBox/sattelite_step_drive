@@ -15,7 +15,7 @@
 \usepackage{indentfirst}
 
 % Выбор внутренней TEX−кодировки
-\usepackage [T2A]{fontenc}
+\usepackage[T2A]{fontenc}
 
 %\usepackage{weird,querr}
 \usepackage{amssymb}
@@ -46,6 +46,10 @@
 % символ градуса и т.д.
 \usepackage{gensymb}
 
+% условие для вставки только дипломных частей в тех местах, что используются
+% в старых документах
+\newcommand{\DIPLOMA}
+
 \begin{document}
 \pagenumbering{alph} % необходимо для обеспечения уникального идентификатора страницы для титула
 
@@ -54,9 +58,10 @@
 \pagenumbering{arabic} % возврат к обычным номерам страниц
 \newpage
 
-\subfile{src/current_feedback_description}
-\subfile{src/task_description}
-\subfile{src/drive_parameters}
+\subfile{src/research/all_research}
+% \subfile{src/current_feedback_description}
+% \subfile{src/task_description}
+% \subfile{src/drive_parameters}
 \subfile{src/economics/economics_intro}
 \subfile{src/ecology/all_ecology_except_normatives}
 \subfile{src/bibliography}
