@@ -32,14 +32,16 @@
 \geometry{top=2cm}      % верхнее поле
 \geometry{bottom=2cm}   % нижнее поле
 
-\usepackage{subfiles}
-
+% подавить предупреждение о некорректной версии .pdf
+\pdfminorversion=6
 % работа с импортом изображений
-\ifx\pdfoutput\undefined
 \usepackage{graphicx}
-\else
-\usepackage[pdftex]{graphicx}
-\fi
+
+% Схемы
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc}
+
+\usepackage{subfiles}
 
 % символ градуса и т.д.
 \usepackage{gensymb}
@@ -55,7 +57,7 @@
 \subfile{src/current_feedback_description}
 \subfile{src/task_description}
 \subfile{src/drive_parameters}
+\subfile{src/economics/economics_intro}
 \subfile{src/ecology/all_ecology_except_normatives}
 \subfile{src/bibliography}
 \end{document}
-
