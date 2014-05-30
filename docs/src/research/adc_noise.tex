@@ -1,0 +1,49 @@
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[font=\small]
+        \begin{axis}[
+            ybar,
+            bar width=20pt,
+            xlabel={Показания АЦП},
+            ylabel={Число попадани},
+            ymin=0,
+            ytick=\empty,
+            xtick=data,
+            axis x line=bottom,
+            axis y line=left,
+            enlarge x limits=0.2,
+            symbolic x coords={2054, 2055, 2056, 2057, 2058, 2059, 2062},
+            xticklabel style={anchor=base,yshift=-\baselineskip},
+            nodes near coords={\pgfmathprintnumber\pgfplotspointmeta}
+        ]
+        \addplot[fill=white] coordinates {
+            (2054, 29)
+            (2055, 103)
+            (2056, 473)
+            (2057, 278)
+            (2058, 240)
+            (2059, 25)
+            (2062, 1)
+        };
+        \node[align=left] at (450, 400) { $m_\text{ацп} = 2056.59$\\
+                                            $p_\text{ацп} = 2062$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Гистограмма показаний АЦП}
+\end{figure}
+
+Для определения числа незашумлённых бит АЦП, был проведён соответствующий
+эксперимент в условиях, рекомендуемых в \cite{TheGoodTheBadAdcAspects}.
+Макетная плата была запитана лабораторным источником питания.
+На наблюдаемый токовый канал АЦП был подан ШИМ амплитудой 24 В с коэффициентом
+заполнения $\zeta = 1$.
+
+Показания АЦП были собраны с помощью профилировщика, прилагающегося к контролеру
+Texas Instruments.
+
+Получим число незашумлённых бит АЦП, подставив результаты эксперимента в
+формулу (\ref{eq_noise_free_code_resolution}).
+
+$$
+    N_{\text{незашум}} = \log_{2} \frac{2^{12}}{\abs{2056.59 - 2062}} \simeq 9
+$$
