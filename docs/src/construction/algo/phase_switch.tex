@@ -1,5 +1,9 @@
 \subsubsection{Шаговый модуль}
 
+
+
+\subsubsection{Модуль ОС по положению}
+
 Как было показано в разделе \ref{sec_feedback_control}, эффективность управления
 можно повысить, если переключать фазы двигателя исходя из величины оптимальногого
 при данных условиях угла коммутации. Алгоритм определения оптимального угла
@@ -30,7 +34,8 @@
 текущего шага, включена нужная фаза и, следовательно, перелюкчение не требуется.
 
 \textit{Зоной переключения} будем называть зону, в которой пришло время включения
-следующей фазы.
+следующей фазы. Зафиксировав, что ротор находится в этой зоне, модуль ОС по положению
+даёт команду шаговому модулю сделать один шаг в направлении движения.
 
 \textit{Зоной выпада из синхронизма} будем называть зону, в которую попадает ротор
 двигателя в случае пропуска шагов или возникновения некоторой непредвиденной ситуации
@@ -42,8 +47,8 @@
 ротора (угловое положение вектора магнитного поля ротора) как $\theta$.
 Угловое положение вектора магнитного поля статора обозначим $\phi_\textit{акт}$.
 
-
-\paragraph{Движение в положительном направлении}
+\paragraph{Зоны движения и переключения}
+\subparagraph{Движение в положительном направлении}
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth, keepaspectratio]
@@ -55,11 +60,12 @@
 В зоне движения угловое положение ротора $\theta$ будет удовлетворять следующему условию:
 
 \begin{equation}
-    \label{movement_zone_posit_move_for_curr_pos}
+    \label{movement_zone_posit_dir_for_curr_pos}
     \begin{array}{ccccc}
-        \alpha & < & \theta & < & \beta                                         \\
-        \phi_\textit{акт} - \theta_\textit{ком} & < & \theta
-        & < &\phi_\textit{акт} - (\theta_\textit{ком} - \theta_\textit{шаг})
+        \alpha & \leq & \theta & < & \beta                                         \\
+        \phi_\textit{акт} - \theta_\textit{ком}
+        & \leq  & \theta
+        & <     &\phi_\textit{акт} - (\theta_\textit{ком} - \theta_\textit{шаг})
     \end{array}
 \end{equation}
 
@@ -67,19 +73,21 @@
 в величинах рассогласования векторов магнитных полей статора и ротора:
 
 \begin{equation}
-    \label{movement_zone_posit_move_for_delta}
-    \theta_\textit{ком} - \theta_\textit{шаг} < \phi_\textit{акт} - \theta
-    < \theta_\textit{ком}
+    \label{movement_zone_posit_dir_for_delta}
+    \theta_\textit{ком} - \theta_\textit{шаг}
+    < \phi_\textit{акт} - \theta
+    \leq \theta_\textit{ком}
 \end{equation}
 
 В зоне переключения угловое положение ротора $\theta$ будет удовлетворять следующему условию:
 
 \begin{equation}
-    \label{switch_zone_posit_move_for_curr_pos}
+    \label{switch_zone_posit_dir_for_curr_pos}
     \begin{array}{ccccc}
-        \beta & < & \theta & < & \gamma                                         \\
-        \phi_\textit{акт} - (\theta_\textit{ком} - \theta_\textit{шаг}) & < & \theta
-        & < &\phi_\textit{акт} - (\theta_\textit{ком} - 2\theta_\textit{шаг})
+        \beta & \leq & \theta & < & \gamma                                         \\
+        \phi_\textit{акт} - (\theta_\textit{ком} - \theta_\textit{шаг})
+        & \leq  & \theta
+        & <     &\phi_\textit{акт} - (\theta_\textit{ком} - 2\theta_\textit{шаг})
     \end{array}
 \end{equation}
 
@@ -87,13 +95,14 @@
 в величинах рассогласования векторов магнитных полей статора и ротора:
 
 \begin{equation}
-    \label{switch_zone_posit_move_for_delta}
-    \theta_\textit{ком} - 2\theta_\textit{шаг} < \phi_\textit{акт} - \theta
-    < \theta_\textit{ком} - \theta_\textit{шаг}
+    \label{switch_zone_posit_dir_for_delta}
+    \theta_\textit{ком} - 2\theta_\textit{шаг}
+    < \phi_\textit{акт} - \theta
+    \leq \theta_\textit{ком} - \theta_\textit{шаг}
 \end{equation}
 
 
-\paragraph{Движение в отрицательном направлении}
+\subparagraph{Движение в отрицательном направлении}
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth, keepaspectratio]
@@ -105,11 +114,12 @@
 В зоне движения угловое положение ротора $\theta$ будет удовлетворять следующему условию:
 
 \begin{equation}
-    \label{movement_zone_negat_move_for_curr_pos}
+    \label{movement_zone_negat_dir_for_curr_pos}
     \begin{array}{ccccc}
-        \beta & < & \theta & < & \alpha                                         \\
-        \phi_\textit{акт} + \theta_\textit{ком} - \theta_\textit{шаг} & < & \theta
-        & < &\phi_\textit{акт} + \theta_\textit{ком}
+        \beta & < & \theta & \leq & \alpha                                         \\
+        \phi_\textit{акт} + \theta_\textit{ком} - \theta_\textit{шаг}
+        & <     & \theta
+        & \leq  &\phi_\textit{акт} + \theta_\textit{ком}
     \end{array}
 \end{equation}
 
@@ -117,19 +127,21 @@
 в величинах рассогласования векторов магнитных полей статора и ротора:
 
 \begin{equation}
-    \label{movement_zone_negat_move_for_delta}
-    -\theta_\textit{ком} < \phi_\textit{акт} - \theta
+    \label{movement_zone_negat_dir_for_delta}
+    -\theta_\textit{ком}
+    \leq \phi_\textit{акт} - \theta
     < \theta_\textit{шаг} - \theta_\textit{ком}
 \end{equation}
 
 В зоне переключения угловое положение ротора $\theta$ будет удовлетворять следующему условию:
 
 \begin{equation}
-    \label{switch_zone_negat_move_for_curr_pos}
+    \label{switch_zone_negat_dir_for_curr_pos}
     \begin{array}{ccccc}
-        \gamma & < & \theta & < & \beta                                         \\
-        \phi_\textit{акт} + \theta_\textit{ком} - 2\theta_\textit{шаг} & < & \theta
-        & < &\phi_\textit{акт} + \theta_\textit{ком} - \theta_\textit{шаг}
+        \gamma & < & \theta & \leq & \beta                                         \\
+        \phi_\textit{акт} + \theta_\textit{ком} - 2\theta_\textit{шаг}
+        & <     & \theta
+        & \leq  & \phi_\textit{акт} + \theta_\textit{ком} - \theta_\textit{шаг}
     \end{array}
 \end{equation}
 
@@ -137,27 +149,93 @@
 в величинах рассогласования векторов магнитных полей статора и ротора:
 
 \begin{equation}
-    \label{switch_zone_negat_move_for_delta}
-    \theta_\textit{шаг} - \theta_\textit{ком} < \phi_\textit{акт} - \theta
+    \label{switch_zone_negat_dir_for_delta}
+    \theta_\textit{шаг} - \theta_\textit{ком}
+    \leq \phi_\textit{акт} - \theta
     < 2\theta_\textit{шаг} - \theta_\textit{ком}
 \end{equation}
 
 
-\paragraph{Обобщение результатов}
+\subparagraph{Обобщение результатов}
 
 Обозначив направление движения как $\textit{dir} = \pm 1$ и объединив формулы
-для двух направлений движений, получим для зоны движения
+для двух направлений движений, получим из (\ref{movement_zone_posit_dir_for_delta})
+и (\ref{movement_zone_negat_dir_for_delta}) для зоны движения
 
 \begin{equation}
     \label{movement_zone_for_delta}
-    \theta_\textit{ком} - \theta_\textit{шаг} < dir \cdot (\phi_\textit{акт} - \theta)
-    < \theta_\textit{ком}
+    \theta_\textit{ком} - \theta_\textit{шаг}
+    < dir \cdot (\phi_\textit{акт} - \theta)
+    \leq \theta_\textit{ком}
 \end{equation}
 
-и для зоны переключения
+и из (\ref{switch_zone_posit_dir_for_delta})
+и (\ref{switch_zone_negat_dir_for_delta}) для зоны переключения
 
 \begin{equation}
     \label{switch_zone_for_delta}
-    \theta_\textit{ком} - 2\theta_\textit{шаг} < dir \cdot (\phi_\textit{акт} - \theta)
-    < \theta_\textit{ком} - \theta_\textit{шаг}
+    \theta_\textit{ком} - 2\theta_\textit{шаг}
+    < dir \cdot (\phi_\textit{акт} - \theta)
+    \leq \theta_\textit{ком} - \theta_\textit{шаг}
 \end{equation}
+
+\paragraph{Зона выпада из синхронизма}
+
+При попадании в зону выпада из синхронизма, не зависимо от причин приведших к этому,
+модуль обратной связи по положению должен восстановить информацию о том,
+в зоне переключения какой фазы ротор находится в данный момент. Полагаем, что для
+продолжения движения в нужном направлении, необходимо, чтобы шаговый модуль
+шаг в нужном направлении. Для этого необходимо обновить информацию о том, на каком
+алгоритмическом шаге ротор двигателя находится в данный момент
+(см. \ref{sec_step_control_algos} о циклической природе алгоритмических шагов).
+
+Полагаем, что ротор находится в зоне переключения некоторой ``мнимо--активной'' фазы,
+тогда информация об угловом положении вектора магнитного поля, которое бы имело место,
+если бы фаза была действительно включена, позволит обновить информацию о текущем
+алгоритмическом шаге шагового модуля. Это позволит шаговому модулю при получении
+команды движения в заданном направлении запитать нужную фазу, сделав корректный
+алгоритмический шаг.
+
+Определеним формулы для вычисления углового вектора магнитного положения
+``мнимо--активной'' фазы для разных направлений движения.
+
+\subparagraph{Положительное направление движения}
+
+Из формулы (\ref{switch_zone_posit_dir_for_curr_pos}) получим
+
+\begin{equation}
+    \label{sync_restore_posit_dir_active_pole_pos_conditions}
+    \phi_\textit{акт}
+    \leq \theta + \theta_\textit{ком} - \theta_\textit{шаг}
+    < \phi_\textit{акт} + \theta_\textit{шаг}
+\end{equation}
+
+Пусть $T = \theta + \theta_\textit{ком} - \theta_\textit{шаг}$, тогда
+
+\begin{equation}
+    \label{sync_restore_posit_dir_active_pole_pos}
+    \phi_\textit{акт} = T - mod(T, \theta_\textit{шаг})
+\end{equation}
+где $mod$ - операция вычисления остатка от деления с сохранением знака делимого.
+
+\subparagraph{Отрицательное направление движения}
+Из формулы (\ref{switch_zone_negat_dir_for_curr_pos}) получим
+
+\begin{equation}
+    \label{sync_restore_negat_dir_active_pole_pos_conditions}
+    \phi_\textit{акт} - \theta_\textit{шаг}
+    < \theta - \theta_\textit{ком} + \theta_\textit{шаг}
+    \leq \phi_\textit{акт}
+\end{equation}
+
+Пусть $D = \theta - \theta_\textit{ком} + \theta_\textit{шаг}$, тогда
+
+\begin{equation}
+    \label{sync_restore_negat_dir_active_pole_pos}
+    \phi_\textit{акт} =
+        \begin{cases}
+            D,                                                      & \mbox{если } D - mod(D, \theta_\textit{шаг}) = 0 \\
+            D - mod(D, \theta_\textit{шаг}) + \theta_\textit{шаг},  & \mbox{если } D - mod(D, \theta_\textit{шаг}) \ne 0)
+        \end{cases}
+\end{equation}
+где $mod$ - операция вычисления остатка от деления с сохранением знака делимого.
