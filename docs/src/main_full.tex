@@ -40,6 +40,12 @@
 % Схемы
 \usepackage{tikz}
 \usetikzlibrary{arrows,calc}
+\usepackage{pgfplots}
+\pgfplotsset{
+  compat=newest,
+  xlabel near ticks,
+  ylabel near ticks
+}
 
 \usepackage{subfiles}
 
@@ -49,6 +55,8 @@
 % условие для вставки некоторых частей, присущих диплому, но не нужных в более
 % старых документах
 \newcommand{\DIPLOMA}
+
+\newcommand\abs[1]{\left|#1\right|}
 
 \begin{document}
 \pagenumbering{alph} % необходимо для обеспечения уникального идентификатора страницы для титула
