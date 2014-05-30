@@ -9,13 +9,12 @@
 \newpage
 \subsection{Параметры составных частей системы}
 \subfile{src/controlled_object_desc}
-\subfile{src/research/energy_calc}
 
 \subsubsection{Двигатель}
 На этапе энергетического расчета в качестве двигателя привода был выбран
-гибридный шаговый двигатель Telco Intercon 4T5618M308.
+гибридный шаговый двигатель Telco Motion 4T5618M308.
 
-\begin{table}
+\begin{table}[ht]
     \centering
     \begin{tabular}{l|l}
     \hline
@@ -29,6 +28,7 @@
     Масса двигателя, кг                     & 0.7                   \\
     \hline
     \end{tabular}
+    \caption{Характеристики шагового двигателя Telco Motion 4T5618M308}
     \label{engine_params}
 \end{table}
 
@@ -40,7 +40,7 @@
 \subsubsection{Датчик}
 В качестве датчика положения используется импульсный датчик ЛИР-137А 6250-05-ПИ.
 
-\begin{table}
+\begin{table}[ht]
     \centering
     \begin{tabular}{l|l}
     \hline
@@ -63,6 +63,7 @@
         Диаметр корпуса, мм                                             & 37 \\
     \hline
     \end{tabular}
+    \caption{Характеристики энкодера ЛИР-137А 6250-05-ПИ}
     \label{encoder_params}
 \end{table}
 
