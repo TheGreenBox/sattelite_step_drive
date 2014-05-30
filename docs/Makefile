@@ -24,6 +24,10 @@ hello:
 clean:
 	@rm -f ${PRODUCT_DIR}/*
 
+clean_junk:
+	@rm -f 	${PRODUCT_DIR}/*.log ${PRODUCT_DIR}/*.toc \
+			${PRODUCT_DIR}/*.aux ${PRODUCT_DIR}/*.out
+
 prepare:
 	@mkdir -p ${PRODUCT_DIR}/
 
