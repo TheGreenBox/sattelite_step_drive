@@ -1,4 +1,7 @@
-\documentclass{article}
+\documentclass[a4paper, 12pt]{report}
+% к сожалению сделать во всем документе 14 я пока не нашел как,
+% documentclass понимает только 3 размера 10(default), 11, 12
+% если указывать другие, то он выставляет вместо них default
 
 \usepackage[utf8]{inputenc}
 
@@ -29,8 +32,8 @@
 \usepackage{geometry}   % Меняем поля страницы
 \geometry{left=2cm}     % левое поле
 \geometry{right=1.5cm}  % правое поле
-\geometry{top=1.5cm}      % верхнее поле
-\geometry{bottom=1.5cm}   % нижнее поле
+\geometry{top=1.5cm}    % верхнее поле
+\geometry{bottom=1.5cm} % нижнее поле
 
 % подавить предупреждение о некорректной версии .pdf
 \pdfminorversion=6
