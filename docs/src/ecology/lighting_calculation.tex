@@ -103,7 +103,11 @@
 \subsubsection{Общее освещение помещения}
 
 \begin{table}[ht]
-    \begin{tabular}{l|l}
+    \renewcommand{\tabularxcolumn}[1]{m{#1}}
+    \newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+    \centering
+    \begin{tabularx}{\textwidth}{L|L}
         \hline
         Высота помещения                                                        & $H$ = 3,2 м                                   \\
         Расстояние светильников от перекрытия                                   & $h_c$ = 0,25 м                                \\
@@ -115,7 +119,7 @@
         Расстояние от крайних светильников до стены                             & $l_\text{д} = 0,3 \cdot L_\text{д}$ = 0,96 м, \\
                                                                                 & $l_\text{ш} = 0,3 \cdot L_\text{ш}$ = 0,73 м  \\
         \hline
-    \end{tabular}
+    \end{tabularx}
     \caption{Параметры размещения светильников}
     \label{lamps_arrangement_parameters}
 \end{table}

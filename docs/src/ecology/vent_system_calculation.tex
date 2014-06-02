@@ -171,8 +171,12 @@ $$
 Подберем фильтр по данным \cite{air_ventilation_and_conditioning}[прилож. IV, табл. IV.1]:
 
 \begin{table}[ht]
+    \renewcommand{\tabularxcolumn}[1]{m{#1}}
+    \newcolumntype{C}{>{\centering\arraybackslash}X}
+    \newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
     \centering
-    \begin{tabular}{l|l}
+    \begin{tabularx}{\textwidth}{l|L}
         \hline
         Тип фильтра                                         & волокнистый, замасляный ячейковый ФяУБ            \\
         Фильтрующий материал                                & стекловолокно ФСВУ                                \\
@@ -181,9 +185,9 @@ $$
         Начальное сопротивление                             & $P_\text{ф.н} = 40 \text{ Па}$                    \\
         Конечное сопротивление                              & $P_\text{ф.к} = 150 \text{ Па}$                   \\
         Удельная пылемкость                                 & $\text{П} = 570 \text{ г/м}^2$                    \\
-        Способ регенерации                                  & замена фильтрующего материала.                    \\
+        Способ регенерации                                  & замена фильтрующего материала                     \\
         \hline
-    \end{tabular}
+    \end{tabularx}
     \caption{Характеристики фильтра}
 \end{table}
 
