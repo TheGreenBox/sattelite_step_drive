@@ -1,11 +1,11 @@
 \begin{table}[ht!]
-    \renewcommand{\tabularxcolumn}[1]{m{#1}}
-    \newcolumntype{L}{>{\raggedright\arraybackslash}X}
+    % \renewcommand{\tabularxcolumn}[1]{m{#1}}
+    % \newcolumntype{L}{>{\raggedright\arraybackslash}X}
 
     \centering
-    \begin{tabularx}{\textwidth}{|L|c|c|c|c|c|c|c|}
+    \begin{tabu}{|X[l,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|}
         \hline
-        \multirow{3}{*}{\parbox{\linewidth}{\centering Показатели напряженности трудового процесса}} & \multicolumn{7}{c|}{Классы условий труда} \\ \cline{2-8}
+        \multirow{3}{*}{\parbox{\linewidth}{\centering Показатели напряженности}} & \multicolumn{7}{c|}{Классы условий труда} \\ \cline{2-8}
 
                                     & Оптимальный   & Допустимый    & \multicolumn{4}{c|}{Вредный}          & Опасный   \\ \cline{2-8}
 
@@ -28,7 +28,7 @@
         Тяжесть труда               &               & \textbullet   &               &       &       &       &           \\ \hline
         Напряженность труда         &               &               & \textbullet   &       &       &       &           \\ \hline
         Общая оценка условий труда  &               &               & \textbullet   &       &       &       &           \\ \hline
-    \end{tabularx}
+    \end{tabu}
     \caption{Итоговая таблица условий труда работника по степени вредности}
     \label{sum_of_labor_conditions}
 \end{table}

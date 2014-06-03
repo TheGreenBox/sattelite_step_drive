@@ -1,17 +1,12 @@
 \begin{table}[ht]
-    \renewcommand{\tabularxcolumn}[1]{m{#1}}
-    \newcolumntype{C}{>{\centering\arraybackslash}X}
-    \newcolumntype{L}{>{\raggedright\arraybackslash}X}
-
     \centering
-    \begin{tabularx}{\textwidth}{|L|C|C|C|C|}
-        \hline
+    \begin{tabu}{|X[l,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|} \hline
         \multirow{4}{*}{\parbox{\linewidth}{\centering Показатели тяжести трудового процесса}}
         & \multicolumn{4}{c|}{Классы условий труда}                                                         \\ \cline{2-5}
 
-        & \multirow{3}{*}{\parbox{\linewidth}{Оптимальный (легкая физ. нагрузка)}}
-        & \multirow{3}{*}{\parbox{\linewidth}{Допустимый (средняя физ. нагрузка)}}
-        & \multicolumn{2}{c|}{Вредный (тяжелый труд)}                                                       \\
+        & \multirow{3}{*}{Оптимальный}
+        & \multirow{3}{*}{Допустимый}
+        & \multicolumn{2}{c|}{Вредный}                                                                      \\
         &                                                   &               & \multicolumn{2}{c|}{}         \\ \cline{4-5}
         &                                                   &               & 1-й степени & 2-й степени     \\ \cline{2-5}
 
@@ -24,7 +19,7 @@
         Рабочая поза                                        &               & \textbullet   &       &       \\ \hline
         Наклоны корпуса                                     & \textbullet   &               &       &       \\ \hline
         Перемещения в пространстве                          & \textbullet   &               &       &       \\ \hline
-    \end{tabularx}
+    \end{tabu}
     \caption{Классы условий труда по показателям тяжести трудового процесса}
     \label{labor_classes_by_work_process_difficulty_tbl}
 \end{table}
