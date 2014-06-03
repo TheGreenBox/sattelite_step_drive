@@ -11,14 +11,21 @@
 \definecolor{LINKCOLOUR}{rgb}{0.1,0.0,0.9}
 \hypersetup{colorlinks,breaklinks,urlcolor=LINKCOLOUR,linkcolor=LINKCOLOUR}
 
+% Выбор внутренней TEX−кодировки
+\usepackage[T2A]{fontenc}
+
 % Включение переносов для русского и английского языков
 \usepackage[english,russian]{babel}
 
+\usepackage{hyphenat}
+\selectlanguage{english}
+\hyphenation{MAT-LAB Si-mu-link}
+\selectlanguage{russian}
+\hyphenation{уп-рав-ле-ни-е уп-рав-ле-ни-я уп-рав-ле-ни-ем уп-рав-ле-ний}
+
+
 % Начинать первый параграф раздела следует с красной строки
 \usepackage{indentfirst}
-
-% Выбор внутренней TEX−кодировки
-\usepackage[T2A]{fontenc}
 
 \usepackage{caption}
 \captionsetup[figure]{labelfont=bf, justification=centering}
