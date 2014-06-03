@@ -32,59 +32,51 @@
 \end{figure}
 
 \begin{table}[ht!]
-    \renewcommand{\tabularxcolumn}[1]{m{#1}}
-    \newcolumntype{L}{>{\raggedright\arraybackslash}X}
     \centering
-    \begin{tabularx}{\textwidth}{c|L}
-        \hline
-            Изображение & Описание                                                                                  \\ \hline
-            \includegraphics[height=0.1\textwidth, keepaspectratio]
-                            {./src/pictures/sattelite_3d_images/camera} &
-            \parbox{\linewidth}{
-                \textbf{Камера ДЗЗ:}                                                                            \\
-                Момент инерции вокруг продольной оси: $1.22 ~\textit{кг} \cdot \textit{м}^{2}$                  \\
-                Момент инерции вокруг каждой из двух поперечных  осей: $2.17 ~\textit{кг} \cdot \textit{м}^{2}$ \\
-                Масса: $49.84 ~\textit{кг}$                                                                     \\
-            }                                                                                                       \\ \hline
+    \begin{tabu} spread \textwidth {X[-1,c,m]|X[l,m]}                                                   \hline
+        Изображение & Описание                                                                          \\ \hline
+        \includegraphics[width=0.1\textwidth, keepaspectratio]
+                        {./src/pictures/sattelite_3d_images/camera}
+        &
+        \textbf{Камера ДЗЗ:}                                                                            \newline
+        Момент инерции вокруг продольной оси: $1.22 ~\textit{кг} \cdot \textit{м}^{2}$                  \newline
+        Момент инерции вокруг каждой из двух поперечных  осей: $2.17 ~\textit{кг} \cdot \textit{м}^{2}$ \newline
+        Масса: $49.84 ~\textit{кг}$                                                                     \\ \hline
 
-            \includegraphics[height=0.1\textwidth, keepaspectratio]
-                            {./src/pictures/sattelite_3d_images/bottom_shell_part} &
-            \parbox{\linewidth}{
-                \textbf{Нижняя часть ЭВТИ:}                                                                     \\
-                Момент инерции вокруг продольной оси: $0.18 ~\textit{кг} \cdot \textit{м}^{2}$                  \\
-                Момент инерции вокруг каждой из двух поперечных  осей: $0.18 ~\textit{кг} \cdot \textit{м}^{2}$ \\
-                Масса: $4.37 ~\textit{кг}$                                                                      \\
-                Продольная длина: $0.5 ~\textit{м}$                                                             \\
-            }                                                                                                       \\ \hline
+        \includegraphics[width=0.1\textwidth, keepaspectratio]
+                        {./src/pictures/sattelite_3d_images/bottom_shell_part}
+        &
+        \textbf{Нижняя часть ЭВТИ:}                                                                     \newline
+        Момент инерции вокруг продольной оси: $0.18 ~\textit{кг} \cdot \textit{м}^{2}$                  \newline
+        Момент инерции вокруг каждой из двух поперечных  осей: $0.18 ~\textit{кг} \cdot \textit{м}^{2}$ \newline
+        Масса: $4.37 ~\textit{кг}$                                                                      \newline
+        Продольная длина: $0.5 ~\textit{м}$                                                             \\ \hline
 
-            \includegraphics[height=0.1\textwidth, keepaspectratio]
-                            {./src/pictures/sattelite_3d_images/top_shell_part} &
-            \parbox{\linewidth}{
-                \textbf{Верхняя часть ЭВТИ:}                                                                    \\
-                Момент инерции вокруг продольной оси: $0.07 ~\textit{кг} \cdot \textit{м}^{2}$                  \\
-                Момент инерции вокруг каждой из двух поперечных  осей: $0.04 ~\textit{кг} \cdot \textit{м}^{2}$ \\
-                Масса: $1.53 ~\textit{кг}$                                                                      \\
-                Продольная длина: $0.25 ~\textit{м}$                                                            \\
-            }                                                                                                       \\ \hline
+        \includegraphics[width=0.1\textwidth, keepaspectratio]
+                        {./src/pictures/sattelite_3d_images/top_shell_part}
+        &
+        \textbf{Верхняя часть ЭВТИ:}                                                                    \newline
+        Момент инерции вокруг продольной оси: $0.07 ~\textit{кг} \cdot \textit{м}^{2}$                  \newline
+        Момент инерции вокруг каждой из двух поперечных  осей: $0.04 ~\textit{кг} \cdot \textit{м}^{2}$ \newline
+        Масса: $1.53 ~\textit{кг}$                                                                      \newline
+        Продольная длина: $0.25 ~\textit{м}$                                                            \\ \hline
 
-            \includegraphics[height=0.1\textwidth, keepaspectratio]
-                            {./src/pictures/sattelite_3d_images/star_sensor} &
-            \parbox{\linewidth}{
-                \textbf{Звездный датчик (2 шт.):}                                                               \\
-                Момент инерции вокруг продольной оси: $0.0 ~\textit{кг} \cdot \textit{м}^{2}$                   \\
-                Момент инерции вокруг каждой из двух поперечных  осей: $0.02 ~\textit{кг} \cdot \textit{м}^{2}$ \\
-                Масса: $2.08 ~\textit{кг}$                                                                      \\
-            }                                                                                                       \\ \hline
+        \includegraphics[width=0.1\textwidth, keepaspectratio]
+                    {./src/pictures/sattelite_3d_images/star_sensor}
+        &
+        \textbf{Звездный датчик (2 шт.):}                                                               \newline
+        Момент инерции вокруг продольной оси: $0.0 ~\textit{кг} \cdot \textit{м}^{2}$                   \newline
+        Момент инерции вокруг каждой из двух поперечных  осей: $0.02 ~\textit{кг} \cdot \textit{м}^{2}$ \newline
+        Масса: $2.08 ~\textit{кг}$                                                                      \\ \hline
 
-            \includegraphics[height=0.1\textwidth, keepaspectratio]
-                            {./src/pictures/sattelite_3d_images/sleeve} &
-            \parbox{\linewidth}{
-                \textbf{Рукав (2 шт.):}                                                                         \\
-                Момент инерции вокруг продольной оси: $0.0 ~\textit{кг} \cdot \textit{м}^{2}$                   \\
-                Момент инерции вокруг каждой из двух поперечных  осей: $0.02 ~\textit{кг} \cdot \textit{м}^{2}$ \\
-                Масса: $0.3 ~\textit{кг}$                                                                       \\
-            }                                                                                                       \\ \hline
-    \end{tabularx}
+        \includegraphics[width=0.1\textwidth, keepaspectratio]
+                    {./src/pictures/sattelite_3d_images/sleeve}
+        &
+        \textbf{Рукав (2 шт.):}                                                                         \newline
+        Момент инерции вокруг продольной оси: $0.0 ~\textit{кг} \cdot \textit{м}^{2}$                   \newline
+        Момент инерции вокруг каждой из двух поперечных  осей: $0.02 ~\textit{кг} \cdot \textit{м}^{2}$ \newline
+        Масса: $0.3 ~\textit{кг}$                                                                       \\ \hline
+    \end{tabu}
 
     \caption{Составные элементы объекта управления}
 \end{table}
