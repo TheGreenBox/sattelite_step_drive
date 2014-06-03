@@ -130,18 +130,14 @@
 воздуха.
 
 \begin{table}[ht]
-    \renewcommand{\tabularxcolumn}[1]{m{#1}}
-    \newcolumntype{C}{>{\centering\arraybackslash}X}
-    \newcolumntype{L}{>{\raggedright\arraybackslash}X}
-
     \centering
-    \begin{tabularx}{\textwidth}{|lCCC|}
+    \begin{tabu}{lX[-1,c,m]X[-1,c,m]X[-1,c,m]}
         \hline
         Период года & Темпер. воздуха, C\degree & Относ. влажность, \%
         & Скорость движения воздуха, м/с                                \\ \hline
         Холодный    & не более $22 - 24$ & $40 - 60$ & 0,1              \\
         Теплый      & не более $23 - 25$ & $40 - 60$ & 0,1              \\ \hline
-    \end{tabularx}
+    \end{tabu}
     \caption{Параметры микроклимата в рабочем помещении}
     \label{microclimat}
 \end{table}
