@@ -13,7 +13,7 @@
             axis y line=left,
             enlarge x limits=0.2,
             symbolic x coords={2054, 2055, 2056, 2057, 2058, 2059, 2062},
-            xticklabel style={anchor=base,yshift=-\baselineskip},
+            xticklabel style={anchor=base,yshift=-\baselineskip, rotate=90},
             nodes near coords={\pgfmathprintnumber\pgfplotspointmeta}
         ]
         \addplot[fill=white] coordinates {
@@ -25,8 +25,9 @@
             (2059, 25)
             (2062, 1)
         };
-        \node[align=left] at (450, 400) { $m_\text{ацп} = 2056.59$\\
-                                            $p_\text{ацп} = 2062$};
+        \node[align=left] at (450, 400) {   $m_\text{ацп} = 2056.59$    \\
+                                            $p_\text{ацп} = 2062$
+                                        };
         \end{axis}
     \end{tikzpicture}
     \caption{Гистограмма показаний АЦП}
