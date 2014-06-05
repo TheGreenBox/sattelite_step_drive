@@ -267,94 +267,64 @@ $j$, то в ячейке $(i, j)$ проставляют $1$, а в $(j, i)$ $0
 В последней колонке таблице (\ref{tbl_technical_lvl_comparison}) весовые
 коэффициенты $D_{\text{ТУ}}$ (значимость соотвествующих функций и, следовательно,
 их влияние на технический уровень конечного изделия).
+
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-        \hline
-        \multirow{2}{2.4cm}{
-            \centering
-            Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+    \begin{tabu}{|X[c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[$$-1,c,m]|X[$$-1,c,m]|} \hline
+        Номер варианта (альтернативы) ($i = \overline{1:n}$)
+        &
         \multicolumn{6}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.25\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}[0pt]{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } &
-        \multirow{2}{3.2cm}{
-            \centering
-            $$ D_\text{ТУ} = \frac{1 + \sum_{i=1}^n E_i}{\sum_{i=1}^m E_i}$$
-        } \\
+        }
         &
-        \centering{1} &
-        \centering{2} &
-        \centering{3} &
-        \centering{4} &
-        \centering{5} &
-        \centering{6} & & \\
-        \hline \hline
-        \centering{1} &---& 0 & 0 & 1 & 0 & 1 & 3 & 0.142857 \\ \hline
-        \centering{2} & 1 &---& 1 & 1 & 1 & 1 & 6 & 0.285714 \\ \hline
-        \centering{3} & 1 & 0 &---& 1 & 0 & 1 & 4 & 0.190476 \\ \hline
-        \centering{4} & 0 & 0 & 0 &---& 0 & 1 & 2 & 0.095238 \\ \hline
-        \centering{5} & 1 & 0 & 1 & 1 &---& 1 & 5 & 0.238095 \\ \hline
-        \centering{6} & 0 & 0 & 0 & 0 & 0 &---& 1 & 0.047619 \\ \hline
-        \hline
-        \multicolumn{7}{|r|}{итого:} & 21 & 1 \\
-        \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i & D_\text{ТУ} = \frac{1 + \sum_{i=1}^n E_i}
+                                                    {\sum_{i=1}^m E_i} \\
+
+          & 1 & 2 & 3 & 4 & 5 & 6 &   &             \\ \hline \hline
+        1 &---& 0 & 0 & 1 & 0 & 1 & 3 & 0.142857    \\ \hline
+        2 & 1 &---& 1 & 1 & 1 & 1 & 6 & 0.285714    \\ \hline
+        3 & 1 & 0 &---& 1 & 0 & 1 & 4 & 0.190476    \\ \hline
+        4 & 0 & 0 & 0 &---& 0 & 1 & 2 & 0.095238    \\ \hline
+        5 & 1 & 0 & 1 & 1 &---& 1 & 5 & 0.238095    \\ \hline
+        6 & 0 & 0 & 0 & 0 & 0 &---& 1 & 0.047619    \\ \hline \hline
+        \multicolumn{7}{|r|}{итого:} & 21 & 1       \\ \hline
+    \end{tabu}
     \caption{Cравнение альтернатив по техническому уровню}
     \label{tbl_technical_lvl_comparison}
 \end{table}
+
 
 \subsubsection{Сравнение функций по затратам}
 Аналогично заполнили таблицу (\ref{tbl_costs_lvl_comparison}) весовым соответсвенно.
 коэффициентами $D_\text{СТ}$ (затраты на осуществление соответствующего варианта
 изделия).
+
 \begin{table}[ht!]
     \centering
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-        \hline
-        \multirow{2}{2.4cm}{
-            \centering
-            Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+    \begin{tabu}{|X[c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[-1,c,m]|X[$$-1,c,m]|X[$$-1,c,m]|} \hline
+        Номер варианта (альтернативы) ($i = \overline{1:n}$)
+        &
         \multicolumn{6}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.25\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}[0pt]{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } &
-        \multirow{2}{3.2cm}{
-            \centering
-            $$ D_\text{CТ} = \frac{1 + \sum_{i=1}^n E_i}{\sum_{i=1}^m E_i}$$
-        } \\
-        &
-        \centering{1} &
-        \centering{2} &
-        \centering{3} &
-        \centering{4} &
-        \centering{5} &
-        \centering{6} & & \\
-        \hline \hline
-        \centering{1} &---& 0 & 0 & 1 & 0 & 1 & 3 & 0.142857 \\ \hline
-        \centering{2} & 1 &---& 1 & 1 & 0 & 1 & 5 & 0.238095 \\ \hline
-        \centering{3} & 1 & 0 &---& 1 & 0 & 1 & 4 & 0.190476 \\ \hline
-        \centering{4} & 0 & 0 & 0 &---& 0 & 1 & 2 & 0.095238 \\ \hline
-        \centering{5} & 1 & 1 & 1 & 1 &---& 1 & 6 & 0.285714 \\ \hline
-        \centering{6} & 0 & 0 & 0 & 0 & 0 &---& 1 & 0.047619 \\ \hline
-        \hline
-        \multicolumn{7}{|r|}{итого:} & 21 & 1 \\
-        \hline
-    \end{tabular}
+        }
+        & 1 + \sum_{i=1}^n E_i & D_\text{CТ} = \frac{1 + \sum_{i=1}^n E_i}
+                                                    {\sum_{i=1}^m E_i} \\
+
+          & 1 & 2 & 3 & 4 & 5 & 6 & &               \\ \hline \hline
+        1 &---& 0 & 0 & 1 & 0 & 1 & 3 & 0.142857    \\ \hline
+        2 & 1 &---& 1 & 1 & 0 & 1 & 5 & 0.238095    \\ \hline
+        3 & 1 & 0 &---& 1 & 0 & 1 & 4 & 0.190476    \\ \hline
+        4 & 0 & 0 & 0 &---& 0 & 1 & 2 & 0.095238    \\ \hline
+        5 & 1 & 1 & 1 & 1 &---& 1 & 6 & 0.285714    \\ \hline
+        6 & 0 & 0 & 0 & 0 & 0 &---& 1 & 0.047619    \\ \hline \hline
+        \multicolumn{7}{|r|}{итого:} & 21 & 1       \\ \hline
+    \end{tabu}
     \caption{Cравнение альтернатив по техническому уровню}
     \label{tbl_costs_lvl_comparison}
 \end{table}
@@ -497,374 +467,278 @@ $j$, то в ячейке $(i, j)$ проставляют $1$, а в $(j, i)$ $0
 
 \end{enumerate}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 1 & 1 & 3 \\ \hline
-        \centering{2} & 0 &---& 1 & 2 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 1 & 1 & 3   \\ \hline
+        2 & 0 &---& 1 & 2   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив микроконтролера по техническому уровню}
     \label{tbl_mcu_tech_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 1 & 1 & 3 \\ \hline
-        \centering{2} & 0 &---& 1 & 2 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 1 & 1 & 3   \\ \hline
+        2 & 0 &---& 1 & 2   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив микроконтролера по затратам}
     \label{tbl_mcu_cost_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 1 & 1 & 3 \\ \hline
-        \centering{2} & 0 &---& 1 & 2 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 1 & 1 & 3   \\ \hline
+        2 & 0 &---& 1 & 2   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив двигателя по техническому уровню}
     \label{tbl_motor_tech_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 0 & 1 & 2 \\ \hline
-        \centering{2} & 1 &---& 1 & 3 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 0 & 1 & 2   \\ \hline
+        2 & 1 &---& 1 & 3   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив двигателя по затратам}
     \label{tbl_motor_cost_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 1 & 1 & 3 \\ \hline
-        \centering{2} & 0 &---& 1 & 2 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 1 & 1 & 3   \\ \hline
+        2 & 0 &---& 1 & 2   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив цифрового датчика угла по техническому уровню}
     \label{tbl_sensor_tech_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 0 & 1 & 2 \\ \hline
-        \centering{2} & 1 &---& 1 & 3 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 0 & 1 & 2   \\ \hline
+        2 & 1 &---& 1 & 3   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив цифрового датчика угла по затратам}
     \label{tbl_sensor_cost_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 1 & 1 & 3 \\ \hline
-        \centering{2} & 0 &---& 1 & 2 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 1 & 1 & 3   \\ \hline
+        2 & 0 &---& 1 & 2   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив драйвера ШИМ по техническому уровню}
     \label{tbl_drv_tech_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 0 & 1 & 2 \\ \hline
-        \centering{2} & 1 &---& 1 & 3 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 0 & 1 & 2   \\ \hline
+        2 & 1 &---& 1 & 3   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив драйвера ШИМ по затратам}
     \label{tbl_drv_cost_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 1 & 1 & 3 \\ \hline
-        \centering{2} & 0 &---& 1 & 2 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 1 & 1 & 3   \\ \hline
+        2 & 0 &---& 1 & 2   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив редуктора по техническому уровню}
     \label{tbl_red_tech_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 1 & 1 & 3 \\ \hline
-        \centering{2} & 0 &---& 1 & 2 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 1 & 1 & 3   \\ \hline
+        2 & 0 &---& 1 & 2   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив редуктора по затратам}
     \label{tbl_red_cost_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 0 & 0 & 1 \\ \hline
-        \centering{2} & 1 &---& 0 & 2 \\ \hline
-        \centering{3} & 1 & 1 &---& 3 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 0 & 0 & 1   \\ \hline
+        2 & 1 &---& 0 & 2   \\ \hline
+        3 & 1 & 1 &---& 3   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив ОС по техническому уровню}
     \label{tbl_os_tech_lvl_comparison}
 \end{table}
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{|c|c|c|c|c|}
+    \begin{tabu}{|X[c,m]|X[0.3,c,m]|X[0.3,c,m]|X[0.3,c,m]|X[$$-1,c,m]|}
         \hline
-        \multirow{2}{2.4cm}[-0.5pc]{
-            \centering
             Номер варианта (альтернативы) ($i = \overline{1:n}$)
-        } &
+        &
         \multicolumn{3}{c|}{
-            \parbox[t]{2.4cm}{
+            \parbox{0.4\linewidth}{
                 \centering
                 Номер варианта (альтернативы) ($j = \overline{1:m}$)
             }
-        } &
-        \multirow{2}{1.7cm}{
-            \centering
-            $$1 + \sum_{i=1}^n E_i$$
-        } \\
+        }
         &
-        \centering \rule{2pt}{0pt} 1 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 2 \rule{2pt}{0pt} &
-        \centering \rule{2pt}{0pt} 3 \rule{2pt}{0pt} & \\
-        \hline \hline
-        \centering{1} &---& 1 & 1 & 3 \\ \hline
-        \centering{2} & 0 &---& 1 & 2 \\ \hline
-        \centering{3} & 0 & 0 &---& 1 \\ \hline
-    \end{tabular}
+        1 + \sum_{i=1}^n E_i \\
+          & 1 & 2 & 3 &     \\ \hline \hline
+        1 &---& 1 & 1 & 3   \\ \hline
+        2 & 0 &---& 1 & 2   \\ \hline
+        3 & 0 & 0 &---& 1   \\ \hline
+    \end{tabu}
     \caption{Сравнение альтернатив ОС по затратам}
     \label{tbl_os_cost_lvl_comparison}
 \end{table}
@@ -1064,7 +938,7 @@ $$
 реализации функцианальных, наиболее значимых частей системы
 (табл. \ref{tbl_econ_result}).
 
-\begin{table}[ht!]
+\begin{table}[ht]
     \centering
     \begin{tabular}{|l|l|}
         \hline
