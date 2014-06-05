@@ -46,7 +46,7 @@ ecology: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/ecology/main_ecology.tex
 
 pcb_develop: hello prepare
-	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/pcb_develop/main_pcb_develop.tex
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/technology/pcb_develop/main_pcb_develop.tex
 
 economics: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/economics/main_economics.tex
