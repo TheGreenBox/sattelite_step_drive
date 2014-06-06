@@ -14,6 +14,31 @@
     \item Формирование напряжений питания для элементов платы управления
 \end{itemize}
 
+Изготовили функциональную схему системы управления
+(рис. \ref{functional_scheme}).
+
+Условные обозначения:
+\begin{itemize}
+    \item МК - микроконтроллер
+    \item УМ - импульсный усилитель мощности
+    \item ШД - шаговой двигатель
+    \item ОР - объект регулирования
+    \item ДУП - датчик углового положения
+    \item ДТ - датчик тока
+    \item УТ - усилитель токового сигнала
+    \item ДН - датчик напряжения шины питания
+    \item ИП - источник питания
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth, keepaspectratio,
+                    clip=true, trim=21mm 21mm 21mm 20mm]
+                    {src/pictures/functional_scheme_real}
+    \caption{Функциональная схема системы управления}
+    \label{functional_scheme}
+\end{figure}
+
 \subfile{src/technology/pcb_develop/pcb_design.tex}
 
 \newpage
@@ -24,7 +49,7 @@
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\textwidth, scale=0.6, keepaspectratio]
-                    {./src/pictures/stand}
+                    {src/pictures/stand}
     \caption{Изометрическая проекция экспериментального стенда}
     \label{pic_stand}
 \end{figure}

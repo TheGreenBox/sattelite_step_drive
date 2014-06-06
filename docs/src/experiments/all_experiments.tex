@@ -2,36 +2,36 @@
 \section{Экспериментальная часть}
 \subsection{Макет экспериментального стенда}
 
-Макет состоит из спроектированного механического стенда (см. \ref{sec_stand_construction})
-и макетной платы Texsas Instruments C2000 Piccolo F28035. В качестве шагового двигателя
-используется двигатель, запланированный для работы в реальном приводе - Telco
-Motion 4T5618M308 (табл. \ref{engine_params}), в качестве датчика
-- импульсный датчик ЛИР-137А 6250-05-ПИ (табл. \ref{encoder_params}).
+Макет состоит из спроектированного механического стенда
+(см. \ref{sec_stand_construction}) и макетной платы
+Texsas~Instruments~C2000~Piccolo~F28035.
+В качестве шагового двигателя используется двигатель, запланированный для работы
+в реальном приводе~--- Telco~Motion~4T5618M308 (табл. \ref{engine_params}), в
+качестве датчика~--- импульсный датчик ЛИР--137А 6250--05--ПИ
+(табл. \ref{encoder_params}).
 
-Функциональная схема макета экспериментального стенда изображена на рис.
-\ref{pic_experim_stand_functional_scheme}, где
+Схема экспериментального стенда изображена на рис.
+\ref{pic_experim_stand_scheme}, где
 
-\begin{itemize}
-    \item МК - микроконтроллер
-    \item УМ - импульсный усилитель мощности
-    \item ШД - шаговой двигатель
-    \item ОР - объект регулирования
-    \item ДУП - датчик углового положения
-    \item ДТ - датчик тока
-    \item УТ - усилитель токового сигнала
-    \item ДН - датчик напряжения шины питания
-    \item ИП - источник питания
-\end{itemize}
+\begin{enumerate}
+       \item Плата управления
+       \item Источник питания
+       \item Шаговой двигатель
+       \item Объект регулирования
+       \item Датчик углового положения
+       \item Муфта соединительная
+       \item Муфта соединительная малая
+\end{enumerate}
 
-\begin{figure}
+\begin{figure}[hb]
     \centering
-    \includegraphics[width=\linewidth, keepaspectratio,
-                    clip=true, trim=41mm 31mm 41mm 30mm]
-                    {./src/pictures/experim_stand_functional_scheme}
-    \caption{Функциональная схема макета экспериментального стенда}
-    \label{pic_experim_stand_functional_scheme}
+    \begin{tikzpicture}[scale=1.5]
+        \draw (0,0) rectangle (10,10);
+        \node at (5,5) {Шаблон для схемы испытательного стенда};
+    \end{tikzpicture}
+    \caption{Схема экспериментального стенда}
+    \label{pic_experim_stand_scheme}
 \end{figure}
-
 \subsubsection{Описание экспериментов}
 
 \subsubsection{Результаты экспериментов}
