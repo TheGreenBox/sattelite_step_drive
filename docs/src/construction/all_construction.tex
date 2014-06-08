@@ -15,7 +15,7 @@
 \end{itemize}
 
 Изготовили функциональную схему системы управления
-(рис. \ref{functional_scheme}).
+(рис. \ref{pic_functional_scheme}).
 
 Условные обозначения:
 \begin{itemize}
@@ -36,7 +36,7 @@
                     clip=true, trim=21mm 21mm 21mm 20mm]
                     {src/pictures/functional_scheme_real}
     \caption{Функциональная схема системы управления}
-    \label{functional_scheme}
+    \label{pic_functional_scheme}
 \end{figure}
 
 \subfile{src/technology/pcb_develop/pcb_design.tex}
@@ -44,9 +44,9 @@
 \newpage
 \subsection{Разработка экспериментального стенда}
 \label{sec_stand_construction}
-\subfile{src/construction/stand_requirements}
+\subfile{src/construction/stand_requirements.tex}
 
-\begin{figure}[ht!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth, scale=0.6, keepaspectratio]
                     {src/pictures/stand}
@@ -60,6 +60,6 @@
 нагружения валов двигателя и датчика. Так же предусмотрена возможность
 варьирования момента инерции нагрузки в небольших пределах.
 
-\newpage
+\clearpage
 \subsection{Разработка программного обеспечения платы управления}
-\subfile{src/construction/algo/phase_switch}
+\subfile{src/construction/algo/phase_switch.tex}
