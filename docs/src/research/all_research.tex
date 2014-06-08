@@ -1,75 +1,19 @@
-\newpage
+\clearpage
 \section{Исследовательская часть}
 
-\subfile{src/research/goals}
-\subfile{src/research/theoretical_base}
+\subfile{src/research/goals.tex}
 
-\subfile{src/research/drive_parameters}
+\subfile{src/research/theoretical_base.tex}
 
-\newpage
-\subsection{Параметры составных частей системы}
-\subfile{src/controlled_object_desc}
+\subfile{src/research/drive_parameters.tex}
 
-\subsubsection{Двигатель}
-На этапе энергетического расчета в качестве двигателя привода был выбран
-гибридный шаговый двигатель \foreignlanguage{english}{Telco Motion} 4T5618M308
-(см табл. \ref{engine_params}).
+\subfile{src/research/subsystem_parameters.tex}
 
-\begin{table}[ht]
-    \centering
-    \begin{tabu} to 0.7\textwidth {X[l]|X[-1,l]} \hline
-    Шаг, $\degree$                          & 1.8                   \\
-    Момент удержания, Н$\cdot$м             & 1.274                 \\
-    Напряжение, В                           & 2.3                   \\
-    Ток, А/фаза                             & 3.0                   \\
-    Сопротивление, Ом/фаза                  & 0.77                  \\
-    Индуктивность, мГн/фаза                 & 1.65                  \\
-    Момент инерции ротора, кг$\cdot$м$^2$   & $2.8 \cdot 10^{-5}$   \\
-    Масса двигателя, кг                     & 0.7                   \\ \hline
-    \end{tabu}
-    \caption{Характеристики шагового двигателя \foreignlanguage{english}{Telco Motion} 4T5618M308}
-    \label{engine_params}
-\end{table}
+\subfile{src/research/math_modeling.tex}
 
-\subsubsection{Редуктор}
-На этапе энергетического расчёта для сопряжения двигателя и нагрузки
-был выбран редуктор с передаточным отношением $i_\text{ред} = 225$. Датчик
-устанавливается непосредственно на вал нагрузки, без использования редуктора.
+\subfile{src/research/control_algo_description.tex}
 
-\subsubsection{Датчик}
-В качестве датчика положения используется импульсный датчик ЛИР-137А 6250-05-ПИ
-(см табл. \ref{encoder_params}).
+\subfile{src/research/current_feedback_description.tex}
 
-\begin{table}[ht]
-    \centering
-    \begin{tabu}{X[l]|X[-1,l]} \hline
-        Разрешающая способность преобразователя, дискрет/оборот         & 6250 \\
-        Модификация преобразователя                                     & А \\
-        Конструктивное исполнение                                       & 5 \\
-        Напряжение питания, В                                           & +5 \\
-        Тип выходного сигнала                                           & ПИ (TTL) \\
-        Интервал рабочих температур, $\degree$С                         & 0..+70 \\
-        Класс точности                                                  & 7 класс $\pm75''$ \\
-        Масса (без кабеля), кг                                          & 0.03 \\
-        Степень защиты от внешних воздействий                           & IP50 \\
-        Максимальная скорость вращения вала, об/мин                     & 10000 \\
-        Вибрационное ускорение в диапазоне частот 55..2000 Гц, м/с$^2$  & $\leq$ 100 \\
-        Момент трогания ротора при температуре 20$\degree$С, Н$\cdot$м  & $\leq 1 \cdot 10^{-3}$ \\
-        Ударное ускорение, м/с$^2$                                      & $\leq$ 300 \\
-        Момент инерции ротора, кг$\cdot$м$^2$                           & 3 $\cdot 10^{-7}$ \\
-        Допустимое осевое смещение вала, мм                             & $\pm$ 0.02 \\
-        Допустимое радиальное смещение вала, мм                         & $\pm$ 0.02 \\
-        Диаметр корпуса, мм                                             & 37 \\ \hline
-    \end{tabu}
-    \caption{Характеристики энкодера ЛИР-137А 6250-05-ПИ}
-    \label{encoder_params}
-\end{table}
-
-\newpage
-\subfile{src/research/math_modeling}
-
-\newpage
-\subfile{src/research/current_feedback_description}
-
-\newpage
+\clearpage
 \subsection{Выводы по исследовательской части}
