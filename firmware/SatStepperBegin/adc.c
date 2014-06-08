@@ -79,7 +79,7 @@ static void socSetUp() {
     // the trigger source that starts the conversion, the channel to convert,
     // and the acquisition (sample) window size. Each SOC is independently
     // configured and can have any combination of the trigger, channel,
-    // and sample window size available. Multiple SOC’s can be configured
+    // and sample window size available. Multiple SOCs can be configured
     // for the same trigger, channel, and/or acquisition window as desired.
 
     EALLOW; // Below registers are "protected", allow access.

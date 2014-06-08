@@ -87,6 +87,14 @@
 
 \newcommand\abs[1]{\left|#1\right|}
 
+\lstset{
+    basicstyle=\small\ttfamily,
+    title=\lstname,
+    numbers=left,
+    frame=l,
+    language=C
+}
+
 \begin{document}
 % установить значение счетчика страниц, для нумерации не с 1
 \setcounter{page}{5}
@@ -112,5 +120,7 @@
 \clearpage
 \subsection[Список таблиц]{}
 \listoftables
+
+\subfile{src/code_listings_include.tex}
 
 \end{document}
