@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="max_step_motor_by_com_angle.svg">
+   sodipodi:docname="max_step_motor_by_com_angle.pdf">
   <defs
      id="defs4">
     <linearGradient
@@ -228,11 +228,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="246.69466"
-     inkscape:cy="621.63812"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="774.23343"
+     inkscape:cy="467.0632"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g13193"
      showgrid="false"
      inkscape:snap-grids="true"
      inkscape:snap-bbox="false"
@@ -245,9 +245,9 @@
      inkscape:snap-center="true"
      inkscape:snap-nodes="false"
      inkscape:snap-global="false"
-     inkscape:window-width="1301"
-     inkscape:window-height="744"
-     inkscape:window-x="65"
+     inkscape:window-width="1920"
+     inkscape:window-height="1056"
+     inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      showguides="true"
@@ -260,7 +260,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -308,7 +308,7 @@
            x="358.39728"
            id="tspan3029"
            sodipodi:role="line"
-           style="-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:23.99999997px">t</tspan></text>
+           style="-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:19.99999997999999835px">t</tspan></text>
       <path
          inkscape:connector-curvature="0"
          id="path3031"
@@ -354,7 +354,7 @@
            x="144.83891"
            id="tspan11608"
            sodipodi:role="line"
-           style="font-size:24.00000003999999976px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">d1</tspan></text>
+           style="font-size:20.00000004px;-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">d1</tspan></text>
       <text
          transform="scale(0.98468936,1.0155487)"
          sodipodi:linespacing="125%"
@@ -367,7 +367,7 @@
            x="88.395355"
            id="tspan11608-0"
            sodipodi:role="line"
-           style="-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">d2</tspan></text>
+           style="-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:20.00000001px">d2</tspan></text>
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
@@ -392,7 +392,7 @@
            x="77.051643"
            id="tspan11715"
            sodipodi:role="line"
-           style="font-size:24.00000003999999976px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">T1</tspan></text>
+           style="font-size:20.00000003px;-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">T1</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text11758"
@@ -400,7 +400,7 @@
          x="318.57141"
          style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
          xml:space="preserve"><tspan
-           style="font-size:24px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+           style="font-size:20px;-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
            y="40.933594"
            x="318.57141"
            id="tspan11760"
@@ -412,7 +412,7 @@
          x="319.04825"
          style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
          xml:space="preserve"><tspan
-           style="font-size:24px;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-style:italic;font-stretch:normal;font-variant:normal"
+           style="font-size:20px;-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
            y="80.71933"
            x="319.04825"
            id="tspan11760-0"
@@ -483,7 +483,7 @@
            x="235.35228"
            id="tspan3029-1"
            sodipodi:role="line"
-           style="font-size:23.99999997000000107px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">t</tspan></text>
+           style="font-size:19.99999998px;-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">t</tspan></text>
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
@@ -508,7 +508,7 @@
            x="80.59819"
            id="tspan11715-8"
            sodipodi:role="line"
-           style="font-size:24.00000003999999976px;-inkscape-font-specification:Courier;font-family:Courier;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">T2</tspan></text>
+           style="font-size:20.00000003px;-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">T2</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text11758-3"
@@ -516,7 +516,7 @@
          x="239.45305"
          style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
          xml:space="preserve"><tspan
-           style="font-size:24px;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-style:italic;font-stretch:normal;font-variant:normal"
+           style="font-size:20px;-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
            y="210.71335"
            x="239.45305"
            id="tspan11760-2"
@@ -528,7 +528,7 @@
          x="239.92989"
          style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
          xml:space="preserve"><tspan
-           style="font-size:24px;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-style:italic;font-stretch:normal;font-variant:normal"
+           style="font-size:20px;-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
            y="250.49908"
            x="239.92989"
            id="tspan11760-0-5"
@@ -540,11 +540,11 @@
          d="m 168.46813,287.57462 c 52.78767,-27.36135 71.46173,-37.07554 71.46173,-37.07554 l 0,0"
          style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart);marker-end:none" />
       <path
-         sodipodi:nodetypes="cc"
+         sodipodi:nodetypes="ccc"
          inkscape:connector-curvature="0"
          id="path12813-8"
-         d="m 154.87563,240.04972 84.57739,-29.33637"
-         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart)" />
+         d="m 156.28924,238.77003 8.12055,-2.74056 75.05819,-25.33108"
+         style="fill:none;stroke:#000000;stroke-width:0.97008491px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker13031)" />
     </g>
     <flowRoot
        xml:space="preserve"
@@ -585,15 +585,15 @@
         <text
            xml:space="preserve"
            style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-           x="141.60411"
-           y="902.28583"
+           x="215.05042"
+           y="903.04517"
            id="text13076"
            sodipodi:linespacing="125%"><tspan
              sodipodi:role="line"
              id="tspan13078"
-             x="141.60411"
-             y="902.28583"
-             style="font-style:italic;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-stretch:normal;font-variant:normal">угол коммутации, шаг</tspan></text>
+             x="215.05042"
+             y="903.04517"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:TeX Gyre Termes;-inkscape-font-specification:TeX Gyre Termes;font-size:21.68297413px">угол коммутации, шаг</tspan></text>
         <text
            xml:space="preserve"
            style="font-size:25px;font-style:normal;font-weight:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -606,24 +606,16 @@
              id="tspan13098"
              x="-655.90723"
              y="47.183517"
-             style="font-style:italic;text-align:center;text-anchor:middle;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-stretch:normal;font-variant:normal;font-size:26.01956896px">максимальная </tspan><tspan
+             style="font-style:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-stretch:normal;font-variant:normal;font-size:21.68297413px">максимальная </tspan><tspan
              id="tspan13352"
              sodipodi:role="line"
              x="-659.88672"
              y="78.433517"
-             style="font-style:italic;text-align:center;text-anchor:middle;-inkscape-font-specification:Courier Italic;font-family:Courier;font-weight:normal;font-stretch:normal;font-variant:normal;font-size:26.01956896px">шаговая частота вращения, кГц</tspan></text>
+             style="font-style:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:TeX Gyre Termes;font-family:TeX Gyre Termes;font-weight:normal;font-stretch:normal;font-variant:normal;font-size:21.68297413px">шаговая частота вращения, кГц</tspan></text>
         <g
            id="g13193"
            transform="translate(30,0)"
            style="stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none">
-          <rect
-             ry="0"
-             y="443.22092"
-             x="101.198"
-             height="413.17175"
-             width="417.21231"
-             id="rect13066"
-             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
           <path
              inkscape:connector-curvature="0"
              id="path13102"
@@ -709,6 +701,16 @@
                inkscape:connector-curvature="0"
                sodipodi:nodetypes="cc" />
           </g>
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.18146336px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             d="m 102.20195,856.28347 0,-365.85375 0,0.0197"
+             id="path4425"
+             inkscape:connector-curvature="0" />
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.11973524px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             d="m 101.61789,856.54201 406.96967,0 -0.09,-0.22729"
+             id="path4427"
+             inkscape:connector-curvature="0" />
         </g>
         <flowRoot
            xml:space="preserve"
