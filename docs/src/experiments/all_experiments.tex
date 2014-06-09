@@ -14,21 +14,23 @@ Texsas~Instruments~C2000~Piccolo~F28035.
 \ref{pic_experim_stand_scheme}, где
 
 \begin{enumerate}
-       \item Плата управления
-       \item Источник питания
-       \item Шаговой двигатель
-       \item Объект регулирования
        \item Датчик углового положения
+       \item Источник питания
        \item Муфта соединительная
        \item Муфта соединительная малая
+       \item Объект регулирования
+       \item Осцилограф
+       \item Персональная ЭВМ
+       \item Плата управления
+       \item Шаговой двигатель
 \end{enumerate}
 
 \begin{figure}[hb]
     \centering
-    \begin{tikzpicture}[scale=1.5]
-        \draw (0,0) rectangle (10,10);
-        \node at (5,5) {Шаблон для схемы испытательного стенда};
-    \end{tikzpicture}
+    \centering
+    \includegraphics[width=\linewidth, keepaspectratio,
+                    clip=true, trim=51mm 21mm 51mm 20mm]
+                    {src/pictures/experimental_stand_draft}
     \caption{Схема экспериментального стенда}
     \label{pic_experim_stand_scheme}
 \end{figure}
