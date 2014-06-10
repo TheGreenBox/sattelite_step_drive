@@ -73,6 +73,7 @@
 % см. http://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
 \usepackage{listings}
 
+
 \usepackage{subfiles}
 
 % символ градуса и т.д.
@@ -88,11 +89,21 @@
 \newcommand\abs[1]{\left|#1\right|}
 
 \lstset{
+    language=C,
     basicstyle=\small\ttfamily,
     title=\lstname,
     numbers=left,
+    breaklines=true,
+    breakatwhitespace=false,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
     frame=l,
-    language=C
+    keywordstyle=\color{teal}
+}
+
+\lstset{
+    morekeywords={  uint_fast8_t, int_fast8_t, uint_fast16_t, int_fast16_t, uint_fast32_t, int_fast32_t,
+                    uint8_t, int8_t, uint16_t, int16_t, uint32_t, int32_t, uint64_t, int64_t, void
+                }
 }
 
 \begin{document}
