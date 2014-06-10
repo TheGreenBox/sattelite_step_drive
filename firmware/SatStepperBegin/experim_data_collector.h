@@ -1,0 +1,2 @@
+void enableDataLogging();
+void disableDataLogging();
