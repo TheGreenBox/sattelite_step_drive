@@ -19,6 +19,12 @@
 #include "timers.h"
 #include "state.h"
 
+// #define LOGGING
+
+#ifdef LOGGING
+#include "experim_data_collector.h"
+#endif // LOGGING
+
 void init() {
     deviceInit();
     initPwm();
@@ -38,8 +44,13 @@ void mainLoop() {
     recomputeAlgoConsts();
     encoderCalibration();
 
-    gState.setPoint.position = -101125;
+    gState.setPoint.position = 101125;
 
+    #ifdef LOGGING
+    enableDataLogging();
+    #endif // LOGGING
+
+    // enableSyncControl();
     enableFeedbackControl();
     switchPhasesIfNecessary();
 
