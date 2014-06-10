@@ -102,8 +102,8 @@ void prevStep();
     \label{sync_restore_negat_dir_active_pole_pos}
     \phi_\textit{акт} =
         \begin{cases}
-            D,                                                      & \mbox{если } D - mod(D, \theta_\textit{шаг}) = 0 \\
-            D - mod(D, \theta_\textit{шаг}) + \theta_\textit{шаг},  & \mbox{если } D - mod(D, \theta_\textit{шаг}) \ne 0)
+            D,                                                      & \mbox{если } mod(D, \theta_\textit{шаг}) = 0 \\
+            D - mod(D, \theta_\textit{шаг}) + \theta_\textit{шаг},  & \mbox{если } mod(D, \theta_\textit{шаг}) \ne 0)
         \end{cases}
 \end{equation}
 где $mod$ - операция вычисления остатка от деления с сохранением знака делимого.

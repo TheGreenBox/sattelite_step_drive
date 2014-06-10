@@ -93,11 +93,11 @@ $$
 
         \draw[<->, >=angle 45, thin] (0,\ymax-0.1) -- (\commMinusStep,\ymax-0.1);
         \draw[thin] (-1,\ymax-0.1) -- (0,\ymax-0.1);
-        \node at (0, \ymax-0.1) [anchor=south east] {$\theta_\text{ком.} - \theta_\text{шаг.}$};
+        \node at (0, \ymax-0.1) [anchor=south east] {$\theta_\text{ком} - \theta_\text{шаг}$};
 
         \draw[<->, >=angle 45, thin] (0,\ymax+0.3) -- (\comm,\ymax+0.3);
         \draw[thin] (-0.4,\ymax+0.3) -- (0,\ymax+0.3);
-        \node at (0, \ymax+0.3) [anchor=south east] {$\theta_\text{ком.}$};
+        \node at (0, \ymax+0.3) [anchor=south east] {$\theta_\text{ком}$};
 
     \end{tikzpicture}
     \caption{Зависимость момента от угла рассогласования}
@@ -109,7 +109,7 @@ $$
 и \ref{eq_average_moment_to_rotor_on_control_pulse}:
 
 $$
-    \tau_\textit{двиг.} =
+    \tau_\textit{двиг} =
         \tau_{\textit{шаг}} =
             K_{M} I_{M} N_{r} ( \theta_{\textit{ком}}
                                 - \frac{ \theta_{\textit{шаг}} }{ 2 }
@@ -119,16 +119,16 @@ $$
 Полный момент отрабатываемый двигателем:
 \begin{equation}
     \label{eq_motor_torque}
-    \tau_\textit{двиг.} =
+    \tau_\textit{двиг} =
         \tau_\textit{цель}
-        + \tau_\textit{стат.}
-        + \tau_\textit{вязк.}
+        + \tau_\textit{стат}
+        + \tau_\textit{вязк}
 \end{equation}
 
 \begin{equation}
     \label{eq_commutation_angle}
-    \theta_{\textit{ком.}} =
-    \frac{ \tau_\textit{цель} + \tau_\textit{стат.} + \tau_\textit{вязк.} }
+    \theta_{\textit{ком}} =
+    \frac{ \tau_\textit{цель} + \tau_\textit{стат} + \tau_\textit{вязк} }
          { K_{M} \cdot I_{M} \cdot N_{r} }
     + \frac{ \theta_{\textit{шаг}} }{ 2 }
 \end{equation}
@@ -137,17 +137,17 @@ $$
 значение может значительно выходить за допустимый диапазон описаный в разделе
 \ref{sec_feedback_control}
 $$
-    0 < \theta_{\textit{ком.}} \leq 2
+    0 < \theta_{\textit{ком}} \leq 2
 $$
 
 \clearpage
-\subsubsection{Обратной связи по углу}
+\subsubsection{ОС по положению}
 \label{fedback_control_algo}
 Здесь и далее будем рассматривать принципы переключения активной фазы шагового
 двигателя на примере простого четырёхфазного шагового двигателя.
 Условно, процесс движения ротора шагового двигателя можно разделить на 3
-элементарные части, которые обозначают три действия системы упраления в процессе
-движения:
+элементарные части (<<зоны>>), которые соответствую трём действиям системы
+упраления в процессе движения:
 
 \begin{enumerate}
     \item Зона движения
