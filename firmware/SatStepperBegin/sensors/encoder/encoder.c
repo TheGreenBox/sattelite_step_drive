@@ -16,7 +16,17 @@
 #include "state.h"
 
 static void emptySharedHandler() {}
-static _sharedEncoderHandler sharedHandler = &emptySharedHandler;
+static _handler sharedHandler = &emptySharedHandler;
+
+#ifdef LOGGING
+    #define ALL_LOGGERS 5
+    static _handler dataLoggers[ALL_LOGGERS] = {&emptySharedHandler,
+                                                &emptySharedHandler,
+                                                &emptySharedHandler,
+                                                &emptySharedHandler,
+                                                &emptySharedHandler};
+    static uint_fast8_t installedLoggers = 0;
+#endif
 
 interrupt void encoderInputAIntHandler(void) {
 #ifdef DEBUG
@@ -44,6 +54,14 @@ interrupt void encoderInputAIntHandler(void) {
         ++gState.encoder.errors
     );
 #endif // DEBUG
+
+#ifdef LOGGING
+    int lgrNum = 0;
+    for (; lgrNum < installedLoggers; ++lgrNum) {
+        (*dataLoggers[lgrNum])();
+    }
+#endif // LOGGING
+
     (*sharedHandler)();
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP1);
 }
@@ -74,6 +92,14 @@ interrupt void encoderInputBIntHandler(void) {
         ++gState.encoder.errors
     );
 #endif // DEBUG
+
+#ifdef LOGGING
+    int lgrNum = 0;
+    for (; lgrNum < installedLoggers; ++lgrNum) {
+        (*dataLoggers[lgrNum])();
+    }
+#endif // LOGGING
+
     (*sharedHandler)();
     ACKNOWLEDGE_ONE_MORE_INTERRUPT_FROM_GROUP(PIEACK_GROUP1);
 }
@@ -174,10 +200,26 @@ void encoderInit() {
 * by a valid interrupt edge or by reset. ->|
 */
 
-void setSharedEncoderHandler(_sharedEncoderHandler handler) {
+void setSharedEncoderHandler(_handler handler) {
     sharedHandler = handler;
 }
 
 void clearSharedEncoderHandler() {
     sharedHandler = emptySharedHandler;
 }
+
+#ifdef LOGGING
+void installDataLogger(_handler logger) {
+    dataLoggers[installedLoggers] = logger;
+    ++installedLoggers;
+}
+
+void removeAllDataLoggers() {
+    installedLoggers = 0;
+
+    int lgrNum = 0;
+    for (; lgrNum < ALL_LOGGERS; ++lgrNum) {
+        dataLoggers[lgrNum] = &emptySharedHandler;
+    }
+}
+#endif // LOGGING

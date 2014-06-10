@@ -8,8 +8,15 @@
  */
 
 #pragma once
-typedef void (* _sharedEncoderHandler)(void);
+typedef void (* _handler)(void);
 
 void encoderInit();
-void setSharedEncoderHandler(_sharedEncoderHandler handler);
+void setSharedEncoderHandler(_handler handler);
 void clearSharedEncoderHandler();
+
+// #define LOGGING
+
+#ifdef LOGGING
+void installDataLogger(_handler logger);
+void removeAllDataLoggers();
+#endif // LOGGING
