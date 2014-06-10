@@ -37,17 +37,26 @@ static int32_t experimentalCalculateNextPolePos(int32_t direction) {
 
     int32_t pos;
     if (direction > 0) {
-        int32_t T = currentPos + commAngleInEncTicks;
+        int32_t T = currentPos + commAngleInEncTicks - algoStepInEncTicks;
         pos = T - T % algoStepInEncTicks;
+        pos += algoStepInEncTicks;
     }
     else {
-        int32_t D = currentPos - commAngleInEncTicks - 1;
-        pos = D - D % algoStepInEncTicks + algoStepInEncTicks;
+        int32_t D = currentPos - commAngleInEncTicks + algoStepInEncTicks;
+        int32_t _remainder = D % algoStepInEncTicks;
+        if (_remainder == 0) {
+            pos = D;
+        }
+        else {
+            pos = D - D % algoStepInEncTicks + algoStepInEncTicks;
+        }
+        pos -= algoStepInEncTicks;
     }
 
     return pos;
 }
 
+// TODO: very similar to experimentalCalculateNextPolePos, rework them
 static experimentalRestore(int32_t direction) {
     int32_t currentPos = gState.encoder.total - gState.reference.encoder;
 
@@ -57,8 +66,14 @@ static experimentalRestore(int32_t direction) {
         trueSteps = T / algoStepInEncTicks;
     }
     else {
-        int32_t D = currentPos - commAngleInEncTicks;
-        trueSteps = D / algoStepInEncTicks + 1;
+        int32_t D = currentPos - commAngleInEncTicks + algoStepInEncTicks;
+        int32_t _remainder = D % algoStepInEncTicks;
+        if (_remainder == 0) {
+            trueSteps = D / algoStepInEncTicks;
+        }
+        else {
+            trueSteps = D / algoStepInEncTicks + 1;
+        }
     }
 
     gState.stepTicker = gState.reference.stepTicker + trueSteps;
@@ -140,18 +155,18 @@ void switchPhasesIfNecessary() {
     }
     else if (TIME_FOR_NEXT_STEP(magneticVectorsMismatch, direction)) {
         // activePolePos = calculateNextPolePos(currentPos, direction);
-        // activePolePos = experimentalCalculateNextPolePos(direction);
-        activePolePos += direction * algoStepInEncTicks;
+        activePolePos = experimentalCalculateNextPolePos(direction);
+        // activePolePos += direction * algoStepInEncTicks;
         step(direction);
     }
     else {
         // restoreSynchronicity(currentPos);
         experimentalRestore(direction);
         // activePolePos = calculateNextPolePos(currentPos, direction);
-        // activePolePos = experimentalCalculateNextPolePos(direction);
+        activePolePos = experimentalCalculateNextPolePos(direction);
 
         // wrong, need to add delta from restore
-        activePolePos += direction * algoStepInEncTicks;
+        // activePolePos += direction * algoStepInEncTicks;
 
         step(direction);
     }
