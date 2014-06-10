@@ -1,10 +1,10 @@
-/* ========================================================
- * Organization: The green box
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * Project name: Satellite stepper drive
- * File name: pwm_wrap_module.h
- * Description: head for pwm control module
- * ========================================================
+ * @file            pwm_wrap_module.h
+ * @brief           Header of wrapper over hardware PWM module
+ *
  */
 
 #ifndef _PWM_WRAP_MODULE__H_

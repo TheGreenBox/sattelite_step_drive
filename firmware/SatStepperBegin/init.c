@@ -1,10 +1,11 @@
-/* ========================================================
- * Organization: The green box
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * Project name: Satellite stepper drive
- * File name: init.c
- * Description: implementation of init processes
- * ========================================================
+ * @file            init.c
+ * @brief           Hardware and software initialization
+                    module
+ *
  */
 
 #include <PeripheralHeaderIncludes.h>

@@ -3,9 +3,10 @@
  * Project name: Satellite stepper drive
  *
  * @file adc.h
- * @brief ADC initialization and interrupts
- *  [github issue #44](https://github.com/TheGreenBox/sattelite_step_drive/issues/44),
- *  [github issue #47](https://github.com/TheGreenBox/sattelite_step_drive/issues/47)
+ * @brief Header of ADC initialization and interrupts module
+ *
+ * [github issue #44](https://github.com/TheGreenBox/sattelite_step_drive/issues/44),
+ * [github issue #47](https://github.com/TheGreenBox/sattelite_step_drive/issues/47)
  */
 
 #pragma once

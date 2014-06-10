@@ -1,10 +1,13 @@
 /**
- * Organization: The Green Box
+ * Organization:    The Green Box
  * Project name:    Satellite stepper drive
  *
- * @file    gray_code_encoder.c
- * @brief   Parsing 2lines binary gray code for relative incremental sensors
- *  [wiki](https://github.com/TheGreenBox/sattelite_step_drive/wiki/sensor_encoder)
+ * @file            gray_code_decoder.c
+ * @brief           2-lines binary gray code parser for relative
+ *                  incremental sensors
+ *
+ * [wiki](https://github.com/TheGreenBox/sattelite_step_drive/wiki/sensor_encoder)
+ *
  */
 
 #include "gray_code_decoder.h"

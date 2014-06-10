@@ -1,11 +1,12 @@
-/* ========================================================
- * Organization: The Green Box
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * Project name: Satellite stepper drive
- * File name:    synchronized_control.h
- * Description:  Module for control interrupt functions
- * ========================================================
+ * @file            current_feedback.c
+ * @brief           Sensorless movement algorithm module
+ *
  */
+
 #include "synchronized_control.h"
 #include "state.h"
 #include "control_algo.h"

@@ -1,10 +1,10 @@
-/* ========================================================
- * Organization: The Green Box
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * Project name: Satellite stepper drive
- * File name:    main.c
- * Description:
- * ========================================================
+ * @file            main.c
+ * @brief           Main file that sets system settings
+ *
  */
 
 #include <PeripheralHeaderIncludes.h>

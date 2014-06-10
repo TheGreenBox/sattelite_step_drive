@@ -4,8 +4,9 @@
  *
  * @file adc.c
  * @brief ADC initialization and interrupts
- *  [github issue #44](https://github.com/TheGreenBox/sattelite_step_drive/issues/44),
- *  [github issue #47](https://github.com/TheGreenBox/sattelite_step_drive/issues/47)
+ *
+ * [github issue #44](https://github.com/TheGreenBox/sattelite_step_drive/issues/44),
+ * [github issue #47](https://github.com/TheGreenBox/sattelite_step_drive/issues/47)
  */
 
 

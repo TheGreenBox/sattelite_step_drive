@@ -1,3 +1,11 @@
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
+ *
+ * @file            algo_types.h
+ * @brief           Available phase switch algorithms library
+ *
+ */
 #include <stdio.h>
 #include "utils/macros.h"
 #include "state.h"

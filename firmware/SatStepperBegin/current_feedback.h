@@ -1,10 +1,12 @@
 /**
- * Organization: The green box
- * Project name: Satellite stepper drive
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * @file    current_feedback.h
- * @brief   Header for current feedback logic module
- *  [github issue #44](https://github.com/TheGreenBox/sattelite_step_drive/issues/44)
+ * @file            current_feedback.h
+ * @brief           Header of current feedback logic module
+ *
+ * [github issue #44](https://github.com/TheGreenBox/sattelite_step_drive/issues/44)
+ *
  */
 
 #pragma once

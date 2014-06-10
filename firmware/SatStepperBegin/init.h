@@ -1,10 +1,11 @@
-/* ========================================================
- * Organization: The green box
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * Project name: Satellite stepper drive
- * File name: init.h
- * Description: head of init processes
- * ========================================================
+ * @file            init.h
+ * @brief           Header of hardware and software initialization
+                    module
+ *
  */
 
 #ifndef _INIT__H_

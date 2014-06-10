@@ -1,3 +1,12 @@
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
+ *
+ * @file            feedback_control.h
+ * @brief           Header of position feedback module
+ *
+ */
+
 #ifndef _FEEDBACK_CONTROL__H_
 #define _FEEDBACK_CONTROL__H_
 

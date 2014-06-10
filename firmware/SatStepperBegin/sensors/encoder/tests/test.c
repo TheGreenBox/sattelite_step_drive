@@ -1,5 +1,11 @@
 /**
-*/
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
+ *
+ * @file            encoder.c
+ * @brief           Encoder logic test module
+ *
+ */
 
 const int _TEST_STEP_NUM = 255;
 const unsigned int PERIOD = 4;

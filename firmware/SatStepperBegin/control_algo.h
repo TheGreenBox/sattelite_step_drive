@@ -1,10 +1,12 @@
-/* ========================================================
- * Organization: The green box
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * Project name: Satellite stepper drive
- * File name: control_algo.h
- * Description: head of control_algo module
- * ========================================================
+ * @file            control_algo.h
+ * @brief           Header of module for setting phase switch algo
+ *                  type and step in positive or negative
+ *                  direction
+ *
  */
 
 #ifndef _CONTROL_ALGO_INCLUDED_
