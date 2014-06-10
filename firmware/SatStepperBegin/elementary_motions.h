@@ -1,10 +1,13 @@
 /**
- * Organization: The green box
- * Project name: Satellite stepper drive
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * @file    elementary_motions.c
- * @brief   Header for pretty little simple algos for elemetnaty motions
- *  github issue: [#54](https://github.com/TheGreenBox/sattelite_step_drive/issues/54)
+ * @file            elementary_motions.h
+ * @brief           Header of simple algorithms for elemetnary
+ *                  motions module
+ *
+ * [github issue #44](https://github.com/TheGreenBox/sattelite_step_drive/issues/44)
+ *
  */
 
 #pragma once

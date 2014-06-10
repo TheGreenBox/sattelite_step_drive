@@ -1,10 +1,10 @@
-/* ========================================================
- * Organization: The Green Box
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * Project name: Satellite stepper drive
- * File name:  SatStepperBegin/timers.h
- * Description:
- * ========================================================
+ * @file            timers.h
+ * @brief           Header of timer settings setter module
+ *
  */
 
 #ifndef _CONTROL_TIMER_H_

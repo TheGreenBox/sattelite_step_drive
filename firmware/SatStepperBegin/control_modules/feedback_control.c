@@ -1,3 +1,12 @@
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
+ *
+ * @file            feedback_control.h
+ * @brief           Position feedback module
+ *
+ */
+
 #include <stdlib.h>
 #include <limits.h>
 #include "utils/macros.h"

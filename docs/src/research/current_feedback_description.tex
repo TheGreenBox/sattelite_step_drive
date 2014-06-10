@@ -1,5 +1,5 @@
 \newpage
-\subsection{Описание ОС по току}
+\subsubsection{ОС по току}
 Согласно требованиям задачи, необходимо обеспечить скорости переброски системы не менее
 $ \dot{q}_{max} = 1.73 $ рад/c при выбранном на этапе энергетического расчета передаточном
 отношении редуктора $ i_\text{ред} = 225 $. Отсюда очевидно, что минимальное время импульса управления:
@@ -15,10 +15,10 @@ $$
 быстрое нарастание тока. Как было доказано ранее (\ref{current_grow_estimate}), время роста можно
 уменьшить, если увеличить напряжение.
 
-\subsubsection{Аппаратной часть реализации ОС по току}
+\subsubsection{Аппаратная часть реализации ОС по току}
 
 \paragraph{Схематика аппаратной части}
-\begin{figure}[ht!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth, keepaspectratio, clip=true, trim=0mm 25mm 0mm 25mm]
                     {./src/pictures/current_measuring_sheme}
@@ -105,7 +105,7 @@ $$
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.5\textwidth, keepaspectratio, clip=true, trim=5mm 10mm 5mm 5mm]
+    \includegraphics[width=0.6\linewidth, keepaspectratio, clip=true, trim=5mm 10mm 5mm 5mm]
                     {./src/pictures/adc_noise_probabilistic_estimate}
     \caption{Гистограмма распределения плотности вероятности шума АЦП}
     \label{pic_adc_noise_probabilistic_estimate}

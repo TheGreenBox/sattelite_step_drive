@@ -1,10 +1,10 @@
-/* ========================================================
- * Organization: The Green Box
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * Project name: Satellite stepper drive
- * File name: macros.h
- * Description: Useful macros used across the project
- * ========================================================
+ * @file            macros.h
+ * @brief           Useful macros used across the project
+ *
  */
 
 #ifndef _MACROS__H_

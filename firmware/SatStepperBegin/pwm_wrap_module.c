@@ -1,11 +1,12 @@
-/* ========================================================
- * Organization: The green box
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * Project name: Satellite stepper drive
- * File name: init.c
- * Description: pwm control
- * ========================================================
+ * @file            pwm_wrap_module.c
+ * @brief           Wrapper over hardware PWM module
+ *
  */
+
 #include <PeripheralHeaderIncludes.h>
 #include <f2803xbmsk.h>
 #include <DSP2803x_EPwm.h>

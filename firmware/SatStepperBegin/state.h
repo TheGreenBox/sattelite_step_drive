@@ -1,10 +1,10 @@
-/* ========================================================
- * Organization: The Green Box
+/**
+ * Organization:    The Green Box
+ * Project name:    Satellite stepper drive
  *
- * Project name: Satellite stepper drive
- * File name:  SatStepperBegin/state.h
- * Description:
- * ========================================================
+ * @file            state.h
+ * @brief           Header of global state module
+ *
  */
 
 #ifndef _GLOBAL_STATE_H_

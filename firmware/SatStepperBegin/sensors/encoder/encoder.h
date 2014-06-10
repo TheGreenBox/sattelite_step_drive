@@ -1,10 +1,12 @@
 /**
- * Organization: The Green Box
+ * Organization:    The Green Box
  * Project name:    Satellite stepper drive
  *
- * @file    encoder.c
- * @brief
- *  [wiki](https://github.com/TheGreenBox/sattelite_step_drive/wiki/sensor_encoder)
+ * @file            encoder.h
+ * @brief           Header of encoder interrupt logic module
+ *
+ * [wiki](https://github.com/TheGreenBox/sattelite_step_drive/wiki/sensor_encoder)
+ *
  */
 
 #pragma once
