@@ -1,0 +1,467 @@
+digraph test {
+    splines =line;
+    size ="23.4, 16.5";
+    ratio=fill;
+    bgcolor="transparent";
+
+    node[shape=record, fontname="ISOCPEUR Italic"];
+    edge[dir=none];
+
+    SOLDER_PASTE[shape=point];
+    SOLDER_PASTE_oper[label="{Операция 1|Автоматический трафаретный принтер P500\nDAESUNG MICRON CO., LTD}"];
+    SOLDER_PASTE_label[label="{Паяльная паста с флюсом\nIndium NC-SMQ 92J | }| "];
+
+    SET1[shape=point];
+    SET1_oper[label="{Операция 2\nУстановка SMD компонентов на пасту|Установщик компонентов SMT2000\nIVAS tech }"];
+
+    // "Res2"   "Чип резистор"  "R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12, R13, R14, R15, R16, R17, R18, R19, R20, R21, R22, R23, R24, R25, R26, R27, R28, R29, R30, R31, R32, R33, R34, R35, R36, R37, R38, R39, R40, R41, R42, R43, R44, R45, R46, R56, R57, R58, R59, R60, R61, R66, R67, R68, R69, R70, R71, R72, R73, R74"
+    // "0603"   "Res2"      "1%"
+    // "4.99к, 4.99к, 357, 226, 348к, 33.2к, 205к, 442к, 10к, 681, 95.3к, 4.99к, 10к, 4.7к, 4.7к, 470, 33, 33, 33, 33, 470, 470, 22.6к, 22.6к, 22.6к, 22.6к, 1к, 1к, 1к, 1к, 1к, 1к, 1к, 1к, 1к, 36к, 10к, 499, 10к, 499, 10к, 499, 10к, 499, 4.7к, 49.9к, 49.9к, 49.9к, 49.9к, 49.9к, 49.9к, 56, 56, 56, 56, 56, 56, 56, 56, 56"
+    R9[shape=point];
+    R9_oper[label="Операция 2: Переход 1"];
+    R9_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 442кОм,\nR9 | ГОСТ 28608-90 }| 1"];
+
+    R10[shape=point];
+    R10_oper[label="Операция 2: Переход 2"];
+    R10_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 10кОм,\nR10, R14, R38, R40, R42, R44 | ГОСТ 28608-90 }| 6"];
+
+    R6[shape=point];
+    R6_oper[label="Операция 2: Переход 3"];
+    R6_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 348кОм,\nR6 | ГОСТ 28608-90 }| 1"];
+
+    R18[shape=point];
+    R18_oper[label="Операция 2: Переход 4"];
+    R18_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 33Ом,\nR18-R21 | ГОСТ 28608-90 }| 4"];
+
+    R66[shape=point];
+    R66_oper[label="Операция 2: Переход 5"];
+    R66_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 56Ом,\nR66-R74 | ГОСТ 28608-90 }| 9"];
+
+    R8[shape=point];
+    R8_oper[label="Операция 2: Переход 6"];
+    R8_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 205кОм,\nR8 | ГОСТ 28608-90 }| 1"];
+
+    R17[shape=point];
+    R17_oper[label="Операция 2: Переход 7"];
+    R17_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 470Ом,\nR17, R22, R23 | ГОСТ 28608-90 }| 3"];
+
+    R24[shape=point];
+    R24_oper[label="Операция 2: Переход 8"];
+    R24_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 22.6кОм,\nR24-R27 | ГОСТ 28608-90 }| 4"];
+
+    R4[shape=point];
+    R4_oper[label="Операция 2: Переход 9"];
+    R4_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 357Ом,\nR4 | ГОСТ 28608-90 }| 1"];
+
+    R56[shape=point];
+    R56_oper[label="Операция 2: Переход 10"];
+    R56_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 49.9кОм,\nR56-R61 | ГОСТ 28608-90 }| 6"];
+
+    R12[shape=point];
+    R12_oper[label="Операция 2: Переход 11"];
+    R12_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 95.3кОм,\nR12 | ГОСТ 28608-90 }| 1"];
+
+    R2[shape=point];
+    R2_oper[label="Операция 2: Переход 12"];
+    R2_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 4.99кОм,\nR2, R3, R13 | ГОСТ 28608-90 }| 3"];
+
+    R37[shape=point];
+    R37_oper[label="Операция 2: Переход 13"];
+    R37_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 36кОм,\nR37 | ГОСТ 28608-90 }| 1"];
+
+    R39[shape=point];
+    R39_oper[label="Операция 2: Переход 14"];
+    R39_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 499Ом,\nR39, R41, R43, R45 | ГОСТ 28608-90 }| 4"];
+
+    R28[shape=point];
+    R28_oper[label="Операция 2: Переход 15"];
+    R28_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 1кОм,\nR28-R36 | ГОСТ 28608-90 }| 9"];
+
+    R7[shape=point];
+    R7_oper[label="Операция 2: Переход 16"];
+    R7_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 33.2кОм,\nR7 | ГОСТ 28608-90 }| 1"];
+
+    R5[shape=point];
+    R5_oper[label="Операция 2: Переход 17"];
+    R5_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 226Ом,\nR5 | ГОСТ 28608-90 }| 1"];
+
+    R11[shape=point];
+    R11_oper[label="Операция 2: Переход 18"];
+    R11_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 681Ом,\nR11 | ГОСТ 28608-90 }| 1"];
+
+    R15[shape=point];
+    R15_oper[label="Операция 2: Переход 19"];
+    R15_label[label="{Чип резистор,\n0603, 1%, 0.063Вт, 4.7кОм,\nR15, R16, R46 | ГОСТ 28608-90 }| 3"];
+
+    // "Res2"   "Чип резистор"  "R50, R51, R52, R53"    "C1206" "Res2"      "1%"        "0.25 Вт"   "1K, 1к, 1к, 1к"    "138, 139, 140, 141"
+    R50[shape=point];
+    R50_oper[label="Операция 2: Переход 20"];
+    R50_label[label="{Чип резистор,\n1206, 1%, 0.25Вт, 1кОм,\nR50-R53 | ГОСТ 28608-90 }| 4"];
+
+    // "Res2"   "Чип резистор"  "R1"    "C1210" "Res2"      "1%"        "0.5 Вт"    "3.3"
+    R1[shape=point];
+    R1_oper[label="Операция 2: Переход 21"];
+    R1_label[label="{Чип резистор,\n1210, 1%, 0.5Вт, 3.3Ом,\nR50-R53 | ГОСТ 28608-90 }| 1"];
+
+    // "Cap Semi"   "Керамический чип конденсатор"
+    // "C2, C3, C5, C6, C7, C8, C9, C11, C12, C14, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25, C26, C27, C28, C33, C36, C37, C39, C40, C42, C43, C45, C46, C47, C48, C49, C50, C51, C52, C53, C54, C55, C56, C57, C58, C59, C60, C61, C62, C63, C64, C65, C66, C67, C68, C69"
+    // "1608[0603]" "Cap Semi"      "5%"
+    // "50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 16В, 16В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 100V, 100V, 100V, 100V, 100V, 100V, 100V, 100V, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В, 50В"
+    // "100н, 10н, 15п, 15н, 100п, 180п, 12п, 1н, 3u3, 100п, 100п, 1н, 1н, 2.2мк, 22мк, 22мк, 1н, 3.3мк, 3.3мк, 1н, 1н, 1н, 1н, 100н, 0.1мк, 0.1мк, 0.1мк, 0.1мк, 0.1мк, 0.1мк, 100pF, 0.1мк, 1н, 1н, 1н, 1н, 1н, 1н, 1н, 1н, 1н, 1н, 1н, 1nF, 1н, 1н, 3.3н, 3.3н, 3.3н, 3.3н, 3.3н, 3.3н, 3.3н, 3.3н, 3.3н"
+    C12[shape=point];
+    C12_oper[label="Операция 2: Переход 22"];
+    C12_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 3.3мк,\nC12, C23, C24 | ГОСТ 27778-88 }| 3"];
+
+    C2[shape=point];
+    C2_oper[label="Операция 2: Переход 23"];
+    C2_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 100н,\nC2, C33 | ГОСТ 27778-88 }| 2"];
+
+    C3[shape=point];
+    C3_oper[label="Операция 2: Переход 24"];
+    C3_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 10н,\nC3 | ГОСТ 27778-88 }| 1"];
+
+    C8[shape=point];
+    C8_oper[label="Операция 2: Переход 25"];
+    C8_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 180п,\nC8 | ГОСТ 27778-88 }| 1"];
+
+    C19[shape=point];
+    C19_oper[label="Операция 2: Переход 26"];
+    C19_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 2.2мк,\nC19 | ГОСТ 27778-88 }| 1"];
+
+    C5[shape=point];
+    C5_oper[label="Операция 2: Переход 27"];
+    C5_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 15п,\nC5 | ГОСТ 27778-88 }| 1"];
+
+    C45[shape=point];
+    C45_oper[label="Операция 2: Переход 28"];
+    C45_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 100В, 100п,\nC45 | ГОСТ 27778-88 }| 1"];
+
+    C9[shape=point];
+    C9_oper[label="Операция 2: Переход 29"];
+    C9_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 12п,\nC9 | ГОСТ 27778-88 }| 1"];
+
+    C20[shape=point];
+    C20_oper[label="Операция 2: Переход 30"];
+    C20_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 22мк,\nC20, C21 | ГОСТ 27778-88 }| 2"];
+
+    C61[shape=point];
+    C61_oper[label="Операция 2: Переход 31"];
+    C61_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 3.3н,\nC61-C69 | ГОСТ 27778-88 }| 9"];
+
+    C6[shape=point];
+    C6_oper[label="Операция 2: Переход 32"];
+    C6_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 15н,\nC6 | ГОСТ 27778-88 }| 1"];
+
+    C11[shape=point];
+    C11_oper[label="Операция 2: Переход 33"];
+    C11_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 1н,\nC11, C17, C18, C22, C25,\nC26-C28, C47-C60 | ГОСТ 27778-88 }| 21"];
+
+    C58[shape=point];
+    C58_oper[label="Операция 2: Переход 34"];
+    C58_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 1п,\nC58 | ГОСТ 27778-88 }| 1"];
+
+    C36[shape=point];
+    C36_oper[label="Операция 2: Переход 35"];
+    C36_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 100В, 0.1мк,\nC36, C37, C39, C40, C42, C43, C46 | ГОСТ 27778-88 }| 7"];
+
+    C7[shape=point];
+    C7_oper[label="Операция 2: Переход 36"];
+    C7_label[label="{Керамический чип конденсатор,\n1608[0603], 5%, 50В, 100п,\nC7, C14, C16 | ГОСТ 27778-88 }| 3"];
+
+    // "Cap Semi"   "Керамический чип конденсатор"  "C29, C30, C32, C34, C35"   "0402"  "Cap Semi"      "5%"    "16В, 16В, 16В, 16В, 16В"       "1мк"   "29, 30, 32, 34, 35"
+    C29[shape=point];
+    C29_oper[label="Операция 2: Переход 37"];
+    C29_label[label="{Керамический чип конденсатор,\n0402, 5%, 16В, 1мкФ,\nC29, C30, C32, C34, C35 | ГОСТ 27778-88 }| 5"];
+
+    // "STATUS LED" "Светодиод зеленый, 70мКд, KP-1608MGC"  "D1"    "0603"  "LED2"              "0.063 Вт"
+    D1[shape=point];
+    D1_oper[label="Операция 2: Переход 38"];
+    D1_label[label="{Светодиод зеленый,\n0603,  70мКд, KP-1608MGC,\nD1 | ГОСТ 54814-2011 }| 1"];
+
+    // "NET LED"    "Светодиод голубой, 30мКд, KPH-1608PBC-A"   "D2"    "0603"  "LED2"              "0.063 Вт"
+    D2[shape=point];
+    D2_oper[label="Операция 2: Переход 39"];
+    D2_label[label="{Светодиод голубой,\n0603, 30мКд, KPH-1608PBC-A,\nD2 | ГОСТ 54814-2011 }| 1"];
+
+    // "ERR LED"    "Светодиод красный, 200мКд, KPH-1608SEC"    "D3"    "0603"  "LED2"              "0.063 Вт"
+    D3[shape=point];
+    D3_oper[label="Операция 2: Переход 40"];
+    D3_label[label="{Светодиод красный,\n0603, 200мКд, KPH-1608SEC,\nD3 | ГОСТ 54814-2011 }| 1"];
+
+    // "LED Сеть"   "Светодиод белый, 300 мКд, KPT-1608QWF-E"   "D4"    "0603"  "LED2"
+    D4[shape=point];
+    D4_oper[label="Операция 2: Переход 41"];
+    D4_label[label="{Светодиод белый,\n0603, 50 мКд, KPT-1608QWF-E,\nD4 | ГОСТ 54814-2011 }| 1"];
+
+    // "LED 12V"    "Светодиод желтый, 8 мКд, KPT-1608YD"   "D5"    "0603"  "LED2"
+    D5[shape=point];
+    D5_oper[label="Операция 2: Переход 42"];
+    D5_label[label="{Светодиод желтый,\n0603, 80 мКд, KPT-1608YD,\nD5 | ГОСТ 54814-2011 }| 1"];
+
+    // "LED 5V" "Светодиод зеленый, 180мКд, KP-1608VGC(A)"  "D6"    "0603"  "LED2"
+    D6[shape=point];
+    D6_oper[label="Операция 2: Переход 43"];
+    D6_label[label="{Светодиод зеленый,\n0603, 80мКд, KP-1608VGC(A),\nD6 | ГОСТ 54814-2011 }| 1"];
+
+    // "LED 3.3V"   "Светодиод оранжевый, 180мКд, KP-1608VSE"   "D7"    "0603"  "LED2"              "0.063 Вт"
+    D7[shape=point];
+    D7_oper[label="Операция 2: Переход 44"];
+    D7_label[label="{Светодиод оранжевый,\n0603, 80мКд, KP-1608VSE,\nD7 | ГОСТ 54814-2011 }| 1"];
+
+    MCU[shape=point];
+    MCU_oper[label="Операция 2: Переход 45"];
+    MCU_label[label="{Микроконтролер\nDD1 Quad80|TMS320F28035}|1"];
+
+    // "DRV8412DDW" "Dual Full Bridge PWM Motor Driver, DRV8412DDW" "DA4"       "DRV8412DDW"
+    DRV[shape=point];
+    DRV_oper[label="Операция 2: Переход 46"];
+    DRV_label[label="{Драйвер ШИМ\nDA4|DRV8412DDW}|1"];
+
+    // "TPS54160DGQ"    "Линейный регулятор напряжения TPS54160DGQ" "DA1"   "TSOP10"    "TPS54160DGQ"
+    VR12[shape=point];
+    VR12_oper[label="Операция 2: Переход 47"];
+    VR12_label[label="{Линейный регулятор напряжения,\nDA1 | TPS54160DGQ Texas Instruments }| 1"];
+
+    // "UA78M05CDCY"    "Линейный регулятор напряжения UA78M05CDCY Texas Instruments"   "DA2"   "UA78M00 DCY (SOT-223)" "UA78M05CDCY"
+    VR5[shape=point];
+    VR5_oper[label="Операция 2: Переход 48"];
+    VR5_label[label="{Линейный регулятор напряжения,\nDA2 | UA78M05CDCY Texas Instruments }| 1"];
+
+    // "UA78M33CDCY"    "Линейный регулятор напряжения UA78M33CDCY" "DA3"   "UA78M00 DCY (SOT-223)" "UA78M33CDCY"
+    VR33[shape=point];
+    VR33_oper[label="Операция 2: Переход 49"];
+    VR33_label[label="{Линейный регулятор напряжения,\nDA3 | UA78M33CDCY Texas Instruments }| 1"];
+
+    // "OPA2350"    "OPA2350 Texas Instruments" "DA5, DA6"  "SOP8"  "OPA2350"                       "79, 80"
+    OPA[shape=point];
+    OPA_oper[label="Операция 2: Переход 50"];
+    OPA_label[label="{Операционный усилитель,\nDA6, DA5| OPA2350 Texas Instruments }| 2"];
+
+    // "TXB0106PW"      "DD2"   "SOP16 R-PDSO-G16"  "TXB0106PW"
+    DD2[shape=point];
+    DD2_oper[label="Операция 2: Переход 51"];
+    DD2_label[label="{6-разрядный двунаправленный\nпреобразователь нарпяжения,\nDD2 | OPA2350 Texas Instruments }| 1"];
+
+    // "SN75176B"   "Интерфейс RS-422/485 Driver/Receiver SN75176B" "DD3"   "SOP8"  "SN75176B"
+    DD3[shape=point];
+    DD3_oper[label="Операция 2: Переход 52"];
+    DD3_label[label="{Интерфейс RS-422/485,\nDA3 | SN75176B }| 1"];
+
+    // "30BQ100"    "Стабилитрон 12В, 5%, 1Вт"  "CR1"   "DIODE_SMC" "Diode BAT17"
+    CR1[shape=point];
+    CR1_oper[label="Операция 2: Переход 53"];
+    CR1_label[label="{Стабилитрон 12В, 5%, 1Вт,\nCR1 | 30BQ100 }| 1"];
+
+    // "Inductor"   "Inductor"  "L1"    "ELL-CTV inductor footprint"    "Inductor"                  "39мкГн"
+    L1[shape=point];
+    L1_oper[label="Операция 2: Переход 54"];
+    L1_label[label="{Индуктивность 39мкГн,\n39 мкГн, 1210, 10%, 1Вт,\nL1 | LQH32MN390K }| 1"];
+
+    KILN[shape=point];
+    KILN_oper[label="{Операция 3\nПайка оплавлением | Конвекционная конвейерная печь BM745 }"];
+
+    SET2[shape=point];
+    SET2_oper[label="{Операция 4\nУстановка компонентов выводных | }"];
+
+    // "Cap Pol1"   "Конденсатор электролитический. ECAP (К50-35), 105°C, B41828A8108M000"  "C1"    "RB7.6-15"  "Cap Pol1"          "63В"       "1м"
+    C1[shape=point];
+    C1_oper[label="Операция 4: Переход 1"];
+    C1_label[label="{Конденсатор электролитический.\nECAP (К50-35), 63В 1мФ, 105°C, 10%,\nC1 | ГОСТ 24602-81 }| 1"];
+
+    // "Cap Pol1"   "Электролититческий конденсатор ECAP (К50-35), 105°C"   "C4, C10, C13, C15, C31"    "RB5-10.5"  "Cap Pol1"          "25В, 25В, 25В, 25В, 25В"       "22мк, 100мк, 47мк, 47мк, 100мк"    "4, 10, 13, 15, 31"
+    C4[shape=point];
+    C4_oper[label="Операция 4: Переход 2"];
+    C4_label[label="{Конденсатор электролитический.\nECAP (К50-29), 105°C, 10%,\nC4, C10, C13, C15, C31 | ГОСТ 24602-81 }| 5"];
+
+    // "Header 2"   "Header, 2-Pin" "P1, P2"    "HDR1X2"    "Header 2"                      "86, 87"
+    P1[shape=point];
+    P1_oper[label="Операция 4: Переход 3"];
+    P1_label[label="{Разъем на плату\nпрямая закрытый, 2-Pin\nP1, P2 | MF-2x1 }| 2"];
+
+    // "Header 8"   "CWF-8 (DS1069-8 M), Вилка на плату 2.50мм прямая закрытая, 8-Pin"  "P3"    "HDR1X8"    "Header 8"
+    P3[shape=point];
+    P3_oper[label="Операция 4: Переход 4"];
+    P3_label[label="{Вилка на плату\nпрямая закрытая, 8-Pin\nP3 | CWF-8 (DS1069-8 M) }| 1"];
+
+    // "Header 2X2H"    "MF-2x2 MRA (MF-4 MRA), Вилка на плату угловая 2.5, 4-Pin"  "P4"    "HDR2X2H"   "Header 2X2H"
+    P4[shape=point];
+    P4_oper[label="Операция 4: Переход 5"];
+    P4_label[label="{Вилка на плату\nугловая, 4-Pin\nP4 | MF-2x2 MRA (MF-4 MRA) }| 1"];
+
+    // "RS-485-header"  "B3B-EH-A вилка прямая на плату 2.5мм, 3-Pin"   "P5"    "HDR1X3"    "Header 3"
+    P5[shape=point];
+    P5_oper[label="Операция 4: Переход 6"];
+    P5_label[label="{Вилка на плату\nпрямая закрытая, 3-Pin\nP5 | B3B-EH-A }| 1"];
+
+    // "JTAG 14H"   "IDC-14MS (DS1013-14S) (BH-14), Вилка прямая"   "P6"    "HDR2X7H"   "Header 7X2H"
+    P6[shape=point];
+    P6_oper[label="Операция 4: Переход 7"];
+    P6_label[label="{Вилка на плату\nпрямая закрытая, 14-Pin\nP6 | IDC-14MS (DS1013-14S) (BH-14) }| 1"];
+
+    WAVE[shape=point];
+    WAVE_oper[label="{Операция 5\nПайка волной | Установка пайки двойной волной припоя WS-400F}"];
+
+    start[ label="{Плата печатная|Д 01.00.01}|1"];
+    finish[ label="{Плата управления|Д 01.00.00}|1"];
+
+    { rank=same; start; }
+
+    { rank=same; SOLDER_PASTE_oper -> SOLDER_PASTE -> SOLDER_PASTE_label; }
+
+    { rank=same; SET1_oper -> SET1; }
+    { rank=same; R9_oper  -> R9  -> R9_label; }
+    { rank=same; R10_oper -> R10 -> R10_label; }
+    { rank=same; R6_oper  -> R6  -> R6_label; }
+    { rank=same; R18_oper -> R18 -> R18_label; }
+    { rank=same; R66_oper -> R66 -> R66_label; }
+    { rank=same; R8_oper  -> R8  -> R8_label; }
+    { rank=same; R17_oper -> R17 -> R17_label; }
+    { rank=same; R24_oper -> R24 -> R24_label; }
+    { rank=same; R4_oper  -> R4  -> R4_label; }
+    { rank=same; R56_oper -> R56 -> R56_label; }
+    { rank=same; R12_oper -> R12 -> R12_label; }
+    { rank=same; R2_oper  -> R2  -> R2_label; }
+    { rank=same; R37_oper -> R37 -> R37_label; }
+    { rank=same; R39_oper -> R39 -> R39_label; }
+    { rank=same; R28_oper -> R28 -> R28_label; }
+    { rank=same; R7_oper  -> R7  -> R7_label; }
+    { rank=same; R5_oper  -> R5  -> R5_label; }
+    { rank=same; R11_oper -> R11 -> R11_label; }
+    { rank=same; R15_oper -> R15 -> R15_label; }
+    { rank=same; R50_oper -> R50 -> R50_label; }
+    { rank=same; R1_oper  -> R1  -> R1_label; }
+    { rank=same; C12_oper -> C12 -> C12_label; }
+    { rank=same; C2_oper  -> C2  -> C2_label; }
+    { rank=same; C3_oper  -> C3  -> C3_label; }
+    { rank=same; C8_oper  -> C8  -> C8_label; }
+    { rank=same; C19_oper -> C19 -> C19_label; }
+    { rank=same; C5_oper  -> C5  -> C5_label; }
+    { rank=same; C45_oper -> C45 -> C45_label; }
+    { rank=same; C9_oper  -> C9  -> C9_label; }
+    { rank=same; C20_oper -> C20 -> C20_label; }
+    { rank=same; C61_oper -> C61 -> C61_label; }
+    { rank=same; C6_oper  -> C6  -> C6_label; }
+    { rank=same; C11_oper -> C11 -> C11_label; }
+    { rank=same; C58_oper -> C58 -> C58_label; }
+    { rank=same; C36_oper -> C36 -> C36_label; }
+    { rank=same; C7_oper  -> C7  -> C7_label; }
+    { rank=same; C29_oper -> C29 -> C29_label; }
+    { rank=same; D1_oper -> D1 -> D1_label; }
+    { rank=same; D2_oper -> D2 -> D2_label; }
+    { rank=same; D3_oper -> D3 -> D3_label; }
+    { rank=same; D4_oper -> D4 -> D4_label; }
+    { rank=same; D5_oper -> D5 -> D5_label; }
+    { rank=same; D6_oper -> D6 -> D6_label; }
+    { rank=same; D7_oper -> D7 -> D7_label; }
+    { rank=same; MCU_oper -> MCU -> MCU_label; }
+    { rank=same; DRV_oper -> DRV -> DRV_label; }
+    { rank=same; VR12_oper -> VR12 -> VR12_label; }
+    { rank=same; VR5_oper -> VR5 -> VR5_label; }
+    { rank=same; VR33_oper -> VR33 -> VR33_label; }
+    { rank=same; OPA_oper -> OPA -> OPA_label; }
+    { rank=same; DD2_oper -> DD2 -> DD2_label; }
+    { rank=same; DD3_oper -> DD3 -> DD3_label; }
+    { rank=same; CR1_oper -> CR1 -> CR1_label; }
+    { rank=same; L1_oper  -> L1 -> L1_label; }
+    { rank=same; KILN_oper -> KILN; }
+
+    { rank=same; SET2_oper -> SET2; }
+    { rank=same; C1_oper -> C1 -> C1_label; }
+    { rank=same; C4_oper -> C4 -> C4_label; }
+    { rank=same; P1_oper -> P1 -> P1_label; }
+    { rank=same; P3_oper -> P3 -> P3_label; }
+    { rank=same; P4_oper -> P4 -> P4_label; }
+    { rank=same; P5_oper -> P5 -> P5_label; }
+    { rank=same; P6_oper -> P6 -> P6_label; }
+    { rank=same; WAVE_oper -> WAVE; }
+    { rank=same; finish; }
+
+    {
+        rank=same;
+        out1[shape=circle, label="1"];
+        out2[shape=circle, label="2"];
+        out3[shape=circle, label="3"];
+    }
+    in1[shape=circle, label="1"];
+    in2[shape=circle, label="2"];
+    in3[shape=circle, label="3"];
+
+    start ->
+    SOLDER_PASTE ->
+    SET1 ->
+    R9 ->
+    R10 ->
+    R6 ->
+    R18 ->
+    R66 ->
+    R8 ->
+    R17 ->
+    R24 ->
+    R4 ->
+    R56 ->
+    R12 ->
+    R2 ->
+    R37 ->
+    R39 ->
+    R28 ->
+    R7 ->
+    in1;
+
+    out1 ->
+    R5 ->
+    R11 ->
+    R15 ->
+    R50 ->
+    R1 ->
+    C12 ->
+    C2 ->
+    C3 ->
+    C8 ->
+    C19 ->
+    C5 ->
+    C45 ->
+    C9 ->
+    C20 ->
+    C61 ->
+    C6 ->
+    C11 ->
+    C58 ->
+    in2;
+
+    out2 ->
+    C36 ->
+    C7 ->
+    C29 ->
+    D1 ->
+    D2 ->
+    D3 ->
+    D4 ->
+    D5 ->
+    D6 ->
+    D7 ->
+    MCU ->
+    DRV ->
+    VR12 ->
+    VR5 ->
+    VR33 ->
+    OPA ->
+    in3;
+
+    out3 ->
+    DD2 ->
+    DD3 ->
+    CR1 ->
+    L1 ->
+    KILN ->
+    SET2 ->
+    C1 ->
+    C4 ->
+    P1 ->
+    P3 ->
+    P4 ->
+    P5 ->
+    P6 ->
+    WAVE ->
+    finish;
+}
+
