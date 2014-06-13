@@ -1,47 +1,18 @@
-# dot option:
-#
-# Usage: dot [-Vv?] [-(GNE)name=val] [-(KTlso)<val>] <dot files>
-# (additional options for neato)    [-x] [-n<v>]
-# (additional options for fdp)      [-L(gO)] [-L(nUCT)<val>]
-# (additional options for memtest)  [-m]
-# (additional options for config)  [-cv]
-# -V          - Print version and exit
-# -v          - Enable verbose mode
-# -Gname=val  - Set graph attribute 'name' to 'val'
-# -Nname=val  - Set node attribute 'name' to 'val'
-# -Ename=val  - Set edge attribute 'name' to 'val'
-# -Tv         - Set output format to 'v'
-# -Kv         - Set layout engine to 'v' (overrides default based on command name)
-# -lv         - Use external library 'v'
-# -ofile      - Write output to 'file'
-# -O          - Automatically generate an output filename based on the input filename with a
-# 'format' appended. (Causes all -ofile options to be ignored.)
-# -P          - Internally generate a graph of the current plugins.
-# -q[l]       - Set level of message suppression (=1)
-# -s[v]       - Scale input by 'v' (=72)
-# -y          - Invert y coordinate in output
-#
-# -n[v]       - No layout mode 'v' (=1)
-# -x          - Reduce graph
-#
-# -Lg         - Don't use grid
-# -LO         - Use old attractive force
-# -Ln<i>      - Set number of iterations to i
-# -LU<i>      - Set unscaled factor to i
-# -LC<v>      - Set overlap expansion factor to v
-# -LT[*]<v>   - Set temperature (temperature factor) to v
-#
-# -m          - Memory test (Observe no growth with top. Kill when done.)
-#
-# -c          - Configure plugins (Writes $prefix/lib/graphviz/config
-#               with available plugin information.  Needs write privilege.)
-# -v          - Enable verbose mode
-#		dot -o$$(name).pdfsoft_arch.dot ; \
+DEFAULT_DOT_PARAMS=-Tpdf
 
-DEFAULT_PARAMS=-Tpdf
+A2_LANSCAPE='{59.4cm,42.05cm}'
+A1_PORTRAIR='{59.4cm,84.1cm}'
+A1_LANSCAPE='{84.1cm,59.4cm}'
 
-all:
-	dot ${DEFAULT_PARAMS} -oproduct/soft_arch.pdf soft_arch.dot
+arch:
+	dot ${DEFAULT_DOT_PARAMS} -o product/tmp_soft_arch.pdf soft_arch.dot
+	inkscape soft_arch_frame_A2.svg --export-pdf=product/tmp_arch_frame.pdf
+	pdfjam product/tmp_arch_frame.pdf --papersize ${A2_LANSCAPE} -o product/tmp_arch_frame.1.pdf
+	pdfjam product/tmp_soft_arch.pdf --papersize ${A2_LANSCAPE} --scale 0.97 --offset "8mm 5mm" -o product/tmp_soft_arch.1.pdf
+	pdftk product/tmp_soft_arch.1.pdf background product/tmp_arch_frame.1.pdf output product/soft_arch.pdf
+
+clean:
+	rm -r -f product
 
 prepare:
 	mkdir -p product

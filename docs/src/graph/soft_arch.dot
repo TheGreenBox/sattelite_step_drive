@@ -1,6 +1,6 @@
 digraph sat_step_ach {
     start="random";
-    nodesep=1;
+    nodesep=0.3;
     bgcolor="transparent";
     node[shape=record, fontname="ISOCPEUR Italic", fontsize=28];
     edge[minlen=3];
