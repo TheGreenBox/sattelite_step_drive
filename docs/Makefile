@@ -1,6 +1,8 @@
 HELLO_MSG="Documentation for step motor sattelaite student work"
 PRODUCT_DIR='product'
 
+include graph/Makefile
+
 help: hello
 	@echo "----------------------------------------"
 	@echo
