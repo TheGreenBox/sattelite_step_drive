@@ -36,7 +36,7 @@ digraph sat_step_ach {
         pwm_wrap_module     [shape=box, label="Модуль ШИМ"];
         init                [shape=box, label="Модуль инициализации"];
         adc                 [shape=box, label="Модуль АЦП"];
-        led_control         [shape=box, label="Модуль работы со светодиодами"];
+        led_control         [shape=box, label="Модуль индикации"];
         uart                [shape=box, label="Модуль UART"];
         sensors_encoder     [shape=box, label="Модуль обработки прерываний энкодера"];
     }
