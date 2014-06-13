@@ -73,6 +73,7 @@
 % см. http://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
 \usepackage{listings}
 
+\usepackage{pdfpages}
 
 \usepackage{subfiles}
 
@@ -87,6 +88,27 @@
 \newcommand{\DIPLOMA}
 
 \newcommand\abs[1]{\left|#1\right|}
+
+\newcommand\invisiblesubsection[1]{%
+    \refstepcounter{subsection}%
+    \addcontentsline{toc}{subsection}{\protect\numberline{\thesubsection}#1}%
+    \subsectionmark{#1}%
+}
+
+% пустой заголовок при использовании \listoffigures
+\addto\captionsrussian{%
+    \renewcommand\listfigurename{}%
+}
+
+% пустой заголовок при использовании \listoftables
+\addto\captionsrussian{%
+    \renewcommand\listtablename{}%
+}
+
+% пустой заголовок при использовании \bibliography
+\addto\captionsrussian{%
+    \renewcommand\refname{}%
+}
 
 \lstset{
     language=C,
@@ -146,12 +168,28 @@
 
 \clearpage
 \section{Приложение}
-\subsection[Список иллюстраций]{}
+\subsection{Список иллюстраций}
 \listoffigures
 \clearpage
-\subsection[Список таблиц]{}
+\subsection{Список таблиц}
 \listoftables
 
 \subfile{src/code_listings_include.tex}
+
+\newpage
+\invisiblesubsection{Перечень элементов платы управления}
+\includepdf[pages=-]{./additional/pcb_bom_list}
+
+\newpage
+\invisiblesubsection{Операционные карты техпроцесса сборки платы управления}
+\includepdf[pages=-, angle=90]{./additional/pcb_operational_maps}
+
+\newpage
+\invisiblesubsection{Спецификая макетного стенда}
+\includepdf[pages=-]{./additional/complete_assembly_spec}
+
+\newpage
+\invisiblesubsection{Операционные карты техпроцесса сборки макетного стенда}
+\includepdf[pages=-, angle=90]{./additional/all_operational_maps}
 
 \end{document}
