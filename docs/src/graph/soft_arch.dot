@@ -1,52 +1,70 @@
 digraph sat_step_ach {
     start="random";
-    splines=splines;
     nodesep=1;
     bgcolor="transparent";
     node[shape=record, fontname="ISOCPEUR Italic", fontsize=28];
     edge[minlen=3];
 
-    rs485[shape=invhouse];
+    connection[shape=invhouse, label="Интерфейс связи"];
     {
         rank=same;
-        moment[shape=ellipse];
-        speed[shape=ellipse];
-        mode[shape=ellipse];
+        moving_time[shape=ellipse, label="Заданное время движения"];
+        speed[shape=ellipse, label="Заданная скорость"];
+        goal_coord[shape=ellipse, label="Целевая точка"];
     }
 
-    algo_types          [shape=box, label="Библиотека алгоритмов переключения фаз ШД"];
     elementary_motions  [shape=box, label="Модуль дополнительных движений"];
-    adc                 [shape=box, label="Модуль АЦП"];
-    led_control         [shape=box, label="Модуль работы со светодиодами"];
-    timers              [shape=box, label="Модуль таймеров"];
     main                [shape=box, label="Главный цикл"];
-    pwm_wrap_module     [shape=box, label="Модуль ШИМ"];
+
     {
         rank=same;
         synchronized_control[shape=box, label="Модуль синхронного управления"];
         feedback_control    [shape=box, label="Модуль ОС по положению"];
+        speed_feedback      [shape=box, label="Модуль ОС по скорости"];
     }
-    init                [shape=box, label="Модуль инициализации"];
+
     {
         rank=same;
-        speed_feedback      [shape=box, label="Модуль ОС по скорости"];
         current_feedback    [shape=box, label="Модуль ОС по току"];
         control_algo        [shape=box, label="Шаговый модуль"];
     }
-    sensors_encoder     [shape=box, label="Модуль обработки прерываний энкодера"];
-    sensors_gray_code_decoder[shape=box, label="Модуль декодирования кода Грея"];
 
-    rs485 -> moment;
-    rs485 -> speed;
-    rs485 -> mode;
+    {
+        // hardware level
+        rank=same;
+        timers              [shape=box, label="Модуль таймеров"];
+        pwm_wrap_module     [shape=box, label="Модуль ШИМ"];
+        init                [shape=box, label="Модуль инициализации"];
+        adc                 [shape=box, label="Модуль АЦП"];
+        led_control         [shape=box, label="Модуль работы со светодиодами"];
+        uart                [shape=box, label="Модуль UART"];
+        sensors_encoder     [shape=box, label="Модуль обработки прерываний энкодера"];
+    }
+    {
+        rank=same;
+        sensors_gray_code_decoder[shape=box, label="Модуль декодирования кода Грея"];
+        algo_types          [shape=box, label="Библиотека алгоритмов переключения фаз ШД"];
+    }
 
-    moment -> synchronized_control;
-    speed  -> synchronized_control;
-    mode   -> synchronized_control;
+    main -> init;
+    main -> led_control;
+    main -> elementary_motions;
 
-    moment -> feedback_control;
-    speed  -> feedback_control;
-    mode   -> feedback_control;
+    uart -> connection;
+    connection -> moving_time;
+    connection -> speed;
+    connection -> goal_coord;
+    connection -> elementary_motions;
+
+    speed       -> synchronized_control;
+    goal_coord  -> synchronized_control;
+    moving_time -> synchronized_control;
+
+    speed       -> feedback_control;
+    goal_coord  -> feedback_control;
+    moving_time -> feedback_control;
+
+    speed  -> speed_feedback;
 
     synchronized_control -> control_algo;
     feedback_control     -> control_algo;
@@ -57,18 +75,13 @@ digraph sat_step_ach {
     timers -> synchronized_control;
     sensors_encoder -> feedback_control;
 
-    main -> init;
-    main -> led_control;
-    main -> elementary_motions;
-
-    elementary_motions -> moment;
+    elementary_motions -> moving_time;
     elementary_motions -> speed;
-    elementary_motions -> mode;
+    elementary_motions -> goal_coord;
 
-    moment -> current_feedback;
+    speed_feedback -> current_feedback;
     adc ->  current_feedback;
     current_feedback -> pwm_wrap_module;
-
 
     sensors_encoder -> sensors_gray_code_decoder;
 }

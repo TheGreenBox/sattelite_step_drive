@@ -38,7 +38,7 @@
 # -v          - Enable verbose mode
 #		dot -o$$(name).pdfsoft_arch.dot ; \
 
-DEFAULT_PARAMS=-Tpdf -s72
+DEFAULT_PARAMS=-Tpdf
 
 all:
 	dot ${DEFAULT_PARAMS} -oproduct/soft_arch.pdf soft_arch.dot
