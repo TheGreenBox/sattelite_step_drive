@@ -293,6 +293,67 @@ $$
     < 2\theta_\textit{шаг} - \theta_\textit{ком}
 \end{equation}
 
+\paragraph{Зона выпада из синхронизма}
+При попадании в зону выпада из синхронизма, не зависимо от причин приведших к
+этому, система управления должна восстановить положение вектора магнитного поля
+статора таким образом чтобы рассогласование попало в зону переключения для
+нового положения ротора.
+Для этого необходимо обновить информацию о том, на каком алгоритмическом шаге
+ротор двигателя находится в данный момент
+(см. \ref{sec_step_control_algos} о циклической природе алгоритмических шагов).
+
+Полагаем, что ротор находится в зоне переключения некоторой <<мнимо~--~активной>>
+фазы, тогда информация об угловом положении вектора магнитного поля, которое бы
+имело место, если бы фаза была действительно включена, позволит обновить
+информацию о текущем алгоритмическом шаге шагового модуля. Это позволит шаговому
+модулю при получении команды движения в заданном направлении запитать нужную
+фазу, сделав алгоритмический шаг в заданном направлении.
+
+Определеним формулы для вычисления углового положения <<мнимо~--~активной>> фазы
+для прямого и обратного направлений движения.
+
+\subparagraph{Положительное направление движения}
+
+Из формулы (\ref{switch_zone_posit_dir_for_curr_pos}) получим
+
+\begin{equation}
+    \label{sync_restore_posit_dir_active_pole_pos_conditions}
+    \phi_\textit{акт}
+    \leq \theta + \theta_\textit{ком} - \theta_\textit{шаг}
+    < \phi_\textit{акт} + \theta_\textit{шаг}
+\end{equation}
+
+Пусть $T = \theta + \theta_\textit{ком} - \theta_\textit{шаг}$, тогда
+
+\begin{equation}
+    \label{sync_restore_posit_dir_active_pole_pos}
+    \phi_\textit{акт} = T - mod(T, \theta_\textit{шаг})
+\end{equation}
+где $mod$ - операция вычисления остатка от деления с сохранением знака делимого.
+
+\subparagraph{Отрицательное направление движения}
+Из формулы (\ref{switch_zone_negat_dir_for_curr_pos}) получим
+\begin{equation}
+    \label{sync_restore_negat_dir_active_pole_pos_conditions}
+    \phi_\textit{акт} - \theta_\textit{шаг}
+    < \theta - \theta_\textit{ком} + \theta_\textit{шаг}
+    \leq \phi_\textit{акт}
+\end{equation}
+
+Пусть $D = \theta - \theta_\textit{ком} + \theta_\textit{шаг}$, тогда
+
+\begin{equation}
+    \label{sync_restore_negat_dir_active_pole_pos}
+    \phi_\textit{акт} =
+        \begin{cases}
+            D,
+            & \mbox{если } mod(D, \theta_\textit{шаг}) = 0 \\
+            D - mod(D, \theta_\textit{шаг}) + \theta_\textit{шаг},
+            & \mbox{если } mod(D, \theta_\textit{шаг}) \ne 0
+        \end{cases}
+\end{equation}
+где $mod$ - операция вычисления остатка от деления с сохранением знака делимого.
+
 \subsubsection{Синхронное управление}
 C помощью формулы (\ref{eq_synchronized_control_max_frequency}) для линейного
 ускорения двигателя и формулы (\ref{eq_synchronized_control_min_frequency}) для
