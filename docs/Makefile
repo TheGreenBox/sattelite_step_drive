@@ -10,6 +10,7 @@ help: hello
 	@echo -e 	"\t all - all docs"
 	@echo -e 	"\t plan - workshop report (full plan)"
 	@echo -e 	"\t ecology - only ecology part"
+	@echo -e 	"\t review 	- diploma review"
 	@echo
 	@echo "----------------------------------------"
 	@echo
@@ -50,3 +51,6 @@ pcb_develop: hello prepare
 
 economics: hello prepare
 	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/economics/main_economics.tex
+
+review: hello prepare
+	@latex -output-directory=${PRODUCT_DIR} -output-format=pdf src/main_review.tex
